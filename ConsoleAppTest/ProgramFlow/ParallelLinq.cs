@@ -63,6 +63,19 @@ namespace ConsoleAppTest.ProgramFlow
             Console.WriteLine("Finished processing!");
         }
 
-        public void PlinqAsOrdered() { }
+        // 	Organizes the output so	that it	is in the same order as	the	original data. This	can	slow down the query. 
+        public void PlinqAsOrdered()
+        {
+            var users = GetData();
+
+            var result = from user in users.AsParallel()
+                         .AsOrdered()
+                         where user.City == "Seattle"
+                         select user;
+            foreach (var user in result)
+                Console.WriteLine(user.Name);
+
+            Console.WriteLine("Finished processing!");
+        }
     }
 }
