@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DebugAndSecurity\" />
+    <Folder Include="DataAccess\" />
+    <Folder Include="Patterns\Creational\" />
+    <Folder Include="Patterns\Behavioral\" />
+    <Folder Include="Patterns\Structural\" />
+    <Folder Include="Types\" />
+  </ItemGroup>
+
+</Project>
