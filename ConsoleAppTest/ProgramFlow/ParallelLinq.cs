@@ -28,6 +28,14 @@ namespace ConsoleAppTest.ProgramFlow
             };
         } 
 
+        private bool CheckCity(string name)
+        {
+            if(name == "")
+                throw new ArgumentException(name);
+            
+            return name == "Seattle";
+        }
+
         // The AsParallel method from system.linq examines the query and determines if the parallelization would speed it up or not 
         // if yes - query is broken up into processes and executed parallely
         // if no - no. Design with that in mind
@@ -76,6 +84,53 @@ namespace ConsoleAppTest.ProgramFlow
                 Console.WriteLine(user.Name);
 
             Console.WriteLine("Finished processing!");
+        }
+
+        // The query requests that the result be ordered by users name, and this ordering is preserved by the use of AsSequential
+        // The AsSequential executes query in order whereas AsOrdered returns a sorted result but does not necessarily run the query in order.
+        public void PlinqAsSequential()
+        {
+            var users = GetData();
+
+            var result = (from user in users.AsParallel() 
+                            where user.City == "Seattle"
+                            orderby (user.Name)
+                            select new {Name = user.Name }).AsSequential().Take(4);  
+
+            foreach (var user in result)
+                Console.WriteLine(user.Name);
+
+            Console.WriteLine("Finished processing!");
+        }
+
+        // ForAll - iterate over res-s. Diff. from foreach - iteration takes place in parallel and will start before query is complete
+        public void PlinqForAll()
+        {
+            var users = GetData();
+
+            var result = from user in users.AsParallel()
+                         where user.City == "Seattle"
+                         select user;
+            result.ForAll(user => Console.WriteLine(user.Name));
+            Console.WriteLine("Finished processing!");
+        }
+
+        // If any queries generate exceptions an AggregateException will be thrown when query complete. Contains list (InnerExceptions) of the exceptions that were thrown 
+        // during the query
+        public void PlinqExceptions()
+        {
+            var users = GetData();
+            try
+            {
+                var result = from user in users.AsParallel() 
+                                where CheckCity(user.City)
+                                select user;
+                result.ForAll(user => Console.WriteLine(user.Name));
+            }
+            catch(AggregateException e)
+            {
+                Console.WriteLine(e.InnerExceptions.Count + " exceptions. ");
+            }
         }
     }
 }

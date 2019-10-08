@@ -44,7 +44,7 @@ namespace ConsoleAppTest.ProgramFlow
         // Accepts two parameters => enumerable of items and an action to be performed on each of the items
         public void ParallelForEach()
         {
-            var items = Enumerable.Range(0, 500).ToList();
+            var items = Enumerable.Range(0, 400).ToList();
             Parallel.ForEach(
                 items,
                 item => {
@@ -57,7 +57,7 @@ namespace ConsoleAppTest.ProgramFlow
         // Counter start, length and lambda expression
         public void ParellelFor()
         {
-            var items = Enumerable.Range(0, 500).ToArray();
+            var items = Enumerable.Range(0, 400).ToArray();
             Parallel.For(0, items.Count(), i => {
                 WorkOnItem(items[i]);
             });
@@ -70,7 +70,7 @@ namespace ConsoleAppTest.ProgramFlow
         // Iterations > 200 may also run inb4
         public void ManagingForLoop()
         {
-            var items = Enumerable.Range(0, 500).ToArray();
+            var items = Enumerable.Range(0, 400).ToArray();
 
             ParallelLoopResult result = Parallel.For(0, items.Count(), (int i, ParallelLoopState loopState) => {
                 if (i == 200)

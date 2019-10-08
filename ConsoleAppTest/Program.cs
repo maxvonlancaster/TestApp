@@ -7,9 +7,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var multiThreading = new MultiThreading();
-            multiThreading.ParellelFor();
-            Console.WriteLine("Hello World!");
+            var service = new Events();
+            service.ActionDelegate();
         }
     }
 }
