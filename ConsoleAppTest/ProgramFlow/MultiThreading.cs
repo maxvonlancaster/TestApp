@@ -14,6 +14,8 @@ namespace ConsoleAppTest.ProgramFlow
             Console.WriteLine("Task 1 started");
             Thread.Sleep(2000);
             Console.WriteLine("Task 1 ending");
+            return;
+            Console.WriteLine("I am not executed");
         }
 
         private void Task2()

@@ -86,12 +86,24 @@ namespace ConsoleAppTest.ProgramFlow
             }
         }
 
-        //
-        //
+        // Program can create and throw its own exceptions by using throw statement to throw ex. instance.
+        // Exception constructor accepts string
         //
         public void ThrowingException()
         {
-            
+            try
+            {
+                throw new Exception("Message ");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex; // Rethrowing the exception - is a bad practice - will not preserve the original stack -
+                // - location of the error will be reported in the handler
+                throw new Exception("This is outer exception, second par - inner one", ex);
+                //  Passing the original exception as an inner for high - level exc. handler to deal. 
+                // The constructor is given a reference to the original exception.
+            }
         }
     }
 }
