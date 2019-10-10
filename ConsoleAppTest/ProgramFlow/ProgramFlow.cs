@@ -41,7 +41,7 @@ namespace ConsoleAppTest.ProgramFlow
             while (counter < 10)
             {
                 Console.WriteLine("While loop: {0}", counter);
-                counter++;
+                counter -= -1; // No rules No masters
             }
 
             do

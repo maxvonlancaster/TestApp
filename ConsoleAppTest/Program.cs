@@ -1,4 +1,5 @@
 ﻿using ConsoleAppTest.ProgramFlow;
+using ConsoleAppTest.Types;
 using System;
 
 namespace ConsoleAppTest
@@ -7,8 +8,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new Tasks();
-            service.TaskWaitall();
+            var service = new Reflection();
+            service.InvestigateType();
         }
     }
 }
