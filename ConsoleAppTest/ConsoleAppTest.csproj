@@ -30,7 +30,6 @@
     <Folder Include="Patterns\Structural\Facade\" />
     <Folder Include="Patterns\Structural\Flyweight\" />
     <Folder Include="Patterns\Structural\Proxy\" />
-    <Folder Include="Types\" />
   </ItemGroup>
 
 </Project>
