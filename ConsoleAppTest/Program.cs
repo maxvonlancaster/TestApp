@@ -7,8 +7,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new Events();
-            service.ActionDelegate();
+            var service = new Tasks();
+            service.TaskWaitall();
         }
     }
 }

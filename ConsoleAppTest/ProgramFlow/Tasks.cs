@@ -14,12 +14,24 @@ namespace ConsoleAppTest.ProgramFlow
             Console.WriteLine("Work ending");
         }
 
+        private void DoWork(int i)
+        {
+            Console.WriteLine("Work starting on {0}", i);
+            Thread.Sleep(2000);
+            Console.WriteLine("Work ending on {0}", i);
+        }
+
         private int CalculateResult()
         {
             Console.WriteLine("Work starting");
             Thread.Sleep(2000);
             Console.WriteLine("Work ending");
             return 100;
+        }
+
+        private void Logger(int i)
+        {
+            Console.WriteLine("Logging {0}", i);
         }
 
         // Creates task, starts it running and then waits for the task to complete
@@ -48,6 +60,25 @@ namespace ConsoleAppTest.ProgramFlow
             Console.WriteLine("Task result: " + task.Result);
         }
 
-        
+        // Task.Waitall - to pause a prog. untill a number of tasks are completed
+        // Another use - provide a place to catch any exceptions that can be thrown by tasks (note that they are aggregated)
+        // Task.WaitAny - pauses program untill one task completes
+        // 
+        public void TaskWaitall()
+        {
+            Task[] tasks = new Task[10];
+
+            for(int i = 0; i < 10; i++)
+            {
+                int taskNum = i; // make a local copy of loop count so that the correct number is passed to lambda, 
+                // otherwise 10 is passed for all tasks.
+
+                tasks[i] = Task.Run(() => DoWork(i));
+            }
+
+            Task.WaitAll(tasks);
+            Console.WriteLine("Finished processing!");
+        }
+
     }
 }
