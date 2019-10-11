@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DebugAndSecurity\" />
-    <Folder Include="DataAccess\" />
+    <Folder Include="NewFolder\" />
     <Folder Include="Patterns\Behavioral\ChainOfResponsibility\" />
     <Folder Include="Patterns\Behavioral\Command\" />
     <Folder Include="Patterns\Behavioral\Iterator\" />
