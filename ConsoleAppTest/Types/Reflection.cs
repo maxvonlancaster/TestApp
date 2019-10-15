@@ -25,13 +25,19 @@ namespace ConsoleAppTest.Types
             }
         }
 
-        // 
-        // 
-        // 
+        // call method -> finding MethodInfo and calling the invoke on that reference
+        // Invoke method is supplied with reference to Person and array of object references that will be used as parameters
+        // will be slower
         // 
         public void ReflectionMethodCall()
         {
+            Type type;
+            Person person = new Person();
+            type = person.GetType();
 
+            MethodInfo setMethod = type.GetMethod("set_Name");
+            setMethod.Invoke(person, new object[] { "F" });
+            Console.WriteLine(person.Name);
         }
 
         // 

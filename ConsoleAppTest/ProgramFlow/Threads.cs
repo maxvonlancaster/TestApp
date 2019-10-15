@@ -28,10 +28,27 @@ namespace ConsoleAppTest.ProgramFlow
             Thread.Sleep(2000);
         }
 
+        private void DoWork(object state)
+        {
+            Console.WriteLine("Doing work: {0}", state);
+            Thread.Sleep(500);
+            Console.WriteLine("Work finished: {0}", state);
+        }
+
         private void WorkOnData(object data)
         {
             Console.WriteLine("Working on data: {0}", data);
             Thread.Sleep(2000);
+        }
+
+        private void DisplayThread(Thread t)
+        {
+            Console.WriteLine("Name: {0}", t.Name);
+            Console.WriteLine("Culture: {0}", t.CurrentCulture);
+            Console.WriteLine("Priority: {0}", t.Priority);
+            Console.WriteLine("Context: {0}", t.ExecutionContext);
+            Console.WriteLine("IsBackground?: {0}", t.IsBackground);
+            Console.WriteLine("IsPool?: {0}", t.IsThreadPoolThread);
         }
 
         // The	Thread	class	is	located	in	the	System.Threading	namespace.	
@@ -139,12 +156,67 @@ namespace ConsoleAppTest.ProgramFlow
             threadToWaitFor.Join();
         }
 
-        // 
-        // 
-        // 
+        public static ThreadLocal<Random> RandomGenerator =
+            new ThreadLocal<Random>(() => 
+            {
+                return new Random(2);
+            });
+
+        // If you want each thread to have its own copy of a particular variable, you can
+        // use the ThreadStatic attribute to specify that the given variable should be created for each thread
+        // If your program needs to initialize the local data for each thread you can use
+        // the ThreadLocal<t> class. When an instance of ThreadLocal is created it
+        // is given a delegate to the code that will initialize attributes of threads
         public void ThreadLocalStorage()
         {
+            Thread t1 = new Thread(() => 
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine("t1: {0}", RandomGenerator.Value.Next());
+                    Thread.Sleep(500);
+                };
+            });
+            Thread t2 = new Thread(() =>
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine("t2: {0}", RandomGenerator.Value.Next());
+                    Thread.Sleep(500);
+                };
+            });
+            t1.Start();
+            t2.Start();
+        }
 
+        // A Thread instance exposes a range of context information, and some items can
+        // be read and others read and set.The information available includes the name of
+        // the thread(if any) priority of the thread, whether it is foreground or background,
+        // the threads culture(this contains culture specific information in a value of type
+        // CultureInfo) and the security context of the thread.The
+        // Thread.CurentThread property can be used by a thread to discover this
+        // information about itself.
+        public void ThreadContext()
+        {
+            Thread.CurrentThread.Name = "Main method";
+            DisplayThread(Thread.CurrentThread);
+        }
+
+        // Threads, like everything else in C#, are managed as objects. If an application
+        // creates a large number of threads, each of these will require an object to be
+        // created and then destroyed when the thread completes.A thread pool stores a
+        // collection of reusable thread objects.Rather than creating a new Thread
+        // instance, an application can instead request that a process execute on a thread
+        // from the thread pool.When the thread completes, the thread is returned to the
+        // pool for use by another process.
+        // 
+        public void ThreadPools()
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                int stateNumber = i;
+                ThreadPool.QueueUserWorkItem(state => DoWork(stateNumber));
+            }
         }
     }
 }

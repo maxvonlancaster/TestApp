@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Patterns\Behavioral\ChainOfResponsibility\" />
     <Folder Include="Patterns\Behavioral\Command\" />
     <Folder Include="Patterns\Behavioral\Iterator\" />
