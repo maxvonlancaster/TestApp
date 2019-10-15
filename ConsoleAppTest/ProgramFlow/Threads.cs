@@ -28,6 +28,12 @@ namespace ConsoleAppTest.ProgramFlow
             Thread.Sleep(2000);
         }
 
+        private void WorkOnData(object data)
+        {
+            Console.WriteLine("Working on data: {0}", data);
+            Thread.Sleep(2000);
+        }
+
         // The	Thread	class	is	located	in	the	System.Threading	namespace.	
         // When you	create	a	Thread	you	can	pass	the	constructor	the	name	of	the	method	the thread	will	run.	
         // Once	the	thread	has	been	created,	you	can	call	the	Start method	on	the	thread	to	start	it	running.	
@@ -57,6 +63,88 @@ namespace ConsoleAppTest.ProgramFlow
             });
             thread.Start();
             Console.WriteLine("Press	a	key	to	end.");
+        }
+
+        // A	program	can	pass	data	into	a	thread	when	it	is	created	by	using	the ParameterizedThreadStart	delegate.
+        // This	specifies	the	thread	method as	one	that	accepts	a	single	object	parameter.	
+        // The	object	to	be	passed	into	the thread	is	then	placed	in	the	Start	method
+        public void ParametraizedThreadStart()
+        {
+            ParameterizedThreadStart ps = new ParameterizedThreadStart(WorkOnData);
+            Thread thread = new Thread(ps);
+            thread.Start(99);
+        }
+
+        // Another	way	to	pass	data	into	a	thread	is	to	specify	the	behavior	of	the	thread as	a
+        // lambda	expression	that	accepts	a	parameter.
+        // The	parameter	to	the	lambda expression	is	the	data	to	be	passed	into	the	thread.	
+        public void ThreadLambdaParameters()
+        {
+            Thread thread = new Thread((data) => {
+                WorkOnData(data);
+            });
+            thread.Start(99);
+            // Note	that	the	data	to	be	passed	into	the	thread	is	always	passed	as	an	object reference.
+            // This	means	that	there	is	no	way	to	be	sure	at	compile	time	that	thread initialization
+            // is	being	performed	with	a	particular	type	of	data. 
+        }
+
+        // A	Thread	object	exposes	an	Abort	method,	which	can	be	called	on	the	thread to	abort	it.	
+        // When	a	thread	is	aborted	it	is	instantly	stopped.	
+        // This	might	mean	that	it	leaves the	program	in	an	ambiguous	state,	with	files	open	and	resources	assigned.
+        public void AbortThread()
+        {
+            Thread tickThread = new Thread(() => {
+                while (true)
+                {
+                    Console.WriteLine("Tick");
+                    Thread.Sleep(1000);
+                }
+            });
+            tickThread.Start();
+            Console.WriteLine("Press key to stop the clock:");
+            Console.ReadKey();
+        }
+
+        static bool tickRunning;
+
+        // A better	way	to	abort	a	thread	is	to	use	a	shared	flag	variable.
+        public void SharedFlagVariable()
+        {
+            tickRunning = true;
+            Thread tickThread = new Thread(() => {
+                while (tickRunning)
+                {
+                    Console.WriteLine("Tick");
+                    Thread.Sleep(1000);
+                }
+            });
+            tickThread.Start();
+            Console.WriteLine("Press	a	key	to	stop	the	clock");
+            Console.ReadKey();
+            tickRunning = false;
+        }
+
+        // The	join	method	allows	two	threads	to	synchronize.	
+        // When	a thread calls the join method on another thread, the caller of join is held until the other thread completes.	
+        public void UsingThreadJoin()
+        {
+            Thread threadToWaitFor = new Thread(() => {
+                Console.WriteLine("Thread starting");
+                Thread.Sleep(5000);
+                Console.WriteLine("Thread ending");
+            });
+            threadToWaitFor.Start();
+            Console.WriteLine("Joining threads");
+            threadToWaitFor.Join();
+        }
+
+        // 
+        // 
+        // 
+        public void ThreadLocalStorage()
+        {
+
         }
     }
 }
