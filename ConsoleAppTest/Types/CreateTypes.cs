@@ -56,7 +56,7 @@ namespace ConsoleAppTest.Types
             public override string ToString() { return string.Format("X:	{0}	Y:	{1}	Lives:	{2}", X, Y, Lives); }
         }
 
-        class MyStack<T> where T : class 
+        class MyStack<T> where T : class
             // If you want to restrict it to only store reference types you can add constraint on possible types that T can represent.
         {
             int stackTop = 0;
@@ -259,5 +259,157 @@ namespace ConsoleAppTest.Types
             AlienClassConstr x = new AlienClassConstr(100, 100, 4);
         }
 
+        // A static variable is a member of a type, but it is not created for each instance of a
+        // type.A variable in a class is made static by using the keyword static in the
+        // declaration of that variable.
+        // 
+        public class StaticVariables
+        {
+            public static int Max_Lives = 99;
+            public int Lives;
+
+            public StaticVariables(int lives)
+            {
+                if (lives > Max_Lives)
+                    throw new Exception("Invalid value");
+                Lives = lives;
+
+                // Making a variable static does not stop it from being changed when the program runs(to achieve this use the const keyword or make the variable
+                // readonly). Rather, the word static in this context means that the variable is “always present.” A program can use a static variable from a type without
+                // needing to have created any instances of that type. Types can also contain static methods.These can be called without the need for an instance of the object
+                // containing the method.Libraries of useful functions are often provided as static members of a library class.
+            }
+
+            // The name of a method is best expressed in a “verb-noun” manner, with an action followed by the thing that the action is acting on.Names such as
+            // “DisplayMenu,” “SaveCustomer,” and “DeleteFile” are very descriptive of what the method does. When talking about the method signature and the code body of
+            // a method we will talk in terms of the parameters used in the method. In the case of the call of a method we will talk in terms of the arguments supplied to the call.
+            public bool RemoveLives(int livesToRemoves)
+            {
+                Lives -= livesToRemoves;
+                if (Lives <= 0)
+                {
+                    Lives = 0;
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        // A method is a member of a class. It has a signature and a body. The signature defines the type and number of parameters that the method will accept.
+        // The body is a block of code that is performed when the method is called. If the method has a type other than void, all code paths through the body of the code
+        // must end with a return statement that returns a value of the type of the method.
+        public void SimpleMethods()
+        {
+            StaticVariables x = new StaticVariables(10);
+            Console.WriteLine("x = {0}", x);
+            if (x.RemoveLives(2))
+            {
+                Console.WriteLine("Still alive");
+            }
+            else
+            {
+                Console.WriteLine("Alien destroyed");
+            }
+            Console.WriteLine("x = {0}", x);
+        }
+
+        static int ReadValue(int low, int high, string prompt)
+        {
+            return 100;
+        }
+
+        static int ReadValueDefault(int low, int high, string prompt = "")
+        {
+            return 100;
+        }
+
+        // When you create a method with parameters, the signature of the method gives the name and type of each parameter in turn
+        public void NamedParameters()
+        {
+            int x = ReadValue(low:1, high:2, prompt:"");
+            // you can change the definition of the method to give a default value for the prompt parameter
+            // Optional parameters must be provided after all of the required ones.
+            x = ReadValueDefault(1, 2);
+        }
+
+        class IntArrayWrapper
+        {
+            private int[] array = new int[100];
+
+            public int this[int i]
+            {
+                get { return array[i]; }
+                set { array[i] = value; }
+            }
+        }
+
+        // A class can use the same indexing mechanism to provide indexed property values.
+        // Note that there is nothing stopping the use of other types in indexed properties.This is how the Dictionary collection is used to index on a
+        // particular type of key value.
+        public void IndexedProperties()
+        {
+            IntArrayWrapper x = new IntArrayWrapper();
+            x[0] = 99;
+            Console.WriteLine(x[0]);
+        }
+
+        class NamedIntArrayWrapper
+        {
+            private int[] array = new int[100];
+
+            public int this[string name]
+            {
+                get
+                {
+                    switch (name)
+                    {
+                        case "zero":
+                            return array[0];
+                        case "one":
+                            return array[1];
+                        default:
+                            return -1;
+                    }
+                }
+                set
+                {
+                    switch (name)
+                    {
+                        case "zero":
+                            array[0] = value;
+                            break;
+                        case "one":
+                            array[1] = value;
+                            break;
+                        default:
+                            return;
+                    }
+                }
+            }
+        }
+
+        // an indexer property that is extended to allow all of the elements in the integer array to be accessed by name.
+        public void IndexingOnStrings()
+        {
+            NamedIntArrayWrapper x = new NamedIntArrayWrapper();
+            x["zero"] = 99;
+            Console.WriteLine(x["zero"]);
+        }
+
+    }
+
+    // However, extension methods provide a way in which behaviors can be added to a class without needing to extend the class itself. 
+    // The first parameter to the method specifies the type that the extension method should be added to, by using the keyword this followed by the name of the type.
+    // Extension methods allow you to add behaviors to existing classes and use them as if they were part of that class. They are very powerful. 
+    // LINQ query operations are added to types in C# programs by the use of extension methods.
+    public static class ExtensionMethods
+    {
+        public static int LineCount(this String str)
+        {
+            return str.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
+        }
     }
 }
