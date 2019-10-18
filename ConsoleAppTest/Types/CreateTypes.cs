@@ -399,6 +399,77 @@ namespace ConsoleAppTest.Types
             Console.WriteLine(x["zero"]);
         }
 
+
+        // It’s	very	important	to	understand	the	difference	between	overloading	and overriding	when	applied	to	methods	in	a	class.	
+        // Overloading	means,	“providing	a method	with	the	same	name,	but	a	different	signature	in	a	given	type.”	
+        // It	is useful	when	you	want	to	provide	several	ways	of	performing	a	particular behavior,	
+        // depending	on	the	circumstances	in	which	the	behavior	is	being	used. 
+        // The	DateTime	structure	provided	by	.NET	has	a	large	number	of	overloaded constructors,	because	there	are	many	
+        // different	ways	a	programmer	might	want	to initialize	a	DateTime	value.	
+        public void OverloadedDateTimeConstructor()
+        {
+            DateTime d0 = new DateTime(ticks: 636679008000000000); // You might have the number of ticks since January 1, 0001 at 00:00:00.000 in the Gregorian	calendar
+            DateTime d1 = new DateTime(year: 2018, month: 7, day: 23);
+            Console.WriteLine(d0);
+            Console.WriteLine(d1);
+        }
+
+        class Document
+        {
+            //	All	documents	have	the	same	GetDate	behavior	so	this	method	will	not	be	overridden
+            public void GetDate()
+            {
+                Console.WriteLine("Hello	from	GetDate	in	Document");
+            }
+
+            //	A	document	may	have	its	own	DoPrint	behavior	so	this	method	is	virtual	so	it	can	be	overriden
+            public virtual void DoPrint()
+            {
+                Console.WriteLine("Hello	from	DoPrint	in	Document");
+            }
+        }
+
+        class Invoice : Document
+        {
+            //	Override	the	DoPrint	method	in	the	base	class to	provide	custom	printing	behaviour	for	an	Invoice
+            public override void DoPrint()
+            {
+                Console.WriteLine("Hello	from	DoPrint	in	Invoice");
+            }
+        }
+
+
+        // The	overriding	of	methods	takes	place	when	class	hierarchies	are	used.	
+        // In	a class	hierarchy	a	child	class	is	derived	from	a	parent	or	base	class.	A	method	in	a
+        // base	class   is	overridden by  a method	in	a child   when the child class contains    a method    with exactly the same  
+        // name and signature	as	a method	in	the parent class.	Only methods that have    been marked	as	virtual	in	the parent  class 
+        // can be overridden.
+        public void MethodOverriding()
+        {
+            //	Create	an	Invoice												
+            Invoice	c	=	new	Invoice();
+            //	This	will	run	the	SetDate	method	from	Document												
+            c.GetDate();
+            //	This	will	run	the	DoPrint	method	from	Invoice												
+            c.DoPrint();
+        }
+
+        class PrePaidInvoice : Invoice
+        {
+            public override void DoPrint()
+            {
+                base.DoPrint();
+                Console.WriteLine("Hello	from	DoPrint	in	PrePaidInvoice");
+            }
+        }
+
+        // The	use	of	method	overriding	allows	the	behavior	of	different	items	to	be customized	for	each	particular	item,
+        // and	you	can	also	re-use	code	in	parent objects	by	using	the	base	keyword.	
+        public void BaseCall()
+        {
+            PrePaidInvoice p = new PrePaidInvoice();
+            p.DoPrint();
+        }
     }
 
     // However, extension methods provide a way in which behaviors can be added to a class without needing to extend the class itself. 
