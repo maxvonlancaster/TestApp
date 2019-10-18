@@ -8,8 +8,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new Threads();
-            service.SharedFlagVariable();
+            var service = new ConsumeTypes();
+            service.InteractionWithExcel();
         }
     }
 }

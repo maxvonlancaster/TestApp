@@ -36,4 +36,8 @@
     <Folder Include="Patterns\Structural\Proxy\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
+  </ItemGroup>
+
 </Project>
