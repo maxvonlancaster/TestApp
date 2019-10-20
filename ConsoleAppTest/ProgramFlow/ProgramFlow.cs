@@ -226,28 +226,103 @@ namespace ConsoleAppTest.ProgramFlow
             // The	method	mTwo	is	never	called,	even	though	it	is	in	the	expression.	
         }
 
-        // 
-        // 
-        // 
+        // The	switch	construction	let’s	a	program	use	a	value	to	select	one	of	a	number of	different	options.	
+        // It	replaces	a	long	sequence	of	if–then–else	constructions that	would	otherwise	be	required.	
+        // The	switch	keyword	is	followed	by	an expression	that	controls	the	switch.
+        // At	run	time	the	program	will	look	for	a matching	value	on	a	particular	case	clause,	
+        // which	identifies	the	code	to	be executed	for	that	value.	The	code	controlled	by	the	case	continues	
+        // until	a break	statement,	which	marks	the	end	of	that	clause.	A	switch	can	contain	a default	clause,	
+        // identifying	a	clause	to	be	performed	if	the	control	value doesn’t	match	any	case. 
         public void SwitchConstruction()
         {
+            Console.WriteLine("Enter a command, commrade: ");
+            int command = int.Parse(Console.ReadLine());
 
+            switch (command)
+            {
+                case 1:
+                    Console.WriteLine("Command 1 chosen, commrade!");
+                    break;
+                case 2:
+                    Console.WriteLine("Command 2 chosen, commrade!");
+                    break;
+                case 3:
+                    Console.WriteLine("Command 3 chosen, commrade!");
+                    break;
+                default:
+                    Console.WriteLine("Please enter a valid command, commrade!");
+                    break;
+            }
         }
 
-        // 
-        // 
-        // 
+        // The	switch	construction	will	switch	on	character,	string	and	enumerated values,	and	it	is	possible	
+        // to	group	cases,	as	shown	below,	which	allows a	user	to	select	a	command	by	entering	a	string.	
+        // Note	that	the	string	that	is entered	is	converted	into	lower	case,	and	that	both	a	long	form	
+        // (save)	and	a	short form	of	the	command	(s)	can	be	used.
         public void SwitchOnStrings()
         {
+            Console.Write("Enter	command:	");
+            string commandName = Console.ReadLine().ToLower();
 
+            switch (commandName)
+            {
+                case "save":
+                case "s":
+                    Console.WriteLine("Save	command");
+                    break;
+                case "load":
+                case "l":
+                    Console.WriteLine("Load	command");
+                    break;
+                case "exit":
+                case "e":
+                    Console.WriteLine("Exit	command");
+                    break;
+                default:
+                    Console.WriteLine("Please	enter	save,	load	or	exit");
+                    break;
+            }
+            // In	C#	it	is	not	permissible	for	a	program	to	“fall	through”	from	the	end	of	one case	clause	into	another.	
+            // Each	clause	must	be	explicitly	ended	with	a	break,	a return,	or	by	the	program	throwing	an	exception. 
+            // Switches	are	a	nice	example	of	a	“luxury”	C#	feature	in	that	they	don’t actually	make	something	
+            // possible	that	you	can’t	do	any	other	way.	You	can create	C#	programs	without	using	any	switch	statements,	
+            // but	they	make	it	easier to	create	code	that	selects	one	behavior	based	on	the	value	in	a	control	variable. 
         }
 
-        // 
-        // 
-        // 
+        // C#	expressions	are	comprised	of	operators	and	operands.	Operators	specify	the action	to	be	performed,	
+        // and	are	either	literal	values	(for	example	the	number	99) or	variables.	You	have	seen	examples	of	operators	
+        // and	operands	in	use	in	the logical	expressions	that	control	the	if	constructions	in	previous	sections.	
+        // An operator	can	work	on	one	operand,	and	such	operands	are	called	unary	or monadic. 
+        // Monadic	operators	are	either	prefix	(given	before	the	operand)	or	postfix (given	after	the	operand).	
+        // Alternatively,	an	operand	can	work	on	two	(binary),	or in	the	case	of	the	conditional	operator	?:	
+        // three	(ternary)	operands. The	context	of	the	use	of	an	operator	determines	the	actual	behavior	that	the operator	
+        // will	exhibit.	For	example,	the	addition	operator	can	be	used	to	add	two
+        // numeric operands    together,	or concatenate two strings together.The use of an incorrect context(for	example adding  a number 
+        // to a   string) will be  detected by the compiler    and cause   a compilation error.
+        // Each operator    has	a priority    or precedence  that determines  when it	is performed during  expression evaluation.	
+        // This precedence  can be  overridden by the use of parenthesis;	
+        // elements enclosed    in parenthesis are evaluated first. Operators also    have an  associability, which gives   the order   
+        // (left to  right   or right to left)   in	which they    are evaluated	if	a number  of them    appear together.
         public void ExpressionEvaluation()
         {
+            int i = 0;  //	create	i	and	set	to	0
+                        //	Monadic	operators	-	one	operand 
+            i++;    //	monadic	++	operator	increment	-	i	now	1 
+            i--;    //	monadic	--	operator	decrement	-	i	now	0
+                    //	Postfix	monadic	operator	-	perform	after	value	given 
+            Console.WriteLine(i++); //	writes	0	and	sets	i	to	1 
+                                    //	Prefix	monadic	operator	-	perform	before	value	given 
+            Console.WriteLine(++i); //	writes	2	and	sets	i	to	2
+                                    //	Binary	operators	-	two	operands 
+            i	=	1	+	1;  //	sets	i	to	2 
+            i	=	1	+	2	*	3;  //	sets	i	to	7	because	*	performed	first 
+            i	=	(1	+	2)	*	3;	//	sets	i	to	9	because	+	performed	first
+            string str = "";
+            str = str + "Hello";    //	+	performs	string	addition
+                                    //	ternary	operators	-	three	operands 
+            i	=	true	?	0	:	1;	//	sets	i	to	0	because	condition	is	true; 
 
+            // Full	details	https://docs.microsoft.com/en-us/dotnet/csharp/programmingguide/statements-expressions-operators/operators.
         }
     }
 }
