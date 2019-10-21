@@ -1,6 +1,7 @@
 ﻿using ConsoleAppTest.ProgramFlow;
 using ConsoleAppTest.Types;
 using System;
+using ConsoleAppTest.ProgramFlow;
 
 namespace ConsoleAppTest
 {
@@ -8,8 +9,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new ConsumeTypes();
-            service.InteractionWithExcel();
+            var service = new ManageMultithreading();
+            service.SingleTaskSumming();
         }
     }
 }

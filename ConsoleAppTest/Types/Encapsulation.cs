@@ -91,20 +91,55 @@ namespace ConsoleAppTest.Types
             // but the	set	behavior	is	private	so	that	only	code	running	inside	the	class	can	assign values	to	the	property.
         }
 
-        // 
-        // 
-        // 
-        public void CreateAccessorMethods()
+        class BankAccount
         {
+            private decimal _accountBalance = 0; // Can not be accessed in the code outside the BankAccount class
 
+            public void PayInFunds(decimal amountToPayIn) // Code outside the BankAccount class can access these methods
+            {
+                _accountBalance = _accountBalance + amountToPayIn;
+            }
+
+            public bool WithdrawFunds(decimal amountToWithdraw)
+            {
+                if (amountToWithdraw > _accountBalance)
+                    return false;
+                _accountBalance = _accountBalance - amountToWithdraw;
+                return true;
+            }
+
+            public decimal GetBalance()
+            {
+                return _accountBalance;
+            }
+
+            // , from a design perspective, making a class member private and only providing public methods that allow access to that
+            // member is a good first step to creating secure code, but you also may also have
+            // to make sure that you provide a secure workflow that manages access to the data.
         }
 
-        // 
-        // 
+        // As a general rule, data held within a type should be made private and methods
+        // (which allow managed access to data inside the type) should be made public.
+        // Properties provide a way to manage access to individual values in a class, so you
+        // can consider how to use accessor methods to provide access to elements in a class.
+        public void CreateAccessorMethods()
+        {
+            BankAccount a = new BankAccount();
+            a.PayInFunds(50);
+            a.WithdrawFunds(10);
+            Console.WriteLine(a.GetBalance());
+        }
+
+        // If you don’t specify an access modifier for a member of a type, the access to that member will default to private. In other words, if you want to make a
+        // member visible outside the type, it must be done explicitly by adding public.This means that you don’t actually have to add the access modifier private to
+        // your private members, but I strongly advise you to do this.
+
+        // Making a member of a class private will prevent code in any external class from having access to that data member.The protected access modifier
+        // makes a class member useable in any classes that extend the parent(base) class in which the member is declared.
         // 
         public void ProtectedAccess()
         {
-
+            
         }
 
         // 
