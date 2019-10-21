@@ -24,7 +24,27 @@ namespace ConsoleAppTest.Types
     {
         class Customer
         {
+            private string _nameValue;
+            // This	value	is	called
+            // the backing value of  the property.If  you just    want to  implement a   class member as	a property,
+            // but don’t want    to get control when    the property	is	accessed,	you can use auto-implemented properties.
+            // The statement here    creates an  integer property    called Age.	The C#	compiler	automatically	creates	the	backing	values.
+            // If	you	want	to	add	get	and	set	behaviors	and	your	own	backing	value	later,	you can	do	this. 
+
+            public int Age { get; set; }
+
             public string Name;
+
+            public string NameValue
+            {
+                get => _nameValue;
+                set
+                {
+                    if (value == string.Empty)
+                        throw new Exception("Invalid value");
+                    _nameValue = value;
+                }
+            }
         }
 
         // A	property	in	an	object	provides	a	way	that	a	programmer	can	encapsulate	data. 
@@ -34,14 +54,41 @@ namespace ConsoleAppTest.Types
             Customer c = new Customer();
             c.Name = "Rob";
             Console.WriteLine("Customer	name:	{0}", c.Name);
+            // This	program	works	well,	but	it	doesn’t	provide	any	control	over	the	contents of	the	customer	name.	
+            // The	name	of	a	customer	can	be	set	to	any	string, including	an	empty	string.	
+            // You	should	stop	users	of	the	Customer	object	from setting	a	customer	name	to	an	empty	string.	
+            // We	call	this	“enforcing	business rules”	on	our	applications.	You	may	have	other	rules	to	enforce,	
+            // which	restrict the	characters	that	can	be	used	in	a	name	and	set	limits	for	the	minimum	and maximum	length	
+            // of	a	customer	name.	But	for	now,	
+            // we will just focus on how to manage access to the name of a customer and invalid customer names from being created. 
         }
 
-        // 
-        // 
-        // 
+        // Shown below is how	to	create	a	NameValue	property	in	the Customer	class	that	performs	validation	of	the	name.	
+        // A	property	is	declared	as having	a	get	behavior	and	a	set	behavior.	
+        // The	set	behavior	is	used	when	a program	sets	a	value	in	the	property	and	the	get	behavior	
+        // is	used	when	a program	gets	a	value	from	the	property.	The	get	behavior	for	the	Name property	
+        // returns	the	value	of	a	private	class	member	variable	called _nameValue,	which	holds	the	value	of	the	name	of	the	customer.
+        // Within	the set	behavior	for	the	Name	property	keyword	value	represents	the	value	being assigned	to	the	property.	
+        // If	this	value	is	an	empty	string	the	set	behavior	throws an	exception	to	prevent	an	empty	string	begin	
+        // set	as	a	Name.	If	the	value	is valid,	the	set	behavior	sets	_nameValue	to	the	incoming	name.	
+        // Note	that there is a C#	convention	that	private	members	of	a	class	have identifiers that start with an	underscore (_) character.
         public void UsingAProperty()
         {
+            Customer c = new Customer();
+            c.NameValue = "Rob";
+            Console.WriteLine("Customer	name:	{0}", c.Name);
+            //	the	following	statement	will	throw	an	exception 
+            c.NameValue	= "";
 
+            // Properties	provide	a	powerful	way	to	enforce	encapsulation,	which	is	very natural	in	use.	
+            // The	user	of	a	property	might	not	even	be	aware	that	code	is running	when	they	perform	what	
+            // seems	like	a	simple	assignment.	You	can provide	“read	only”	properties	by	creating	properties	that	only	
+            // contain	a	get behavior.	These	are	useful	if	you	want	to	expose	multiple	views	of	the	data	in	an object,	
+            // for	example	a	Thermometer	class	can	provide	different	properties	that give	the	temperature	value	in	Fahrenheit	and	Centigrade.
+            // You	can	also	create “write	only	properties”	by	only	providing	the	set	behavior,	although	this	
+            // ability is	less	frequently	used.	It	is	also	possible	to	set	different	access	modifiers	for	the get	and	set	behaviors,	
+            // so	that	a	get	behavior	can	be	public	for	anyone	to	read,	
+            // but the	set	behavior	is	private	so	that	only	code	running	inside	the	class	can	assign values	to	the	property.
         }
 
         // 
