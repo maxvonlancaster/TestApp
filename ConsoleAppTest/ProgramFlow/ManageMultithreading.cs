@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleAppTest.ProgramFlow
@@ -62,8 +63,8 @@ namespace ConsoleAppTest.ProgramFlow
                 if (rangeEnd > _items.Length)
                     rangeEnd = _items.Length;
                 //	create	local	copies	of	the	parameters																
-                int	rs	=	rangeStart;
-                int	re	=	rangeEnd;
+                int rs = rangeStart;
+                int re = rangeEnd;
                 tasks.Add(Task.Run(() => AddRangeOfValues(rs, re)));
                 rangeStart = rangeEnd;
             }
@@ -98,10 +99,9 @@ namespace ConsoleAppTest.ProgramFlow
         {
             while (start < end)
             {
-
                 // The	lock statement	is	followed	by	a	statement	or	block	of	code	that	is	performed	in	an atomic	manner,	
                 // so	it	will	not	be	possible	for	a	task	to	interrupt	the	code	protected by	the	lock
-                lock (_sharedTotalLock) 
+                lock (_sharedTotalLock)
                 {
                     _sharedTotal += _items[start];
                 }
@@ -149,9 +149,6 @@ namespace ConsoleAppTest.ProgramFlow
 
             while (start < end)
             {
-
-                // The	lock statement	is	followed	by	a	statement	or	block	of	code	that	is	performed	in	an atomic	manner,	
-                // so	it	will	not	be	possible	for	a	task	to	interrupt	the	code	protected by	the	lock
                 subtotal += _items[start];
                 start++;
             }
@@ -192,20 +189,108 @@ namespace ConsoleAppTest.ProgramFlow
 
         }
 
-        // 
-        // 
-        // 
-        public void UsingMonitors()
+        private void AddRangeOfValuesWithMonitor(int start, int end)
         {
+            long subtotal = 0;
 
+            while (start < end)
+            {
+                subtotal += _items[start];
+                start++;
+            }
+
+            Monitor.Enter(_sharedTotalLock);
+            _sharedTotal += subtotal;
+            Monitor.Exit(_sharedTotalLock);
         }
 
-        // 
-        // 
-        // 
+        // Monitor - similar to lock, but code arranged differently. Allow program to ensure that only one thread at a time can access a praticular object.
+        // Rather than controlling a statement or block of code, as the lock keyword does, the atomic code is enclosed in calls of
+        // Monitor.Enter and Monitor.Exit.The Enter and Exit methods are passed a reference to an object that is used as the lock.
+        public void UsingMonitors()
+        {
+            List<Task> tasks = new List<Task>();
+            int rangeSize = 1000;
+            int rangeStart = 0;
+            while (rangeStart < _items.Length)
+            {
+                int rangeEnd = rangeStart + rangeSize;
+                if (rangeEnd > _items.Length)
+                    rangeEnd = _items.Length;
+                //	create	local	copies	of	the	parameters																
+                int rs = rangeStart;
+                int re = rangeEnd;
+                tasks.Add(Task.Run(() => AddRangeOfValuesWithMonitor(rs, re))); // method uses monitor
+                rangeStart = rangeEnd;
+            }
+            Task.WaitAll(tasks.ToArray());
+            Console.WriteLine("Total: {0}", _sharedTotal);
+
+            // If atomic code throws an exception, you need to be sure that any locks that have been claimed to enter the code are released.In statements managed by the
+            // lock keyword this happens automatically, if you use a Monitor, make sure that the lock is released.
+            Monitor.Enter(_sharedTotalLock);
+            try
+            {
+                // some code here that might throw exception
+            }
+            finally
+            {
+                Monitor.Exit(_sharedTotalLock); // this will always be executed
+            }
+
+            // way to check whether or not it will be blocked when it tries to enter the locked segment of code.
+            if (Monitor.TryEnter(_sharedTotalLock))
+            {
+                // code controlled by the lock
+            }
+            else
+            {
+                // do something else because the lock object is in use
+            }
+            // The TryEnter method attempts to enter the code controlled by the lock. If this is not possible because the lock object is in use, the TryEnter method returns false.
+        }
+
+        private object lock1 = new object();
+        private object lock2 = new object();
+
+        private void Method1()
+        {
+            lock (lock1)
+            {
+                Console.WriteLine("Method1 got lock1");
+                Console.WriteLine("Method1 waiting for lock2");
+                lock (lock2)
+                {
+                    Console.WriteLine("Method1 got lock2");
+                }
+                Console.WriteLine("Method1 released lock2");
+            }
+            Console.WriteLine("Method1 released lock1");
+        }
+
+        private void Method2()
+        {
+            lock (lock2)
+            {
+                Console.WriteLine("Method2 got lock2");
+                Console.WriteLine("Method2 waiting for lock1");
+                lock (lock1)
+                {
+                    Console.WriteLine("Method2 got lock1");
+                }
+                Console.WriteLine("Method2 released lock1");
+            }
+            Console.WriteLine("Method2 released lock2");
+        }
+
+        // a deadly embrace, where two different tasks are waiting for each other to perform an action on a shared
+        // collection, which blocks from adding items when the collection is full andremoving items when the collection is empty.This situation is also called a deadlock.
         public void SequentialLocking()
         {
-
+            Method1();
+            Method2();
+            Console.WriteLine("Methods complete");
+            // all methods will complete. Each method gets the lock objects in turn because they are running sequentially
         }
 
         // 
