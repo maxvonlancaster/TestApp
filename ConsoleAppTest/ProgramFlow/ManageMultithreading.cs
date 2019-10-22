@@ -227,7 +227,8 @@ namespace ConsoleAppTest.ProgramFlow
             Console.WriteLine("Total: {0}", _sharedTotal);
 
             // If atomic code throws an exception, you need to be sure that any locks that have been claimed to enter the code are released.In statements managed by the
-            // lock keyword this happens automatically, if you use a Monitor, make sure that the lock is released.
+            // lock keyword this happens automatically, if you use a Monitor, make sure that the lock is released.
+
             Monitor.Enter(_sharedTotalLock);
             try
             {
@@ -293,41 +294,169 @@ namespace ConsoleAppTest.ProgramFlow
             // all methods will complete. Each method gets the lock objects in turn because they are running sequentially
         }
 
-        // 
+        // You	can	change	the	program	so	that	the methods	are	performed	by	tasks.
         // 
         // 
         public void DeadLockedTasks()
         {
+            Task t1 = Task.Run(() => Method1());
+            Task t2 = Task.Run(() => Method2());
+            Console.WriteLine("waiting	for	Task	2");
+            t2.Wait();
+            Console.WriteLine("Tasks	complete.	Press	any	key	to	exit."); // this will never be printed
 
+            // The	tasks	in	this	case	never	complete.	Each	task	is	waiting	for	the	other’s	lock object,	and	neither	can	
+            // continue.	Note	that	
+            // this	is	not	the	same	as	creating	an infinite	loop,	in	which	a	program	repeats	a	sequence	of	statements	forever.	
         }
 
-        // 
-        // 
-        // 
+        private void AddRangeOfValuesInterlocked(int start, int end)
+        {
+            long subtotal = 0;
+
+            while (start < end)
+            {
+                subtotal += _items[start];
+                start++;
+            }
+
+            Interlocked.Add(ref _sharedTotal, subtotal);
+            // There	is	also	a	compare	and	exchange	method	that	can	be	used	to	create	a multi-tasking	program	to	search	
+            // through	an	array	and	find	the	largest	value	in that	array. 
+        }
+
+        // There’s	a	better	way of	achieving	thread	safe	access	to	the	contents	of	a	variable,	which	
+        // is	to	use	the Interlocked	class.	This	provides	a	set	of	thread-safe	operations	that	can	be performed	on	a	variable.	
+        // These	include	increment,	decrement,	exchange	(swap	a variable	with	another),	and	add. 
         public void InterlockTotal()
         {
+            List<Task> tasks = new List<Task>();
+            int rangeSize = 1000;
+            int rangeStart = 0;
+            while (rangeStart < _items.Length)
+            {
+                int rangeEnd = rangeStart + rangeSize;
+                if (rangeEnd > _items.Length)
+                    rangeEnd = _items.Length;
+                //	create	local	copies	of	the	parameters																
+                int rs = rangeStart;
+                int re = rangeEnd;
+                tasks.Add(Task.Run(() => AddRangeOfValuesInterlocked(rs, re))); // method uses monitor
+                rangeStart = rangeEnd;
+            }
+            Task.WaitAll(tasks.ToArray());
+            Console.WriteLine("Total: {0}", _sharedTotal);
+
+            // Volatile variables
+            // The	source	of	a	C#	program	goes	through	a	number	of	stages	before	it	is	actually executed.	
+            // The	compilation	process	includes	the	examination	of	the	sequence	of statements	to	discover	ways	
+            // that	a	program	can	be	made	to	run	more	quickly. This	might	result	in	
+            // statements	being	executed	in	a	different	order	to	the	order they	were	written.	
+            // After compilation	we	may	find	that	the	order	of	statements	has	been swapped,	
+            // so	that	the	value	can	be	held	inside	the	computer	processor	rather than	having	to	be	
+            // re -loaded	from	memory	for	the	write	statement. In	a	single	threaded	situation	this	is	perfectly	
+            // acceptable,	but	if	multiple threads	are	working	on	the	code,	this	may	result	in	unexpected	behaviors. 
+            // Furthermore,	if	another	task	changes	the	value	of	variable	while	statements	are	running, and	if	the	C#	compiler	
+            // caches	the	value	between	statements,	this	results	in an	out	of	date	value	being	printed.	
+            // C#	provides	the	keyword	volatile,	
+            // which can	be	used	to	indicate	that	operations	involving	a	particular	variable	are	not optimized	in	this	way.
+            // volatile int x;
+            // Operations	involving	the	variable	x	will	now	not	be	optimized,	and	the	value of	
+            // x	will	be	fetched	from	the	copy	in	memory,	rather	than	being	cached	in	the processor.	
+            // This	can	make	operations	involving	the	variable	x	a	lot	less	efficient. 
 
         }
 
-        // 
-        // 
-        // 
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
+        private void Clock()
+        {
+            while (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                Console.WriteLine("Tick");
+                Thread.Sleep(1000);
+            }
+        }
+
+        // There	is	an	important	difference	between	threads	and	tasks,	in	that	a	Thread can	be	aborted	at	any	time,	
+        // whereas	a	Task	must	monitor	a	cancellation	token so	that	it	will	end	when	told	to
         public void CancellATask()
         {
-
+            Task.Run(() => Clock());
+            Console.WriteLine("Press any key to stop clock");
+            Console.ReadKey();
+            _cancellationTokenSource.Cancel();
+            Console.WriteLine("Clock stoped");
         }
 
-        // 
-        // 
-        // 
+        private void ClockWithException(CancellationToken cancellationToken)
+        {
+            int tickCount = 0;
+
+            while (!cancellationToken.IsCancellationRequested && tickCount < 20)
+            {
+                tickCount++;
+                Console.WriteLine("Tick");
+                Thread.Sleep(1000);
+            }
+
+            cancellationToken.ThrowIfCancellationRequested();
+        }
+
+        // A	Task	can	indicate	that	it	has	been	cancelled	by	raising	an	exception.	
+        // This	can be	useful	if	a	task	is	started	in	one	place	and	monitored	in	another.	
         public void CancellWithException()
         {
-
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            Task clock = Task.Run(() => ClockWithException(cancellationTokenSource.Token));
+            Console.WriteLine("Press any key to stop the clock");
+            Console.ReadKey();
+            if (clock.IsCompleted)
+            {
+                Console.WriteLine("Clock task completed");
+            }
+            else
+            {
+                try
+                {
+                    cancellationTokenSource.Cancel();
+                    clock.Wait();
+                }
+                catch(AggregateException ex)
+                {
+                    Console.WriteLine("Clock task stopped: {0}", ex.InnerExceptions[0].ToString());
+                }
+            }
         }
 
-        // 
-        // 
-        // 
+        class Counter
+        {
+            private int _totalValue = 0;
+
+            public void IncreaseValue(int amount)
+            {
+                _totalValue += amount;
+            }
+
+            public int Total
+            {
+                get { return _totalValue; }
+            }
+        }
+
+        // An	object	can	provide	services	to	other	objects	by	exposing	methods	for	them	to use.	
+        // If	an	object	is	going	to	be	used	in	a	multi-threaded	application	it	is important	that	
+        // the	method	behaves	in	a	thread	safe	manner.	Thread	safe	means that	the	method	can	be	called	from	
+        // multiple	tasks	simultaneously	without producing	incorrect	results,	and	without	placing	the	object	that	
+        // it	is	a	member	of into	an	invalid	state. 
+        // Without	locking,	the	program	that	attempts to	use	multiple	tasks	to	sum	the	contents	of	an	array	
+        // fails	because	there	is unmanaged	access	to	the	shared	total	value.	You	can	see	the	same	issues	arising when	
+        // a	method	uses	the	value	of	a	member	of	an	object. 
+        // Any	use	of	a	member	of	a	class	must	be	thread	safe,	and	this	must	be	done	in a	way	that	does	
+        // not	compromise	multi-threaded	performance.	You’ve	seen	how adding	locks	can	make	things	thread	safe,	
+        // but	you	also	saw	how	doing	this incorrectly	can	actually	make	performance	worse.	This	may	mean	that	creating	a
+        // multi-tasked implementation  of a   system involves    a complete    re-write,	with processes  refactored	as	
+        // either producers   or consumers   of data.
         public void UnsafeThreadMethod()
         {
 

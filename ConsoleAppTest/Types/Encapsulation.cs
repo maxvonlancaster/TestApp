@@ -93,14 +93,14 @@ namespace ConsoleAppTest.Types
 
         class BankAccount
         {
-            private decimal _accountBalance = 0; // Can not be accessed in the code outside the BankAccount class
+            protected decimal _accountBalance = 0; // Can not be accessed in the code outside the BankAccount class
 
             public void PayInFunds(decimal amountToPayIn) // Code outside the BankAccount class can access these methods
             {
                 _accountBalance = _accountBalance + amountToPayIn;
             }
 
-            public bool WithdrawFunds(decimal amountToWithdraw)
+            public virtual bool WithdrawFunds(decimal amountToWithdraw)
             {
                 if (amountToWithdraw > _accountBalance)
                     return false;
@@ -137,25 +137,107 @@ namespace ConsoleAppTest.Types
         // Making a member of a class private will prevent code in any external class from having access to that data member.The protected access modifier
         // makes a class member useable in any classes that extend the parent(base) class in which the member is declared.
         // 
-        public void ProtectedAccess()
+        class OverdraftAccount : BankAccount
         {
-            
+            decimal overdraftLimit = 100;
+
+            public override bool WithdrawFunds(decimal amountToWithdraw)
+            {
+                if (amountToWithdraw > _accountBalance + overdraftLimit)
+                    return false;
+                _accountBalance = _accountBalance - amountToWithdraw;
+                return true;
+            }
+
+            // It	isn’t	recommended	that	you	use	the	protected	access	modifier	to	control access	to	highly	important	data	
+            // members	of	a	class	such	as	a	bank	balance. Doing	this	makes	it	very	easy	for	a	malicious	programmer	
+            // to	gain	access	to	the protected	member	by	extending	the	parent	class.	I	tend	to	use	the	protected access	
+            // modifier	to	limit	access	to	helper	methods	that	have	no	meaningful	use outside	of	the	class	hierarchy. 
+
+            // The	internal	access	modifier	will	make	a	member	of	a	type	accessible	within the	assembly	
+            // in	which	it	is	declared.	You	can	regard	an	assembly	as	the	output	of a	C#	project	in	Visual	Studio.	
+            // It	can	be	either	an	executable	program	(with	the language	extension	.exe)	or	a	library	of	classes	
+            // (with	the	language	extension .dll).	Internal	access	is	most	useful	when	you	have	a	large	number	of	
+            // cooperating classes	that	are	being	used	to	provide	a	particular	library	component.	
+            // These classes	may	want	to	share	members	which	should	not	be	visible	to	programs	that use	the	library.	
+            // Using	the	access	modifier	internal	allows	this	level	of sharing. 
         }
 
-        // 
-        // 
+        // The	readonly	access	modifier	will	make	a	member	of	a	type	read	only.	The value	of	the	member	
+        // can	only	be	set	at	declaration	or	within	the	constructor	of the	class. 
+
+        // The	private,	public,	protected,	and	internal	access	modifiers	can	also	be	applied to	classes	that	
+        // are	declared	nested	inside	other	classes.	
+        class NewBankAccount
+        {
+            protected class Address
+            {
+                public string FirstLine;
+                public string Postcode;
+            }
+
+            protected decimal balance = 0;
+        }
+
+        class OverdraftNewAccount : NewBankAccount
+        {
+            decimal overdraftLimit = 100;
+            Address GuarantorAddress;
+        }
+
+
         //
-        public void ProtectedClass()
+        interface IPrintable
         {
-
+            string GetPrintableText(int pageWidth, int pageHeight);
+            string GetTitle();
         }
 
-        // 
+        interface IDisplay
+        {
+            string GetTitle();
+        }
+
+        class Report : IPrintable, IDisplay
+        {
+            // If	you	think	about	it,	the	methods	in	the	IPrintable	interface	only	have meaning	when	being	
+            // used	by	something	trying	to	print	an	object.	It	is	not sensible	to	call	the	printing	methods	in	
+            // any	other	context	than	via	the IPrintable	reference.	You	can	achieve	this	by	making	the	implementation	
+            // of the	printing	methods	explicit(!!!),	thus	adding	the	interface	name	to	the	declaration of	the	method	body. 
+            string IPrintable.GetPrintableText(int pageWidth, int pageHeight)
+            {
+                return "Print Text";
+            }
+
+            string IPrintable.GetTitle()
+            {
+                return "Print Title";
+            }
+
+            // Resolving	duplicate	method	signatures	by	using	explicit implementation:
+            string IDisplay.GetTitle()
+            {
+                return "Display Title";
+            }
+            // Once	you	have	done	this,	the	only	way	to	access	these	methods	in	a	Report instance	is	by	a	
+            // reference	of	IPrintable	type.
+        }
+
+        // When	a	class	implements	an	interface	it	contains	methods	with	signatures	that match	the	ones	specified	
+        // in	the	interface.	You	can	use	an	explicit	interface implementation	to	make	methods	implementing	an	interface	
+        // only	visible	when the	object	is	accessed	via	an	interface	reference. 
         // 
         // 
         public void PrintingInterface()
         {
+            Report report = new Report();
+            // report.GetTitle();
+            // Code above gives compile error
+            IPrintable printable = new Report();
+            printable.GetTitle(); // does not give error
 
+            // When	you	use	an	interface	in	a	program	you	should	ensure	that	all	the implementations	of	any	interface	methods	are	explicit.	
+            // This	reduces	the	chances of	the	interface	methods	being	used	in	an	incorrect	context.
         }
     }
 }
