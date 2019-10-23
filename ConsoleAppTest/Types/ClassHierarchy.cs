@@ -38,9 +38,100 @@ namespace ConsoleAppTest.Types
             printable.GetTitle();
         }
 
-        // 2-34
+        // 2-34 The IAccountInterface (Design interface)
+        // You	can	build	your	knowledge	of	interfaces	
+        // by considering how to create	an interface to describe the behavior of a class that will implement a bank account. 
+        public interface IAccount
+        {
+            void PayInFunds(decimal amount);
+            bool WithdrawFunds(decimal amount);
+            decimal GetBalance();
+            // Note	that at the interface level we are not saying how any of these tasks should be performed, but we are just identifying the tasks. 
+        }
+        // An	interface	is	placed	in	a	source	file	just	like	a	class,	and	compiled	in	the same	way.	
+        // It	sets	out	a	number	of	methods	that	relate	to	a	particular	task	or	role, which	in	this	case	
+        // is	what	a	class	must	do	to	be	considered	a	bank	account.	There is	a	convention	in	C#	programs	
+        // that	the	name	of	an	interface	starts	with	the	letter I.	It	is	interesting	to	note	that	one	of	the	refactoring	
+        // tools	available	in	Visual Studio	is	one	that	will	extract	the	method	signatures	from	a	class	and	create	an 
+        // interface that    contains those   methods.
 
-        // 2-35
+        class BankAccount : IAccount
+        {
+            private decimal _balance = 0;
+
+            // 	these methods are only exposed when the BankAccount object is referred to by a reference of type IAccount.
+            decimal IAccount.GetBalance()
+            {
+                return _balance;
+            }
+
+            void IAccount.PayInFunds(decimal amount)
+            {
+                _balance += amount;
+            }
+
+            bool IAccount.WithdrawFunds(decimal amount)
+            {
+                if (_balance < amount)
+                {
+                    return false;
+                }
+                _balance = _balance - amount;
+                return true;
+            }
+        }
+        // So,	with	interfaces	you	are	moving	away	from	considering	classes	in	terms	of what	they	are,	
+        // and	starting	to	think	about	them	in	terms	of	what	they	can	do.	In the	case	of	your	
+        // bank,	this	means	that	you	want	to	deal	with	objects	in	terms	of IAccount,	
+        // (the	set	of	account	abilities)	rather	than	BankAccount	(a particular	account	class). 
+        public void InterfaceDesign()
+        {
+            IAccount account = new BankAccount();
+            account.PayInFunds(50);
+            Console.WriteLine("Balance:	" + account.GetBalance());
+        }
+
+
+        // 2-35 BabyAccount (Inherit from a base class)
+        // One	of	the	fundamental	principles	of	software	development	is	to	ensure	that	you create	every	piece	of	code	
+        // in	an	application	precisely	once.	Rather	than	copying code	from	one	part	of	a	program	to	another,	
+        // you	would	create	a	method	and	then call	that	method. The	reason	to	do	this	is	quite	simple.	If	you	find	
+        // a	bug	in	a	piece	of	your program	you	only	want	to	have	to	fix	the	bug	once.	You	don’t	want	to	have	
+        // to search	through	the	program	looking	for	all	of	the	places	where	you	have	used	a particular	lump	of	code.	
+        // If	you	have	to	do	this,	you	may	miss	one	place	and	end up	with	a	program	that	is	mostly	fixed,	but	will	
+        // still	fail	sometimes.	A	class hierarchy	is	a	great	way	to	reuse	code	so	that	you	only	have	to	create	
+        // a	behavior in	one	place	and	can	then	reuse	the	behavior	everywhere	it	makes	sense	to	do this. A	class	hierarchy	
+        // is	used	when	you	have	an	application	that	must	manipulate items	that	are	part	of	a	particular	group.
+
+        // What	you	really	want	to	do	is	pick	up	all	the	behaviors	in	the	BankAccount and	then	just	change	the	one	method	that	
+        // needs	to	behave	differently.	This	can	be done	in	C#	using	inheritance.	
+        class BabyAccount : BankAccount, IAccount
+        {
+            // BankAccount	is	called	the	base	or	parent	class	of	BabyAccount.
+
+        }
+
+        public void InheritanceFromBaseClass()
+        {
+            IAccount account = new BabyAccount();
+            account.PayInFunds(50);
+            // This	works	because,	although	BabyAccount	does	not	have	a	PayInFunds method,	the	base	class	does.	
+            // This	means	that	the	PayInFunds	method	from	the BankAccount	class	is	used	at	this	point. 
+            // Instances	of	the	BabyAccount	class	have	abilities	which	they	pick	up	from their	base	class.	
+            // In	fact,	at	the	moment,	the	BabyAccount	class	has	no behaviors	of	its	own;	it	gets	everything	from	its	base	class. 
+
+            // A	program	can	use	the	is	and	as	operators	when	working	with	class	hierarchies and	interfaces.	
+            // The	is	operator	determines	if	the	type	of	a	given	object	is	in	a particular	class	hierarchy	or	implements	
+            // a	specified	interface.	You	apply	the	is operator	between	a	reference	variable	and	a	type	or	
+            // interface	and	the	operator returns	true	if	the	reference	can	be	made	to	refer	to	objects	of	that	type. 
+            if (account is IAccount)
+            {
+                Console.WriteLine("acc is IAccount");
+            }
+
+
+        }
+
 
         // 2-36
 
