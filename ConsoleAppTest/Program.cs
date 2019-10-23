@@ -9,8 +9,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new ManageMultithreading();
-            service.CancellWithException();
+            var service = new StringManipulation();
+            service.StringInterpolation();
         }
     }
 }
