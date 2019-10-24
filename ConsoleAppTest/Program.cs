@@ -9,8 +9,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new StringManipulation();
-            service.StringInterpolation();
+            var service = new Reflection();
+            service.FindComponents();
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using static ConsoleAppTest.Types.ClassHierarchy;
 
 namespace ConsoleAppTest.Types
 {
@@ -37,14 +39,47 @@ namespace ConsoleAppTest.Types
 
             MethodInfo setMethod = type.GetMethod("set_Name");
             setMethod.Invoke(person, new object[] { "F" });
-            Console.WriteLine(person.Name);
+            Console.WriteLine(person.Name); // will print out "F"
+        }
+
+        // to        implement plugins you need to be able to search the classes in an assembly and
+        // find components that implement particular interfaces.This behavior is the basis of the Managed Extensibility Framework(MEF). 
+        // Find more at :  https://docs.microsoft.com/en-us/dotnet/framework/mef/
+        // Find all classes that implement IAccount
+        public void FindComponents()
+        {
+            Assembly thisAssembly = Assembly.GetExecutingAssembly();
+            List<Type> AccountTypes = new List<Type>();
+            foreach (Type t in thisAssembly.GetTypes())
+            {
+                if (t.IsInterface)
+                    continue;
+                if (typeof(IAccount).IsAssignableFrom(t))
+                {
+                    AccountTypes.Add(t);
+                }
+            } // BabyAccount and BankAccount will be added
+        }
+
+        // You can simplify the identification of the types by using a LINQ query
+        public void LinqComponents()
+        {
+            Assembly thisAssembly = Assembly.GetExecutingAssembly();
+
+            var AccountTypes = from type in thisAssembly.GetTypes()
+                               where typeof(IAccount).IsAssignableFrom(type) && !type.IsInterface
+                               select type;
+            // It is possible to load an assembly from a file by using the Assembly.Load method.The statement below would load all the types in a file called
+            // BankTypes.dll.This means that at its start an application could search aparticular folder for assembly files, load them and then search for classes that
+            // can be used in the application.
+            Assembly bankTypes = Assembly.Load("BankTypes.dll");
         }
 
         // 
         // 
         // 
         // 
-        public void FindComponents()
+        public void CodeDomObject()
         {
 
         }
@@ -53,7 +88,43 @@ namespace ConsoleAppTest.Types
         // 
         // 
         // 
-        public void LinqComponents()
+        public void LambdaExpressionTree()
+        {
+
+        }
+
+        // 
+        // 
+        // 
+        // 
+        public void ModifyingExpressionTree()
+        {
+
+        }
+
+        // 
+        // 
+        // 
+        // 
+        public void AssemplyObject()
+        {
+
+        }
+
+        // 
+        // 
+        // 
+        // 
+        public void PropertyInfo()
+        {
+
+        }
+
+        // 
+        // 
+        // 
+        // 
+        public void MethodInfoReflection()
         {
 
         }
