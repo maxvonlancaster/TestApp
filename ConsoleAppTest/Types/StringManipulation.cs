@@ -24,13 +24,16 @@ namespace ConsoleAppTest.Types
         public void StringIntern()
         {
             // When a program is compiled the compiler uses a process called string interning to improve the efficiency of string storage.
-            // The compiler will save program memory by making both s1 and s2 refer to the same string object with the content “hello.”
+            // The compiler will save program memory by making both s1 and s2 refer to the same string object with the content “hello.”
+
             string s1 = "Hello";
             string s2 = "Hello";
 
             // String interning only happens when the program is compiled. The following statements would make a make a new string with the content “hello” when the
             // program runs, however this string would be a different object from the string created for s1 and s2 above.
-            string h1 = "He";            string h2 = "llo";            string s3 = h1 + h2;
+            string h1 = "He";
+            string h2 = "llo";
+            string s3 = h1 + h2;
 
             // String interning doesn’t happen when a program is running because every time a new string is created the program has to search through the list of interned
             // strings to see if that string was already present. This slows the program down.However, you can force a given string to be interned at run time by using the
@@ -136,7 +139,8 @@ namespace ConsoleAppTest.Types
                 Console.WriteLine("Culture comparisons encyclopaedias are equal");
             // We can use IgnoreCase option to perform comparisons that ignore the case:
             if ("encyclopædia".Equals("ENCYCLOPAEDIA", StringComparison.CurrentCultureIgnoreCase))
-                Console.WriteLine("Case culture comparisons encyclopaedias are equal");        }
+                Console.WriteLine("Case culture comparisons encyclopaedias are equal");
+        }
 
         // You can regard string as an array of characters. Program can iterate that array. Also provides Length property -> number of characters in a string
         public void EnumerateStrings()
@@ -161,7 +165,8 @@ namespace ConsoleAppTest.Types
         }
 
         // You can add behaviors to classes that you create to allow them to be given formatting commands in the same way.Any type that
-        // implements the IFormattable interface will contain a ToString method that can be used to request formatted conversion of values into a string.        // 
+        // implements the IFormattable interface will contain a ToString method that can be used to request formatted conversion of values into a string.
+        // 
         // 
         class MusicTrack : IFormattable
         {

@@ -10,7 +10,7 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
             var service = new Reflection();
-            service.FindComponents();
+            service.CodeDomObject();
         }
     }
 }
