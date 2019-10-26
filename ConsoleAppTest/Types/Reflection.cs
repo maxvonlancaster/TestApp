@@ -7,6 +7,7 @@ using static ConsoleAppTest.Types.ClassHierarchy;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.IO;
+using System.Linq.Expressions;
 
 namespace ConsoleAppTest.Types
 {
@@ -133,13 +134,29 @@ namespace ConsoleAppTest.Types
             // you	were	parsing. 
         }
 
-        // 
-        // 
-        // 
-        // 
+        // A	lambda	expression	is	a	way	of expressing	a	data	processing	action	(a	value	goes	in	and	a	result	comes	out).	
+        // You can	express	a	single	action	in	a	program	by	the	use	of	a	single	lambda expression.	More	complex	actions	can	be	expressed	
+        //in	expression	trees.	If	you think	about	it,	the	structure	of	a	CodeDOM	object	is	very	like	a	tree,	in	that	the root	
+        // object	contains	elements	that	branch	out	from	it.	The	elements	in	the	root object	can	also	contain	other	elements,	leading	to	
+        // a	tree	like	structure	that describes	the	elements	in	the	program	that	is	being	created.	Expression	trees	are widely	used	
+        // in	C#,	particularly	in	the	context	of	LINQ.	The	code	that	generates the	result	of	a	LINQ	query	will	be	created	as	an	expression	tree. 
         public void LambdaExpressionTree()
         {
+            //	build	the	expression	tree:													
+            Expression<Func<int,int>>	squareExp	=	num	=>	num	*	num;
+            //	The	parameter	for	the	expression	is	an	integer												
+            ParameterExpression	numParam	=	Expression.Parameter(typeof(int),	"num");
+            //	The	opertion	to	be	performed	is	to	square	the	parameter												
+            BinaryExpression squareOperation = Expression.Multiply(numParam, numParam);
+            //	This	creates	an	expression	tree	that	describes	the	square	operation												
+            Expression<Func<int,	int>>	square	= Expression.Lambda<Func<int,	int>>( squareOperation,	new ParameterExpression[] { numParam });
+            //	Compile	the	tree	to	make	an	executable	method	and	assign	it	to	a	dele												
+            Func<int,	int>	doSquare	=	square.Compile();
+            //	Call	the	delegate												
+            Console.WriteLine("Square	of	2:	{0}",	doSquare(2));
 
+            // The	System.Linq.Expressions	namespace	contains	a	range	of	other types	that	can	be	used	to	represent	other	code	elements	
+            // in	lambda	expressions, including	conditional	operation,	loops	and	collections. 
         }
 
         // 
