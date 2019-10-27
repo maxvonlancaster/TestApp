@@ -57,7 +57,7 @@ namespace ConsoleAppTest.Types
 
         class BankAccount : IAccount
         {
-            private decimal _balance = 0;
+            protected decimal _balance = 0;
 
             // 	these methods are only exposed when the BankAccount object is referred to by a reference of type IAccount.
             decimal IAccount.GetBalance()
@@ -79,6 +79,11 @@ namespace ConsoleAppTest.Types
                 _balance = _balance - amount;
                 return true;
             }
+
+            public virtual bool WithdrowVirtual(decimal amount)
+            {
+                return false;
+            } 
         }
         // So,	with	interfaces	you	are	moving	away	from	considering	classes	in	terms	of what	they	are,	
         // and	starting	to	think	about	them	in	terms	of	what	they	can	do.	In the	case	of	your	
@@ -109,6 +114,7 @@ namespace ConsoleAppTest.Types
         {
             // BankAccount	is	called	the	base	or	parent	class	of	BabyAccount.
 
+            
         }
 
         public void InheritanceFromBaseClass()
@@ -133,23 +139,80 @@ namespace ConsoleAppTest.Types
         }
 
 
-        // 2-36
+        // 2-36 Overriding
+        // Overriding replaces    a method	in	a	base	class with    a version   that provides    the behavior    appropriate to  a child   class.	
+        // In the	case	of the
+        // BabyAccount,	you want    to change  the behavior    of the one method  that you are interested	in.	
+        // You want    to replace the WithdrawFunds   method with    a new one.
+        // The	keyword	override	means	“use this	version	of	the	method	in	preference	to	the	one	in	the	base	class.”
+        public class BankAccountOverride : IAccount
+        {
+            protected decimal _balance = 0;
+            public virtual bool WithdrawFunds(decimal amount)
+            {
+                if (_balance < amount)
+                {
+                    return false;
+                }
+                _balance = _balance - amount;
+                return true;
+            }
+
+            void IAccount.PayInFunds(decimal amount)
+            {
+                _balance = _balance + amount;
+            }
+
+            decimal IAccount.GetBalance()
+            {
+                return _balance;
+            }
+        }
+
+        class BabyAccountOverride : BankAccount, IAccount
+        {
+            public override bool WithdrowVirtual(decimal amount)
+            {
+                if (amount > 10)
+                {
+                    return false;
+                }
+                if (_balance < amount)
+                {
+                    return false;
+                }
+                _balance = _balance - amount;
+                return true;
+            }
+        }
+        // The	C#	compiler	needs	to	know	if	a	method	is	going	
+        // to	be	overridden.	This is	because	it	must	call	an	overridden	method	in	a	slightly	different	way	from a	“normal”	one.	
+        // 
+
 
         // 2-37
 
+
         // 2-38
+
 
         // 2-39
 
+
         // 2-40
+
 
         // 2-41
 
+
         // 2-42
+
 
         // 2-43
 
+
         // 2-44
+
 
         // 2-45
 
