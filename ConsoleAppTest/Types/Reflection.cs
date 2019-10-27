@@ -95,17 +95,17 @@ namespace ConsoleAppTest.Types
         {
             CodeCompileUnit compileUnit = new CodeCompileUnit();
             //	Create	a	namespace	to	hold	the	types	we	are	going	to	create 
-            CodeNamespace	personnelNameSpace	=	new	CodeNamespace("Personnel");
+            CodeNamespace personnelNameSpace = new CodeNamespace("Personnel");
             //	Import	the	system	namespace 
-            personnelNameSpace.Imports.Add(new	CodeNamespaceImport("System")); //	Create	a	Person	class 
-            CodeTypeDeclaration	personClass	=	new	CodeTypeDeclaration("Person");
-            personClass.IsClass	=	true;
-            personClass.TypeAttributes	=	System.Reflection.TypeAttributes.Public;
+            personnelNameSpace.Imports.Add(new CodeNamespaceImport("System")); //	Create	a	Person	class 
+            CodeTypeDeclaration personClass = new CodeTypeDeclaration("Person");
+            personClass.IsClass = true;
+            personClass.TypeAttributes = System.Reflection.TypeAttributes.Public;
             //	Add	the	Person	class	to	personnelNamespace 
             personnelNameSpace.Types.Add(personClass);
             //	Create	a	field	to	hold	the	name	of	a	person 
-            CodeMemberField	nameField	=	new	CodeMemberField("String",	"name");
-            nameField.Attributes	=	MemberAttributes.Private;
+            CodeMemberField nameField = new CodeMemberField("String", "name");
+            nameField.Attributes = MemberAttributes.Private;
             //	Add	the	name	field	to	the	Person	class 
             personClass.Members.Add(nameField);
             //	Add	the	namespace	to	the	document 
@@ -116,17 +116,17 @@ namespace ConsoleAppTest.Types
 
             //	Now	we	need	to	send	our	document	somewhere 
             //	Create	a	provider	to	parse	the	document 
-            CodeDomProvider	provider	=	CodeDomProvider.CreateProvider("CSharp");
+            CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             //	Give	the	provider	somewhere	to	send	the	parsed	output 
-            StringWriter	s	=	new	StringWriter();
+            StringWriter s = new StringWriter();
             //	Set	some	options	for	the	parse	-	we	can	use	the	defaults 
-            CodeGeneratorOptions	options	=	new	CodeGeneratorOptions();
+            CodeGeneratorOptions options = new CodeGeneratorOptions();
             //	Generate	the	C#	source	from	the	CodeDOM 
-            provider.GenerateCodeFromCompileUnit(compileUnit,	s,	options);
+            provider.GenerateCodeFromCompileUnit(compileUnit, s, options);
             //	Close	the	output	stream 
             s.Close();
             //	Print	the	C#	output 
-            Console.WriteLine(s.ToString()); 
+            Console.WriteLine(s.ToString());
 
             // There	are	a	range	of	types	that	can	be	created	and	added	to	a	document	to allow	you	to	programmatically	
             // create	enumerated	types	expressions,	method calls,	properties	and	all	the	elements	of	a	complete	program.	
@@ -143,29 +143,52 @@ namespace ConsoleAppTest.Types
         public void LambdaExpressionTree()
         {
             //	build	the	expression	tree:													
-            Expression<Func<int,int>>	squareExp	=	num	=>	num	*	num;
+            Expression<Func<int, int>> squareExp = num => num * num;
             //	The	parameter	for	the	expression	is	an	integer												
-            ParameterExpression	numParam	=	Expression.Parameter(typeof(int),	"num");
+            ParameterExpression numParam = Expression.Parameter(typeof(int), "num");
             //	The	opertion	to	be	performed	is	to	square	the	parameter												
             BinaryExpression squareOperation = Expression.Multiply(numParam, numParam);
             //	This	creates	an	expression	tree	that	describes	the	square	operation												
-            Expression<Func<int,	int>>	square	= Expression.Lambda<Func<int,	int>>( squareOperation,	new ParameterExpression[] { numParam });
+            Expression<Func<int, int>> square = Expression.Lambda<Func<int, int>>(squareOperation, new ParameterExpression[] { numParam });
             //	Compile	the	tree	to	make	an	executable	method	and	assign	it	to	a	dele												
-            Func<int,	int>	doSquare	=	square.Compile();
+            Func<int, int> doSquare = square.Compile();
             //	Call	the	delegate												
-            Console.WriteLine("Square	of	2:	{0}",	doSquare(2));
+            Console.WriteLine("Square	of	2:	{0}", doSquare(2));
 
             // The	System.Linq.Expressions	namespace	contains	a	range	of	other types	that	can	be	used	to	represent	other	code	elements	
             // in	lambda	expressions, including	conditional	operation,	loops	and	collections. 
         }
 
-        // 
-        // 
-        // 
-        // 
+        public class MultiplyToAdd : ExpressionVisitor
+        {
+            public Expression Modify(Expression expression)
+            {
+                return Visit(expression);
+            }
+
+            protected override Expression VisitBinary(BinaryExpression expression)
+            {
+                if (expression.NodeType == ExpressionType.Multiply)
+                {
+                    Expression left = this.Visit(expression.Left);
+                    Expression right = this.Visit(expression.Right);
+                    //	Make	this	binary	expression	an	Add	rather	than	a	multiply	operation.													
+                    return	Expression.Add(left,	right);								
+                }
+                return base.VisitBinary(expression);
+            }
+        }
+
+        // An	expression	tree	is	immutable,	which	means	that	the	elements	in	the expression	cannot	be	changed	once	the	expression	
+        // has	been	created.	To	modify an	expression	tree	you	must	make	a	copy	of	the	tree	which	contains	the	modified 
+        // behaviors. 
         public void ModifyingExpressionTree()
         {
-
+            Expression<Func<int, int>> squareExp = num => num * num;
+            MultiplyToAdd m = new MultiplyToAdd();
+            Expression<Func<int, int>> addExpression = (Expression<Func<int, int>>)m.Modify(squareExp);
+            Func<int, int>    doAdd = addExpression.Compile();
+            Console.WriteLine("Double	of	4:	{0}", doAdd(4));
         }
 
         // 
