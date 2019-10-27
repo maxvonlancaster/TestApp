@@ -191,31 +191,105 @@ namespace ConsoleAppTest.Types
             Console.WriteLine("Double	of	4:	{0}", doAdd(4));
         }
 
-        // 
-        // 
-        // 
-        // 
+        // An	assembly	is	the	output	produced	when	a	.NET	project	is	compiled.	The assembly	type	represents	the	contents	
+        // of	an	assembly,	which	can	be	the	currently executing	assembly	or	one	that	is	loaded	from	a	file. The	Assembly	
+        // class	provides	a	way	that	programs	can	use	reflection	on	the contents	of	the	assembly	that	it	represents.	
+        // It	provides	methods	and	properties	to establish	and	manage	the	version	of	the	assembly,	any	dependencies	that	the 
+        // assembly	has	on	other	files,	and	the	definition	of	any	types	that	are	declared	in the	assembly.	
         public void AssemplyObject()
         {
-
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Console.WriteLine("Executing assembly name: {0}", assembly.FullName);
+            AssemblyName name = assembly.GetName();
+            Console.WriteLine("Major	Version:	{0}", name.Version.Major);
+            Console.WriteLine("Minor	Version:	{0}", name.Version.Minor);
+            Console.WriteLine("In global assembly cache: {0}", assembly.GlobalAssemblyCache);
+            foreach (Module module in assembly.Modules)
+            {
+                Console.WriteLine("Module: {0}", module.Name);
+                foreach (Type type in module.GetTypes())
+                {
+                    Console.WriteLine("Type: {0}", type.Name);
+                    foreach (MemberInfo member in type.GetMembers())
+                    {
+                        Console.WriteLine("Member: {0}", member.Name);
+                    }
+                }
+            }
         }
 
-        // 
-        // 
-        // 
-        // 
+        // A	C#	property	provides	a	quick	way	of	providing	get	and	set	behaviors	for	a	data variable	in	a	type.	
+        // The	PropertyInfo	class	provides	details	of	a	property, including	the	MethodInfo	information	for	the	get	and	set	
+        // behaviors	if	they	are present.	
         public void PropertyInfo()
         {
+            Type type = typeof(Person);
+            foreach (PropertyInfo p in type.GetProperties())
+            {
+                Console.WriteLine("Property: {0}", p.Name);
+                if (p.CanRead)
+                {
+                    Console.WriteLine("Can read");
+                    Console.WriteLine("Set	method:	{0}", p.GetMethod);
+                }
+                if (p.CanWrite)
+                {
+                    Console.WriteLine("Can write");
+                    Console.WriteLine("Set	method:	{0}", p.SetMethod);
+                }
+            }
 
         }
 
-        // 
-        // 
-        // 
-        // 
+        public class Calculator
+        {
+            public int Add(int a, int b)
+            {
+                return a + b;
+            }
+        }
+
+        // The	MethodInfo	class	holds	data	about	a	method	in	a	type.	This	includes	the signature	of	the	method,	the	return	
+        // type	of	the	method,	details	of	method parameters and even the byte code    that forms   the body    of the method.
         public void MethodInfoReflection()
         {
+            Console.WriteLine("Get	the	type	information	for	the	Calculator	class");
+            Type type = typeof(Calculator);
+            Console.WriteLine("Get	the	method	info	for	the	AddInt	method");
+            MethodInfo AddIntMethodInfo = type.GetMethod("AddInt");
+            Console.WriteLine("Get	the	IL	instructions	for	the	AddInt	method");
+            MethodBody AddIntMethodBody = AddIntMethodInfo.GetMethodBody();
+            //	Print	the	IL	instructions.													
+            foreach	(byte	b	in	AddIntMethodBody.GetILAsByteArray())
+            {
+                Console.Write("	{0:X}",	b);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Create	Calculator	instance");
+            Calculator calc = new Calculator();
+            Console.WriteLine("Create	parameter	array	for	the	method");
+            object[] inputs = new object[] { 1, 2 };
 
+            Console.WriteLine("Call	Invoke	on	the	method	info");
+            Console.WriteLine("Cast	the	result	to	an	integer");
+            int result = (int)AddIntMethodInfo.Invoke(calc, inputs);
+            Console.WriteLine("Result	of:	{0}", result);
+            Console.WriteLine("Call	InvokeMember	on	the	type");
+            result = (int)type.InvokeMember("AddInt", 
+                BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public, 
+                null,
+                calc, 
+                inputs);
+            Console.WriteLine("Result	of:	{0}", result);
+            // Note	that	to	invoke	a	method	you	must	provide	an	array	of	parameters	for	the method	to	work	on,	and	the	invoke	methods	
+            // return	an	object	reference	that	must be	cast	to	the	actual	type	of	the	method.
         }
+
+        // You’ve	used	the	Type	type	(as	it	were)	in	many	places	in	your	programs	that use	reflection.	A	type	
+        // instance	describes	the	contents	of	a	C#	type,	including	a collection	holding	all	the	methods,	another	containing	
+        // all	the	class	variables, another	containing	properties,	and	so	on.	It	also	contains	a	collection	of	attribute class	
+        // instances	associated	with	this	type	and	details	of	the	Base	type	from	which the	type	is	derived.	
+        // The	GetType	method	can	be	called	on	any	instance	to obtain	a	reference	to	the	type	for	that	object,	and	the	
+        // typeof	method	can	be used	on	any	type	to	obtain	the	type	object	that	describes	that	type.	
     }
 }

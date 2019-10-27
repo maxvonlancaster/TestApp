@@ -63,7 +63,7 @@ namespace ConsoleAppTest.Types
     public class Person
     {
         public string Name { get; set; }
-        public int Age { get; set; }
+        public int Age { get; }
 
         [NonSerialized] //No need to save this
         private int point;
