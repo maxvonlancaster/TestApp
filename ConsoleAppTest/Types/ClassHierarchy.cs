@@ -83,7 +83,7 @@ namespace ConsoleAppTest.Types
             public virtual bool WithdrowVirtual(decimal amount)
             {
                 return false;
-            } 
+            }
         }
         // So,	with	interfaces	you	are	moving	away	from	considering	classes	in	terms	of what	they	are,	
         // and	starting	to	think	about	them	in	terms	of	what	they	can	do.	In the	case	of	your	
@@ -114,7 +114,7 @@ namespace ConsoleAppTest.Types
         {
             // BankAccount	is	called	the	base	or	parent	class	of	BabyAccount.
 
-            
+
         }
 
         public void InheritanceFromBaseClass()
@@ -245,10 +245,69 @@ namespace ConsoleAppTest.Types
         }
 
 
-        // 2-38
+        // 2-38 Constructors and class hierarchies
+        // A constructor is a method which gets control during the process of object creation.It is used to allow initial values to be set into an object.
+        public class BankAccountConstructor : IAccount
+        {
+            private decimal _balance;
 
+            public BankAccountConstructor(decimal balance)
+            {
+                // You can now set the initial balance of an account when one is created
+                _balance = balance;
+            }
 
-        // 2-39
+            public decimal GetBalance()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void PayInFunds(decimal amount)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool WithdrawFunds(decimal amount)
+            {
+                throw new NotImplementedException();
+            }
+        }
+        // Unfortunately, adding a constructor like this to a base class in a class hierarchy has the effect of breaking all the child classes.The reason for this is
+        // that creating a child class instance involves creating an instance of the base class. When the program tries to create a BabyAccount it must first create a
+        // BankAccount.Creating a BankAccount involves the use of its constructor to set the initial balance of the BankAccount. The BabyAccount class must
+        // contain a constructor that calls the constructor in the parent object to set that up
+        public class BabyAccountConstructor : BankAccountConstructor
+        {
+            public BabyAccountConstructor(decimal balance) : base(balance)
+            {
+            }
+        }
+
+        // Abstract classes
+        // You can provide a virtual “default” method in the BankAccount class and        then rely on the programmers overriding this with a more specific message, but
+        // you then have no way of making sure that they really do perform the override.C# provides a way of flagging a method as abstract. This means that the method
+        // body is not provided in this class, but will be provided in a child class
+        public abstract class BankAccountAbstract
+        {
+            // abstract methods are valid only in abstract classes, otherwise - compile error
+            public abstract string WarningLetterString();
+
+            public int GetSquere(int x)
+            {
+                return x * x;
+            }
+        }
+        // The fact that the BankAccount class contains an abstract method means that the class itself is abstract (and must be marked as such). It is not possible to
+        // make an instance of an abstract class. If you think about it this is sensible.An instance of BankAccount would not know what to do if the
+        // WarningLetterString method was ever called.An abstract class can be thought of as a kind of template.If you want to make
+        // an instance of a class based on an abstract parent you must provideimplementations of all the abstract methods given in the parent.
+        // You might decide that an abstract class looks a lot like an interface. This is true,in that an interface also provides a “shopping list” of methods which must be
+        // provided by a class. However, abstract classes are different in that they cancontain fully implemented methods alongside the abstract ones.This can be
+        // useful because it means you don’t have to repeatedly implement the samemethods in each of the components that implement a particular interface.
+        // A class can only inherit from one parent, so it can only pick up the behaviorsof one class. Some languages support multiple inheritance, where a class can
+        // inherit from multiple parents.C# does not allow this.
+
+        // 2-39 IComparable
 
 
         // 2-40
