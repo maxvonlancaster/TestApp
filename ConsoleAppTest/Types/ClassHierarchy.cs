@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -305,28 +306,198 @@ namespace ConsoleAppTest.Types
         // provided by a class. However, abstract classes are different in that they cancontain fully implemented methods alongside the abstract ones.This can be
         // useful because it means you don’t have to repeatedly implement the samemethods in each of the components that implement a particular interface.
         // A class can only inherit from one parent, so it can only pick up the behaviorsof one class. Some languages support multiple inheritance, where a class can
-        // inherit from multiple parents.C# does not allow this.
+        // inherit from multiple parents.C# does not allow this.
+
 
         // 2-39 IComparable
+        // The	IComparable	interface	is	used	by	.NET	to	determine	the	ordering	of objects	when	they	are	sorted.	Below	is	the	definition	
+        // of	the	method	from	the	C# .NET library.You can see that the interface contains    a single  method, CompareTo,	which compares	this	object 
+        // with    another.The CompareTo method returns an integer.If  the value   returned    is	less than	0	it indicates   that    this object should  
+        // be placed  before the one it	is	being compared    with.If the value returned	is	zero, it indicates   that    this object should  be placed  at 
+        // the same position as	the one it  is	being compared    with and	if	the value   returned    is	greater than	0	it means    that    this object 
+        // should  be placed  after the one it	is	being compared    with.
+        // You	can	allow	your	bank	accounts	to	be	sorted	in	order	of	balance	by	making the	BankAccount	class	implement	the	IComparable	
+        // interface	and	adding	a CompareTo	method	to	the	BankAccount	class. 
+        public class BankAccountComparable : IComparable, IAccount
+        {
+            private int _balance;
+
+            public BankAccountComparable(int balance)
+            {
+                _balance = balance;
+            }
+
+            public int CompareTo(object obj)
+            {
+                // if we are comparaed with lower object:
+                if (obj == null)
+                    return 1;
+                //	Convert	the	object	reference	into	an	account	reference
+                BankAccountComparable bank = obj as BankAccountComparable;
+                //	as	generates	null	if	the	conversion	fails
+                if (bank == null)
+                    throw new Exception("Not an account");
+                //	use	the	balance	value	as	the	basis	of	the	comparison
+                throw new NotImplementedException();
+            }
+
+            public decimal GetBalance()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void PayInFunds(decimal amount)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool WithdrawFunds(decimal amount)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        // Once	the	BankAccount	has	been	made	to	implement	the	IComparable interface,	you	can	use	the	Sort	behaviors	provided	by	
+        // collection	types.
+        public void Comparables()
+        {
+            //	Create	20	accounts	with	random	balances 
+            List<IAccount>	accounts	=	new	List<IAccount>();
+            Random	rand	=	new	Random(1);
+            for (int	i=0;	i<20;	i++)
+            {
+                IAccount	account	=	new BankAccountComparable(rand.Next(0,	10000));
+                accounts.Add(account);
+            }
+            //	Sort	the	accounts 
+            accounts.Sort();
+        }
+
+        // 2-40 Typed	IComparable
+        // The	IComparable	interface	uses	a	CompareTo	method	that	accepts	an object	reference	as	a	parameter.	This	reference	should	
+        // refer	to	an	object	of	the same	type	as	the	object	that	is	doing	the	comparing,	i.e.	the	CompareTo method	in	type	x	
+        // should	be	supplied	with	a	reference	to	type	x	as	a	parameter. 
+        // There	is	another	version	of	the	IComparable	interface	that	accepts	a	type. This	can	be	used	to	create	a	CompareTo	
+        // that	only	accepts	parameters	of	a specified	type.	
+        public class BankAccountComparableTyped : IComparable<IAccount>, IAccount
+        {
+            public int CompareTo(IAccount other)
+            {
+                throw new NotImplementedException();
+            }
+
+            public decimal GetBalance()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void PayInFunds(decimal amount)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool WithdrawFunds(decimal amount)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        // 2-41 IEnumerable
+        // Programs	spend	a	lot	of	time	consuming	lists	and	other	collections	of	items.	This is	called	iterating	or	enumerating. You	
+        // might	think	of	iteration	as	something	that	is	performed	on	lists	and	arrays of	values,	with	a	program	working	through	
+        // each	element	in	turn.	However, iteration	is	much	more	than	this.	Any	C#	object	can	implement	the IEnumerable	interface	that	
+        // allows	other	programs	to	get	an	enumerator	from that	object.	The	enumerator	object	can	then	be	used	to	enumerate	
+        // (or	iterate)	on the	object. 
+        public void GetAnEnumerator()
+        {
+            //	Get	an	enumerator	that	can	iterate	through	a	string
+            var stringEnumerator = "Hello wrod".GetEnumerator();
+            while (stringEnumerator.MoveNext())
+            {
+                Console.WriteLine(stringEnumerator.Current);
+            }
+        }
+        // 	prints	out	the	“Hello	world”	string	one	character at	a	time.
 
 
-        // 2-40
+        // 2-42 IEnumerator using foreach
+        // You	can	consume	all	the iterators	in	this	way,	but	C#	makes	life	easier	by	providing	the	foreach construction,	
+        // which	automatically	gets	the	enumerator	from	the	object	and	the works	through	it.	
+        public void UsingForeeach()
+        {
+            foreach (char ch in "Hello	world")
+                Console.Write(ch);
+        }
 
 
-        // 2-41
+        // 2-43 Making	an	object	enumerable 
+        // The	IEnumerable	interface	allows	you	to	create	objects	that	can	be enumerated	within	your	programs,	for	example	by	the	foreach	
+        // loop construction.	Collection	classes,	and	results	returned	by	LINQ	queries  implement this    interface.
+        class EnumeratorThing : IEnumerator<int>, IEnumerable
+        {
+            int count;
+            int limit;
+
+            public EnumeratorThing(int limit)
+            {
+                this.count = 0;
+                this.limit = limit;
+            }
+
+            public int Current
+            {
+                get
+                {
+                    return count;
+                }
+            }
+
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return count;
+                }
+            }
+
+            public void Dispose()
+            {
+            }
+
+            public IEnumerator GetEnumerator()
+            {
+                return this;
+            }
+
+            public bool MoveNext()
+            {
+                if (++count == limit)
+                    return false;
+                else
+                    return true;
+            }
+
+            public void Reset()
+            {
+                count = 0;
+            }
+        }
+
+        public void UsingEnumerable()
+        {
+            // You	can	use	an	EnumeratorThing	instance	in	a	foreach	loop: 
+            EnumeratorThing e = new EnumeratorThing(10);
+            foreach (int i in e)
+                Console.WriteLine(i);
+        }
+
+        // 2-44 Using	yield 
 
 
-        // 2-42
+        // 2-45 Using	IDisposable 
 
 
-        // 2-43
 
-
-        // 2-44
-
-
-        // 2-45
-
-
+        // https://docs.microsoft.com/en-us/dotnet/framework/interop/.
     }
 }
