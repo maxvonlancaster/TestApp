@@ -190,7 +190,59 @@ namespace ConsoleAppTest.Types
         // 
 
 
-        // 2-37
+        // 2-37 Using base method
+        // The	word	base	in	this	context	means	“a	reference	to	the	thing	which	has been	overridden.”
+        class BabyAccountBase : BankAccount
+        {
+            public override bool WithdrowVirtual(decimal amount)
+            {
+                if (amount > 10)
+                {
+                    return false;
+                }
+                else
+                {
+                    return base.WithdrowVirtual(amount);
+                }
+            }
+        }
+        // It’s	important	to	understand	what	we’re	doing	here,	and	why	we’re	doing	it: I	don’t	want	to	have	to	write	
+        // the	same	code	twice I	don’t	want	to	make	the	_balance	value	visible	outside	the	BankAccount class. 
+        // The	use	of	the	word	base	to	call	the	overridden	method	solves	both	of	these
+        // problems rather  beautifully.Because the method call    returns a   bool result  you can just send    whatever it  delivers.
+        // By making	this	change you can put the _balance    back to  private	in	the BankAccount because it	is	not accessed by the 
+        // WithdrawFunds method.Note    that there   are other   useful spin-offs here.	If I   need to  fix a   bug in the behavior    of the 
+        // WithDrawFunds method  I just fix it once, in the top-level class, and then it is fixed for all the classes which call back to it.
+
+        // Replacing	methods	in	base	classes
+        // C#	allows	a	program	to	replace	a	method	in	a	base	class	by	simply	creating	a new	method	in	the	child	class.	In	
+        // this	situation	there	is	no	overriding,	you	have just	supplied	a	new	version	of	the	method.	In	fact,	the	C#	compiler	
+        // will	give	you a	warning	that	indicates	how	you	should	provide	the	keyword	new	to	indicate this
+        class BabyAccountBaseNew : BankAccount
+        {
+            public new bool WithdrowVirtual(decimal amount)
+            {
+                return true;
+            }
+        }
+        // Note	that	a	replacement	method	is	not	able	to	use	base	to	call	the	method that	it	has	overridden,	because	
+        // it	has	not	overridden	a	method,	it	has	replaced	it.
+
+        // Stopping	overriding 
+        // Overriding	is	very	powerful.	It	means	that	a	programmer	can	just	change	one tiny	part	of	a	
+        // class	and	make	a	new	one	with	all	the	behaviors	of	the	parent.	This
+        // goes well    with a   design process, so	as	you move    down the	“family tree”	of classes  you get more and more specific    
+        // implementations.However,	overriding/replacing	is	not always  desirable.
+        // you	need	a	way	to	mark	some methods	as	not	being	able	to	be	overridden.	C#	does	this	by	giving	us	a	sealed keyword	
+        // which	means	“You	can’t	override	this	method	any	more”. You	can	only	seal	an	overriding	method	and	sealing	a	method	
+        // does	not prevent	a	child	class	from	replacing	a	method	in	a	parent.	However,	you	can	also mark	a	class	as	sealed.	
+        class BabyAccountBaseNewSealed : BankAccount
+        {
+            public override sealed bool WithdrowVirtual(decimal amount)
+            {
+                return true;
+            }
+        }
 
 
         // 2-38
