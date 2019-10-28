@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
-    <PackageReference Include="System.CodeDom" Version="0.0.0" />
+    <PackageReference Include="System.CodeDom" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
