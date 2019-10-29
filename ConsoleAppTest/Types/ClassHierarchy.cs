@@ -492,12 +492,92 @@ namespace ConsoleAppTest.Types
         }
 
         // 2-44 Using	yield 
+        // 	To	make	it	easier	to	create	iterators	C#	includes	the	yield keyword. 
+        // The	keyword	yield	is followed	by	the	return	keyword	and	precedes	the	value	to	be	returned	for	the current	iteration.	
+        // The	C#	compiler	generates	all	the	Current	and	MoveNext behaviors	that	make	the	iteration	work,	and	also	records	the	state	
+        // of	the	iterator method	so	that	the	iterator	method	resumes	at	the	statement	following	the yield	statement	when	the	next	
+        // iteration	is	requested.	
+        // The	yield	keyword	does	two	things.	It	specifies	the	value	to	be	returned	for a	given	iteration,	and	it	also	returns
+        // control	to	the	iterating	method.
+        public class EnumeratorThingWithYield : IEnumerator<int>, IEnumerable
+        {
+            private int _limit;
+
+            public EnumeratorThingWithYield(int limit)
+            {
+                _limit = limit;
+            }
+
+            public int Current => throw new NotImplementedException();
+
+            object IEnumerator.Current => throw new NotImplementedException();
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
+
+            public IEnumerator GetEnumerator()
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    yield return i;
+                }
+            }
+
+            public bool MoveNext()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Reset()
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        // You can express iterator that returns values as follows:
+        public IEnumerator<int> GetEnumerator()
+        {
+            yield return 1;
+            yield return 2;
+            yield return 3;
+        }
+
 
 
         // 2-45 Using	IDisposable 
+        // C#	provides	memory	management	for	applications,	but	it	can’t	control	how programs	use	other	resources	such	as	file	handles,	
+        // database	connections	and	lock objects.	While	an	object	can	get	control	when	it	is	removed	by	the	garbage collector	
+        // it	is hard	for	a	developer	to	know	precisely	when	this	happens.	It	may	not	even happen	until	the	program	ends. 
+        // The	IDisposable	interface	provides	a	way	that	an	object	can	indicate	that it	contains	an	explicit	Dispose	method	that	
+        // can	be	used	to	tidy	up	an	object when an  application has finished    using	it.	A	disposed object may exist	in memory,	but 
+        // any attempts to  use it  will result  in	the ObjectDisposedException being thrown.
+        // Note	that	the	action	of	the	Dispose	method	depends	entirely	on	the	needs	of the	application.	Note	also	that	the	Dispose	
+        // method	is	not	called	automatically when	an	object	is	deleted	from	memory.	There	are	two	ways	to	make	sure	that Dispose	
+        // is	called	correctly;	you	can	call	the	method	yourself	in	your application,	or	you	can	make	use	of	the	C#	using	construction. 
+        // The	C#	using	construction	is	a	good	way	to	ensure	that	Dispose	is	called correctly	because	it	incorporates	exception	
+        // handling	so	that	if	an	exception	is thrown	by	the	code	using	the	object	the	Dispose	method	is	automatically called	on	the
+        // object	being	used.	If	you	have	a	number	of	objects	that	need	to	be disposed	you	can	nest	using	blocks	inside	each	other. 
+        class CrucialConnection : IDisposable
+        {
+            public void Dispose()
+            {
+                Console.WriteLine("Dispose Called!");
+            }
+        }
 
+        public void UsingDisposable()
+        {
+            using (CrucialConnection c = new CrucialConnection())
+            {
+                // Do something with this class
+            }
+        }
 
-
+        // 	In	the	COM	world	the	IUnknown	interface	is	the	means	by	which	one object	describes	the	interfaces	that	it	makes	available	
+        // for	use	by	others.	The IUnknown	interface	provides	a	means	by	which	.NET	applications	can interoperate	with	
+        // COM	objects	at	this	level.	You	use	it	when	connecting	C# applications	to	COM	objects.	
         // https://docs.microsoft.com/en-us/dotnet/framework/interop/.
     }
 }
