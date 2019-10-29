@@ -9,8 +9,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new Reflection();
-            service.PropertyInfo();
+            var service = new Events();
+            service.Closures();
         }
     }
 }
