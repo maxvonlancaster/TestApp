@@ -89,7 +89,8 @@ namespace ConsoleAppTest.ProgramFlow
                 // Raises alarm. The event handler receivers a reference to the alarm that is raising this event.
                 OnAlarmRaised(this, EventArgs.Empty); 
                 // the second argument is set to EventArgs.Empty, to indicate that this event does not produce any
-                // data, it is simply a notification that an event has taken place.
+                // data, it is simply a notification that an event has taken place.
+
             }
         }
         // The signature of the methods to be added to this delegate must reflect this.The AlarmListener1 method accepts two parameters and can be used with this delegate.
@@ -348,8 +349,8 @@ namespace ConsoleAppTest.ProgramFlow
         // Up	until	now	we	have	been	using	lambda	expressions	that	are	attached	to delegates.	The	delegate	provides	a	name	
         // by	which	the	code	in	the	lambda expression	can	be	accessed.	However,	a	lambda	expression	can	also	be	used directly	
         // in	a	context	where	you	just	want	to	express	a	particular	behavior.	
-        // A	lambda	expression	used	in	this	way	can	be	described	as	an	anonymous method;	because	it	is	a	piece	of	functional	code	t
-        // hat	doesn’t	have	a	name. 
+        // A	lambda	expression	used	in	this	way	can	be	described	as	an	anonymous method;	because	it	is	a	piece	of	functional	code	
+        // that	doesn’t	have	a	name. 
         public void LambdaExpressionTask()
         {
             Task.Run(() => 
