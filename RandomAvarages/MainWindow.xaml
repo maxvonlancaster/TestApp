@@ -6,12 +6,23 @@
         xmlns:local="clr-namespace:RandomAvarages"
         mc:Ignorable="d"
         Title="Random Averages" Height="450" Width="800">
-    <Grid>
-        <HeaderedContentControl>
+    <Grid Margin="0,0,2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="335*"/>
+        </Grid.ColumnDefinitions>
+        <HeaderedContentControl Grid.ColumnSpan="2">
             Random Averages
         </HeaderedContentControl>
-        <Button x:Name="Click" Content="Click" Margin="143,132,576,231"/>
+        <TextBlock Text="What's your name?" Grid.ColumnSpan="2"/>
+        <StackPanel Orientation="Horizontal" Margin="10,25,211,27" Grid.ColumnSpan="2">
+            <Label Content="Number of values" Margin="100,57,0,257" Width="158"/>
+            <TextBox x:Name="nameInput" Text="" Width="113" HorizontalAlignment="Left" Margin="80,57,0,257"/>
+            <TextBox x:Name="ResultBox" Text="Result: " Margin="121,264,389,50" Width="171"/>
 
+        </StackPanel>
+        <TextBlock x:Name="greetingOutput" Grid.ColumnSpan="2"/>
+        <Button x:Name="Click" Content="Click" Margin="221,163,376,200" Grid.Column="1"/>
 
     </Grid>
 </Window>
