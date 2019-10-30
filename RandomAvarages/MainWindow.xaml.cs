@@ -44,10 +44,10 @@ namespace RandomAvarages
 
         private static void ButtonClicked(object sender, RoutedEventArgs args)
         {
-            MainWindow mw = new MainWindow();
-            mw.nameInput.Text = (String)((Button)sender).Tag;
-            ((MainWindow)Application.Current.MainWindow).nameInput.Text = (String)((Button)sender).Tag;
-            long input = long.Parse(mw.nameInput.Text);
+            //MainWindow mw = new MainWindow();
+            //mw.nameInput.Text = (String)((Button)sender).Tag;
+            //((MainWindow)Application.Current.MainWindow).nameInput.Text = (String)((Button)sender).Tag;
+            //long input = long.Parse(mw.nameInput.Text);
         }
 
 

@@ -2,6 +2,7 @@
 using ConsoleAppTest.Types;
 using System;
 using ConsoleAppTest.ProgramFlow;
+using ConsoleAppTest.DebugAndSecurity;
 
 namespace ConsoleAppTest
 {
@@ -9,8 +10,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new Events();
-            service.Closures();
+            var service = new ValidateInput();
+            service.CreatingJson();
         }
     }
 }
