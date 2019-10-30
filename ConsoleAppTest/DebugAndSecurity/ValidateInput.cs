@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace ConsoleAppTest.DebugAndSecurity
 {
@@ -46,16 +48,45 @@ namespace ConsoleAppTest.DebugAndSecurity
             }
         }
 
-        // 
+        // XML (eXtensible Markup Language) is another way of expressing the content of an object in a portable and human readable form.This is a slightly more
+        // heavyweight standard, in that an XML document contains more metadata (data about data) than a JSON document.
         public void CreatingXml()
         {
+            MusicTrack track = new MusicTrack("Death Grips", "Guilliotine", 100);
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(MusicTrack));
+            TextWriter textWriter = new StringWriter();
+            xmlSerializer.Serialize(textWriter, track);
+            textWriter.Close();
 
+            string trackXML = textWriter.ToString();
+            Console.WriteLine("XML: {0}", trackXML);
+
+            TextReader textReader = new StringReader(trackXML);
+            MusicTrack trackRead = xmlSerializer.Deserialize(textReader) as MusicTrack;
+            Console.WriteLine("Read back: {0}", trackRead);
+
+            // XML serialization can only save and load the public data elements in a type. If you want to save the private elements in a class you should use the Data Contract serializer
+            // XML documents can have a schema attached to them. A schema formally sets out the items that a document must contain to be valid.
+            // Elements in an XML document can also be given attributes to provide more information about them.
+            // An XML document is no less vulnerable to tampering than a JSON document
         }
 
-        // 
+        // You can perform simple text-based checks on a JSON file to get some level of confidence about the validity of its contents.For example, a program can check
+        // that the text starts and ends with a matching pair of brace characters(curly brackets), contains the same number of open square brackets as close square
+        // brackets, and an even number of double quote characters.The exceptions thrown by the JSON parser, however, can also give good information about the content.
         public void ValidatingJson()
         {
-
+            // Missing \" before 250
+            string invalidJson = "{\"Artist\":\"Scorpions\",\"Title\":\"Holiday\",\"Length\":250\"}";
+            try
+            {
+                MusicTrack track = JsonConvert.DeserializeObject<MusicTrack>(invalidJson);
+                Console.WriteLine("Read back: {0}", track);
+            }
+            catch (JsonReaderException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
 
@@ -63,6 +94,11 @@ namespace ConsoleAppTest.DebugAndSecurity
 
     public class MusicTrack
     {
+        // Parameterless constructor required by the XML serializer (otherwise runtime error), does not need to set any property values, they are public
+        public MusicTrack()
+        {
+        }
+
         public MusicTrack(string artist, string title, int length)
         {
             Artist = artist;
@@ -75,7 +111,7 @@ namespace ConsoleAppTest.DebugAndSecurity
         public int Length { get; set; }
 
         //	ToString	that	overrides	the	behavior	in	the	base	class				
-        public	override	string	ToString()
+        public override string ToString()
         {
             return	Artist + " " + Title + " " + Length.ToString() + " seconds long" ;
         }
