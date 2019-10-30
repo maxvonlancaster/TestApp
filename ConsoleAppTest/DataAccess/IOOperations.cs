@@ -37,16 +37,33 @@ namespace ConsoleAppTest.DataAccess
             // FileAccess: Read, ReadWrite, Write
         }
 
-        // 
+        // The Stream class implements the IDisposable interface This means that any objects derived from the Stream type must also implement
+        // the interface. This means that we can use the C# using construction to ensure that files are closed when they are no longer required.
         public void FileStremAndIDisposable()
         {
-
+            using (FileStream outputStream = new FileStream("OutputText.txt", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                string outputMessageString = "Hello world";
+                byte[] outputMessageBytes = Encoding.UTF8.GetBytes(outputMessageString);
+                outputStream.Write(outputMessageBytes, 0, outputMessageBytes.Length);
+            }
         }
 
-        // 
+        // The filesystem makes no particular distinction between text files and binary files.We have already seen how we can use the Encoding class to convert
+        // Unicode text into an array of bytes that can be written into a binary file. However, the C# language provides stream classes that make it much easier to
+        // work with text.The TextWriter and TextReader classes are abstractclasses that define a set of methods that can be used with text.
+        // The StreamWriter class extends the TextWriter class to provide a class that we can us to write text into streams.
         public void StreamWriterAndReader()
         {
-
+            using (StreamWriter writeStream = new StreamWriter("OutputText.txt"))
+            {
+                writeStream.Write("Hello there!");
+            }
+            using (StreamReader readStream = new StreamReader("OutputText.txt"))
+            {
+                string readString = readStream.ReadToEnd();
+                Console.WriteLine("Text read: {0}", readString);
+            }
         }
 
         // 
