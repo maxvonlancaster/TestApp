@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
 
 namespace ConsoleAppTest.DataAccess
@@ -66,10 +67,31 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 
+        // The Stream class has a constructor that will accept another stream as a parameter, allowing the creation of chains of streams.	
         public void StoringCompressedFiles()
         {
+            using (FileStream writeFile = new FileStream("CompText.zip", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                using (GZipStream writeFileZip = new GZipStream(writeFile, CompressionMode.Compress))
+                {
+                    using (StreamWriter writeFileText = new StreamWriter(writeFileZip))
+                    {
+                        writeFileText.Write("Hello world");
+                    }
+                }
+            }
 
+            using (FileStream readFile = new FileStream("CompText.zip", FileMode.Open, FileAccess.Read))
+            {
+                using (GZipStream readFileZip = new GZipStream(readFile, CompressionMode.Decompress))
+                {
+                    using (StreamReader readFileText = new StreamReader(readFileZip))
+                    {
+                        string message = readFileText.ReadToEnd();
+                        Console.WriteLine("Read	text: {0}", message);
+                    }
+                }
+            }
         }
 
         // 
@@ -156,4 +178,6 @@ namespace ConsoleAppTest.DataAccess
 
         }
     }
+
+    // Ich gebe mein Buch bekannt.
 }
