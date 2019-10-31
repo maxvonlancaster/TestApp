@@ -578,6 +578,6 @@ namespace ConsoleAppTest.Types
         // 	In	the	COM	world	the	IUnknown	interface	is	the	means	by	which	one object	describes	the	interfaces	that	it	makes	available	
         // for	use	by	others.	The IUnknown	interface	provides	a	means	by	which	.NET	applications	can interoperate	with	
         // COM	objects	at	this	level.	You	use	it	when	connecting	C# applications	to	COM	objects.	
-        // https://docs.microsoft.com/en-us/dotnet/framework/interop/.
+        // TODO: https://docs.microsoft.com/en-us/dotnet/framework/interop/.
     }
 }

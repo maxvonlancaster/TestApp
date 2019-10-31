@@ -12,7 +12,7 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
             var service = new IOOperations();
-            service.FileStremAndIDisposable();
+            service.DriveInformation();
         }
     }
 }

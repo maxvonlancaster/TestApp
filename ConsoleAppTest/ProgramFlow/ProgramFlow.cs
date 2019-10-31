@@ -322,7 +322,7 @@ namespace ConsoleAppTest.ProgramFlow
                                     //	ternary	operators	-	three	operands 
             i	=	true	?	0	:	1;	//	sets	i	to	0	because	condition	is	true; 
 
-            // Full	details	https://docs.microsoft.com/en-us/dotnet/csharp/programmingguide/statements-expressions-operators/operators.
+            // TODO: Full details https://docs.microsoft.com/en-us/dotnet/csharp/programmingguide/statements-expressions-operators/operators.
         }
     }
 }

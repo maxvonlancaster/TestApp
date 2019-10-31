@@ -70,6 +70,7 @@ namespace ConsoleAppTest.DataAccess
         // The Stream class has a constructor that will accept another stream as a parameter, allowing the creation of chains of streams.	
         public void StoringCompressedFiles()
         {
+            // chain streams!
             using (FileStream writeFile = new FileStream("CompText.zip", FileMode.OpenOrCreate, FileAccess.Write))
             {
                 using (GZipStream writeFileZip = new GZipStream(writeFile, CompressionMode.Compress))
@@ -94,22 +95,73 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 
+        // The File class is a helper class that makes it easier to work with files. Contains set of static methods that can be used to append text to a file, copy, create,
+        // delete, move, open, read a file, manage its security.
         public void UseFileClass()
         {
+            File.WriteAllText(path: "TextFile.txt", contents: "Hello there!");
+            File.AppendAllText(path: "TextFile.txt", contents: "Hello there again!");
+            if (File.Exists("TextFile.txt"))
+            {
+                Console.WriteLine("File exists");
+            }
 
+            string contents = File.ReadAllText(path: "TextFile.txt");
+            Console.WriteLine("File contents: {0}", contents);
+            File.Copy(sourceFileName: "TextFile.txt", destFileName: "CopyTextFile.txt");
+            using (TextReader reader = File.OpenText(path: "CopyTextFile.txt"))
+            {
+                string text = reader.ReadToEnd();
+                Console.WriteLine("Copied contents: {0}", text);
+            }
         }
 
-        // 
+        // When creating applications that use streams you need to ensure that your code can deal with any exceptions that might be thrown by the stream
+        // Our application may try to open a file that does not exist, or a given storage device may become full during writing.
+        //  It is also possible that threads in a multi-threaded application can “fight” over files.
+        // With this in mind you should ensure that production code that opens and interacts with streams is protected by try–catch constructions.
         public void StreamExceptions()
         {
-
+            try
+            {
+                string contents = File.ReadAllText(path: "FileThatDoesNotExist.txt");
+            }
+            catch (FileNotFoundException notFoundEx)
+            {
+                // File not found
+                Console.WriteLine(notFoundEx.Message);
+            }
+            catch (Exception ex)
+            {
+                // Any other exception
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        // 
+        // A given storage device, perhaps a disk drive or USB portable disk, can be divided into partitions.Each partition represents an area on the storage device
+        // that can be used to store data.A partition on a storage device is exposed as a drive which, on the Windows operating system, is represented by a drive letter.
+        // The drive letter is assigned by the operating system and is used as the root of an absolute path to a file on the computer.
+        // The Disk Management application allows administrators to re-assign drive letters, combine multiple physical drives into a single logical drive, and attach
+        // virtual hard drives(VHD) created from drive images.
+        // Each of the partitions on a physical storage device is formatted using a particular filing system that manages the storage of file.
         public void DriveInformation()
         {
-
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            foreach (DriveInfo drive in drives)
+            {
+                Console.WriteLine("Name: {0}", drive.Name);
+                if (drive.IsReady)
+                {
+                    Console.WriteLine("Type: {0}", drive.DriveType);
+                    Console.WriteLine("Format: {0}", drive.DriveFormat);
+                    Console.WriteLine("Free space: {0}", drive.TotalFreeSpace);
+                }
+                else
+                {
+                    Console.WriteLine("Drive not ready");
+                }
+            }
+            // Note that some of the drive letters have been allocated to removable devices.
         }
 
         // 
