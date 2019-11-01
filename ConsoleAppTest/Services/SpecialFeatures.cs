@@ -3,16 +3,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Transactions;
+
+// Aliased generics:
+using ASimpleName = System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>>>;
 
 namespace ConsoleAppTest.Services
 {
-    // TODO: Weakreference, Mutex, Transaction, 
+    // TODO: semaphore, Transaction, stackalloc, 
     public class SpecialFeatures
     {
-        public T DefaultValue<T>()
+        private T DefaultValue<T>()
         {
             return default(T);
         }
@@ -114,6 +119,141 @@ namespace ConsoleAppTest.Services
             get { return _str ?? "new string"; }
         }
 
+        // Auto properties can have different scopes
+        public int MyInt { get; private set; }
+
+        // You can use @ for variable names that are keywords
+        public void UsingVariableNamesThatAreKeywors()
+        {
+            var @string = "hello";
+            var @int = new object();
+            var @object = 99;
+            Console.WriteLine(@string);
+        }
+
+        // Events are really delegates under the hood and any delegate object can have multiple functions attached to it and detatched from it
+        // Events can also be controlled with the add/remove, similar to get/set except they're invoked when += and -= are use
+        private event EventHandler _handler;
+
+        public event EventHandler Handler
+        {
+            add
+            {
+                if (value.Target == null)
+                    throw new Exception("No static handlers!");
+                _handler += value;
+            }
+            remove
+            {
+                _handler -= value;
+            }
+        }
+
+        public void CheckedAndUnchecked()
+        {
+            short x = 32767; // maximum value for short
+            int z1 = checked((short)(x + x)); // will throw OverflowException
+            int z2 = unchecked((short)(x + x)); // -2
+            int z3 = (short)(x + x); // -2
+            Console.WriteLine("z2={0}, z3={1}", z2, z3);
+        }
+
+        // Preprocessor directives
+        public void IfDebug()
+        {
+#if DEBUG
+            Console.WriteLine("Debug version!");
+#endif
+        }
+
+        public void AnonymuousFunctions()
+        {
+            var f = new Func<string>(() => { return "string"; });
+
+            Func<int, int, string> add = (a, b) => Convert.ToString(a + b);
+            Func<int, int, string> addAnother = (a, b) =>
+            {
+                var i = a + b;
+                return i.ToString();
+            };
+
+            Console.WriteLine(f() + add(1,2) + addAnother(2,3));
+        }
+
+        public void FormatStringBrackets()
+        {
+            int foo = 3;
+            string bar = "mice";
+            string s = String.Format("{{I am in brackets!}} {0} {1}", foo, bar);
+            Console.WriteLine(s);
+            //Outputs "{I am in brackets!} 3 mice"
+        }
+
+        static Mutex mutObj = new Mutex();
+        static int x = 0;
+
+        private void Count()
+        {
+            mutObj.WaitOne();
+            x = 1;
+            for (int i = 0; i < 9; i++)
+            {
+                Console.WriteLine("Thread: {0}, x: {1}", Thread.CurrentThread.Name, x);
+                x++;
+                Thread.Sleep(200);
+            }
+            mutObj.ReleaseMutex();
+        }
+
+        public void UsingMutex()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Thread newThread = new Thread(Count);
+                newThread.Name = "thread " + i.ToString();
+                newThread.Start();
+            }
+        }
+
+
+        // create semaphore
+        static Semaphore semaphore = new Semaphore(3, 3);
+
+        public void UsingSemaphore()
+        {
+
+        }
+
+        // The DebuggerDisplayAttribute controls how an object, property, or field is displayed in the 
+        // debugger variable windows. This attribute can be applied to types, delegates, properties, fields, and assemblies.
+        [DebuggerDisplay("{value}", Name = "{key}")]
+        public class KeyValuePair
+        {
+            public KeyValuePair(string key, string value)
+            {
+                this.key = key;
+                this.value = value;
+            }
+
+            public string key { get; set; }
+            public string value { get; set; }
+        }
+
+
+        // Weak references in .Net create references to large objects in your application that are used infrequently so that 
+        // they can be reclaimed by the garbage collector if needed
+        public void WeakRefernceUsage()
+        {
+            KeyValuePair keyValuePair = new KeyValuePair("a", "stuff");
+            WeakReference reference = new WeakReference(keyValuePair);
+            keyValuePair = null;
+            if (reference.IsAlive)
+            {
+                Console.WriteLine("Obj is alive");
+                KeyValuePair pair = reference.Target as KeyValuePair;
+                Console.WriteLine(pair.value);
+            }
+        }
 
     }
 }

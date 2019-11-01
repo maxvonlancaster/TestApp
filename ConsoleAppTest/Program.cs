@@ -4,6 +4,7 @@ using System;
 using ConsoleAppTest.ProgramFlow;
 using ConsoleAppTest.DebugAndSecurity;
 using ConsoleAppTest.DataAccess;
+using ConsoleAppTest.Services;
 
 namespace ConsoleAppTest
 {
@@ -11,8 +12,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new IOOperations();
-            service.DriveInformation();
+            var service = new SpecialFeatures();
+            service.WeakRefernceUsage();
         }
     }
 }

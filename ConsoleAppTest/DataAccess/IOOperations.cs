@@ -164,34 +164,95 @@ namespace ConsoleAppTest.DataAccess
             // Note that some of the drive letters have been allocated to removable devices.
         }
 
-        // 
+        // A file system maintains information about each file it stores. This includes the name of the file, permissions associated with the file, 
+        // dates associated with the creation, modification of the file, and the physical location of the file on the storage device.
         public void UsingFileInfo()
         {
-
+            string filePath = "TextFile.txt";
+            File.WriteAllText(path: filePath, contents: "This text goes in the file");
+            FileInfo info = new FileInfo(filePath);
+            Console.WriteLine("Name: {0}", info.Name);
+            Console.WriteLine("Full	Path: {0}", info.FullName);
+            Console.WriteLine("Last	Access: {0}", info.LastAccessTime);
+            Console.WriteLine("Length: {0}", info.Length);
+            Console.WriteLine("Attributes: {0}", info.Attributes);
+            Console.WriteLine("Make the file read only");
+            info.Attributes |= FileAttributes.ReadOnly;
+            Console.WriteLine("Attributes: {0}", info.Attributes);
+            Console.WriteLine("Remove the read only attribute");
+            info.Attributes &= ~FileAttributes.ReadOnly;
+            Console.WriteLine("Attributes: {0}", info.Attributes);
         }
 
-        // 
+        // A file system can create files that contain collections of file information items. These are called directories or folders. Directories can	
+        // contain directory information about directories, which allows a user to nest directories to create tree structures. As with files, there are two 
+        // ways to work with directories: the Directory class and the DirectoryInfo class. The Directory class is like the File
+        // class. It is a static class that provides methods that can enumerate the contents of directories and create and manipulate directories.
         public void TheDirectoryClass()
         {
+            Directory.CreateDirectory("TestDirectory");
 
+            if (Directory.Exists("TestDirectory"))
+                Console.WriteLine("Directory created succesfully");
+
+            Directory.Delete("TestDirectory");
+            Console.WriteLine("Directory deleted succesfully");
         }
 
-        // 
+        // An instance of the DirectoryInfo class describes the contents of one directory. The class also provides methods that can be used to create and 
+        // manipulate directories.
         public void TheDirectoryClassInfo()
         {
-
+            DirectoryInfo directory = new DirectoryInfo("TestDirectory");
+            directory.Create();
+            if (directory.Exists)
+                Console.WriteLine("Directory created");
+            directory.Delete();
+            Console.WriteLine("Directory deleted succesfully");
         }
 
-        // 
+        // Paths can be relative or absolute. A relative path specifies the location of a file relative to the folder in which the program is presently running.	
+        // The Path class is very useful and should always be used in preference to manually working with the path strings.
         public void UsingPath()
         {
+            string fullName = @"C:\Users\Василь.000\Documents\text.txt";
 
+            string dirName = Path.GetDirectoryName(fullName);
+            string fileName = Path.GetFileName(fullName);
+            string fileExtension = Path.GetExtension(fullName);
+            string lisName = Path.ChangeExtension(fullName, ".lis"); 
+            string newText = Path.Combine(dirName, "newText.txt");
+
+            Console.WriteLine("Full name: {0}", fullName);
+            Console.WriteLine("File directory: {0}", dirName);
+            Console.WriteLine("File name: {0}", fileName);
+            Console.WriteLine("File extension: {0}", fileExtension);
+            Console.WriteLine("File with lis extension: {0}", lisName);
+            Console.WriteLine("New path: {0}", newText);
         }
 
-        // 
+        private void FindFiles(DirectoryInfo dir, string searchPattern)
+        {
+            foreach (DirectoryInfo directory in dir.GetDirectories())
+            {
+                FindFiles(directory, searchPattern);
+            }
+            FileInfo[] matchingFiles = dir.GetFiles(searchPattern);
+            foreach (FileInfo fileInfo in matchingFiles)
+            {
+                Console.WriteLine(fileInfo.FullName);
+            }
+        }
+
+        // The DirectoryInfo class provides a method called GetFiles that can be used to get a collection of FileInfo items that describe the files in 
+        // a directory. One overload of GetFiles can accept a search string. Within the search string
+        // the character * can represent any number of characters and the character ? can represent a single character.
         public void CSharpPorgrams()
         {
-
+            DirectoryInfo startDir = new DirectoryInfo(@"..\..\..\..");
+            string searchString = "*.cs";
+            FindFiles(startDir, searchString);
+            // The Directory class provides a method called EnumerateFiles that can also be used to enumerate files in this way. 
         }
 
         // 
