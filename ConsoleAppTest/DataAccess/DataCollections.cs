@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -55,17 +56,45 @@ namespace ConsoleAppTest.DataAccess
             // of the rows are a different length.
             int[][] jaggedArray = new int[][]
             {
-                new int[]{1,2,3,4,4 },
-                new int[]{ 5,6},
-                new int[]{0,0,-1,300,300,100,0,0,0 }
+                new int[]{ 1, 2, 3, 4, 4 },
+                new int[]{ 5, 6},
+                new int[]{ 0, 0, -1, 300, 300, 100, 0, 0, 0 }
             };
         }
 
+        // 56 The usefulness of an array is limited by the way you must decide in advance the number of items that are to be stored in the array. The size of	
+        // an array cannot be changed once it has been created (although you can use a variable to set the dimension of the array if you wish). The ArrayList 
+        // class was created to address this issue. An ArrayList stores data in a dynamic structure that grows as more items are added to it. 
+        // Items in an ArrayList are managed by reference and the reference that is used is of type	object. This means that an ArrayList can hold references	
+        // to any type of object, since the object type is the base type of all of the types in C#. However, this can lead  some programming difficulties.	
+        public void UseArrayList()
+        {
+            ArrayList arrayList = new ArrayList();
+            arrayList.Add(1);
+            arrayList.Add(2);
+            arrayList.Add(3);
+            arrayList.Add("string");
+            arrayList.Insert(index: 4, value: "value");
+
+            foreach (var elem in arrayList)
+            {
+                Console.WriteLine(elem);
+            }
+        }
+
+
         // 57
+        public void UseList()
+        {
+
+        }
 
 
         // 58
+        public void DictionaryExample()
+        {
 
+        }
 
         // 59
 
@@ -80,9 +109,6 @@ namespace ConsoleAppTest.DataAccess
 
 
         // 63
-
-
-        // 64
 
 
     }
