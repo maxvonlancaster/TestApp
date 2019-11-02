@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Linq;
 
 namespace ConsoleAppTest.DataAccess
 {
@@ -121,16 +123,47 @@ namespace ConsoleAppTest.DataAccess
                 Console.WriteLine("Account located");
         }
 
-        // 59 how	to	use	a	dictionary	to	count the	frequency	of	words	in	a	document.
+        // 59 how to use a dictionary to count the frequency of words in a document.
         public void WordCounter()
         {
+            // Writing to a file
+            FileStream outputStream = new FileStream("OutputText.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            string outPutMessageString = @"Did you ever hear the Tragedy of Darth Plagueis the wise? I thought not. It's not a story the Jedi would tell you. 
+                                            It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to 
+                                            influence the midichlorians to create life... He had such a knowledge of the dark side that he could even keep the 
+                                            ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be 
+                                            unnatural. He became so powerful... the only thing he was afraid of was losing his power, which eventually, 
+                                            of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him 
+                                            in his sleep. It's ironic he could save others from death, but not himself.";
+            byte[] outputMessageBytes = Encoding.UTF8.GetBytes(outPutMessageString);
+            outputStream.Write(outputMessageBytes);
+            outputStream.Close();
 
+            Dictionary<string, int> counters = new Dictionary<string, int>();
+            string text = File.ReadAllText("input.txt");
+            string[] words = text.Split(new char[] { ' ', ',', '.' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string word in words)
+            {
+                string lowWord = word.ToLower();
+                if (counters.ContainsKey(lowWord))
+                    counters[lowWord]++;
+                else
+                    counters.Add(lowWord, 1);
+            }
+
+            var items = from pair in counters
+                        orderby pair.Value descending
+                        select pair;
+            foreach (var pair in items)
+            {
+                Console.WriteLine("{0}:	{1}", pair.Key, pair.Value);
+            }
         }
 
         // 60
         public void SetExample()
         {
-
+            
         }
 
         // 61
