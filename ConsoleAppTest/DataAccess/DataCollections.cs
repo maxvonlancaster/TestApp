@@ -83,17 +83,32 @@ namespace ConsoleAppTest.DataAccess
         }
 
 
-        // 57
+        // 57 The List type makes use of the “generics” features of C#.
+        // When a program creates a List the type of data that the list is to hold is specified using C# generic notation. Only references of the specified type 
+        // can be added to the list, and values obtained from the list are of the specified type. The List type implements the ICollection and IList interfaces.
         public void UseList()
         {
+            List<string> names = new List<string>();
+            names.Add("Adam");
+            names.Add("Bob");
 
+            for (int i = 0; i < names.Count; i++)
+            {
+                Console.WriteLine(names[i]);
+            }
+
+            names[0] = "Fred";
+            foreach (string name in names)
+            {
+                Console.WriteLine(name);
+            }
         }
 
 
-        // 58
+        // 58 
         public void DictionaryExample()
         {
-
+            
         }
 
         // 59
