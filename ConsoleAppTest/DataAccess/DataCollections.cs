@@ -193,13 +193,22 @@ namespace ConsoleAppTest.DataAccess
             // Another set methods can be used to combine set values to produce unions, differences, and to test supersets and subsets. 
         }
 
-        // 61
+        // 61 A queue provides a short term storage for data item. It is organized as a first-infirst-out (FIFO) collection. Items can be added to the queue using	
+        // the Enqueue method and read from the queue using the Dequeue method. There is also a Peek method that allows a program to look at an item at the top of	
+        // the queue without removing it from the queue.A program can iterate through the items in a queue and a queue also provides a Count property that will 
+        // give the number of items in the queue.
         public void QueueExample()
         {
+            Queue<string> queue = new Queue<string>();
+            queue.Enqueue("A");
+            queue.Enqueue("B");
 
+            Console.WriteLine(queue.Dequeue()); // A
+            Console.WriteLine(queue.Dequeue());
         }
 
-        // 62
+        // 62 A	stack is very similar in use to a queue. The most important difference is that a stack is organized as last-in-first-out (LIFO). A program can	
+        // use the Push method to push items onto the top of the stack and the Pop method to remove items from the stack.	
         public void StackExample()
         {
 
