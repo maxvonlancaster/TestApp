@@ -13,7 +13,7 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
             var service = new SpecialFeatures();
-            service.WeakRefernceUsage();
+            service.CheckedAndUnchecked();
         }
     }
 }

@@ -152,10 +152,11 @@ namespace ConsoleAppTest.Services
         public void CheckedAndUnchecked()
         {
             short x = 32767; // maximum value for short
-            int z1 = checked((short)(x + x)); // will throw OverflowException
             int z2 = unchecked((short)(x + x)); // -2
             int z3 = (short)(x + x); // -2
             Console.WriteLine("z2={0}, z3={1}", z2, z3);
+
+            int z1 = checked((short)(x + x)); // will throw OverflowException
         }
 
         // Preprocessor directives
