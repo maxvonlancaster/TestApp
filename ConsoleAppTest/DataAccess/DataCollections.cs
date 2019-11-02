@@ -204,14 +204,19 @@ namespace ConsoleAppTest.DataAccess
             queue.Enqueue("B");
 
             Console.WriteLine(queue.Dequeue()); // A
-            Console.WriteLine(queue.Dequeue());
+            Console.WriteLine(queue.Dequeue()); // B
         }
 
         // 62 A	stack is very similar in use to a queue. The most important difference is that a stack is organized as last-in-first-out (LIFO). A program can	
         // use the Push method to push items onto the top of the stack and the Pop method to remove items from the stack.	
         public void StackExample()
         {
+            Stack<string> stack = new Stack<string>();
+            stack.Push("A");
+            stack.Push("B");
 
+            Console.WriteLine(stack.Pop()); // B
+            Console.WriteLine(stack.Pop()); // A
         }
 
         // 63
