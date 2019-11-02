@@ -127,7 +127,7 @@ namespace ConsoleAppTest.DataAccess
         public void WordCounter()
         {
             // Writing to a file
-            FileStream outputStream = new FileStream("OutputText.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream outputStream = new FileStream("input.txt", FileMode.OpenOrCreate, FileAccess.Write);
             string outPutMessageString = @"Did you ever hear the Tragedy of Darth Plagueis the wise? I thought not. It's not a story the Jedi would tell you. 
                                             It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to 
                                             influence the midichlorians to create life... He had such a knowledge of the dark side that he could even keep the 
@@ -160,10 +160,37 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 60
+        // 60 A set is an unordered collection of items. Each of the items in a set will be present only once. You can use a set to contain tags or attributes	
+        // that might be applied to a data item.	
+        // Some programming languages, such as Python and Java, provide a set type that is part of the language. C# doesn’t have a built-in set type, but the 
+        // HashSet class can be used to implement sets
         public void SetExample()
         {
-            
+            HashSet<string> listOne = new HashSet<string>();
+            listOne.Add("a");
+            listOne.Add("b");
+            listOne.Add("c");
+            listOne.Add("f");
+
+            HashSet<string> listTwo = new HashSet<string>();
+            listTwo.Add("d");
+            listTwo.Add("e");
+            listTwo.Add("f");
+
+            HashSet<string> search = new HashSet<string>();
+            search.Add("d");
+            search.Add("e");
+
+            if (search.IsSubsetOf(listOne))
+            {
+                Console.WriteLine("subset of listOne"); // will not be printed
+            }
+
+            if (search.IsSubsetOf(listTwo))
+            {
+                Console.WriteLine("subset of listTwo"); // will be printed
+            }
+            // Another set methods can be used to combine set values to produce unions, differences, and to test supersets and subsets. 
         }
 
         // 61
