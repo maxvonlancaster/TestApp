@@ -105,26 +105,51 @@ namespace ConsoleAppTest.DataAccess
         }
 
 
-        // 58 
+        // 58 A Dictionary allows you to access data using a key. The name Dictionary is very appropriate.If you want to look up a definition of a word, you find    
+        // the word in a dictionary and read the definition.In the case of an application, the key might be an account number or a username. The data can be a 
+        // bank account or a user record.
         public void DictionaryExample()
         {
-            
+            string a1 = "Account 1";
+            string a2 = "Account 2";
+            Dictionary<int, string> bank = new Dictionary<int, string>();
+            bank.Add(1, a1);
+            bank.Add(2, a2);
+
+            Console.WriteLine(bank[1]);
+            if (bank.ContainsKey(2))
+                Console.WriteLine("Account located");
         }
 
-        // 59
+        // 59 how	to	use	a	dictionary	to	count the	frequency	of	words	in	a	document.
+        public void WordCounter()
+        {
 
+        }
 
         // 60
+        public void SetExample()
+        {
 
+        }
 
         // 61
+        public void QueueExample()
+        {
 
+        }
 
         // 62
+        public void StackExample()
+        {
 
+        }
 
         // 63
+        public void CollectionInitialization()
+        {
 
+        }
 
     }
 }
