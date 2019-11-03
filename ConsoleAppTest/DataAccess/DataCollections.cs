@@ -8,6 +8,18 @@ using System.Linq;
 namespace ConsoleAppTest.DataAccess
 {
     // Collections are a different way of grouping data. Collections are how to store a large number of objects that are usually all the same type
+
+    // The type of collection to use normally falls naturally from the demands of the application. If you need to store a list of values, use a List in preference 
+    // to an array or ArrayList. An array is fixed in size and an ArrayList does not provide type safety. A List can only contain objects of the list type and can 
+    // grow and contract. It is also very easy to remove a value from the middle of a list or insert an extra value. Use an array if you are concerned about 
+    // performance and you are holding value types, since the data will be accessed more quickly. The other occasion where arrays are useful is if a program 
+    // needs to store two-dimensional data (for example a table of values made up of rows and columns). In this situation you can create an object that implements	
+    // a row (and contains a List of elements in the row) and then stores a List of these objects. If there is an obvious value in an object upon which it can be
+    // indexed (for example an account number or username), use a dictionary to store the objects and then index on that value. A dictionary is less useful 
+    // if you need to locate a data value based on different elements, such as needing to find a customer based on their customer ID, name, or address. In that	
+    // case, put the data in a List and then use LINQ queries on the list to locate items. Sets can be useful when working with tags. Their built-in operations 
+    // are much easier to use than writing your own code to match elements together. Queues and stacks are used when the needs of the application require FIFO	
+    // or LIFO behavior. 
     public class DataCollections
     {
         // 55 An array is the simplest way to create a collection of items of a particular type. An array is assigned a size when it is created and the elements	
@@ -219,11 +231,60 @@ namespace ConsoleAppTest.DataAccess
             Console.WriteLine(stack.Pop()); // A
         }
 
-        // 63
+        // 63 The examples that you have seen have added values to collections by calling the collection methods to add the values. For example, use the Add 
+        // method to add items to a List. However, there are quicker ways to initialize each type of object.
         public void CollectionInitialization()
+        {
+            int[] arrayInt = { 1, 2, 3, 4 };
+            ArrayList arrayList = new ArrayList { 1, "string", new ArrayList(), true };
+            List<int> listInt = new List<int> { 1, 2, 3, 4 };
+            Dictionary<int, string> dictionary = new Dictionary<int, string>
+            {
+                { 1, "A" },
+                { 2, "B" }
+            };
+            HashSet<string> set = new HashSet<string> { "A", "B", "C" };
+            Queue<string> queue = new Queue<string> ( new string[] { "A", "B", "C" } );
+            Stack<string> stack = new Stack<string>(new string[] { "A", "B", "C" });
+        }
+
+        // 64 The array class does not provide any methods that can add or remove elements. The size of an array is fixed when the array is created. The only 
+        // way to modify the size of an existing array is to create a new array of the required type and then copy the elements from one to the other. The array 
+        // class provides a CopyTo method that will copy the contents of an array into another array. The first parameter of CopyTo is the destination array. 
+        // The second parameter is the start position in the destination array for the copied values.	
+        public void GrowAnArray()
         {
 
         }
 
+        // 65 
+        public void ListModification()
+        {
+
+        }
+
+        // 66 
+        public void DictionaryModification()
+        {
+
+        }
+
+        // 67 
+        public void SetModification()
+        {
+
+        }
+
+        // 68 
+        public void CustomCollection()
+        {
+
+        }
+
+        // 69 
+        public void ICollectionInterface()
+        {
+
+        }
     }
 }
