@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Linq;
+using ConsoleAppTest.DebugAndSecurity;
 
 namespace ConsoleAppTest.DataAccess
 {
@@ -254,37 +255,98 @@ namespace ConsoleAppTest.DataAccess
         // The second parameter is the start position in the destination array for the copied values.	
         public void GrowAnArray()
         {
-
+            int[] array = { 1, 2, 3, 4};
+            int[] newArray = new int[5];
+            array.CopyTo(newArray, 0);
+            array = newArray;
         }
 
-        // 65 
+        // 65 There are a number of methods that can be used to modify the contents of the ArrayList and List collections.	
         public void ListModification()
         {
+            List<string> list = new List<string>();
+            list.Add("add to end of list");	// add to the end of the list
+            list.Insert(0, "insert at start");
+            list.Insert(1, "insert at index 1");
 
         }
 
-        // 66 
+        // 66 Add and remove items from a Dictionary
         public void DictionaryModification()
         {
-
+            Dictionary<int, string> dictionary = new Dictionary<int, string>();
+            dictionary.Add(1, "A");
+            dictionary.Remove(1);
         }
 
-        // 67 
+        // 67 Add and remove items from a Set 
         public void SetModification()
         {
-
+            HashSet<string> set = new HashSet<string>();
+            set.Add("Rob Miles");   // add an item 
+            set.Remove("Rob	Miles"); // remove an item
+            set.RemoveWhere(x => x.StartsWith("R")); // remove those that start with R
         }
 
-        // 68 
-        public void CustomCollection()
+        // 68 A custom collection is a collection that you create for a specific purpose that has behaviors that you need in your application. One way to make a
+        // custom collection is to create a new type that implements the ICollection interface. This can then be used in the same way as any other collection, 
+        // such as with a program iterating through your collection using a foreach construction. Anothe  way to create a custom collection is to use an 
+        // existing collection class as the base (parent) class of a new collection type. You can then add new behaviors to your new collection and, because 
+        // it is based on an existing collection type, your collection can be used in the same way as any other collection. 
+        class TrackStore : List<MusicTrack>
         {
-
+            public int RemoveArtist(string removeName)
+            {
+                List<MusicTrack> removeList = new List<MusicTrack>();
+                foreach (MusicTrack track in this)
+                {
+                    if (track.Artist == removeName)
+                    {
+                        removeList.Add(track);
+                    }
+                }
+                foreach (MusicTrack track in removeList)
+                {
+                    this.Remove(track);
+                }
+                return removeList.Count;
+            }
         }
 
-        // 69 
-        public void ICollectionInterface()
+        // 69 The behavior of a collection type is expressed by the ICollection interface. The ICollection interface is a child of the IEnumerator interface. 
+        // Interface hierarchies work in exactly the same way as class hierarchies, in that a child of a parent interface contains all of the methods that 
+        // are described in the parent. This means that a type that implements the ICollection interface is capable of being enumerated.	
+        class CompassCollection : ICollection
         {
+            // Array containing values in this collection
+            string[] points = { "north", "west", "east", "south"};
 
+            public int Count { get { return points.Length; } }
+
+            // Returns true if the collection is thread safe; This collection is not
+            public bool IsSynchronized { get { return false; } }
+
+            // Returns an object that can be used to syncrhonise access to this object
+            public object SyncRoot { get { return this; } }
+
+            // Provide a copyto behavior
+            public void CopyTo(Array array, int index)
+            {
+                foreach (string point in points)
+                {
+                    array.SetValue(point, index);
+                    index = index + 1;
+                }
+            }
+
+            // Required for IEnumerate; Returns the enumerator from the embedded array
+            public IEnumerator GetEnumerator()
+            {
+                return points.GetEnumerator();
+            }
         }
+
+        // Note, that if you want the new collection type to be used with LINQ queries it must implement the IEnumerable<type>	
+        // interface. This means that the type must contain a GetEnumerator<string>() method. 
     }
 }

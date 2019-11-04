@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ConsoleAppTest.DataAccess
 {
@@ -255,38 +258,86 @@ namespace ConsoleAppTest.DataAccess
             // The Directory class provides a method called EnumerateFiles that can also be used to enumerate files in this way. 
         }
 
-        // 
+        // The	.NET	Framework	provides	a	range	of	application	programming	interfaces that	can	interact	with	a	TCP/IP	(Transmission	
+        // Control	Protocol/Internet Protocol)	network. C#	programs can	create	network	socket	objects	that	can communicate	over	the	network	by	
+        // sending	unacknowledged	datagrams	using
+        // UDP(User Datagram Protocol) or creating managed connections using	TCP (Transmission Control Protocol). In this section we  are going   
+        // to focus   on the classes in the System.Net namespace that allow	a program to communicate with servers using	the	HTTP(HyperText Transport   
+        // Protocol). This protocol operates on  top of  a TCP/IP connection.In  other words, TCP/IP provides the connection  between the server and  
+        // client systems and HTTP defines the format of  the messages that are exchanged over that connection. An HTTP client, for	example a   
+        // web browser, creates a TCP connection  to a server and makes a   request for	data by  sending the HTTP GET command.The server  will then    
+        // respond with a page of information. After the response has been returned to the client the TCP connection	is	closed.The information 
+        // returned by  the server	is	formatted using	HTML (HyperText Markup   Language)	and rendered    by the browser.In the case	of an  
+        // ASP(Active Server  Pages)  application the HTML document may be 
+        // produced dynamically by  software, rather than being loaded  from a file stored  on the server.HTTP was originally used for	the sharing 
+        // of human-readable web pages.However,	now an  HTTP request may return	an XML or JSON formatted document  that describes data in	an application.
+        // The REST (REpresentational State   Transfer) architecture uses the GET, PUT, POST and DELETE  operations of  HTTP to  allow a   client to  
+        // request a   server to perform functions in	a client-server application.The fundamental operation   that is	used to  communicate with    these and 
+        // other servers is	the sending of a “web request”	to a   server to  perform an  HTML command on the server, and now we are  going to  discover 
+        // how to  do	this.	Let’s look    at three   different ways to interact with web servers and consider their   advantages and disadvantages.These 
+        // are WebRequest, WebClient, and HttpClient. 
+
+
+
+        // The	WebRequest	class	is	an	abstract	base	class	that	specifies	the	behaviors	of	a web	request.	It	exposes	a	static	
+        // factory	method	called	Create,	which	is	given	a universal	resource	identifier	(URI)	string	that	specifies	the	resource	that	
+        // is	to	be used.	The	Create	method	inspects	the	URI	it	is	given	and	returns	a	child	of	the WebRequest	class	that	matches	that
+        // resource.	The	Create	method	can	create HttpWebRequest,	FtpWebRequest,	and	FileWebRequest	objects.	In	the	case	of	a web	site,
+        // the	URI	string	will	start	with	“http”	or	“https”	and	the	Create	method
+        // will	return	an HttpWebRequest  instance.The GetResponse method on  an HttpWebRequest  returns a   WebResponse instance    that describes  
+        // the response    from the server.Note that	this	response	is not the web page    itself,	but an  object that    describes the response from   
+        // the server.To  actually read    the text    from the webpage a   program must    use the GetResponseStream method  on the response to  get a   stream 
+        // from    which the webpage text    can be  read.
         public void HttpWebRequest()
         {
+            WebRequest webRequest = WebRequest.Create("https://www.microsoft.com");
+            WebResponse webResponse = webRequest.GetResponse();
 
+            using (StreamReader stream = new StreamReader(webResponse.GetResponseStream()))
+            {
+                string siteText = stream.ReadToEnd();
+                Console.WriteLine(siteText);
+            }
         }
 
-        //
+        // The WebClient class provides a simpler and quicker way of reading the text from a web server. There is now no need to create a stream to read the page 
+        // contents (although you can do this if you wish) and there is no need to deal with the response to the web request before you can obtain the reply from the server.
         public void WebClient()
         {
-
+            WebClient client = new WebClient();
+            string siteText = client.DownloadString("https://www.microsoft.com");
+            Console.WriteLine(siteText);
         }
 
-        // 
-        public void WebClientAsync()
+        // The WebClient class also provides methods that can be used to read from the server asynchronously.	
+        public async Task WebClientAsync()
+        {
+            WebClient client = new WebClient();
+            string siteText = await client.DownloadStringTaskAsync("https://www.microsoft.com");
+            Console.WriteLine(siteText);
+        }
+
+        // The HTTPClient is important because it is the way in which a Windows Universal Application can download the contents of a website. Unlike the 
+        // WebRequest and the WebClient classes, an HTTPClient only provides asynchronous methods.
+        public async Task HttpClient()
+        {
+            HttpClient client = new HttpClient();
+            string siteText = await client.GetStringAsync("https://www.microsoft.com");
+            Console.WriteLine(siteText);
+
+            // As with file handling, loading information from the Internet is prone to error. Network connections may be broken or servers may be 
+            // unavailable. This means that web request code should be enclosed in appropriate exception handlers.	
+        }
+
+        // The file operations provided by the File class do not have any asynchronous versions, so the FileStream class should be used instead.	
+        public async Task AsynchronousFileWriting()
         {
 
         }
 
-        // 
-        public void HttpClient()
-        {
-
-        }
-
-        // 
-        public void AsynchronousFileWriting()
-        {
-
-        }
-
-        // 
-        public void FileExceptions()
+        // If any exceptions are thrown by the asynchronous file write method they must be caught and a message displayed for the user. This will only happen if	
+        // the WriteBytesAsync method returns a Task object that is awaited when the WriteBytesAsync method is called.	
+        public async Task FileExceptions()
         {
 
         }

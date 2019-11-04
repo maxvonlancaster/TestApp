@@ -28,7 +28,8 @@ namespace MusicTracks.Services
             Console.WriteLine(track.Artist);
         }
 
-        // 
+        // C# contains an implementation of regular expressions that can be used to perform data validation. A regular expression is a means of expressing a 
+        // string of characters that need to be matched in a target string.	
         public void SimpleRegularExpression()
         {
 
