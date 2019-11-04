@@ -12,8 +12,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new DataCollections();
-            service.WordCounter();
+            var service = new UsingLinq();
+            service.LinqJoin();
         }
     }
 }

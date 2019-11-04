@@ -258,7 +258,7 @@ namespace ConsoleAppTest.DataAccess
             // The Directory class provides a method called EnumerateFiles that can also be used to enumerate files in this way. 
         }
 
-        // The	.NET	Framework	provides	a	range	of	application	programming	interfaces that	can	interact	with	a	TCP/IP	(Transmission	
+        // The .NET Framework provides a range of application programming interfaces that can interact with a TCP/IP (Transmission	
         // Control	Protocol/Internet Protocol)	network. C#	programs can	create	network	socket	objects	that	can communicate	over	the	network	by	
         // sending	unacknowledged	datagrams	using
         // UDP(User Datagram Protocol) or creating managed connections using	TCP (Transmission Control Protocol). In this section we  are going   
