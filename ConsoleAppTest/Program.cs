@@ -12,8 +12,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new UsingLinq();
-            service.LinqTakeAndSkip();
+            var service = new SpecialFeatures();
+            service.UsingGoTo();
         }
     }
 }

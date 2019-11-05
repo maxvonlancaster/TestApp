@@ -256,5 +256,22 @@ namespace ConsoleAppTest.Services
             }
         }
 
+        // 
+        public void UsingGoTo()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    goto DivisibleBy3;
+                }
+            GetBack:;
+            }
+
+        DivisibleBy3:
+            Console.WriteLine("Divisible by 3");
+        }
+
+
     }
 }

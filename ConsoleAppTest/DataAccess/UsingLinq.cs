@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace ConsoleAppTest.DataAccess
 {
@@ -360,46 +361,119 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 
+        // The result of a LINQ query is an item that can be iterated. We have used the foreach construction to display the results from queries. The actual evaluation 
+        // of a LINQ query normally only takes place when a program starts to extract results from the query. This is called deferred execution. If you want to	
+        // force the execution of a query you can use the ToArray() method
         public void ForceQueryExecution()
         {
             MusicTrackClasses();
 
+            var selectedTracksQuery = from artist in _artistsEntyties
+                                 where artist.Name == "Iggy Pop"
+                                 join track in _musicTracksEntyties on artist.ID equals track.ArtistID
+                                 select new
+                                 {
+                                     ArtistName = artist.Name,
+                                     track.Title
+                                 };
+
+            var selectedTracksResult = selectedTracksQuery.ToArray();
+
+            foreach (var item in selectedTracksResult)
+            {
+                Console.WriteLine("Artist: {0}, Total Length: {1}", item.ArtistName, item.Title);
+            }
+
+            // A query result also provides ToList and ToDictionary methods that will force the execution of the query and generate an immediate result of that 
+            // type.	
         }
 
-        // 
+        private static string XMLText = 
+            "<MusicTracks>" + 
+                "<MusicTrack>" + 
+                    "<Artist>Rob Miles</Artist>" + 
+                    "<Title>My Way</Title>" + 
+                    "<Length>150</Length>" + 
+                "</MusicTrack>" +
+                "<MusicTrack>" + 
+                    "<Artist>Immy Brown</Artist>" + 
+                    "<Title>Her	Way</Title>" + 
+                    "<Length>200</Length>" + 
+                "</MusicTrack>" + 
+            "</MusicTracks>";
+
+        private XDocument _musicTracksDocument = XDocument.Parse(XMLText);
+
+        // The format of LINQ queries is slightly different when working with XML. This is because the source of the query is a filtered set of XML entries from	
+        // the source document
         public void ReadXmlWithLinq()
         {
-            MusicTrackClasses();
+            IEnumerable<XElement> selectedTracks = from track in _musicTracksDocument.Descendants("MusicTrack")
+                                 select track;
 
+            foreach (XElement item in selectedTracks)
+            {
+                Console.WriteLine("Artist:{0} Title:{1}", 
+                    item.Element("Artist").FirstNode, item.Element("Title").FirstNode);
+            }
         }
 
-        // 
+        // A program can perform filtering in the query by adding a where operator, just as with the LINQ we have seen before.	
         public void FilterXmlWithLinq()
         {
-            MusicTrackClasses();
+            IEnumerable<XElement> selectedTracks = from track in _musicTracksDocument.Descendants("MusicTrack")
+                                                   where (string)track.Element("Artist") == "Rob Miles"
+                                                   select track;
+
+
+            // The LINQ queries that we have seen so far have been expressed using query comprehension. It is possible, however, to express the same query in the	
+            // form	of a method-based query. The Descendants method returns an object that provides the Where behavior.
+            selectedTracks = _musicTracksDocument.Descendants("MusicTrack")
+                             .Where(track => (string)track.Element("Artist") == "Rob Miles");
 
         }
 
-        // 
+        // The LINQ to XML features include very easy way to create XML documents
         public void CreateXmlWithLinq()
         {
-            MusicTrackClasses();
+            XElement musicTracks = new XElement("Music Tracks", 
+                new List<XElement>
+                {
+                    new XElement("Music Track", 
+                        new XElement("Artist","A"),
+                        new XElement("Title","Track1")),
+                    new XElement("Music Track",
+                        new XElement("Artist","B"),
+                        new XElement("Title","Track2"))
+                });
 
         }
 
-        // 
+        // The XElement class provides methods that can be used to modify the contents of a given XML element.
         public void ModifyXmlWithLinq()
         {
-            MusicTrackClasses();
+            IEnumerable<XElement> selectedTracks = from track in _musicTracksDocument.Descendants("MusicTrack")
+                                                   where (string)track.Element("Title") == "My Way"
+                                                   select track;
 
+            foreach (XElement item in selectedTracks)
+            {
+                item.Element("Title").FirstNode.ReplaceWith("stuff");
+            }
         }
 
-        // 
+        // As you saw when creating a new XML document, an XElement can contain a collection of other elements to build the tree	
+        // structure of an XML document. You can programmatically add and remove elements to change the structure of the XML document. 
         public void AddXmlWithLinq()
         {
-            MusicTrackClasses();
+            IEnumerable<XElement> selectedTracks = from track in _musicTracksDocument.Descendants("MusicTrack")
+                                                   where (string)track.Element("Style") == null
+                                                   select track;
 
+            foreach (XElement item in selectedTracks)
+            {
+                item.Add(new XElement("Style", "Pop"));
+            }
         }
     }
 
