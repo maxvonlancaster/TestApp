@@ -14,7 +14,7 @@ using ASimpleName = System.Collections.Generic.Dictionary<string, System.Collect
 
 namespace ConsoleAppTest.Services
 {
-    // TODO: semaphore, Transaction, stackalloc, out, ref, goto
+    // TODO: semaphore, Transaction, stackalloc, out, ref
     public class SpecialFeatures
     {
         private T DefaultValue<T>()
@@ -265,7 +265,6 @@ namespace ConsoleAppTest.Services
                 {
                     goto DivisibleBy3;
                 }
-            GetBack:;
             }
 
         DivisibleBy3:

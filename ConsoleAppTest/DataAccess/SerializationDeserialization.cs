@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace ConsoleAppTest.DataAccess
@@ -14,10 +16,39 @@ namespace ConsoleAppTest.DataAccess
     // data is not compatible with the new design. 
     public class SerializationDeserialization
     {
-        // 
+        // There are essentially two kinds of serialization that a program can use: binary  serialization and text serialization.
+        // Binary serialization imposes its own format on the data that is being serialized, mapping
+        // the data onto a stream of 8-bit values.The data in a stream created by a binaryserializer can only be read by a corresponding binary de-serializer.Binary
+        // serialization can provide a complete “snapshot” of the source data. Both publicand private data in an object will be serialized, and the type of each data item is preserved
         public void BinarySerialization()
         {
+            MusicDataStore data = MusicDataStore.TestData();
 
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream outputStream =
+                new FileStream("MusicTracks.bin", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                formatter.Serialize(outputStream, data);
+            }
+
+            MusicDataStore inputData;
+
+            using (FileStream inputStream =
+                new FileStream("MusicTracks.bin", FileMode.Open, FileAccess.Read))
+            {
+                inputData = (MusicDataStore)formatter.Deserialize(inputStream);
+            }
+
+            foreach (var item in inputData.Artists)
+            {
+                Console.WriteLine(item.Name);
+            }
+
+            // Binary serialization is the only serialization technique that serializes private data members by default(i.e.without the developer asking). A file created by a
+            // binary serializer can contain private data members from the object being serialized.Note, however, that once an object has serialized there is nothing to
+            // stop a devious programmer from working with serialized data, perhaps viewing and tampering with the values inside it.This means that a program should treat
+            // deserialized inputs with suspicion.Furthermore, any security sensitive information in a class should be explicitly marked NonSerialized.One way
+            // to improve security of a binary serialized file is to encrypt the stream before it is stored, and decrypt it before deserialization.
         }
 
         // 
@@ -57,9 +88,14 @@ namespace ConsoleAppTest.DataAccess
     }
 
 
+    // Classes to be serialized by the binary serializer must be marked with the [Serializable] attribute
+    [Serializable]
     class ArtistSerializable
     {
         public string Name { get; set; }
+
+        [NonSerialized]
+        int tempData;
     }
 
     [Serializable]
@@ -73,13 +109,29 @@ namespace ConsoleAppTest.DataAccess
     [Serializable]
     class MusicDataStore
     {
-        List<ArtistSerializable> Artists = new List<ArtistSerializable>();
-        List<MusicTrackSerializable> MusicTracks = new List<MusicTrackSerializable>();
+        public List<ArtistSerializable> Artists = new List<ArtistSerializable>();
+        public List<MusicTrackSerializable> MusicTracks = new List<MusicTrackSerializable>();
         public static MusicDataStore TestData()
         {
             MusicDataStore result = new MusicDataStore();
+            result.Artists = new List<ArtistSerializable>
+            {
+                new ArtistSerializable() { Name = "Art1"},
+                new ArtistSerializable() { Name = "Art2"},
+                new ArtistSerializable() { Name = "Art3"},
+                new ArtistSerializable() { Name = "Art4"},
+                new ArtistSerializable() { Name = "Art5"}
+            };
+            result.MusicTracks = new List<MusicTrackSerializable>
+            {
+                new MusicTrackSerializable() { Artist = result.Artists[0], Title = "Title1", Length = 100 },
+                new MusicTrackSerializable() { Artist = result.Artists[0], Title = "Title2", Length = 200 },
+                new MusicTrackSerializable() { Artist = result.Artists[1], Title = "Title3", Length = 100 },
+                new MusicTrackSerializable() { Artist = result.Artists[1], Title = "Title4", Length = 300 },
+                new MusicTrackSerializable() { Artist = result.Artists[1], Title = "Title5", Length = 200 },
+            };
             // create the same test data set as	used for the LINQ examples								
             return result;
         }
-    } 
+    }
 }

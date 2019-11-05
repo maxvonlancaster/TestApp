@@ -329,17 +329,30 @@ namespace ConsoleAppTest.DataAccess
             // unavailable. This means that web request code should be enclosed in appropriate exception handlers.	
         }
 
-        // The file operations provided by the File class do not have any asynchronous versions, so the FileStream class should be used instead.	
-        public async Task AsynchronousFileWriting()
+        // The file operations provided by the File class do not have any asynchronous versions, so the FileStream class should be used instead.
+        public async Task AsynchronousFileWriting(string fileName, byte[] items)
         {
-
+            using (FileStream outStream = 
+                new FileStream(fileName, FileMode.Open, FileAccess.Write))
+            {
+                await outStream.WriteAsync(buffer: items, offset: 0, count: items.Length);
+            }
         }
 
         // If any exceptions are thrown by the asynchronous file write method they must be caught and a message displayed for the user. This will only happen if	
         // the WriteBytesAsync method returns a Task object that is awaited when the WriteBytesAsync method is called.	
-        public async Task FileExceptions()
+        public async Task FileExceptions(object sender, EventArgs args)
         {
-
+            byte[] data = new byte[100];
+            try
+            {
+                // Filename is wrong
+                await AsynchronousFileWriting("wrongcharacter:.dat", data);
+            }
+            catch (Exception writeException)
+            {
+                Console.WriteLine(writeException.Message);
+            }
         }
     }
 
