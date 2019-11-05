@@ -192,18 +192,62 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 
+        // Another useful LINQ feature is the ability to group the results of a query to create a summary output. For example, you may want to create a query to 
+        // tell how many tracks there are by each artist in the music collection.
         public void LinqGroup()
         {
             MusicTrackClasses();
 
+            var artistSummary = from track in _musicTracksEntyties
+                                join artist in _artistsEntyties on track.ArtistID equals artist.ID
+                                group track by artist.Name
+                                into artistTrackSummary
+                                select new
+                                {
+                                    ID = artistTrackSummary.Key,
+                                    Count = artistTrackSummary.Count()
+                                };
+
+            foreach (var item in artistSummary)
+            {
+                Console.WriteLine("Artist: {0}, Count: {1}", item.ID, item.Count);
+            }
         }
 
-        // 
+        // A LINQ query will normally return all of	the	items that if finds. However, this might be	more items that your program wants.	
+        // For example, you might want to show the user the output one page at a time. You can use take to tell the query to take	
+        // a particular number of items and the skip to tell a query to skip a particular number of items in the result before	
+        // taking the requested number. 
         public void LinqTakeAndSkip()
         {
             MusicTrackClasses();
 
+            int pageNo = 0;
+            int pageSize = 10;
+
+            while (true)
+            {               // Get the track information	
+                var	trackList = from musicTrack in _musicTracksEntyties.Skip(pageNo*pageSize)
+                                .Take(pageSize)	join artist in _artistsEntyties	on musicTrack.ArtistID equals artist.ID
+                                select	new
+                                {
+                                    ArtistName = artist.Name,
+                                    musicTrack.Title
+                                };
+                //	Quit if	we reached the end of the data				
+                if	(trackList.Count()	==	0)
+                    break;
+                //	Display	the	query	result				
+                foreach	(var item in trackList)
+                {
+                    Console.WriteLine("Artist:{0} Title:{1}",												
+                        item.ArtistName, item.Title);
+                }
+                Console.Write("Press any key to continue");
+                Console.ReadKey();
+                //	move on	to the	next page 
+                pageNo++; 
+            }
         }
 
         // 
@@ -293,4 +337,7 @@ namespace ConsoleAppTest.DataAccess
         public int ID { get; set; }
         public string Name { get; set; }
     }
+
+    // Rollstuhl
+    // 
 }
