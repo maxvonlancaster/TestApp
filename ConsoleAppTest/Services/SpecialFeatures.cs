@@ -14,7 +14,7 @@ using ASimpleName = System.Collections.Generic.Dictionary<string, System.Collect
 
 namespace ConsoleAppTest.Services
 {
-    // TODO: semaphore, Transaction, stackalloc, out, ref
+    // TODO: semaphore, Transaction, stackalloc, out, ref, goto
     public class SpecialFeatures
     {
         private T DefaultValue<T>()

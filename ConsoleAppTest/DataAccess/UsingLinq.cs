@@ -215,8 +215,8 @@ namespace ConsoleAppTest.DataAccess
         }
 
         // A LINQ query will normally return all of	the	items that if finds. However, this might be	more items that your program wants.	
-        // For example, you might want to show the user the output one page at a time. You can use take to tell the query to take	
-        // a particular number of items and the skip to tell a query to skip a particular number of items in the result before	
+        // For example, you might want to show the user the output one page at a time. You can use take to tell the query to take 
+        // a particular number of items and the skip to tell a query to skip a particular number of items in the result before 
         // taking the requested number. 
         public void LinqTakeAndSkip()
         {
@@ -226,18 +226,20 @@ namespace ConsoleAppTest.DataAccess
             int pageSize = 10;
 
             while (true)
-            {               // Get the track information	
+            {               
+                // Get the track information
                 var	trackList = from musicTrack in _musicTracksEntyties.Skip(pageNo*pageSize)
-                                .Take(pageSize)	join artist in _artistsEntyties	on musicTrack.ArtistID equals artist.ID
-                                select	new
+                                .Take(pageSize)	join artist in _artistsEntyties	on 
+                                musicTrack.ArtistID equals artist.ID
+                                select new
                                 {
                                     ArtistName = artist.Name,
                                     musicTrack.Title
                                 };
-                //	Quit if	we reached the end of the data				
+                // Quit if we reached the end of the data
                 if	(trackList.Count()	==	0)
                     break;
-                //	Display	the	query	result				
+                // Display the query result	
                 foreach	(var item in trackList)
                 {
                     Console.WriteLine("Artist:{0} Title:{1}",												
@@ -245,37 +247,117 @@ namespace ConsoleAppTest.DataAccess
                 }
                 Console.Write("Press any key to continue");
                 Console.ReadKey();
-                //	move on	to the	next page 
+                // move on to the next page 
                 pageNo++; 
             }
         }
 
-        // 
+        // In the context of LINQ commands, the word aggregate means “bring together a number of related values to create a single result.” You can use aggregate
+        // operators on the results produced by group operations.You may want to get the total length of all the tracks assigned to an artist, and for that you can use
+        // the Sum aggregate operator. The parameter to the Sum operator is a lambda expression that the operator
+        // will use on each item in the group to obtain the value to be added to the total sum for that item. To get the sum of MusicTrack lengths, the lambda
+        // expression just returns the value of the Length property for the item.
         public void LinqAggregate()
         {
             MusicTrackClasses();
 
+            var artistSummary = from track in _musicTracksEntyties
+                                join artist in _artistsEntyties on track.ArtistID equals artist.ID
+                                group track by artist.Name
+                                into artistTrackSummary
+                                select new
+                                {
+                                    ID = artistTrackSummary.Key,
+                                    Length = artistTrackSummary.Sum(x => x.Length)
+                                };
+
+            foreach (var item in artistSummary)
+            {
+                Console.WriteLine("Artist: {0}, Total Length: {1}", item.ID, item.Length);
+            }
+
+            // You can use Average, Max, and Min to generate other items of aggregate information.You can also create your own Aggregate behavior that will be
+            // called on each successive item in the group and will generate a single aggregate result.
         }
 
-        // 
+        // The query statement uses query comprehension syntax, which includes the operators from, in, where, and select.The compiler uses these to generate
+        // a call to the Where method on the MusicTracks collection.
+        // The Where method accepts a lambda expression as a parameter.
         public void MethodBasedQuery()
         {
             MusicTrackClasses();
 
+            // method based implementation of query from void LinqOperators()
+            var selectedTracks = _musicTracks.Where(track => track.Artist.Name == "Iggy Pop");
+
+            foreach (MusicTrackNew musicTrack in selectedTracks)
+            {
+                Console.WriteLine("Artist: {0}, Title: {1}, Length: {2}",
+                    musicTrack.Artist.Name, musicTrack.Title, musicTrack.Length);
+            }
+
+            // Programs can use the LINQ query methods (and execute LINQ queries) on data collections, such as lists and arrays, and also on database connections. The
+            // methods that implement LINQ query behaviors are not added to the classes that use them. Instead they are implemented as extension methods.
         }
 
-        // 
+        // The phrase “query comprehension syntax” refers to the way that you can build LINQ queries for using the C# operators provided specifically for expressing
+        // data queries.The intention is to make the C# statements that strongly resemblethe SQL queries that perform the same function.This makes it easier for
+        // developers familiar with SQL syntax to use LINQ.
         public void ComplexQuery()
         {
             MusicTrackClasses();
 
+            var artistSummary = from track in _musicTracksEntyties
+                                join artist in _artistsEntyties on track.ArtistID equals artist.ID
+                                group track by artist.Name
+                                into artistTrackSummary
+                                select new
+                                {
+                                    ID = artistTrackSummary.Key,
+                                    Length = artistTrackSummary.Sum(x => x.Length)
+                                };
+
+            foreach (var item in artistSummary)
+            {
+                Console.WriteLine("Artist: {0}, Total Length: {1}", item.ID, item.Length);
+            }
         }
 
-        // 
+        // You first saw the use of anonymous types in the “Anonymous types” section earlier in this chapter.The last few sample programs have shown the use of
+        // anonymous types moving from creating values that summarize the contents of a source data object (for example extracting just the artist and title information
+        // from a MusicTrack value), to creating completely new types that contain data from the database and the results of aggregate operators.
+        // It is important to note that you can also create anonymous type instances in method-based SQL queries.
         public void ComplexAnonymousTypes()
         {
             MusicTrackClasses();
 
+            var artistSummary = _musicTracksEntyties.Join(
+                    _artistsEntyties,
+                    track => track.ArtistID,
+                    artist => artist.ID,
+                    (track, artist) => new
+                    {
+                        track = track,
+                        artist = artist
+                    }
+                )
+                .GroupBy(
+                    temp0 => temp0.artist.Name,
+                    temp0 => temp0.track
+                )
+                .Select(
+                    artistTrackSummary => 
+                    new
+                    {
+                        ID = artistTrackSummary.Key,
+                        Length = artistTrackSummary.Sum(x => x.Length)
+                    }
+                );
+
+            foreach (var item in artistSummary)
+            {
+                Console.WriteLine("Artist: {0}, Total Length: {1}", item.ID, item.Length);
+            }
         }
 
         // 
