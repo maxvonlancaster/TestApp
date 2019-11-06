@@ -12,8 +12,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new SerializationDeserialization();
-            service.BinarySerialization();
+            var service = new PerformEncryption();
+            service.AesDecryption();
         }
     }
 }
