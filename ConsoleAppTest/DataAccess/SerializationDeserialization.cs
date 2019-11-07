@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Permissions;
 using System.Text;
 
 namespace ConsoleAppTest.DataAccess
@@ -51,16 +53,63 @@ namespace ConsoleAppTest.DataAccess
             // to improve security of a binary serialized file is to encrypt the stream before it is stored, and decrypt it before deserialization.
         }
 
-        // 
-        public void CustomSerialization()
+        // Sometimes it might be necessary for code in a class to get control during the serialization process.You might want to add checking information or encryption
+        // to data elements, or you might want to perform some custom compression of the data. There are two ways that to do this. The first way is to create our own
+        // implementation of the serialization process by making a data class implement the ISerializable interface.
+        // A class that implements the ISerializable interface must contain a GetObjectData method.This method will be called when an object is
+        // serialized.It must take data out of the object and place it in the output stream.The class must also contain a constructor that will initialize an instance of the
+        // class from the serialized data source.
+        [Serializable]
+        public class ArtistSer : ISerializable
         {
+            public ArtistSer()
+            {
+            }
 
+            public ArtistSer(SerializationInfo info, StreamingContext context)
+            {
+                Name = info.GetString("name");
+            }
+
+            public string Name { get; set; }
+
+            [SecurityPermissionAttribute(SecurityAction.Demand)]
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
+                info.AddValue("name", Name);
+            }
+
+            // The constructor for the Artist type accepts info and context parameters and uses the GetString method on the info parameter to obtain
+            // the name information from the serialization stream and use it to set the value of the Name property of the new instance.
         }
 
-        // 
-        public void CustomizationMethods()
+        // he second way of customizing the serialization process is to add methods that will be called during serialization.These are identified by attributes
+        [Serializable]
+        public class ArtistCustom
         {
+            [OnSerializing()]
+            internal void OnSerializingMethod(StreamingContext context)
+            {
+                Console.WriteLine("Called before the artist is serialized");
+            }
 
+            [OnSerialized()]
+            internal void OnSerializedMethod(StreamingContext context)
+            {
+                Console.WriteLine("Called after the artist is serialized");
+            }
+
+            [OnDeserializing()]
+            internal void OnDeserializingMethod(StreamingContext context)
+            {
+                Console.WriteLine("Called before the artist is deserialized");
+            }
+
+            [OnDeserialized()]
+            internal void OnDeserializedMethod(StreamingContext context)
+            {
+                Console.WriteLine("Called after the artist is deserialized");
+            }
         }
 
         // 

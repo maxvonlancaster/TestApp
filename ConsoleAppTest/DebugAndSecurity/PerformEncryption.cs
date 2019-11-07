@@ -116,13 +116,11 @@ namespace ConsoleAppTest.DebugAndSecurity
                 {
                     using (CryptoStream decryptCryptoStream = new CryptoStream(decryptStream, decryptor, CryptoStreamMode.Read))
                     {
-
                         using (StreamReader srDecrypt = new StreamReader(decryptCryptoStream))
                         {
                             // Read the decrypted bytes from the decrypting stream and place them in a string.
                             decryptedText = srDecrypt.ReadToEnd();
-                        }
-                    }
+                        }                    }
                 }
             }
 
