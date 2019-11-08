@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Permissions;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace ConsoleAppTest.DataAccess
 {
@@ -112,28 +113,116 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 
-        public void BinaryVersions()
+        // Binary Versions 
+        // The OnDeserializing method can be used to set values of fields that might not be present in data that is being read from a serialized document.
+        // The OnDeserializing method is performed during deserialization.The method
+        // is called before the data for the object is deserialized and can set default valuesfor data fields.If the input stream contains a value for a field, this will overwrite
+        // the default set by OnDeserializing.        //
+        [Serializable]
+        class MusicTrackDeserializing
         {
+            public ArtistSerializable Artist { get; set; }
+            public string Title { get; set; }
+            public int Length { get; set; }
 
+            [OptionalField] // valid only on fields
+            public string Style;
+
+            [OnDeserializing()] // when deserializing old entity without Style
+            internal void OnDeserializingMethod(StreamingContext context)
+            {
+                Style = "Unknown";
+            }
         }
 
-        // 
+        // A program can serialize data into an XML steam in much the same way as a binary formatter.Note, however, that when an XmlSerializer
+        // instance is created to perform the serialization, the constructor must be given the type of the data being stored.
+        // XML serialization is called a text serializer, because the serialization process creates text documents.
         public void XmlSerialization()
         {
+            MusicDataStore musicData = MusicDataStore.TestData();
 
+            XmlSerializer formatter = new XmlSerializer(typeof(MusicDataStore));
+            using (FileStream outputStream = 
+                new FileStream("MusicTracks.xml", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                formatter.Serialize(outputStream, musicData);
+            }
+
+            MusicDataStore inputData;
+
+            using (FileStream inputStream = 
+                new FileStream("MusicTracks.xml", FileMode.Open, FileAccess.Read))
+            {
+                inputData = (MusicDataStore)formatter.Deserialize(inputStream);
+            }
+
+            foreach (var item in inputData.Artists)
+            {
+                Console.WriteLine(item.Name);
+            }
         }
 
-        // 
+        // Xml References
+        // The serialization process handles references to objects differently from binary serialization
         public void XmlReferences()
         {
 
         }
 
-        // 
+
+        [DataContract]
+        public class ArtistDataMember
+        {
+            [DataMember]
+            public int ID { get; set; }
+            [DataMember]
+            public string Name { get; set; }
+        }
+
+        [DataContract]
+        public class MusicTrackDataMember
+        {
+            [DataMember]
+            public int ID { get; set; }
+            [DataMember]
+            public int ArtistID { get; set; }
+            [DataMember]
+            public string Title { get; set; }
+            [DataMember]
+            public int Length { get; set; }
+        }
+
+        // The data contract serializer is provided as part of the Windows Communication Framework(WCF). It is located in the System.Runtime.Serialization
+        // library.Note that this library is not included in a project by default. It can be used to serialize objects to XML files. It differs from the XML serializer in the
+        // following ways: Data to be serialized is selected using an “opt in” mechanism, so only items
+        // marked with the[DataMember] attribute will be serialized. It is possible to serialize private class elements (although of course they will
+        // be public in the XML text produced by the serializer).The XML serializer provides options that allow programmers to specify the
+        // order in which items are serialized into the data file.These options are notpresent in the DataContract serializer.        // Once the fields to be serialized have been specified they can be serialized using a DataContractSerializer.
         public void DataContractSerializer()
         {
+            MusicDataStore musicData = MusicDataStore.TestData();
 
+            DataContractSerializer formatter = new DataContractSerializer(typeof(MusicDataStore));
+
+            using (FileStream outputStream =
+                new FileStream("MusicTracks.xml", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                formatter.WriteObject(outputStream, musicData);
+            }
+
+            MusicDataStore inputData;
+
+            using (FileStream inputStream =
+                new FileStream("MusicTracks.xml", FileMode.Open, FileAccess.Read))
+            {
+                inputData = (MusicDataStore)formatter.ReadObject(inputStream);
+            }
+
+            foreach (var item in inputData.Artists)
+            {
+                Console.WriteLine(item.Name);
+            }
         }
     }
 

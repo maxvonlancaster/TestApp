@@ -1,7 +1,6 @@
 ﻿using ConsoleAppTest.ProgramFlow;
 using ConsoleAppTest.Types;
 using System;
-using ConsoleAppTest.ProgramFlow;
 using ConsoleAppTest.DebugAndSecurity;
 using ConsoleAppTest.DataAccess;
 using ConsoleAppTest.Services;
@@ -12,8 +11,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new PerformEncryption();
-            service.AesDecryption();
+            var service = new CalcService();
+            service.AccelerationCalculationMethod();
         }
     }
 }
