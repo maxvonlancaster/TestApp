@@ -11,8 +11,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new CalcService();
-            service.AccelerationCalculationMethod();
+            var service = new ConsumeData();
+            service.UpdateWithSql();
         }
     }
 }

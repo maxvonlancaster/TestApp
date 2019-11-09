@@ -10,7 +10,7 @@ namespace ConsoleAppTest.DataAccess
     // on their machine, before creating a dedicated server for the published application
     public class ConsumeData
     {
-        private string _connectionString = "Server=LAPTOP-2M0GJS3G\\SQLEXPRESS;Database=MusicTracksContext;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private string _connectionString = "Server=localhost\\SQLEXPRESS;Database=MusicTracksContext;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         // To make a connection to a database a program must create a SqlConnection object. The constructor for the SqlConnection class is
         //given a connection string that identifies the database that is to be opened.Before we can begin to read from the database we need to consider how the connection
@@ -36,16 +36,38 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 
+        // The first SQL command selected all of the elements in a table. You can change this so that you can filter the contents of the table using a query.
         public void FilterWithSql()
         {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("select * from MusicTrack where Artist = 'Artist'", connection);
 
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string artist = reader["Artist"].ToString();
+                    string title = reader["Title"].ToString();
+                    int length = (int)reader["Length"];
+
+                    Console.WriteLine("Artist: {0}, Title: {1}, Length: {2}", artist, title, length);
+                }
+            }
         }
 
-        // 
+        // A program can use the SQL UPDATE command to update the contents of an entry in the database
+        // When the update is performed it is possible to determine how many elements  are updated.
         public void UpdateWithSql()
         {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("update MusicTrack SET Artist='Kanye West' WHERE ID='1'", connection);
 
+                int result = command.ExecuteNonQuery();
+                Console.WriteLine("Number of entries updated: {0}", result);
+            }
         }
 
         // 

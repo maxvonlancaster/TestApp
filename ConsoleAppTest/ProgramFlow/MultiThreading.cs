@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppTest.ProgramFlow
 {
+    // You can think of a task as an abstraction of a unit of work to be performed. The work itself will be described by some C# program code, perhaps by a method or
+    // a lambda expression.A task may be performed concurrently with other tasks.The Task Parallel Library(TPL) provides a range of resources that allow you
+    // to use tasks in an application.The Task.Parallel class in the library provides three methods that can be used to create applications that contain tasks
+    // that execute in parallel.
     class MultiThreading
     {
         private void Task1()
@@ -40,6 +44,8 @@ namespace ConsoleAppTest.ProgramFlow
         {
             Parallel.Invoke(() => Task1(), () => Task2());
             Console.WriteLine("Finished processing!");
+            // The Parallel.Invoke method can start a large number of tasks at once.You have no control over the order in which the tasks are started or which
+            // processor they are assigned to. The Parallel.Invoke method returns when all of the tasks have completed.
         }
 
         // Task.Parallel provides a foreach method that performs a parallel implementation of foreach loop
@@ -49,7 +55,8 @@ namespace ConsoleAppTest.ProgramFlow
             var items = Enumerable.Range(0, 400).ToList();
             Parallel.ForEach(
                 items,
-                item => {
+                item =>
+                {
                     WorkOnItem(item);
                 });
             Console.WriteLine("Finished processing!");
@@ -60,7 +67,8 @@ namespace ConsoleAppTest.ProgramFlow
         public void ParellelFor()
         {
             var items = Enumerable.Range(0, 400).ToArray();
-            Parallel.For(0, items.Count(), i => {
+            Parallel.For(0, items.Count(), i =>
+            {
                 WorkOnItem(items[i]);
             });
             Console.WriteLine("Finished processing!");
@@ -74,7 +82,8 @@ namespace ConsoleAppTest.ProgramFlow
         {
             var items = Enumerable.Range(0, 400).ToArray();
 
-            ParallelLoopResult result = Parallel.For(0, items.Count(), (int i, ParallelLoopState loopState) => {
+            ParallelLoopResult result = Parallel.For(0, items.Count(), (int i, ParallelLoopState loopState) =>
+            {
                 if (i == 200)
                     loopState.Stop();
 
