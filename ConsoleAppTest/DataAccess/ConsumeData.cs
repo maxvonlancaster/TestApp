@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ConsoleAppTest.DataAccess
 {
@@ -70,22 +71,70 @@ namespace ConsoleAppTest.DataAccess
             }
         }
 
-        // 
+        // Suppose you want to allow the user of your program to update the name of a
+        // particular track.Your program can read the information from the user and then construct an SQL command to perform the update.
         public void SqlInjection()
         {
+            Console.Write("Enter the title of the track to update: ");            string searchTitle = Console.ReadLine();
+            Console.Write("Enter the new artist name: ");
+            string newName = Console.ReadLine();
+            string sqlCommand = "update MusicTrack SET Artist=" + newName + " WHERE Title=" + searchTitle;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlCommand, connection);
+
+                int result = command.ExecuteNonQuery();
+                Console.WriteLine("Number of entries updated: {0}", result);
+            }
+            // Enter the new artist name: Fred'); DELETE FROM MusicTrack; 
+            // user of the program has done is injected another SQL command after the
+            // UPDATE command. The command would set the new artist name to Fred and then perform an SQL DELETE command. 
 
         }
 
-        // 
+        // For this reason, you should never construct SQL commands directly from user input.You must use parameterized SQL statements instead.
+        // The SQL command contains markers that identify the points in the query where text is to be inserted.The program then adds the parameter
+        // values that correspond to the marker points.The SQL server now knows exactly where each element starts and ends, making SQL injection impossible.
         public void ParameterizedQuery()
         {
+            Console.Write("Enter the title of the track to update: ");            string searchTitle = Console.ReadLine();
+            Console.Write("Enter the new artist name: ");
+            string newName = Console.ReadLine();
+            string sqlCommand = "update MusicTrack SET Artist = @newName WHERE Title = @searchTitle";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlCommand, connection);
 
+                command.Parameters.AddWithValue("@searchTitle", searchTitle);
+                command.Parameters.AddWithValue("@newName", newName);
+
+                int result = command.ExecuteNonQuery();
+                Console.WriteLine("Number of entries updated: {0}", result);
+            }
         }
 
-        // 
-        public void AsynchronousAccess()
+        // There are also asynchronous versions of the methods.A program can use the async/await mechanism with these
+        // versions of the methods so that database queries can run asynchronously.This is particularly important if your program is interacting with the user via a
+        // windowed interface.
+        async Task AsynchronousAccess()
         {
-
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM MusicTrack", connection);
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+                StringBuilder databaseList = new StringBuilder();
+                while (await reader.ReadAsync())
+                {
+                    string id = reader["ID"].ToString();
+                    string artist = reader["Artist"].ToString();
+                    string title = reader["Title"].ToString();
+                    string row = string.Format("ID: {0} Artist: {1} Title: {2}", id, artist, title);
+                    databaseList.AppendLine(row);
+                }
+                Console.WriteLine(databaseList.ToString());
+            }
         }
 
         // 
