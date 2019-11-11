@@ -130,8 +130,8 @@ namespace ConsoleAppTest.DebugAndSecurity
         // The encryption process in .NET is an example of good class design. All of the encryption classes, including Aes, are extensions of the base class
         // SymmetricAlgorithm, which is in the  System.Security.Cryptography namespace.
 
-        // RSA (Rivest–Shamir–Adleman) is a very popular asymmetric encryption        standard.The RSACryptoServiceProvider class in the
-        // System.Security.Cryptography namespace will perform encryption        and decryption of data using this standard.
+        // RSA (Rivest–Shamir–Adleman) is a very popular asymmetric encryption standard.The RSACryptoServiceProvider class in the
+        // System.Security.Cryptography namespace will perform encryption and decryption of data using this standard.
         public void RsaEncryption()
         {
             string plainText = "This is my super secret data";
