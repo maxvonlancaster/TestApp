@@ -12,21 +12,39 @@ namespace ConsoleAppTest.DebugAndSecurity
     {
         // The System.Diagnostics namespace contains Debug and Trace classes that can
         // be used to trace execution of a program.The classes contain methods that can be used to generate tracing output from a program when it runs.
+        // By default, the output from the Debug statements is directed to the Output window in Visual Studio.
+        // Note, that if the program is not compiled for debug, the debug statements are not included in the program that is produced.The debug code uses a conditional attribute
         public void DebugCodeTracing()
         {
-
+            System.Diagnostics.Debug.WriteLine("Starting the program");
+            System.Diagnostics.Debug.Indent();
+            System.Diagnostics.Debug.WriteLine("Inside a function");
+            System.Diagnostics.Debug.Unindent();
+            System.Diagnostics.Debug.WriteLine("Outside a function");
+            string name = "Alan";
+            System.Diagnostics.Debug.WriteLineIf(string.IsNullOrEmpty(name), "This string will not be printed out");
         }
 
-        // 
+        // If you want to add this form of tracing output to production code you can use the Trace object, which can be used in the same way as the Debug object
         public void TraceCodeTracing()
         {
-
+            Trace.WriteLine("Starting the program");
+            Trace.TraceInformation("This is an information message");
+            Trace.TraceWarning("This is a warning message");
+            Trace.TraceError("this is an error message");
         }
 
-        // 
+        // An assertion is a statement that you make, believing it to be true. For example, in the application design you might assert that “the name of a customer is never an
+        // empty string.” When my program fails, the first thing to do is make sure that allof the assertions about the state of the program are actually true. In the case of
+        // the customer name you will add code to display the customer name so that you can check it, or you will add code to test the assertion.
         public void AssertionsInDebug()
         {
+            string name = "Alan";
+            System.Diagnostics.Debug.Assert(!string.IsNullOrEmpty(name));
 
+            name = "";
+            System.Diagnostics.Debug.Assert(!string.IsNullOrEmpty(name));
+            // If the parameter is false, the assertion fails and the program will display a message offering the developer the option to continue the program.
         }
 
         // 

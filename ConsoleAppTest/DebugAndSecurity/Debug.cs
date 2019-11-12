@@ -94,7 +94,9 @@ namespace ConsoleAppTest.DebugAndSecurity
             }
         }
 
-        // 
+        // The build configuration of your program controls the settings that are applied to the build process.A new Visual Studio project is created with two preset build
+        // configurations available; one for Debug and the other for Release.It’s importantunderstand the difference between these two build types and also how to
+        // create additional build configurations for specific projects.
         public void CodeOptimization()
         {
 
