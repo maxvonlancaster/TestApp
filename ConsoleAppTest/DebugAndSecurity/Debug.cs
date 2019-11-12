@@ -1,7 +1,9 @@
 ﻿#define DIAGNOSTICS
+#undef DEBUG
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace ConsoleAppTest.DebugAndSecurity
@@ -28,19 +30,68 @@ namespace ConsoleAppTest.DebugAndSecurity
         // with the #define directive that lets us define a symbol that controls the behavior of#if.
         public void ConditionalCompilation()
         {
-
+            DebugTrackConditional track = new DebugTrackConditional("A", "B", 100);
         }
 
-        // 
+        [Conditional("DEBUG")]
+        private void Display(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        // You can use the Conditional attribute to enable and disable a method in your program.The attribute is defined in the
+        // System.Diagnostics namespace and can be used to flag a method as to only be executed if a given conditional compilation symbol is defined.
         public void ConditionalAttribute()
         {
+            Display("this message will not be printed out since debug is undef");
+
+            // Note that the use of the Conditional attribute does not control whether or not the method is included in the compiled assembly file output by the compiler.
+            //The method is always included in the assembly output.However, the Conditional output will prevent the method from being called.
+
+            OldMethod();
+        }
+
+
+        // You can mark classes, interfaces, methods and properties with the Obselete attribute to indicate that they have been superseded by new versions.The
+        // Obselete attribute is applied to the superseded element and given a message and a Boolean value that indicates whether a compiler warning(false) 
+        // or an error (true) should be produced if the element with the attribute is used by a program.
+        [Obsolete("This method is obsolete. Call NewMethod instead", false)]
+        private void OldMethod()
+        {
 
         }
 
+
         // 
+        // 
+
+
+
+        private void Exploder()
+        {
+#line 1 "qwerty"
+            throw new Exception("Exeption 1");
+#line default
+        }
+
+        // Some of the code that you work with may contain auto-generated elements. These code components may be inserted into your program files.This happens
+        // with systems such as ASP.NET.These can lead to confusion navigating error reports, where the line number that is reported doesn’t match the one you see in
+        // the Visual Studio editor. The #line directive can be used to set the reported line
+        // numbers of statements in your code. You can also use the #line directive to specify the file name delivered by error reporting.
         public void LineNumbers()
         {
+#line hidden
+            Console.WriteLine("The debugger will not step through this statement");
+#line default
 
+            try
+            {
+                Exploder();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
 
         // 
@@ -94,6 +145,13 @@ namespace ConsoleAppTest.DebugAndSecurity
 #endif
             // if the condition is not fulfilled the code controlled by conditional compilation is
             // never included in the assembly file output.
+
+            // The condition that is tested can be a logical expression that combines tests for multiple symbols. The symbols can only be declared right at the 
+            // start of a source file.
+
+            // Conditional compilation symbols can also be defined in the properties of an application.
+
+            // 
         }
 
         public int ID { get; set; }
