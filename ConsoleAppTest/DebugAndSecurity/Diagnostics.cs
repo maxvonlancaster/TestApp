@@ -47,10 +47,12 @@ namespace ConsoleAppTest.DebugAndSecurity
             // If the parameter is false, the assertion fails and the program will display a message offering the developer the option to continue the program.
         }
 
-        // 
+        // By default (unless specified otherwise) the output from the Debug and Trace classes is sent to the output window in Visual Studio.This will work during
+        // development, but once the program has been deployed this will not be useful. A
+        // program can attach listener objects to Debug and Trace, which will serve as destinations for tracing information.
         public void TraceListener()
         {
-
+            //TraceListener consoleListener = new Con;
         }
 
         // 
