@@ -72,16 +72,35 @@ namespace ConsoleAppTest.DebugAndSecurity
             // TraceEventType: Stop, Start, Suspend, Resume, Transfer, Verbose, Information, Warning, Error, Critical.
         }
 
-        // 
-        public void TracesWitch()
+        // The TraceSwitch object is provided to help manage tracing output from a
+        // program.The TraceSwitch object contains a Level property that can be set to determine the level of tracing output to be produced.        public void TraceSwitch()
         {
+            TraceSwitch control = new TraceSwitch("Control", "Controls the trace output");
+            control.Level = TraceLevel.Warning;
 
+            if (control.TraceError)
+            {
+                Console.WriteLine("Error occured");
+            }
+
+            Trace.WriteLineIf(control.TraceWarning, "A warning message");
         }
 
-        // 
+        // The SourceSwitch can be used to directly control the behavior of a TraceSource object. It works in the same way as the TraceSwitch described above
         public void SourceSwitch()
         {
+            TraceSource trace = new TraceSource("Tracer", SourceLevels.All);
 
+            SourceSwitch control = new SourceSwitch("Control", "Controls the trace output");
+            control.Level = SourceLevels.Information;
+            trace.Switch = control;
+
+            trace.TraceEvent(TraceEventType.Start, 10000);
+            trace.TraceEvent(TraceEventType.Warning, 10001);
+            trace.TraceEvent(TraceEventType.Verbose, 10002, "At the end of the program");
+            trace.TraceData(TraceEventType.Information, 1003, new object[] { "Note 1", "Message" });
+            trace.Flush();
+            trace.Close();
         }
 
         // 
