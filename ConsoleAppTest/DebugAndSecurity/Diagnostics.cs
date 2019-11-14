@@ -55,10 +55,21 @@ namespace ConsoleAppTest.DebugAndSecurity
             //TraceListener consoleListener = new Con;
         }
 
-        // 
+        // The Trace and Debug classes provide tracing for a program in the form of simple messages.If you want to take a more managed approach to program tracing, you
+        // can use the TraceSource class. An instance of the TraceSource class will create events that can be used to trace program execution
         public void SimpleTraceSource()
         {
-
+            TraceSource trace = new TraceSource("Tracer", SourceLevels.All);
+            trace.TraceEvent(TraceEventType.Start, 10000);
+            trace.TraceEvent(TraceEventType.Warning, 10001);
+            trace.TraceEvent(TraceEventType.Verbose, 10002, "At the end of the program");
+            trace.TraceData(TraceEventType.Information, 1003, new object[] { "Note 1", "Message" });
+            trace.Flush();
+            trace.Close();
+            // Each event is given a particular event type and an event number.The event number element of an event is just an integer value that identifies the particular
+            // event. When you design the tracing in the application, you can define values that will be used to represent particular events, such as events 0 to 999 can mean user
+            // interface, and 1,000 to 1,999 databases, and so on. There are a range of event types that are specified by a value of type TraceEventType.
+            // TraceEventType: Stop, Start, Suspend, Resume, Transfer, Verbose, Information, Warning, Error, Critical.
         }
 
         // 

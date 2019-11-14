@@ -11,8 +11,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new Debug();
-            service.LineNumbers();
+            var service = new Diagnostics();
+            service.SimpleTraceSource();
         }
     }
 }
