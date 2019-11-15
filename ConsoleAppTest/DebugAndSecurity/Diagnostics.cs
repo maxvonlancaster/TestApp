@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using System.Threading;
 
 namespace ConsoleAppTest.DebugAndSecurity
 {
@@ -108,13 +109,23 @@ namespace ConsoleAppTest.DebugAndSecurity
         public void ConfigFile()
         {
             TraceSource trace = new TraceSource("configControl");
-
         }
 
-        // 
+        // DEBUG -> Performance profiler
+
+        // Before you can speed up your application you need to know where it is spending most of its time.The StopWatch class can be used to measure elapsed time
         public void StopwatchClass()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            Thread.Sleep(1234);
+            stopwatch.Stop();
+            Console.WriteLine("Elapsed time: {0}", stopwatch.ElapsedMilliseconds);
 
+            stopwatch.Restart();
+            Thread.Sleep(1000);
+            stopwatch.Stop();
+            Console.WriteLine("New elapsed time: {0}", stopwatch.ElapsedMilliseconds); // New elapsed time: 1000
         }
 
         // 
