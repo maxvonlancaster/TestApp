@@ -103,9 +103,11 @@ namespace ConsoleAppTest.DebugAndSecurity
             trace.Close();
         }
 
-        // 
+        // The examples earlier show how a program can configure tracing output when it
+        // runs.However, it is also possible to configure tracing output using the application configuration file
         public void ConfigFile()
         {
+            TraceSource trace = new TraceSource("configControl");
 
         }
 
