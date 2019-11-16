@@ -14,7 +14,7 @@ using ASimpleName = System.Collections.Generic.Dictionary<string, System.Collect
 
 namespace ConsoleAppTest.Services
 {
-    // TODO: semaphore, Transaction, stackalloc, out, ref
+    // TODO: semaphore, Transaction, stackalloc,
     public class SpecialFeatures
     {
         private T DefaultValue<T>()
@@ -271,6 +271,48 @@ namespace ConsoleAppTest.Services
             Console.WriteLine("Divisible by 3");
         }
 
+        // When passing by value (without ref) method does not get a variable, but its copy
+        // when ref -> method gets address of the variable in memory
+        public void PassByReferenceAndValue()
+        {
+            int a = 5;
+            Increment(a); // i=6
+            Console.WriteLine("a={0}", a); // a=5
+
+            a = 5;
+            IncrementReference(ref a); // i=6
+            Console.WriteLine("a={0}", a); // a=6
+
+            int z;
+            Sum(10, 10, out z);
+            Console.WriteLine("Sum={0}", z); // z=20
+        }
+
+        // value passed
+        private void Increment(int i)
+        {
+            i++;
+            Console.WriteLine("i={0}", i);
+        }
+
+        // reference passed
+        private void IncrementReference(ref int i)
+        {
+            i++;
+            Console.WriteLine("i={0}", i);
+        }
+
+        private void Sum(int x, int y, out int a)
+        {
+            a = x + y;
+        }
+
+        // pass by refernce, but you can not change content inside method
+        private void IncrementInt(in int i)
+        {
+            // following will be compile error
+            //i = 10;
+        }
 
     }
 }
