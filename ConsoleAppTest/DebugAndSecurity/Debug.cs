@@ -99,7 +99,9 @@ namespace ConsoleAppTest.DebugAndSecurity
         // create additional build configurations for specific projects.
         public void CodeOptimization()
         {
-
+            int i = 99;
+            int j = 100;
+            Console.WriteLine("The	value	in	j	is	{0}", j);
         }
 
         // 

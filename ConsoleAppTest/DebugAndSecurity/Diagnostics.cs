@@ -128,13 +128,15 @@ namespace ConsoleAppTest.DebugAndSecurity
             Console.WriteLine("New elapsed time: {0}", stopwatch.ElapsedMilliseconds); // New elapsed time: 1000
         }
 
-        // 
+        // A program can read the values of the performance counters so that it can monitor the system in which it is running. A given performance counter is identified	
+        // by its category name, counter name and instance name
         public void ReadPerformanceCounters()
         {
-
+            //PerformanceCounter counter 
         }
 
-        // 
+        // You can also create your own performance counters too. These are added to the performance counters on the host machine and can be accessed by other 
+        // programs and viewed using the Performance Monitor program
         public void CreatePerformanceCounters()
         {
 
@@ -157,5 +159,11 @@ namespace ConsoleAppTest.DebugAndSecurity
         {
 
         }
+    }
+
+    enum CreationResult
+    {
+        CreatedCounters,
+        LoadedCounters
     }
 }
