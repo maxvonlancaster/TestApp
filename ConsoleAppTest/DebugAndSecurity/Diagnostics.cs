@@ -148,10 +148,27 @@ namespace ConsoleAppTest.DebugAndSecurity
 
         }
 
-        // 
+        // A program can also read from the event log.
+        // The program reads the image processing event log and prints out every entry in it.If the log has not been created(or none of the earlier example
+        // programs have been run on the computer) the program prints a warning message and ends.
         public void ReadFromTheEventLog()
         {
+            string categoryName = "Image processing";
 
+            if (!EventLog.SourceExists(categoryName))
+            {
+                Console.WriteLine("Event log not present");
+            }
+            else
+            {
+                EventLog eventLog = new EventLog();
+                eventLog.Source = categoryName;
+                foreach (EventLogEntry entry in eventLog.Entries)
+                {
+                    Console.WriteLine("Source: {0} Type: {1} Time: {2} Message: {3}", 
+                        entry.Source, entry.EntryType, entry.TimeWritten, entry.Message);
+                }
+            }
         }
 
         // A program can bind to an event log and receive notification events when the log is written to.You can use this to create a dashboard that displays the activity of
