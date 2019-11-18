@@ -11,8 +11,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new TestService();
-            service.TestMethod();
+            var service = new Diagnostics();
+            service.ReadPerformanceCounters();
         }
     }
 }

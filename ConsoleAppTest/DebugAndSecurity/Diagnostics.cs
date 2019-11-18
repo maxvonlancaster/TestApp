@@ -132,7 +132,20 @@ namespace ConsoleAppTest.DebugAndSecurity
         // by its category name, counter name and instance name
         public void ReadPerformanceCounters()
         {
-            //PerformanceCounter counter 
+            PerformanceCounter processor = new PerformanceCounter(categoryName: "Processor information",
+                counterName: "% Processor Time",
+                instanceName: "_Total");
+            Console.WriteLine("Press any key to stop");
+
+            while (true)
+            {
+                Console.WriteLine("Processor time: {0}", processor.NextValue());
+                Thread.Sleep(1000);
+                if (Console.KeyAvailable)
+                {
+                    break;
+                }
+            }
         }
 
         // You can also create your own performance counters too. These are added to the performance counters on the host machine and can be accessed by other 
