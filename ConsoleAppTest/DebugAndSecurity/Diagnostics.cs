@@ -154,10 +154,25 @@ namespace ConsoleAppTest.DebugAndSecurity
 
         }
 
-        // 
+        // A program can bind to an event log and receive notification events when the log is written to.You can use this to create a dashboard that displays the activity of
+        // your applications.The dashboard binds to log events that your application generates.
         public void BindToTheEventLog()
         {
+            string categoryName = "Image processing";
 
+            EventLog eventLog = new EventLog();
+            eventLog.Source = categoryName;
+            eventLog.EntryWritten += ImageEvent_LogEntryWritten;
+            eventLog.EnableRaisingEvents = true;
+
+            Console.WriteLine("Listening for log events");
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+        }
+
+        private static void ImageEvent_LogEntryWritten(object sender, EntryWrittenEventArgs e)
+        {
+            Console.WriteLine(e.Entry.Message);
         }
     }
 
