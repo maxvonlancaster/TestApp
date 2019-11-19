@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomAvarages", "RandomAva
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTracks", "MusicTracks\MusicTracks.csproj", "{EDC708BA-CBAE-45A4-8C7B-F9B8FA47223C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage", "Storage\Storage.csproj", "{DAC699DD-128E-448C-8910-35FAEBB9D695}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storage", "Storage\Storage.csproj", "{DAC699DD-128E-448C-8910-35FAEBB9D695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeModel", "KnowledgeModelM\KnowledgeModel.csproj", "{19F6F7A3-021A-4A08-93D9-848381D22F9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DAC699DD-128E-448C-8910-35FAEBB9D695}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAC699DD-128E-448C-8910-35FAEBB9D695}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAC699DD-128E-448C-8910-35FAEBB9D695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F6F7A3-021A-4A08-93D9-848381D22F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F6F7A3-021A-4A08-93D9-848381D22F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F6F7A3-021A-4A08-93D9-848381D22F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F6F7A3-021A-4A08-93D9-848381D22F9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

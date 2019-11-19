@@ -18,7 +18,7 @@ namespace ConsoleAppTest.DataAccess
         // Write, read and position the "file pointer".
 
         // The FileStream object provides a stream instance connected to a file. The stream object instance converts calls into the stream into commands for the
-        // filesystem on the computer running the program.The file system provides the interface to the physical device performing the data storage for the computer
+        // filesystem on the computer running the program.The file system provides the interface to the physical device performing the data storage for the computer.
         // c# app <-> stream object <-> Filestream <-> storage device
         public void UsingAFileStrem()
         {
