@@ -80,7 +80,106 @@
 
     Arrays()
     {
+        // Array -> ordered collection of data. 0-based. Dynamic(no fixed size), and sparsed(may have gaps)
+        var empty = [];
+        var primes = [2, 3, 5, 7, 11];
+        var misc = [1.1, true, "a"]; // differend types
+        // the values may not be constants, but any expressions
+        var undefs = [, ,]; // An array with 2 elements, both undefined.        var base = 1024;
+        var table = [base, base + 1, base + 2, base + 3];
+        var a = new Array(10); // array of length 10
 
+        // reading writting:
+        var a = ["w"];
+        var val = a[0];
+        a[1] = 3.14;
+        i = 2;
+        a[i] = 3;
+        a[i + 1] = "h";
+        a[a[i]] = a[0];
+        console.log(a);
+        // arrays -> specific kind of objects
+        var o = {};
+        o[1] = "1";
+
+        // Sparse arrays:
+        a = []; // Create an array with no elements and length = 0.
+        a[1000] = 0; // Assignment adds one element but sets length to 1001.
+
+        // Length
+        a = [1, 2, 3, 4, 5]; // Start with a 5-element array.
+        a.length = 3; // a is now [1,2,3].
+        a.length = 0; // Delete all elements. a is [].
+        a.length = 5; // Length is 5, but no elements, like new Array(5)        a.push("p"); // adds elements to the end of array
+        a.push("a", "b");
+
+        // Deleting:
+        a = [1, 2, 3];
+        delete a[1]; // a now has no element at index 1
+        console.log(1 in a); // => false: no array index 1 is defined
+        a.length; // => 3: delete does not affect array length
+
+        // Iterating:
+        for (var i = 0; i < a.length; i++) {
+            console.log(a[i]);
+        }
+
+        for (var i in a) {
+            console.log(i); // will print indexes present in a
+            console.log(a[i]);
+        }
+
+        // Joining:
+        a = [1, 2, 3];
+        console.log(a.join()) // "1,2,3"
+        console.log(a.join(" ")) // "1 2 3"
+        console.log(a.join("")) // "123"
+        var b = new Array(10);
+        console.log(b.join("-")) // "---------"
+
+        // Reverse:
+        a.reverse().join() // => "3,2,1" 
+
+        // Sort:
+        a = ["b", "a", "c"];
+        var s = a.sort();
+        console.log(s.join(", "));
+
+        // Concat -> adds elements to the end of array:
+        a = [1, 2, 3]
+        a.concat(4, 5, 6);
+
+        // Slicing:
+        a.slice(1, 3);
+        a.slice(1, -1); // [2,3,4,5]
+
+        // Push and Pop -> to work with arrays as stacks
+        var stack = [];
+        stack.push(1,2);
+        console.log(stack.pop()); // 2
+
+        // Following are for ECMAScript 5:
+        // Foreach:
+        var data = [1, 2, 3, 6, 7, 8];
+        var sum = 0;
+        data.forEach(function (value) { sum += value });
+        console.log(sum);
+
+        // Map - processes a-y and returns new array
+        var b = data.map(function (x) { return x * x; });
+
+        // Filter:
+        var smallones = data.filter(function (x) { return x < 3; });
+
+        // IndexOf:
+        a = [0, 1, 2, 1, 0];
+        console.log(a.indexOf(1)); // 1
+        console.log(a.lastIndexOf(1)); // 3
+        console.log(a.indexOf(3)); // -1
+
+        // Strings as arrays:
+        var s = "test";
+        console.log(s[1]);
     }
 
     WebBrowserAndDom()
