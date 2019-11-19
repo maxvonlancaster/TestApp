@@ -132,7 +132,20 @@ namespace ConsoleAppTest.DebugAndSecurity
         // by its category name, counter name and instance name
         public void ReadPerformanceCounters()
         {
-            //PerformanceCounter counter 
+            PerformanceCounter processor = new PerformanceCounter(categoryName: "Processor information",
+                counterName: "% Processor Time",
+                instanceName: "_Total");
+            Console.WriteLine("Press any key to stop");
+
+            while (true)
+            {
+                Console.WriteLine("Processor time: {0}", processor.NextValue());
+                Thread.Sleep(1000);
+                if (Console.KeyAvailable)
+                {
+                    break;
+                }
+            }
         }
 
         // You can also create your own performance counters too. These are added to the performance counters on the host machine and can be accessed by other 
@@ -148,16 +161,48 @@ namespace ConsoleAppTest.DebugAndSecurity
 
         }
 
-        // 
+        // A program can also read from the event log.
+        // The program reads the image processing event log and prints out every entry in it.If the log has not been created(or none of the earlier example
+        // programs have been run on the computer) the program prints a warning message and ends.
         public void ReadFromTheEventLog()
         {
+            string categoryName = "Image processing";
 
+            if (!EventLog.SourceExists(categoryName))
+            {
+                Console.WriteLine("Event log not present");
+            }
+            else
+            {
+                EventLog eventLog = new EventLog();
+                eventLog.Source = categoryName;
+                foreach (EventLogEntry entry in eventLog.Entries)
+                {
+                    Console.WriteLine("Source: {0} Type: {1} Time: {2} Message: {3}", 
+                        entry.Source, entry.EntryType, entry.TimeWritten, entry.Message);
+                }
+            }
         }
 
-        // 
+        // A program can bind to an event log and receive notification events when the log is written to.You can use this to create a dashboard that displays the activity of
+        // your applications.The dashboard binds to log events that your application generates.
         public void BindToTheEventLog()
         {
+            string categoryName = "Image processing";
 
+            EventLog eventLog = new EventLog();
+            eventLog.Source = categoryName;
+            eventLog.EntryWritten += ImageEvent_LogEntryWritten;
+            eventLog.EnableRaisingEvents = true;
+
+            Console.WriteLine("Listening for log events");
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+        }
+
+        private static void ImageEvent_LogEntryWritten(object sender, EntryWrittenEventArgs e)
+        {
+            Console.WriteLine(e.Entry.Message);
         }
     }
 
