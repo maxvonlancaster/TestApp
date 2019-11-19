@@ -314,5 +314,12 @@ namespace ConsoleAppTest.Services
             //i = 10;
         }
 
+        public void CastingAs()
+        {
+            object a = 1;
+            var casted = a as MusicTrack; // will be null if not casted, not throwing an exception
+            Console.WriteLine(casted);
+        }
+
     }
 }

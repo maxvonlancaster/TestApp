@@ -4,6 +4,7 @@ using System;
 using ConsoleAppTest.DebugAndSecurity;
 using ConsoleAppTest.DataAccess;
 using ConsoleAppTest.Services;
+using ConsoleAppTest.Patterns;
 
 namespace ConsoleAppTest
 {
@@ -11,8 +12,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new TestService();
-            service.TestMethod();
+            var service = new PatternService();
+            service.CreateSingleton();
         }
     }
 }
