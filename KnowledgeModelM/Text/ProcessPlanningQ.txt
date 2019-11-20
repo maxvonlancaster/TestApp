@@ -1,1 +1,35 @@
-﻿
+﻿1. Software development process
+
+
+2. Basics of SDLC models:
+
+
+3. Waterfall Concept
+
+
+4. Agile software development concept
+
+
+5. Scrum
+
+
+6. Roles and responsibilities
+
+
+7. Artifacts (Scrum board, Cards, Epics, Stories, Tasks, Backlogs, Sprint, Increment, etc.)
+
+
+8. Estimation (Story Points, Velocity, Sprint Burndown Chart, Feature Burnup Chart)
+
+
+9. Ceremonies (Release planning, Sprint planning, Daily Scrum, Sprint demo, Sprint retrospective)
+
+
+10. Kanban
+
+
+11. Scrum vs Kanban: applicability
+
+
+12. Scrumban
+
