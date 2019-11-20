@@ -1,1 +1,14 @@
-﻿
+﻿1. Understanding networks: layers and protocols
+Protocol - set of rules that governs the communication between computers on a network. 
+OSI (open system interconnetcion) - defines 7 layers.
+4 main layers in simplification: Physical/data link (Ethernet); Network (IP, Ipx); Transport (Tcp, spx); Session/presentation/application (http, ftp, telnet. smtp, dns).
+
+
+2. Basic understanding of TCP/IP model and protocols
+
+3. Defining internet, intranet and VPN
+
+4. 
+
+5. 
+

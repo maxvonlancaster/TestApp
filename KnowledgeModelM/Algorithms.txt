@@ -1,1 +1,11 @@
-﻿
+﻿1. Algorithms complexity (understanding, big O notation, complexity of common algorithms)
+
+2. Array sorting methods(bubble sort, quick sort, merge sort)
+
+3. Tree structure(construction, traversal)
+
+4. Binary search algorithm
+
+5. Hash table(creating, collisions)
+
+6. Stack, queue, linked list(construction, understanding, usage)
