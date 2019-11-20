@@ -70,7 +70,58 @@
 
     ControlAndLoopConstructions()
     {
+        var n = Math.floor(Math.random() * 4);
+        // if else - evaluete expression
+        if (n == 0) {
+            console.log("Zero");
+        }
+        else if (n == 1) {
+            console.log("One");
+        }
+        else if (n == 2) {
+            console.log("Two");
+        }
+        else {
+            console.log("Else");
+        }
+        // switch:
+        switch (n) {
+            case 0:
+                console.log("Zero");
+                break;
+            case 1:
+                console.log("One");
+                break;
+            case 2:
+                console.log("Two");
+                break;
+            default:
+                break;
+        }
 
+        // Loops -> while, do-while(is always execurted at least once, tested at the end), for, for-in
+        var c = 0;
+        while (c < 5) {
+            console.log(c);
+            c++;
+        }
+
+        do {
+            console.log("do-while:", c);
+            c--;
+        } while (i > 0);
+
+        var sum = 0;
+        for (var i = 0; i < 10; i++ )
+        {
+            sum += i * i;
+        }
+        console.log("sum=", sum);
+
+        var a = { 1: "a", 2: "b", 3: "c" };
+        for (i in a) {
+            console.log("for in:",i);
+        };
     }
 
     FunctionsContextScopes()
