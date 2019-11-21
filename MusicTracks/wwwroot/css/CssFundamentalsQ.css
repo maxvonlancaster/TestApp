@@ -18,3 +18,34 @@ h1, h2, h3 { /*selecting multiple elements*/
 p {
     text-align: right; /*defines alignement of text*/
 }
+
+
+/*CSS SELECTORS*/
+.synopsis { /*this rule is applied only to the classes synopsis, dot(.) prefix! */
+    color: #7E8184; /*class canbe used on any element*/
+    font-style: italic;
+}
+
+.button {
+    color: #FFF;
+    background-color: #5995DA;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #5D6063;
+    border-radius: 5px;
+
+    width: 200px;
+    margin: 20px auto;
+}
+
+.page {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.call-to {
+    font-style: italic;
+    background-color: #EEB75A;
+}
