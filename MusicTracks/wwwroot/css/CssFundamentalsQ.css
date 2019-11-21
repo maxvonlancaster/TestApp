@@ -1,1 +1,20 @@
-﻿
+﻿body { /*Selector, which defines which html elements it refers to*/
+    color: #110000;
+    background-color: #EEEEEE; 
+}
+
+h1 {
+    font-size: 36px; /*selecting different elements*/
+}
+
+h2 {
+    font-size: 2em; /*unit of measurement*/
+}
+
+h1, h2, h3 { /*selecting multiple elements*/
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+p {
+    text-align: right; /*defines alignement of text*/
+}
