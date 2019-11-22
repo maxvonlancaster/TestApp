@@ -49,3 +49,53 @@ p {
     font-style: italic;
     background-color: #EEB75A;
 }
+
+h4 {
+    font-style: italic;
+}
+
+/*DESCENDANT SELECTORS*/
+/*let you target only those elements that are inside of another element; can combine any types of selectors*/
+.synopsis em {
+    font-style: normal;
+}
+
+
+/*PSEUDO-CLASSES FOR LINKS*/
+a:link { /*link that has never been visited*/
+    color: blue;
+}
+
+a:visited { /*link that has been visited*/
+    color: purple;
+}
+
+a:hover { /*user's mouse hovering over it*/
+    color: aqua;
+}
+
+a:active { /*link pressed*/
+    color: red;
+}
+
+a:visited:hover { /*both visited and hover*/
+    color: orange;
+}
+
+
+/*PSEUDO-CLASSES FOR STRUCTURE*/
+/*selects the last element of type in its parent element*/
+p:last-of-type {
+    margin-bottom: 50px;
+}
+
+/*selects only first p in class=page*/
+.page > p:first-of-type {
+    color: #7E8184;
+    font-style: italic;
+}
+
+/*ID SELECTORS*/
+#button-3 {
+    color:darkgreen;
+}

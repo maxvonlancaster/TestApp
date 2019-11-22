@@ -34,7 +34,7 @@
         <p>Ypu can also use empty tags <br>without slash</p>
         <hr>
 
-        <p></p>
+        <a href='google.com'>Another page</a>
 
         <h1>Css Selectors</h1>
 
@@ -48,10 +48,17 @@
             arbitrary boxes in your web pages.
         </p>
 
-        <div class="button">Button One</div>
-        <div class="button">Button Two</div> @*Reusing class styles*@
-        <div class="call-to button">Button Three</div> @*Modifying class styles -> multipple classes*@
+        <div class="button"><a href='google.com'>Button One</a></div>
+        <div class="button">
+            <a href='google.com'>Button Two</a> @*Reusing class styles*@
+        </div>
+        <div  class="call-to button">
+            <a href='google.com'>Button Three</a> @*Modifying class styles -> multipple classes*@
+        </div>
         @*ORDER IN STYLESHEET MATTERS -> when two confluicting styles, last one applies. Order in html does not matter *@
 
+<p id="button-3">Last of type p</p>
+
     </div>
+
 </div>
