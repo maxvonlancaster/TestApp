@@ -5,4 +5,4 @@
 import Fundamentals from './JsFundamentalsQ.js';
 const Fund = new Fundamentals();
 
-Fund.ControlAndLoopConstructions();
+Fund.FunctionsContextScopes();

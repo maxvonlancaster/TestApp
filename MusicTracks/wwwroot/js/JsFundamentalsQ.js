@@ -126,7 +126,78 @@
 
     FunctionsContextScopes()
     {
+        // Varible scope: region of program in which it is defined. Global(everywhere defined) and local (func. parameters)
+        // Within the body of a function local var takes precedence over global
+        var v = "global";
+        function check()
+        {
+            var v = "local";// use var to local var-s, otherwise -> owerwrite global ones
+            return v;
+        }
+        console.log(check());
 
+        // nested scope:
+        var n = "global";
+        function check()
+        {
+            var n = "local";
+            function checkN()
+            {
+                var n = "nested"; // variables are visible withinf function they are defined in and nested in them
+                return n;
+            }
+            return checkN();
+        }
+        console.log(check());
+
+
+        // FUNCTIONS
+        function factorial(x) {
+            if (x <= 1) return 1;
+            return x * factorial(x - 1);
+        }
+        console.log("10!=",factorial(10));
+        // assign to variable:
+        var squere = function (x) { return x * x; }
+        console.log(squere(21));
+        var g = factorial;
+        console.log("5!=",g(5));
+
+        // method - function, that is stored as a property of object
+        var calc = {
+            a: 1,
+            b: 1,
+            add: function () {
+                this.result = 1 + 1;
+            }
+        }
+        calc.add();
+        console.log("1+1=",calc.result);
+
+        function f(x) {
+            console.log("f:", x);
+            arguments[0] = null; // arguments object within the body of a function
+            console.log(x); // x is now null
+        }
+
+        var o = new Object();
+        o.m = f; // m is now property of object o -> method
+        o.m(1);
+
+        // callee property:
+        var factorialNew = function (x) {
+            if (x <= 1) return 1;
+            return x * arguments.callee(x - 1);
+        }
+
+        var a = [function (x) { return x * x; }, 20];
+        console.log(a[0](a[1])); // functions dont require names 
+
+        // Using functions as data:
+        function operate(operator, a) {
+            return operator(a);
+        }
+        console.log("operate: ",operate(g, 2));
     }
 
     Arrays()
