@@ -16,7 +16,7 @@ h1, h2, h3 { /*selecting multiple elements*/
 }
 
 p {
-    text-align: right; /*defines alignement of text*/
+    text-align: left; /*defines alignement of text*/
 }
 
 
@@ -98,4 +98,55 @@ p:last-of-type {
 /*ID SELECTORS*/
 #button-3 {
     color:darkgreen;
+}
+
+
+/*BOX MODEL!!!!!!!!!!!!*/
+#h1, #p1, #p2 { /* Block boxes; width -> based on parent, mostly entire window */
+    background-color: #DDE0E3; /* Light gray */
+}
+
+#e1, #s1 { /* Inline boxes; width -> based on content */
+    background-color: #B2D6FF; /* Light blue */
+}
+
+#e2, #s2 {
+    background-color: #B2D6FF; /* Light blue */
+    display: block; /* Override the default box type */
+}
+
+/*Content – The text, image, or other media content in the element.
+Padding – The space between the box’s content and its border.
+Border – The line between the box’s padding and margin.
+Margin – The space between the box and surrounding boxes.*/
+
+#p4 {
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+
+#p5 {
+    padding: 20px 0 20px 10px; /* Top  Right  Bottom  Left */
+}
+
+#p6 {
+    border: 1px solid #5D6063; /*stroke width, style, color*/
+}
+
+#p7 {
+    border-bottom: dashed;
+    border-top: 1px solid red;
+}
+
+#p7 { /*space outside elements border*/
+    margin-bottom: 50px; /* Add this */
+} /*Inline boxes completely ignore the top and bottom margins*/
+
+/*It’s usually a good idea to override default styles to a predictable value using the “universal” CSS selector*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
