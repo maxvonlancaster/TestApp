@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicTracks.Models;
 
 namespace MusicTracks.Migrations
 {
     [DbContext(typeof(MusicTracksContext))]
-    partial class MusicTracksContextModelSnapshot : ModelSnapshot
+    [Migration("20191124205705_i7")]
+    partial class i7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

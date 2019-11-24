@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MusicTracks.Models;
+using MusicTracks.Services;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace MusicTracks
 {
@@ -38,6 +40,8 @@ namespace MusicTracks
 
             services.AddDbContext<MusicTracksContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicTracksContext")));
+            services.AddDefaultIdentity<UserIdentity>().AddEntityFrameworkStores<MusicTracksContext>();
+            services.AddScoped(typeof(IDesignTimeDbContextFactory<MusicTracksContext>), typeof(EntityFactory));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +60,7 @@ namespace MusicTracks
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
