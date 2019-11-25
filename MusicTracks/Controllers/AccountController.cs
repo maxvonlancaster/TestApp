@@ -34,6 +34,9 @@ namespace MusicTracks.Controllers
             {
                 System.Security.Principal.GenericIdentity identity = new System.Security.Principal.GenericIdentity(string.Empty);
 
+                model.Id = Guid.NewGuid().ToString();
+                model.PasswordHash = model.Password.GetHashCode().ToString();
+
                 var user = new UserIdentity
                 {
                     UserName = model.UserName,
@@ -42,15 +45,16 @@ namespace MusicTracks.Controllers
                     Surname = model.Surname,
                     PhoneNumber = model.PhoneNumber,
                     Email = model.Email,
-                    PasswordHash = model.Password
+                    PasswordHash = model.PasswordHash,
+                    Id = model.Id
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 user.SecurityStamp = Guid.NewGuid().ToString();
-                await _signManager.SignInAsync(user, false);
+                await _signManager.SignInAsync(user, true);
 
                 _context.Identities.Add(model);
                 _context.SaveChanges();
-                return View("~/Home/Index.cshtml");
+                return View("/Views/Home/Index.cshtml");
             }
             else
             {
