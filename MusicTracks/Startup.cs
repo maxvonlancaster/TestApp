@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using MusicTracks.Models;
 using MusicTracks.Services;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.AspNetCore.Identity;
 
 namespace MusicTracks
 {
@@ -40,7 +41,7 @@ namespace MusicTracks
 
             services.AddDbContext<MusicTracksContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicTracksContext")));
-            services.AddDefaultIdentity<UserIdentity>().AddEntityFrameworkStores<MusicTracksContext>();
+            services.AddIdentity<UserIdentity, IdentityRole>().AddEntityFrameworkStores<MusicTracksContext>();
             services.AddScoped(typeof(IDesignTimeDbContextFactory<MusicTracksContext>), typeof(EntityFactory));
         }
 
@@ -61,6 +62,7 @@ namespace MusicTracks
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            //app.UseIdentity();
 
             app.UseMvc(routes =>
             {
