@@ -49,10 +49,10 @@ namespace MusicTracks.Controllers
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 user.SecurityStamp = Guid.NewGuid().ToString();
-                await _signManager.SignInAsync(user, true);
+                await _signManager.PasswordSignInAsync(user, user.Password, true, true);
 
-                _context.Identities.Add(model);
-                _context.SaveChanges();
+                //_context.Identities.Add(model);
+                //_context.SaveChanges();
                 return View("/Views/Home/Index.cshtml");
             }
             else

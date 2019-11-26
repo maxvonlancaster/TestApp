@@ -41,10 +41,16 @@ namespace MusicTracks
 
             services.AddDbContext<MusicTracksContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicTracksContext")));
-            services.AddIdentity<UserIdentity, IdentityRole>()
+            services.AddIdentity<UserIdentity, IdentityRole<string>>()
                 .AddEntityFrameworkStores<MusicTracksContext>()
                 .AddDefaultTokenProviders();
+            //services.AddScoped<IUserStore<UserIdentity>, MusicTracksContext>();
             services.AddScoped(typeof(IDesignTimeDbContextFactory<MusicTracksContext>), typeof(EntityFactory));
+            services.AddScoped<UserManager<UserIdentity>>();
+            services.AddScoped<SignInManager<UserIdentity>>();
+
+            var service = services.Select(s => s is IUserStore<UserIdentity>).FirstOrDefault();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
