@@ -41,7 +41,9 @@ namespace MusicTracks
 
             services.AddDbContext<MusicTracksContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicTracksContext")));
-            services.AddIdentity<UserIdentity, IdentityRole>().AddEntityFrameworkStores<MusicTracksContext>();
+            services.AddIdentity<UserIdentity, IdentityRole>()
+                .AddEntityFrameworkStores<MusicTracksContext>()
+                .AddDefaultTokenProviders();
             services.AddScoped(typeof(IDesignTimeDbContextFactory<MusicTracksContext>), typeof(EntityFactory));
         }
 

@@ -63,23 +63,23 @@ h4 {
 
 /*PSEUDO-CLASSES FOR LINKS*/
 a:link { /*link that has never been visited*/
-    color: blue;
+    /*color: blue;*/
 }
 
 a:visited { /*link that has been visited*/
-    color: purple;
+    /*color: purple;*/
 }
 
 a:hover { /*user's mouse hovering over it*/
-    color: aqua;
+    /*color: aqua;*/
 }
 
 a:active { /*link pressed*/
-    color: red;
+    /*color: red;*/
 }
 
 a:visited:hover { /*both visited and hover*/
-    color: orange;
+    /*color: orange;*/
 }
 
 

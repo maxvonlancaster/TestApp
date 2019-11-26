@@ -35,7 +35,7 @@ namespace MusicTracks.Controllers
                 System.Security.Principal.GenericIdentity identity = new System.Security.Principal.GenericIdentity(string.Empty);
 
                 model.Id = Guid.NewGuid().ToString();
-                model.PasswordHash = model.Password.GetHashCode().ToString();
+                //model.PasswordHash = model.Password.GetHashCode().ToString();
 
                 var user = new UserIdentity
                 {
@@ -45,7 +45,6 @@ namespace MusicTracks.Controllers
                     Surname = model.Surname,
                     PhoneNumber = model.PhoneNumber,
                     Email = model.Email,
-                    PasswordHash = model.PasswordHash,
                     Id = model.Id
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -61,5 +60,44 @@ namespace MusicTracks.Controllers
                 throw new Exception("Error registration");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signManager.SignOutAsync();
+            return View("/Views/Home/Index.cshtml");
+        }
+
+        [HttpGet]
+        public IActionResult Login(string returnUrl = "")
+        {
+            var model = new LoginViewModel { ReturnUrl = returnUrl };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signManager.PasswordSignInAsync(model.Username,
+                   model.Password, model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Invalid login attempt");
+            return View(model);
+        }
+
     }
 }
