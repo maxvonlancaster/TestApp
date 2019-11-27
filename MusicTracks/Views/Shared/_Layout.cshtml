@@ -52,8 +52,12 @@
                     }
                     else
                     {
-                        <li>Hello, @UserManager.GetUserName(User)</li>
-                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Hello, @UserManager.GetUserName(User)</a></li>
+                        <li>
+                            <form method = "post" asp-controller = "Account" asp-action = "Logout">
+                                <input type="submit" value="Logout" />
+                            </form>
+                        </li>
                     }
                 </ul>
             </div>
