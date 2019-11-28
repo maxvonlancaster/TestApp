@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using static System.Console;
@@ -9,10 +10,35 @@ namespace KnowledgeModel.Lang
 {
     public class LangQ
     {
+        public void ValueAndReferenceTypes()
+        {
+
+        }
+
         // Properties and automatic properties
         public int Id { get; set; } // automatic property -> no additional logic of access
         public string Name { get; set; } = "Name"; // in C#6 and later -> automatic prop. can be initialized
         // 
+
+
+        public void CollectionsAndGeneric()
+        {
+            string[] strArray = { "a", "b", "c" };
+            //strArray[3] = "d";  -> would be a runtime exception
+
+            // collections -> built to dynamically resize themselfs on the fly as you insert or remove items. Nongeneric (on objects) and generic (typesafe)
+            // Nongeneric: ArrayList, BitArray, HashTable, Queue, SortedList, Stack, ICollection, ICloneable, IDictionary, IEnumerable, IEnumerator, IList
+            ArrayList arrayList = new ArrayList();
+            arrayList.AddRange(new string[] { "a", "b", "c" });
+            Console.WriteLine("This collection has {0} items", arrayList.Count);
+
+            arrayList.Add("d");
+            arrayList.Add(1);
+            Console.WriteLine("This collection has {0} items", arrayList.Count);
+            // Problems: Performance (boxing), Typesafety
+
+
+        }
 
 
         // Static using -> allows all the accessible static members of a type to be imported, making them available without qualification in subseq. code.
@@ -24,47 +50,7 @@ namespace KnowledgeModel.Lang
         }
 
 
-        // Span<T>
-        // Typesafe realisation of contiguous region of any memory
-        public void SpanT()
-        {
-            var array = new byte[100];
-            var arraySpan = new Span<byte>(array);
-            byte data = 0;
-            for (int ctr = 0; ctr < arraySpan.Length; ctr++)
-                arraySpan[ctr] = data++;
-
-            int arraySum = 0;
-            foreach (var value in array)
-                arraySum += value;
-
-            Console.WriteLine($"The sum is {arraySum}");
-        }
-
-        public void SpanArray()
-        {
-            var array = new int[] {1,2,3,4,5,6,7,8,9,10};
-            var slice = new Span<int>(array, 2, 5);
-
-            for (int i = 0; i < slice.Length; i++)
-            {
-                slice[i] *= 2;
-            }
-
-            foreach (var value in array)
-                Console.Write($"{value} ");
-            Console.WriteLine(); // output 1 2 6 8 ...
-        }
-
-        public void ReadOnlySpan()
-        {
-            string contentLength = "Content-Length: 132";
-            var charSpan = new ReadOnlySpan<char>(contentLength.ToCharArray());
-            var slice = charSpan.Slice(16); // no creation of new string -> benefit
-            int length;
-            int.TryParse(slice, out length);
-            Console.WriteLine($"Length: {length}");
-        }
+        
 
 
 
