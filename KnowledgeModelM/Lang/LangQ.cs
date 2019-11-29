@@ -23,6 +23,12 @@ namespace KnowledgeModel.Lang
         // 
 
 
+        public void StructuredExceptionHandling()
+        {
+
+        }
+
+
         public void CollectionsAndGeneric()
         {
             string[] strArray = { "a", "b", "c" };
@@ -132,14 +138,57 @@ namespace KnowledgeModel.Lang
         public void Dictionaries()
         {
             //Dictionary<TKey, TValue>
-
-
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("c", "csfdsf");
+            dict.Add("a", "asfdsf");
+            dict.Add("b", "bsfdsf");
+            dict.Add("y", "ysfdsf");
+            try
+            {
+                dict.Add("a", "acv");
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            dict["b"] = "bdv";
+            dict["o"] = "onm";
+            string val = "";
+            dict.TryGetValue("t", out val);
+            dict.Remove("c");
+            Dictionary<string, string>.KeyCollection keys = dict.Keys;
+            foreach (KeyValuePair<string, string> pair in dict)
+            {
+                Console.WriteLine("Key={0}, Value={1}", pair.Key, pair.Value);
+            }
 
             //SortedDictionary<TKey, TValue>
+            SortedDictionary<string, string> dictSorted = new SortedDictionary<string, string>(); // sorted by key
+            dictSorted.Add("c", "csfdsf");
+            dictSorted.Add("a", "asfdsf");
+            dictSorted.Add("b", "bsfdsf");
+            dictSorted.Add("y", "ysfdsf");
+            try
+            {
+                dictSorted.Add("a", "acv");
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            dictSorted["b"] = "bdv";
+            dictSorted["o"] = "onm";
+            string valS = "";
+            dictSorted.TryGetValue("t", out valS);
+            dictSorted.Remove("c");
+            Dictionary<string, string>.KeyCollection keysS = dict.Keys;
+            foreach (KeyValuePair<string, string> pair in dictSorted)
+            {
+                Console.WriteLine("Key={0}, Value={1}", pair.Key, pair.Value);
+            }
 
 
-
-            //SortedList<TKey, TValue>
+            //SortedList<TKey, TValue>  - similiar to SortedDictionary, less memory used, but SortedDictionary is faster in insert.
 
 
 
