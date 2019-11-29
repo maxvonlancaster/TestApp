@@ -129,6 +129,25 @@ namespace KnowledgeModel.Lang
         }
 
 
+        public void Dictionaries()
+        {
+            //Dictionary<TKey, TValue>
+
+
+
+            //SortedDictionary<TKey, TValue>
+
+
+
+            //SortedList<TKey, TValue>
+
+
+
+            //ConcurrentDictionary<TKey, TValue>
+
+        }
+
+
         // Static using -> allows all the accessible static members of a type to be imported, making them available without qualification in subseq. code.
         // great if you have a set of functions related to certain domain
         public void StaticUsing()
