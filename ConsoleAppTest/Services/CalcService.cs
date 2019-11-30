@@ -36,5 +36,20 @@ namespace ConsoleAppTest.Services
 
             // 20   1,04   0,999   100
         }
+
+        public void CalcEulerNumber()
+        {
+
+        }
+
+        public void CalcPiNumber()
+        {
+
+        }
+
+        public void CalcAffineApproximation()
+        {
+
+        }
     }
 }
