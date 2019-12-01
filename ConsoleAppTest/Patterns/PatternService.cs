@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using ConsoleAppTest.Patterns.Creational.Prototype;
 using ConsoleAppTest.Patterns.Creational.Factory;
+using ConsoleAppTest.Patterns.Creational.AbstractFactory;
 
 namespace ConsoleAppTest.Patterns
 {
@@ -49,10 +50,12 @@ namespace ConsoleAppTest.Patterns
             Creational.Factory.Product product = creator.FactoryMethod();
         }
 
-        // 
+        // Abstract factory gives interface for creation of the famillies of interconnected objects with a given interfaces without specifing concrete 
+        // types of given objects.
         public void AbstractFactoryClient()
         {
-
+            AbstractFactory factory = new ConcreteFactory1();
+            AbstractProductA product = factory.CreateProductA();
         }
 
         /// <summary>
