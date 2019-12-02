@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace ConsoleAppTest.Services
@@ -82,6 +83,9 @@ namespace ConsoleAppTest.Services
 
         public void CalcAffineApproximation()
         {
+            Stopwatch s = new Stopwatch();
+            s.Start();
+
             Points p = new Points() { A = a, B = b, D = 100 };
             // approximated funtion:
             Func<double, double> f = (x) => { return x * x ; };
@@ -94,7 +98,7 @@ namespace ConsoleAppTest.Services
 
             double step = 0.0001;
             
-            while (a < 4)
+            while (a < 3)
             {
                 while (b < 1)
                 {
@@ -116,8 +120,10 @@ namespace ConsoleAppTest.Services
                 }
                 a += step;
             }
+            s.Stop();
 
             Console.WriteLine("A = {0}, B = {1}, D = {2}", p.A, p.B, p.D);
+            Console.WriteLine("Time elapsed: ", s.ElapsedMilliseconds);
             // TODO: Graphic representation!
         }
     }

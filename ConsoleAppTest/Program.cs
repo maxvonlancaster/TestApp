@@ -15,7 +15,7 @@ namespace ConsoleAppTest
         {
             var service = new CalcService();
             service.CalcAffineApproximation();
-            Console.WriteLine(CalcService.Factorial(20));
+            //Console.WriteLine(CalcService.Factorial(20));
         }
     }
 }
