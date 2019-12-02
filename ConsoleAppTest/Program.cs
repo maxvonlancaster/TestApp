@@ -12,8 +12,9 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new PatternService();
-            service.CreateSingleton();
+            var service = new CalcService();
+            service.CalcPiNumber();
+            Console.WriteLine(CalcService.Factorial(1));
         }
     }
 }

@@ -44,7 +44,31 @@ namespace ConsoleAppTest.Services
 
         public void CalcPiNumber()
         {
+            int n = 25;
+            double t = 0;
+            decimal pi = 0;
+            double deno = 0;
+            double piopp = 0;
 
+            for (int k = 0; k < n; k++)
+            {
+                t = (double)((-1) ^ k) * (Factorial(6*k)) * (double)(13591409 + 545140134 * k);
+                deno = Factorial(3 * k) * (Math.Pow( Factorial(k), 3)) * (double)(640320 ^ (3 * k));
+                piopp += t / deno;
+            }
+            piopp = piopp * 12 / Math.Pow(640320,1.5);
+            pi = (decimal)(1 / piopp);
+            Console.WriteLine(pi);
+        }
+
+        public static double Factorial(int v)
+        {
+            double fact = 1;
+            for (int i = 1; i < v + 1; i++)
+            {
+                fact = fact * (double)i;
+            }
+            return fact;
         }
 
         public void CalcAffineApproximation()

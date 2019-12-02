@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicTracks.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 namespace MusicTracks.Services
 {
     // 
-    public class ConsumeData
+    public class ConsumeData : IConsumeData
     {
         // 
         public void FilterWithSql()

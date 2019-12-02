@@ -1,4 +1,5 @@
 ﻿using MusicTracks.Models;
+using MusicTracks.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace MusicTracks.Services
 {
     // 
-    public class ValidateAppInput
+    public class ValidateAppInput : IValidateAppInput
     {
         // Naughty PrintTrack method that changes the Artist property of the track being printed.
         private void PrintTrack(MusicTrack track)
