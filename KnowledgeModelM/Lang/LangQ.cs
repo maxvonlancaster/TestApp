@@ -190,7 +190,7 @@ namespace KnowledgeModel.Lang
 
 
             //SortedList<TKey, TValue>  - similiar to SortedDictionary, less memory used, but SortedDictionary is faster in insert.
-            // stores keys sequentially in onde array and values in another
+            // stores keys sequentially in one array and values in another
 
 
             //ConcurrentDictionary<TKey, TValue> -> thread safe collection key-value, access to which can be received by a couple of threads
@@ -217,6 +217,43 @@ namespace KnowledgeModel.Lang
         }
 
 
+        public void BuildingEnumerableTypes()
+        {
+            // Iterate over an array of items:
+            int[] arrayInt = { 1, 2, 3, 4 };
+            foreach (int it in arrayInt)
+            {
+                Console.WriteLine(it); // any type supporting GetEnumerator() method can be evaluated by foreach construct
+            }
+            Points ps = new Points();
+            foreach (Point p in ps) // implements IEnumerable (GetEnumerator)
+            {
+                Console.WriteLine(p.X);
+            }
+
+            // Manually work with IEnumerator:
+            IEnumerator i = ps.GetEnumerator();
+            i.MoveNext();
+            Point point = (Point)i.Current;
+            Console.WriteLine("X={0}, Y={1}", point.X, point.Y);
+
+            // Using named iterator:
+            foreach (Point p in ps.GetEnumeratorCustom())
+            {
+                Console.WriteLine(p.X);
+            }
+        }
+
+        public void BuildingClonableObjects()
+        {
+
+        }
+
+        public void BuildingComparableTypes()
+        {
+
+        }
+
         // Static using -> allows all the accessible static members of a type to be imported, making them available without qualification in subseq. code.
         // great if you have a set of functions related to certain domain
         public void StaticUsing()
@@ -228,7 +265,7 @@ namespace KnowledgeModel.Lang
 
 
 
-
+        // ****************************************************************** //
 
         // C# whats new
         // You can apply reaonly modifier to the members of a struct
@@ -261,6 +298,32 @@ namespace KnowledgeModel.Lang
                 return -1;
             else
                 return 0;
+        }
+    }
+
+    public class Points : IEnumerable
+    {
+        private Point[] pointArray = new Point[4];
+
+        public Points()
+        {
+            pointArray[0] = new Point() { X = 1, Y = 0 };
+            pointArray[1] = new Point() { X = 0, Y = 0 };
+            pointArray[2] = new Point() { X = 1, Y = 1 };
+            pointArray[3] = new Point() { X = 0, Y = 1 };
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return pointArray.GetEnumerator();
+        }
+
+        public IEnumerable GetEnumeratorCustom()
+        {
+            foreach (Point p in pointArray)
+            {
+                yield return p;
+            }
         }
     }
 }
