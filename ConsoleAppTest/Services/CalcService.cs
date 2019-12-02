@@ -71,9 +71,54 @@ namespace ConsoleAppTest.Services
             return fact;
         }
 
+        double a = 1;
+        double b = -1;
+        public class Points
+        {
+            public double A;
+            public double B;
+            public double D;
+        } 
+
         public void CalcAffineApproximation()
         {
+            Points p = new Points() { A = a, B = b, D = 100 };
+            // approximated funtion:
+            Func<double, double> f = (x) => { return x * x ; };
+            
+            // approximating function:
+            Func<double, double> g = (x) => { return a * x + b; };
 
+            // uniform distance:
+            Func<double, double> d = (x) => { return Math.Abs(g(x) - f(x)); };
+
+            double step = 0.0001;
+            
+            while (a < 4)
+            {
+                while (b < 1)
+                {
+                    double distance = d(0);
+                    for (double t = step; t < 1; t = t + step)
+                    {
+                        if (distance < d(t))
+                        {
+                            distance = d(t);
+                        }
+                    }
+                    if (distance < p.D)
+                    {
+                        p.D = distance;
+                        p.A = a;
+                        p.B = b;
+                    }
+                    b += step;
+                }
+                a += step;
+            }
+
+            Console.WriteLine("A = {0}, B = {1}, D = {2}", p.A, p.B, p.D);
+            // TODO: Graphic representation!
         }
     }
 }
