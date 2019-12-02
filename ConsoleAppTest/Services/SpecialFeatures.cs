@@ -321,5 +321,9 @@ namespace ConsoleAppTest.Services
             Console.WriteLine(casted);
         }
 
+        public void StackallocUsage()
+        {
+
+        }
     }
 }

@@ -221,7 +221,7 @@ namespace KnowledgeModel.Lang
         // great if you have a set of functions related to certain domain
         public void StaticUsing()
         {
-            WriteLine(Sqrt(5));
+            WriteLine(Sqrt(5)); // using static System.Console;
             WriteLine(Friday - Monday);
         }
 

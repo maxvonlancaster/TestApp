@@ -5,6 +5,7 @@ using ConsoleAppTest.DebugAndSecurity;
 using ConsoleAppTest.DataAccess;
 using ConsoleAppTest.Services;
 using ConsoleAppTest.Patterns;
+using KnowledgeModel.Lang;
 
 namespace ConsoleAppTest
 {
@@ -12,9 +13,9 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new CalcService();
-            service.CalcPiNumber();
-            Console.WriteLine(CalcService.Factorial(1));
+            var service = new LangComp();
+            service.TypeReflection();
+            Console.WriteLine(CalcService.Factorial(20));
         }
     }
 }

@@ -1,14 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace KnowledgeModel.Lang
 {
     public class LangComp
     {
-        // Reflection - process of typediscovery in the runtime
+        // Reflection - process of type discovery in the runtime
         public void TypeReflection()
         {
+            // Obtain type info.
+            Point p = new Point();
+            Type t = p.GetType();
+            Type t2 = typeof(Point); // Do not need to create instance of class. Expects strongly typed name of the type.
+            // Using Type.GetType() method -> do not throw exception if cannot find and ignore case:
+            Type t3 = Type.GetType("KnowledgeModel.Lang.Point", false, true);
+
+            // Display methods: Type.GetMethods -> returns SYstem.Reflection.MethodInfo array:
+            Console.WriteLine("Methods:");
+            MethodInfo[] mi = t.GetMethods();
+            foreach (MethodInfo m in mi)
+            {
+                Console.WriteLine("Method: {0}", m.Name);
+            }
+
+            Console.WriteLine("\nFields:");
+            FieldInfo[] fi = t.GetFields();
+            foreach (FieldInfo f in fi)
+            {
+                Console.WriteLine("Field: {0}", f.Name);
+            }
+
+            Console.WriteLine("\nProperties:");
+            PropertyInfo[] pi = t.GetProperties();
+            foreach (PropertyInfo pr in pi)
+            {
+                Console.WriteLine("Property: {0}", pr.Name);
+            }
+
+            Console.WriteLine("\nReflecting on implemented interfaces:");
+            Type tl = typeof(List<string>);
+            Type[] ifaces = tl.GetInterfaces();
+            foreach (Type i in ifaces)
+            {
+                Console.WriteLine("Interface: {0}", i.Name);
+            }
+
+            Console.WriteLine("List various stats");
+            Console.WriteLine("Base class: {0}", tl.BaseType);
+            Console.WriteLine("Is abstract: {0}", tl.IsAbstract);
+            Console.WriteLine("Is sealed: {0}", tl.IsSealed);
+            Console.WriteLine("Is type generic: {0}", tl.IsGenericTypeDefinition);
+            Console.WriteLine("Is a class type: {0}", tl.IsClass);
 
         }
 
@@ -18,6 +62,26 @@ namespace KnowledgeModel.Lang
         }
 
         public void DisposeAndFinalizePatterns()
+        {
+
+        }
+
+        public void GcTriggers()
+        {
+
+        }
+
+        public void LargeObjects()
+        {
+
+        }
+
+        public void MonitoringAppMemoryUsage()
+        {
+
+        }
+
+        public void ExceptionHandlingGuidelines()
         {
 
         }
@@ -63,5 +127,8 @@ namespace KnowledgeModel.Lang
             int.TryParse(slice, out length);
             Console.WriteLine($"Length: {length}");
         }
+
+
+
     }
 }
