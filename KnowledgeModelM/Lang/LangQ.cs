@@ -252,7 +252,11 @@ namespace KnowledgeModel.Lang
 
         public void BuildingClonableObjects()
         {
-
+            // MemberviceClone() -> shallow copy
+            // ability to return identical copy -> implement IClonable
+            // Clone returns plain object type -> need to cast
+            PointClonable p1 = new PointClonable(10, -10);
+            PointClonable p2 = (PointClonable)p1.Clone();
         }
 
         public void BuildingComparableTypes()
@@ -277,7 +281,27 @@ namespace KnowledgeModel.Lang
 
         public void AnonymuousTypes()
         {
+            // Build anon. type using the var keyword -> compiler will automatically generate a new class definition at compile time. Initialization syntaxis used to tell the compiler to create private backing fields and (read-only)
+            // properties for the newly created type.
+            var point = new { X = 10, Y = 20, Z = -40 };
+            // you can use this type to get the property data:
+            Console.WriteLine("Point: {0}, {1}, {2}", point.X, point.Y, point.Z);
+            //int t = point.T; // -> compile time error
+            //point.X = 9; // -> compile error - all properties are readonly
 
+            // Anon. types have custom implementations of each virtual method of System.Object:
+            Console.WriteLine(point.ToString());
+            Console.WriteLine("Instance of : {0}, Base class: {1}", point.GetType().Name, point.GetType().BaseType); // <>f__AnonymousType0`3 , base: System.Object
+
+            // anon types can not support events, cust. methods, cust. operators or cust. overrides.; always are implicitly sealed; are always created using the default constructor.
+
+            // It is possible to create an anonymous type that is composed of other anon. types.
+            var itemPurchase = new
+            {
+                TimeBought = DateTime.Now,
+                Item = new { Color = "Red", Speed = 50},
+                Price = 34.00
+            };
         }
 
         public void ExtensionMethods()
@@ -390,6 +414,23 @@ namespace KnowledgeModel.Lang
             {
                 yield return p;
             }
+        }
+    }
+
+    public class PointClonable : ICloneable
+    {
+        public PointClonable(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public object Clone()
+        {
+            return new PointClonable(this.X, this.Y);
         }
     }
 }
