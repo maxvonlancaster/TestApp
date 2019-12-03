@@ -13,6 +13,11 @@ namespace KnowledgeModel.Lang
 {
     public class LangQ
     {
+        public void TypesCasting()
+        {
+
+        }
+
         public void ValueAndReferenceTypes()
         {
 
@@ -22,6 +27,7 @@ namespace KnowledgeModel.Lang
         public int Id { get; set; } // automatic property -> no additional logic of access
         public string Name { get; set; } = "Name"; // in C#6 and later -> automatic prop. can be initialized
         // 
+
 
 
         public void StructuredExceptionHandling()
@@ -250,6 +256,66 @@ namespace KnowledgeModel.Lang
         }
 
         public void BuildingComparableTypes()
+        {
+
+        }
+
+        public void NullableTypes()
+        {
+
+        }
+
+        public void DelegatesEventsLambdas()
+        {
+
+        }
+
+        public void IndexersAndOperatorOverloading()
+        {
+
+        }
+
+        public void AnonymuousTypes()
+        {
+
+        }
+
+        public void ExtensionMethods()
+        {
+
+        }
+
+        public void CustomTypeConversions()
+        {
+
+        }
+
+        // Strings and StringBuilder. String concatenation practices. String Interpolation
+        public void StringsAndStringBuilder()
+        {
+
+        }
+
+
+
+
+        public void Serialization()
+        {
+
+        }
+
+
+        public void SystemIONameSpace()
+        {
+
+        }
+
+        public void LinqToObjects()
+        {
+
+        }
+
+        public void GeneralCodingConventions()
         {
 
         }

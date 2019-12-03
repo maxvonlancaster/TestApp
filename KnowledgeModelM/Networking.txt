@@ -1,14 +1,50 @@
 ﻿1. Understanding networks: layers and protocols
-Protocol - set of rules that governs the communication between computers on a network. 
-OSI (open system interconnetcion) - defines 7 layers.
-4 main layers in simplification: Physical/data link (Ethernet); Network (IP, Ipx); Transport (Tcp, spx); Session/presentation/application (http, ftp, telnet. smtp, dns).
+	Protocol - set of rules that governs the communication between computers on a network. 
+	OSI (open system interconnetcion) - defines 7 layers.
+	Four main layers in simplification: Physical/data link (Ethernet); Network (IP, Ipx); 
+	Transport (Tcp, spx); Session/presentation/application (http, ftp, telnet. smtp, dns).
+
 
 
 2. Basic understanding of TCP/IP model and protocols
+	
+
 
 3. Defining internet, intranet and VPN
 
-4. 
 
-5. 
+4. Basics of Firewalls and DMZ
+
+
+5. Application layer protocols basics (HTTP, FTP, Telnet)
+
+
+6. Understanding HTTP and WWW
+
+
+7. Basic troubleshooting tools (ICMP, ping, traceroute)
+
+
+8. Client/Server model
+
+
+9. Sockets, IP and port addressing
+
+
+10. Using proxy server
+
+
+11. File transfer services: FTP, TFTP
+
+
+12. Name resolution services: DNS, whois
+
+
+13. Remote access services: Telnet, SSH, rdesktop, VNC
+
+
+14. The basic difference between HTTP and HTTPS protocols
+	Hypertext Transfer Protocol Secure (HTTPS) -> extension of http, used for secure communication over a computer network, widely used on the internet.
+	In https the comunication protocol is encrypted using transport level security (tsl) or its predecesor, secure socets layer (ssl). 
+	Motivation: authentication of the accessed website, protection of privacy and integrity of data while transaction. Bidirectional encryption.
 
