@@ -14,7 +14,7 @@ using ASimpleName = System.Collections.Generic.Dictionary<string, System.Collect
 
 namespace ConsoleAppTest.Services
 {
-    // TODO: semaphore, Transaction, stackalloc,
+    // TODO: semaphore, Transaction
     public class SpecialFeatures
     {
         private T DefaultValue<T>()
@@ -321,9 +321,41 @@ namespace ConsoleAppTest.Services
             Console.WriteLine(casted);
         }
 
+        // The stackalloc operator allocates a block of memory on the stack. A stack alllocated memory block is automatically discarded when method returns.
+        // U can not explicitly free memory allocated with stackalloc, it is not subject to GC.
+        // stackalloc T<E>, where T:unmanaged, E -> int expression.
         public void StackallocUsage()
         {
+            // You can assign stackalloc result to one of the following types: Span<T>
+            int length = 3;
+            Span<int> numbers = stackalloc int[length];
+            for (var i = 0; i < length; i++)
+            {
+                numbers[i] = i;
+            }
 
+            int lengthB = 1000;
+            Span<byte> buffer = lengthB <= 1024 ? stackalloc byte[lengthB] : new byte[lengthB];
+
+            Span<int> numbersNew = stackalloc[] { 1, 2, 3, 4, 5, 6 };
+
+            // And pointers:
+            unsafe
+            {
+                int l = 3;
+                int* numbs = stackalloc int[l];
+                for (var i = 0; i < l; i++)
+                {
+                    numbs[i] = i;
+                }
+            }
+
+            // The use of stackalloc automatically enables buffer overrun detection features in the common language runtime (CLR). If a buffer overrun is 
+            // detected, the process is terminated as quickly as possible to minimize the chance that malicious code is executed.
+
+            // Unmanaged types:
+            // sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool
+            // Pointer, enum; structs containing unmngd above
         }
     }
 }
