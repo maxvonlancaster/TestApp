@@ -53,11 +53,11 @@ namespace ConsoleAppTest.Services
 
             for (int k = 0; k < n; k++)
             {
-                t = (double)((-1) ^ k) * (Factorial(6*k)) * (double)(13591409 + 545140134 * k);
-                deno = Factorial(3 * k) * (Math.Pow( Factorial(k), 3)) * (double)(640320 ^ (3 * k));
+                t = (double)((-1) ^ k) * (Factorial(6 * k)) * (double)(13591409 + 545140134 * k);
+                deno = Factorial(3 * k) * (Math.Pow(Factorial(k), 3)) * (double)(640320 ^ (3 * k));
                 piopp += t / deno;
             }
-            piopp = piopp * 12 / Math.Pow(640320,1.5);
+            piopp = piopp * 12 / Math.Pow(640320, 1.5);
             pi = (decimal)(1 / piopp);
             Console.WriteLine(pi);
         }
@@ -79,25 +79,23 @@ namespace ConsoleAppTest.Services
             public double A;
             public double B;
             public double D;
-        } 
+        }
 
         public void CalcAffineApproximation()
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
-
+            a = -0.005;
             Points p = new Points() { A = a, B = b, D = 100 };
             // approximated funtion:
-            Func<double, double> f = (x) => { return x * x ; };
-            
+            Func<double, double> f = (x) => { return x * x; };
+
             // approximating function:
             Func<double, double> g = (x) => { return a * x + b; };
 
             // uniform distance:
             Func<double, double> d = (x) => { return Math.Abs(g(x) - f(x)); };
 
-            double step = 0.0001;
-            
+            double step = 0.001;
+
             while (a < 3)
             {
                 while (b < 1)
@@ -105,7 +103,7 @@ namespace ConsoleAppTest.Services
                     double distance = d(0);
                     for (double t = step; t < 1; t = t + step)
                     {
-                        if (distance < d(t))
+                        if (d(t) > distance)
                         {
                             distance = d(t);
                         }
@@ -119,12 +117,49 @@ namespace ConsoleAppTest.Services
                     b += step;
                 }
                 a += step;
+                b = -1;
             }
-            s.Stop();
 
             Console.WriteLine("A = {0}, B = {1}, D = {2}", p.A, p.B, p.D);
-            Console.WriteLine("Time elapsed: ", s.ElapsedMilliseconds);
-            // TODO: Graphic representation!
+            // TODO: Graphic representation!, Optimize!
+        }
+
+        public void CalcLinearApproximation()
+        {
+            a = 0.0001;
+            b = 0;
+            Points p = new Points() { A = a, B = 0, D = 100 };
+            // approximated funtion:
+            Func<double, double> f = (x) => { return x * x; };
+
+            // approximating function:
+            Func<double, double> g = (x) => { return a * x + b; };
+
+            // uniform distance:
+            Func<double, double> d = (x) => { return Math.Abs(g(x) - f(x)); };
+
+            double step = 0.0001;
+
+            while (a < 3)
+            {
+                double distance = d(0);
+                for (double t = step; t < 1; t = t + step)
+                {
+                    if (distance < d(t))
+                    {
+                        distance = d(t);
+                    }
+                }
+                if (distance < p.D)
+                {
+                    p.D = distance;
+                    p.A = a;
+                    p.B = b;
+                }
+                a += step;
+            }
+
+            Console.WriteLine("A = {0}, B = {1}, D = {2}", p.A, p.B, p.D);
         }
     }
 }
