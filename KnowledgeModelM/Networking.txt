@@ -47,4 +47,4 @@
 	Hypertext Transfer Protocol Secure (HTTPS) -> extension of http, used for secure communication over a computer network, widely used on the internet.
 	In https the comunication protocol is encrypted using transport level security (tsl) or its predecesor, secure socets layer (ssl). 
 	Motivation: authentication of the accessed website, protection of privacy and integrity of data while transaction. Bidirectional encryption.
-
+	Other differences: Port (http: 80, https: 443), Layer: (http: Application, https: Transport)
