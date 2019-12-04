@@ -142,7 +142,9 @@ namespace KnowledgeModel.Lang
 
 
             // Creating Custom Generic Classes
-
+            Point<int> p1 = new Point<int>(10, 10); // supports a single type parameter
+            Point<double> p2 = new Point<double>(20.5, 0.3);
+            p2.ResetPoint();
 
 
             // Constraining Type Parameters
@@ -442,5 +444,29 @@ namespace KnowledgeModel.Lang
         {
             return new PointClonable(this.X, this.Y);
         }
+    }
+
+    // Generic Point Struture:
+    public struct Point<T>
+    {
+        private T xPos;
+        private T yPos;
+
+        public T X { get => xPos; set => xPos = value; }
+        public T Y { get => yPos; set => yPos = value; }
+
+        public Point(T x, T y)
+        {
+            xPos = x;
+            yPos = y;
+        }
+
+        // Reset fields to the default value of type parameter
+        public void ResetPoint()
+        {
+            xPos = default(T);
+            yPos = default(T); // 0 for numeric values, null for ref.
+        }
+
     }
 }
