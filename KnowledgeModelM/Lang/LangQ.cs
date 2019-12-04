@@ -127,8 +127,18 @@ namespace KnowledgeModel.Lang
             pointsO.CollectionChanged += PointsChanged;
 
 
-            // Collection Initialization Syntax
-
+            // Collection Initialization Syntax -> closely related to the object ininjtialization syntax(allows to set properties of new object at the time of construstion)
+            // You can apply coll. init. syntax to classes that support Add() method, formalized by the ICollection interface
+            int[] intArray = { 0, 1, 2, 3 };
+            List<int> intList = new List<int> { 0, 1, 2, 3, 4 };
+            ArrayList intArrayList = new ArrayList { 0, 1, 3 };
+            // U can blend obj. initialization syntax with collection init. syntax:
+            List<Point> listPoints = new List<Point>
+            {
+                new Point{ X = 1, Y = 2 },
+                new Point{ X = 1, Y = 0 }
+            };
+            // benefit -> saving time
 
 
             // Creating Custom Generic Classes
