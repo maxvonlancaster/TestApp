@@ -147,9 +147,13 @@ namespace KnowledgeModel.Lang
             p2.ResetPoint();
 
 
-            // Constraining Type Parameters
-
-
+            // Constraining Type Parameters -> what given type parameter must look like
+            // where T : struct -> T must have System.ValueType in its chain of inheritance (must be a structure)
+            // where T : class -> must not have System.ValueType in inheritance  (must be a reference type)
+            // where T : new() -> must have a default constructor - useful when creating instance of T -> this constraint must be listed last when multiple con-s
+            // where T : NameOfBaseClass -> must be derived from NameOfBaseClass
+            // where T : NameOfInterface -> you can write multiple interfaces separated by comma.
+            // example -> where T : new(), class, IDrawable 
 
         }
 
@@ -273,12 +277,25 @@ namespace KnowledgeModel.Lang
 
         public void BuildingComparableTypes()
         {
-
+            
         }
 
         public void NullableTypes()
         {
+            //int i = null; bool b = null; -> compile errors -> value types can not be assigned null, as it is used to establish an empty object reference
+            // nullable type can represent all the values of its underliyng type, plus the value null. Can be useful when working with relational db-s. To define nullable variable type ? is put in suffix
+            int? ni = 10;
+            bool? nb = null;
+            char? nc = 'a';
+            int?[] arrayInt = new int?[10];
+            string? s = "str";
 
+            // ? suffix notation is a shorthand for creating instance of the generic System.Nullable<T> structure. Provides set of members of use.
+            Nullable<int> ni2 = 9;
+            Console.WriteLine(ni2.HasValue); // true
+
+            // operator ?? allows you to assign a value to nullable type if the retrieved value is in fact null. More compact version of if/else.
+            int i = ni2 ?? 10;
         }
 
         public void DelegatesEventsLambdas()
@@ -447,7 +464,7 @@ namespace KnowledgeModel.Lang
     }
 
     // Generic Point Struture:
-    public struct Point<T>
+    public struct Point<T> where T : struct
     {
         private T xPos;
         private T yPos;
