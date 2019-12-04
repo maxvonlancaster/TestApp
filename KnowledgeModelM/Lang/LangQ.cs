@@ -335,7 +335,16 @@ namespace KnowledgeModel.Lang
 
         public void ExtensionMethods()
         {
-
+            // Extension methods -> allow you to add new methods or properties to a class or structure without modifying the original type in any direct manner. 
+            // Useful for -> backward compatibility, work with sealed classes or structures.
+            // Must be within static classes, are marked with this keyword as a modifier on first param., tgop-level(not nested)
+            int i = 12345;
+            int reversed = i.ReverseDigits();
+            Console.WriteLine(reversed);
+            // extension methods are limited to namespaces -> need to import -> using!
+            // Extending types implementig specific interfaces: -> also possible to define extension method that can only extend a class or struct that implements the correct interface.
+            string[] data = { "a", "b", "c" };
+            data.PrintAndBeep(); // any type that implements IEnumerable has a new method
         }
 
         public void CustomTypeConversions()
@@ -354,17 +363,52 @@ namespace KnowledgeModel.Lang
 
         public void Serialization()
         {
+            //Configuring Objects for Serialization
+
+
+
+            //Choosing a Serialization Formatter(binary, soap, xml, etc)
+
+
+
+            //Type Fidelity Among the Formatters
 
         }
 
 
         public void SystemIONameSpace()
         {
+            //Abstract Stream Class
+
+
+
+            //StreamWriters and StreamReaders
+
+
+
+            //StringWriters and StringReaders
+
+
+
+            //Watching Files Programmatically
 
         }
 
         public void LinqToObjects()
         {
+            //LINQ Queries to Primitive Arrays and Collections
+
+
+
+            //LINQ Query Operators
+
+
+
+            //Internal Representation of LINQ Query
+
+
+
+            //Building Query Using Lambda Expressions
 
         }
 
@@ -485,5 +529,26 @@ namespace KnowledgeModel.Lang
             yPos = default(T); // 0 for numeric values, null for ref.
         }
 
+        //public class MyCl : System.Int32 { }
+
+    }
+
+    public static class MyExtensions
+    {
+        public static int ReverseDigits(this int i)
+        {
+            char[] digits = i.ToString().ToCharArray();
+            Array.Reverse(digits);
+            return int.Parse(new string(digits));
+        }
+
+        public static void PrintAndBeep(this System.Collections.IEnumerable iterator)
+        {
+            foreach (var i in iterator)
+            {
+                Console.WriteLine(i);
+                Console.Beep();
+            }
+        }
     }
 }
