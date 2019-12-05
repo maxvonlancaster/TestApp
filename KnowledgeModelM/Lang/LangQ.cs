@@ -13,8 +13,30 @@ namespace KnowledgeModel.Lang
 {
     public class LangQ
     {
+        public void DeclareNamespacesClassesInterfacesStaticAndInstanceClassMembers()
+        {
+
+        }
+
         public void TypesCasting()
         {
+            // important feature of CLR is typesafety
+            // cast to base types is implicit, to derived -> explicit, possible runtime exception
+            Object o = new Point(); // no cast needed -> object is base of Point
+            Point p = (Point)o; // cast needed 
+
+            // casting with is -> no exceptions thrown, returns bool
+            Object o1 = new object();
+            Boolean b1 = (o1 is Object); // true
+            Boolean b2 = (o1 is Point); // false; if object is null, cast always returns false
+            // cast with as -> clr checks if o1 is Point and if it is, returns a non-null reference, if not - returns null
+            Point p1 = o1 as Point;
+
+            // Following give runtime exceptions:
+            Point p2 = (Point)o1;
+
+            // Compile errors:
+            //Point p3 = new object();
 
         }
 
@@ -305,7 +327,25 @@ namespace KnowledgeModel.Lang
 
         public void IndexersAndOperatorOverloading()
         {
+            // Indexer method -> enables to build custom types that provide access to internal subitems using array-like syntax
+            PointCollection pointCollection = new PointCollection();
+            // Add object with indexer syntax
+            pointCollection["Origin"] = new Point() { X = 0, Y = 0 };
+            pointCollection["VectorX"] = new Point() { X = 1, Y = 0 };
+            pointCollection["VectorY"] = new Point() { X = 0, Y = 1 };
+            Point p = pointCollection["VectorX"];
+            // Overloading Indexer methods: -> may be overloaded on single class or structure
+            pointCollection[1] = new Point() { X = 1, Y = 1 };
+            // Also indexers with multiple dimensions (this[int x, int y], indexers in interfaces)
 
+
+            // Operator overloading:
+            Point a = new Point() { X = 0, Y = 10 };
+            Point b = new Point() { X = 20, Y = 30 };
+            Point c = a + b;
+            Console.WriteLine("X={0},Y={1}", c.X, c.Y);
+            Console.WriteLine(a < b); // when define < also c# demands defining > -> otherwise compile error
+            // use wisely - only when building atomic data types
         }
 
         public void AnonymuousTypes()
@@ -337,7 +377,7 @@ namespace KnowledgeModel.Lang
         {
             // Extension methods -> allow you to add new methods or properties to a class or structure without modifying the original type in any direct manner. 
             // Useful for -> backward compatibility, work with sealed classes or structures.
-            // Must be within static classes, are marked with this keyword as a modifier on first param., tgop-level(not nested)
+            // Must be within static classes, are marked with this keyword as a modifier on first param., top-level(not nested)
             int i = 12345;
             int reversed = i.ReverseDigits();
             Console.WriteLine(reversed);
@@ -449,6 +489,23 @@ namespace KnowledgeModel.Lang
     {
         public int X { get; set; }
         public int Y { get; set; }
+
+
+        // Operator overloading: using keyword operator
+        public static Point operator +(Point p1, Point p2)
+        {
+            return new Point() { X = p1.X + p2.X, Y = p1.Y + p2.Y };
+        }
+
+        public static bool operator <(Point p1, Point p2)
+        {
+            return (p1.X < p2.X) && (p1.Y < p2.Y); 
+        }
+
+        public static bool operator >(Point p1, Point p2)
+        {
+            return (p1.X > p2.X) && (p1.Y > p2.Y);
+        }
     }
 
     public class SortPoints : IComparer<Point>
@@ -549,6 +606,34 @@ namespace KnowledgeModel.Lang
                 Console.WriteLine(i);
                 Console.Beep();
             }
+        }
+    }
+
+    public class PointCollection : IEnumerable
+    {
+        private Dictionary<string, Point> listPoints = new Dictionary<string, Point>();
+
+        // This indexer returns a point based on a string index:
+        public Point this[string name]
+        {
+            get { return (Point)listPoints[name]; }
+            set { listPoints[name] = value; }
+        }
+
+        public Point this[int id]
+        {
+            get { return (Point)listPoints[id.ToString()]; }
+            set { listPoints[id.ToString()] = value; }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return listPoints.GetEnumerator();
+        }
+
+        public interface IStringContainer // indexer in interface
+        {
+            string this[int index] { get; set; }
         }
     }
 }
