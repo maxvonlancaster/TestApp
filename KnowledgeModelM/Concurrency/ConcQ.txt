@@ -1,0 +1,22 @@
+﻿1. Understand differences between Concurrency vs Multi-threading vs Asynchronous 
+
+Synchronous Programming Model -> A thread is assigned to one task and starts working on it. Once the task is complete then it is available for the next task. It can not leave the executing task in mind to take up another task.
+	Single-threaded -> If we have a couple of tasks to be worked on and the current system provides just a single thread, then tasks are assigned to the thread one by one  (thread 1: task1-task2-task3-...)
+	Multi-Threaded -> In this environment, we used to have multiple threads which can take up these tasks and start working on that. It means we have a pool of threads (new threads can also be created based 
+		on the requirement and available resources) and bunch of tasks. So these thread can work on these as
+		(Thread1: task1-...; Thread2: task2-...; Thread3: task3-...;)
+
+Asynchronous Programming Model -> a thread once start executing a task it can hold it in mid, save the current state and start executing another.
+	Single-threaded -> a single thread is responsible to complete all the tasks and tasks are interleaved to each other (thread 1: task1-task2-task1-task3-task4-task2-task1-task3-task1-...)
+	Multi-threaded -> (Thread1: task1-task2-task1-task3-task4-task2-task1-...; Thread2: task4-task1-tsak9-...; Thread3: task5-task2-...;)
+
+Concurrency: processing multiple requests at a time. Multithreaded programming and asynch. model (single + multithreaded)
+
+Benefits: Usability and performance. If single threaded - frozen screen. Performance 
+
+Asynchrony in asp.net: When a request is received by IIS, it takes a thread from CLR thread pool (IIS does not own any thread-pool itself instead uses CLR thread pool) and assigns to it which further processes the request. 
+	As number of threads are limited and new ones can be created at a certain limit then if the thread wastes most of the time in waiting then it’s going to hit hard to your application’s overall performance. 
+	But if you write asynchronous code (which now become very easy and can be written almost similar to synchronous using the new keywords async/await in C#) then it will be way faster and throughput of your server will 
+	increase significantly because instead of waiting something to complete, it will be available to thread pool to take the new requests. If the application has a lot of dependency and long running process then for those application, 
+	async programming will be not less than a boon.
+	-> IIS request queue -> CLR Threda Pool -> Processing request 
