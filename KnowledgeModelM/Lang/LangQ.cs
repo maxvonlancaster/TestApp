@@ -402,6 +402,10 @@ namespace KnowledgeModel.Lang
             Point p2 = (Point)ps;
             // conversion routines make use of the C# operator keyword, in conjunction with the explicit or implicit keyword, and must be defined as static. The incoming parameter is the
             // entity you are converting from, while the operator type is the entity you are converting to. 
+
+            PointSpace ps2 = 1;
+            int i = (int)ps2;
+            // the incoming operator -> entity converting from, operator type -> converting to;
         }
 
         // Strings and StringBuilder. String concatenation practices. String Interpolation
@@ -664,6 +668,19 @@ namespace KnowledgeModel.Lang
         // 2d point can be implicitly converted into 3d point 
         public static implicit operator PointSpace(Point p)
         {
-            return new PointSpace() { X = p.X, Y = p.Y, Z = 0 };        }
+            return new PointSpace() { X = p.X, Y = p.Y, Z = 0 };
+        }
+
+        // additional explicit conversion:
+        // cast from PointSpace to int
+        public static explicit operator int(PointSpace p)
+        {
+            return p.X;
+        }
+
+        public static implicit operator PointSpace(int i)
+        {
+            return new PointSpace() { X = i, Y = i, Z = i };
+        }
     }
 }
