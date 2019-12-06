@@ -389,6 +389,13 @@ namespace KnowledgeModel.Lang
 
         public void CustomTypeConversions()
         {
+            // In terms of the intrinsic numerical types (sbyte, int, float, etc.), an explicit conversion is required when
+            //you attempt to store a larger value in a smaller container, as this could result in a loss of data. Conversely, an
+            //implicit conversion happens automatically when you attempt to place a smaller type in a destination type that will not result in a loss of data: 
+            int a = 123;
+            long b = a; // implicit
+            int c = (int)b; // explicit
+
 
         }
 
@@ -635,5 +642,12 @@ namespace KnowledgeModel.Lang
         {
             string this[int index] { get; set; }
         }
+    }
+
+    public class PointSpace
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Z { get; set; }
     }
 }
