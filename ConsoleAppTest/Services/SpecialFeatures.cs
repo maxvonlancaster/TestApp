@@ -357,5 +357,13 @@ namespace ConsoleAppTest.Services
             // sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool
             // Pointer, enum; structs containing unmngd above
         }
+
+        public unsafe void Pointers()
+        {
+            int x = 100;
+            int* y = &x; // &x gives the memory address of the variable x
+            Console.WriteLine((int)y); // displays the memory adress
+            Console.WriteLine(*y); // displ. value at the adress
+        }
     }
 }
