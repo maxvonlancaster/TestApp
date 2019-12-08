@@ -130,7 +130,7 @@ namespace ConsoleAppTest.Services
             b = 0;
             Points p = new Points() { A = a, B = 0, D = 100 };
             // approximated funtion:
-            Func<double, double> f = (x) => { return x * x * x; };
+            Func<double, double> f = (x) => { return x * x ; };
 
             // approximating function:
             Func<double, double> g = (x) => { return a * x + b; };
@@ -142,8 +142,8 @@ namespace ConsoleAppTest.Services
 
             while (a < 2)
             {
-                double distance = d(-1);
-                for (double t = -1 + step; t < 1; t = t + step)
+                double distance = d(0);
+                for (double t = 0 + step; t < 1; t = t + step)
                 {
                     if (distance < d(t))
                     {

@@ -360,10 +360,21 @@ namespace ConsoleAppTest.Services
 
         public unsafe void Pointers()
         {
-            int x = 100;
-            int* y = &x; // &x gives the memory address of the variable x
-            Console.WriteLine((int)y); // displays the memory adress
-            Console.WriteLine(*y); // displ. value at the adress
+            int i = 100;
+            int* iAdress = &i; // &x gives the memory address of the variable x
+            Console.WriteLine((long)iAdress); // displays the memory adress
+            Console.WriteLine(*iAdress); // displ. value at the adress
+            *iAdress = 10;
+            Console.WriteLine(i);
+            i = 20;
+            Console.WriteLine(*iAdress);
+
+            bool b = true;
+            bool* bAdress = &b; // &x gives the memory address of the variable x
+            Console.WriteLine((long)bAdress); // displays the memory adress
+            Console.WriteLine(*bAdress); // displ. value at the adress
+            *bAdress = false;
+            Console.WriteLine(b);
         }
     }
 }
