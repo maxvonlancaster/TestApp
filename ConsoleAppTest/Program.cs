@@ -13,8 +13,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new CalcService();
-            service.CalcLinearApproximation();
+            var service = new LangQ();
+            service.CustomTypeConversions();
             //Console.WriteLine(CalcService.Factorial(20));
         }
     }
