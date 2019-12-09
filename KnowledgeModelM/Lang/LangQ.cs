@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 using static System.Console;
 using static System.DayOfWeek;
@@ -452,9 +453,56 @@ namespace KnowledgeModel.Lang
 
         public void LinqToObjects()
         {
-            //LINQ Queries to Primitive Arrays and Collections
+            // linq -> strongly typed query language, embedded directly into the grammar of c# itself.
 
-
+            // LINQ Queries to Primitive Arrays and Collections
+            string[] stringArray = { "ab", "cd", "eq", "ce"};
+            // when have array -> common to extract a subset of items based on a given requirement
+            IEnumerable<string> subset = from s in stringArray
+                                         where s.Contains("c")
+                                         orderby s
+                                         select s;
+            foreach (string s in subset)
+                Console.WriteLine(s);
+            List<Point> list = new List<Point>()
+            {
+                new Point(){ X = 0, Y = 0 },
+                new Point(){ X = 0, Y = 1 },
+                new Point(){ X = 0, Y = 2 },
+                new Point(){ X = 1, Y = 0 },
+                new Point(){ X = 2, Y = 1 },
+                new Point(){ X = 2, Y = 2 },
+                new Point(){ X = 2, Y = 0 },
+                new Point(){ X = -3, Y = 1 },
+            };
+            // linq query expressions can also manipulate data within members of System.Collections.Generic namespace.
+            IEnumerable<Point> firstQuadrant = from p in list
+                                               where p.X > 0 && p.Y > 0
+                                               orderby p.X
+                                               select p;
+            foreach (Point p in firstQuadrant)
+                Console.WriteLine("x = {0}, y = {1};", p.X, p.Y);
+            // on non-generic collections:
+            ArrayList arrayList = new ArrayList()
+            {
+                new Point(){ X = 0, Y = 0 },
+                new Point(){ X = 0, Y = 1 },
+                new Point(){ X = 0, Y = 2 },
+                "item",
+                new Point(){ X = 1, Y = 0 },
+                5,
+                new Point(){ X = 2, Y = 1 },
+                new Point(){ X = 2, Y = 2 },
+                new Point(){ X = 2, Y = 0 },
+                new object(),
+                new Point(){ X = -3, Y = 1 },
+            };
+            // Transform ArrayList into an IEnumerable<T>-compatible type. 
+            IEnumerable<Point> pointsFromAL = arrayList.OfType<Point>();
+            var subset2 = from p in pointsFromAL
+                          where p.X > 0 && p.Y > 0
+                          orderby p.X
+                          select p;
 
             //LINQ Query Operators
 
