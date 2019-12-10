@@ -518,7 +518,44 @@ namespace KnowledgeModel.Lang
 
         public void GeneralCodingConventions()
         {
+            // Coding conventions -> consistent look, understand code more quickly, facilitate copiing, changing
+            // Use namespace qualifiers. 
+            // Layout -> default code editor setting (tabs, smart identiing etc.) only one statement per line, one declaration per line,
+            // at least one blank line between line def. and property def., use paranteses to make clouses:
+            var a = 1;
+            var b = 1;
+            if ((a > 0) && (b > 0))
+            {
 
+            }
+            // Commenting -> place comment on a separate line, not at the end of current one, begin wwith upper case, end with a dot, one space between slashes 
+            // and text.
+
+            // Lnguage guidelines:
+            // Strings -> use string interploation to concatenate short strings:
+            string display = $"{a.ToString()},{b.ToString()}";
+            // To append strings in loops -> use StringBuilder
+            var bigString = new StringBuilder();
+            for (var i = 0; i < 100; i++)
+            {
+                bigString.Append(display);
+            }
+            // Use implicit typing for variables when the type of the variable is obvious from the right hand of expression or is not important:
+            var s = "string";
+            // Do not use var when the type is not apparent; avoid the use of var in place of dynamic; 
+            // Use implicit typing to determine the type of the loop variable in for and foreach statements
+            // In general, use int rather than unsigned types -> more compatibility.
+            // Use the concise syntax when you initialize arrays on the declaration line.
+            // To avoid exceptions and increase performance by skipping unnecessary comparisons, use && instead of & and || instead of | when you perform comparisons
+            // Use the concise form of object instantiation, with implicit typing
+            // Use object initializers to simplify object creation:
+            var point = new Point() { X = 0, Y = 1 };
+            // 
+
+            // Call static members by using the class name: ClassName.StaticMember. This practice makes code more readable by making static access clear. 
+            // Do not qualify a static member defined in a base class with the name of a derived class.
+
+            // Use implicit typing in the declaration of query variables and range variables.
         }
 
         // Static using -> allows all the accessible static members of a type to be imported, making them available without qualification in subseq. code.
