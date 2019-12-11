@@ -63,7 +63,9 @@ namespace KnowledgeModel.Lang
 
         public void DisposeAndFinalizePatterns()
         {
-
+            // Implement Dispose method to release resources used by app. The .net garbage collector does not allocate or release unmanaged memory.
+            // Dispose patern -> imposes order on the lifetime of an object. Used for resources that access unmanaged resources -> file and pipe handlers, wait handlers, pointers or blocks of unmanaged objects.
+            // The dispose pattern has two variations: 
         }
 
         public void GcTriggers()
@@ -77,6 +79,33 @@ namespace KnowledgeModel.Lang
         }
 
         public void MonitoringAppMemoryUsage()
+        {
+
+        }
+
+        // .Net diagnostics
+        public void CodeContracts()
+        {
+
+        }
+
+        public void EventTracingForWindows()
+        {
+
+        }
+
+        public void EventLogging()
+        {
+
+        }
+
+        public void PerformanceMonitoring()
+        {
+
+        }
+        // ^
+
+        public void ImplementLogging()
         {
 
         }
@@ -128,7 +157,21 @@ namespace KnowledgeModel.Lang
             Console.WriteLine($"Length: {length}");
         }
 
+        public void CSharpNew()
+        {
 
+        }
 
+        public void NetStandartOverview()
+        {
+
+        }
     }
+
+    //public class Elephant
+    //{
+    //    public <T>Elephant(T id)
+    //    {
+    //    }
+    //}
 }
