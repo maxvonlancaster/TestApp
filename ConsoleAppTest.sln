@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum", "Forum\Forum.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.BLL", "Forum.BLL\Forum.BLL.csproj", "{DF15BD9E-6694-4BEB-B56C-DB6F0704CE39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.DAL", "Forum.DAL\Forum.DAL.csproj", "{8238FD73-B53E-456F-AB73-F3D71C3D4CA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.DAL", "Forum.DAL\Forum.DAL.csproj", "{8238FD73-B53E-456F-AB73-F3D71C3D4CA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math", "Math\Math.csproj", "{F6BE96FC-42A4-40AA-8597-79E8E2CD3EA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mathematics", "Math\Mathematics.csproj", "{F6BE96FC-42A4-40AA-8597-79E8E2CD3EA6}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TestFSharp", "TestFSharp\TestFSharp.fsproj", "{F3AE728C-380E-45A7-80C9-7E8DCFEA8609}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "TestFSharp", "TestFSharp\TestFSharp.fsproj", "{F3AE728C-380E-45A7-80C9-7E8DCFEA8609}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
