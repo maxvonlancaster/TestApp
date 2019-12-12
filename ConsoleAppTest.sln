@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.BLL", "Forum.BLL\Foru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.DAL", "Forum.DAL\Forum.DAL.csproj", "{8238FD73-B53E-456F-AB73-F3D71C3D4CA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math", "Math\Math.csproj", "{F6BE96FC-42A4-40AA-8597-79E8E2CD3EA6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TestFSharp", "TestFSharp\TestFSharp.fsproj", "{F3AE728C-380E-45A7-80C9-7E8DCFEA8609}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{8238FD73-B53E-456F-AB73-F3D71C3D4CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8238FD73-B53E-456F-AB73-F3D71C3D4CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8238FD73-B53E-456F-AB73-F3D71C3D4CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6BE96FC-42A4-40AA-8597-79E8E2CD3EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6BE96FC-42A4-40AA-8597-79E8E2CD3EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6BE96FC-42A4-40AA-8597-79E8E2CD3EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6BE96FC-42A4-40AA-8597-79E8E2CD3EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3AE728C-380E-45A7-80C9-7E8DCFEA8609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3AE728C-380E-45A7-80C9-7E8DCFEA8609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3AE728C-380E-45A7-80C9-7E8DCFEA8609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3AE728C-380E-45A7-80C9-7E8DCFEA8609}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
