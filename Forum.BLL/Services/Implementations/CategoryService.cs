@@ -9,9 +9,9 @@ namespace Forum.BLL.Services.Implementations
 {
     public class CategoryService : ICategoryService
     {
-        private ForumDbContext _context;
+        private ForumsDbContext _context;
 
-        public CategoryService(ForumDbContext context)
+        public CategoryService(ForumsDbContext context)
         {
             _context = context;
         }

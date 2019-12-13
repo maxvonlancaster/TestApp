@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Forum.DAL.Entities
 {
-    public class User : IdentityUser<string>
+    public class User : IdentityUser<int>
     {
         public int Rating { get; set; }
         public byte[] Picture { get; set; }

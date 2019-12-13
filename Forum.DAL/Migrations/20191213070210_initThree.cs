@@ -3,10 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Forum.DAL.Migrations
 {
-    public partial class firstMigration : Migration
+    public partial class initThree : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "IdentityUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserClaims", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "SubForums",
                 columns: table => new
@@ -26,7 +41,8 @@ namespace Forum.DAL.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(nullable: true),
                     NormalizedUserName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -78,7 +94,7 @@ namespace Forum.DAL.Migrations
                     Media = table.Column<byte[]>(nullable: true),
                     Text = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
-                    PosterId = table.Column<string>(nullable: true),
+                    PosterId = table.Column<int>(nullable: true),
                     SubForumId = table.Column<int>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true)
                 },
@@ -114,7 +130,7 @@ namespace Forum.DAL.Migrations
                     Media = table.Column<byte[]>(nullable: true),
                     Text = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
-                    PosterId = table.Column<string>(nullable: true),
+                    PosterId = table.Column<int>(nullable: true),
                     PostId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -169,6 +185,9 @@ namespace Forum.DAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "IdentityUserClaims");
 
             migrationBuilder.DropTable(
                 name: "Posts");

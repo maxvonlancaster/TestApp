@@ -9,9 +9,9 @@ namespace Forum.BLL.Services.Implementations
 {
     public class PostService : IPostService
     {
-        private ForumDbContext _context;
+        private ForumsDbContext _context;
 
-        public PostService(ForumDbContext context)
+        public PostService(ForumsDbContext context)
         {
             _context = context;
         }

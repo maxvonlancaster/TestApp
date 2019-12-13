@@ -9,9 +9,9 @@ namespace Forum.BLL.Services.Implementations
 {
     public class CommentService : ICommentService
     {
-        private ForumDbContext _context;
+        private ForumsDbContext _context;
 
-        public CommentService(ForumDbContext context)
+        public CommentService(ForumsDbContext context)
         {
             _context = context;
         }

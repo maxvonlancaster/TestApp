@@ -9,9 +9,9 @@ namespace Forum.BLL.Services.Implementations
 {
     public class UserService : IUserService
     {
-        private ForumDbContext _context;
+        private ForumsDbContext _context;
 
-        public UserService(ForumDbContext context)
+        public UserService(ForumsDbContext context)
         {
             _context = context;
         }

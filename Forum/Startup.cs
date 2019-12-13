@@ -29,11 +29,11 @@ namespace Forum
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ForumDbContext>(options =>
+            services.AddDbContext<ForumsDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("ForumDatabase")));
+                    Configuration.GetConnectionString("ForumDB")));
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ForumDbContext>();
+                .AddEntityFrameworkStores<ForumsDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

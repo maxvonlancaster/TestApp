@@ -9,9 +9,9 @@ namespace Forum.BLL.Services.Implementations
 {
     public class SubforumService : ISubforumService
     {
-        private ForumDbContext _context;
+        private ForumsDbContext _context;
 
-        public SubforumService(ForumDbContext context)
+        public SubforumService(ForumsDbContext context)
         {
             _context = context;
         }

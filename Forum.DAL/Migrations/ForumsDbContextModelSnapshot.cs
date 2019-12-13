@@ -4,16 +4,14 @@ using Forum.DAL.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Forum.DAL.Migrations
 {
-    [DbContext(typeof(ForumDbContext))]
-    [Migration("20191212205125_firstMigration")]
-    partial class firstMigration
+    [DbContext(typeof(ForumsDbContext))]
+    partial class ForumsDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +52,8 @@ namespace Forum.DAL.Migrations
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PosterId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("PosterId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -85,8 +83,8 @@ namespace Forum.DAL.Migrations
                     b.Property<byte[]>("Media")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("PosterId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("PosterId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -131,8 +129,10 @@ namespace Forum.DAL.Migrations
 
             modelBuilder.Entity("Forum.DAL.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -185,6 +185,27 @@ namespace Forum.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IdentityUserClaims");
                 });
 
             modelBuilder.Entity("Forum.DAL.Entities.Category", b =>
