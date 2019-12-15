@@ -1,9 +1,12 @@
 ﻿using Forum.BLL.Services.Interfaces;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Forum.BLL.Services.Implementations
 {
@@ -16,29 +19,40 @@ namespace Forum.BLL.Services.Implementations
             _context = context;
         }
 
-        public void Add(SubForum entity)
+        public async Task Add(SubForum entity)
         {
-            throw new NotImplementedException();
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var subForum = await _context.SubForums.FindAsync(id);
+            if (subForum != null)
+            {
+                _context.SubForums.Remove(subForum);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Not found");
+            }
         }
 
-        public List<SubForum> Get()
+        public async Task<List<SubForum>> Get()
         {
-            throw new NotImplementedException();
+            return await _context.SubForums.ToListAsync();
         }
 
-        public SubForum Get(int id)
+        public async Task<SubForum> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.SubForums.FirstOrDefaultAsync(s => s.SubForumId == id);
         }
 
-        public void Update(SubForum entity)
+        public async Task Update(SubForum entity)
         {
-            throw new NotImplementedException();
+            _context.SubForums.Update(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

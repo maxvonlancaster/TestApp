@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Forum.DAL.Implementations;
 using Forum.DAL.Entities;
+using Forum.BLL.Services.Interfaces;
+using Forum.BLL.Services.Implementations;
 
 namespace Forum
 {
@@ -29,6 +31,12 @@ namespace Forum
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ISubforumService, SubforumService>();
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IUserService, UserService>();
+
             services.AddDbContext<ForumsDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("ForumDB")));

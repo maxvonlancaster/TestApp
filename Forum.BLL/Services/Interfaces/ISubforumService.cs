@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Forum.BLL.Services.Interfaces
 {
     public interface ISubforumService
     {
-        void Add(SubForum entity);
-        void Delete(int id);
-        List<SubForum> Get();
-        SubForum Get(int id);
-        void Update(SubForum entity);
+        Task Add(SubForum entity);
+        Task Delete(int id);
+        Task<List<SubForum>> Get();
+        Task<SubForum> Get(int id);
+        Task Update(SubForum entity);
     }
 }
