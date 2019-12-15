@@ -5,7 +5,12 @@ using System.Text;
 
 namespace Forum.BLL.Services.Interfaces
 {
-    public interface ISubforumService : IService<SubForum, int>
+    public interface ISubforumService
     {
+        void Add(SubForum entity);
+        void Delete(int id);
+        List<SubForum> Get();
+        SubForum Get(int id);
+        void Update(SubForum entity);
     }
 }
