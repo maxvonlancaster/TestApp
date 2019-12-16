@@ -14,7 +14,7 @@ using ASimpleName = System.Collections.Generic.Dictionary<string, System.Collect
 
 namespace ConsoleAppTest.Services
 {
-    // TODO: semaphore, Transaction, Pointers
+    // TODO: semaphore, Transaction, Marshalling, 
     public class SpecialFeatures
     {
         private T DefaultValue<T>()
