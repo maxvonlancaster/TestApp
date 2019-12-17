@@ -12,6 +12,7 @@ namespace Forum.BLL.Services.Interfaces
         Task Delete(int id);
         Task<List<SubForum>> Get();
         Task<SubForum> Get(int id);
+        bool SubForumExists(int id);
         Task Update(SubForum entity);
     }
 }

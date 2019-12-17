@@ -54,5 +54,10 @@ namespace Forum.BLL.Services.Implementations
             _context.SubForums.Update(entity);
             await _context.SaveChangesAsync();
         }
+
+        public bool SubForumExists(int id)
+        {
+            return _context.SubForums.Any(e => e.SubForumId == id);
+        }
     }
 }

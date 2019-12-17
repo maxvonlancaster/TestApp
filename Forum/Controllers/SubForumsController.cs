@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Forum.BLL.Services.Interfaces;
 
 namespace Forum.Controllers
 {
     public class SubForumsController : Controller
     {
-        private readonly ForumsDbContext _context;
+        private readonly ISubforumService _subforumService;
 
-        public SubForumsController(ForumsDbContext context)
+        public SubForumsController(ISubforumService subforumService)
         {
-            _context = context;
+            _subforumService = subforumService;
         }
 
         // GET: SubForums
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SubForums.ToListAsync());
+            return View(await _subforumService.Get());
         }
 
         // GET: SubForums/Details/5
@@ -33,8 +34,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var subForum = await _context.SubForums
-                .FirstOrDefaultAsync(m => m.SubForumId == id);
+            var subForum = await _subforumService.Get((int)id);
             if (subForum == null)
             {
                 return NotFound();
@@ -58,8 +58,7 @@ namespace Forum.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(subForum);
-                await _context.SaveChangesAsync();
+                await _subforumService.Add(subForum);
                 return RedirectToAction(nameof(Index));
             }
             return View(subForum);
@@ -73,7 +72,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var subForum = await _context.SubForums.FindAsync(id);
+            var subForum = await _subforumService.Get((int)id);
             if (subForum == null)
             {
                 return NotFound();
@@ -97,12 +96,11 @@ namespace Forum.Controllers
             {
                 try
                 {
-                    _context.Update(subForum);
-                    await _context.SaveChangesAsync();
+                    await _subforumService.Update(subForum);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubForumExists(subForum.SubForumId))
+                    if (!_subforumService.SubForumExists(subForum.SubForumId))
                     {
                         return NotFound();
                     }
@@ -124,8 +122,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var subForum = await _context.SubForums
-                .FirstOrDefaultAsync(m => m.SubForumId == id);
+            var subForum = await _subforumService.Get((int)id);
             if (subForum == null)
             {
                 return NotFound();
@@ -139,15 +136,8 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subForum = await _context.SubForums.FindAsync(id);
-            _context.SubForums.Remove(subForum);
-            await _context.SaveChangesAsync();
+            await _subforumService.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool SubForumExists(int id)
-        {
-            return _context.SubForums.Any(e => e.SubForumId == id);
         }
     }
 }
