@@ -64,7 +64,19 @@ namespace KnowledgeModel.Lang
             //Shape shape = new Shape();        No method that corresponds ...
         }
 
-        // 22. Is it possible to override a method which is declared without a virtual keyword?
+        // 22. Is it possible to override a method which is declared without a virtual keyword? - NO (but hiding with new is possible, but not advised)
+        public void MethodNotVirtual() 
+        {
+            Shape s1 = new Shape(1);
+            int i = s1.ShapeMethod();
+            Console.WriteLine(i); // 1
+            Shape s2 = new ShapeNew(2);
+            i = s2.ShapeMethod();
+            Console.WriteLine(i); // 2 - the reference is wrong
+            ShapeNew s3 = new ShapeNew(3);
+            i = s3.ShapeMethod();
+            Console.WriteLine(i); // 0 - the reference is correct
+        }
 
         // 23. What is the difference between new and override keywords in method declaration?
 
@@ -176,6 +188,23 @@ namespace KnowledgeModel.Lang
         public Shape(int x)
         {
             this.x = x;
+        }
+
+        public int ShapeMethod() 
+        {
+            return x;
+        }
+    }
+
+    public class ShapeNew : Shape
+    {
+        public ShapeNew(int x) : base(x)
+        {
+        }
+
+        public new int ShapeMethod() 
+        {
+            return 0;
         }
     }
 }
