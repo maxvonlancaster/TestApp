@@ -26,7 +26,7 @@ namespace KnowledgeModel.Lang
         // 9. How method arguments are passed in C#? Can this behavior be changed?
 
         // 10. What is the difference between Int.Parse and Int.TryParse?
-        public void IntParseDiff() 
+        public void IntParseDiff()
         {
             string s1 = "incorrect";
             string s2 = "1";
@@ -48,14 +48,13 @@ namespace KnowledgeModel.Lang
         // 13. Why isn't it possible to create an instance of an abstract class?
 
         // 14. Is it possible to invoke a method from an abstract class?
-        public void MethodInvokingFromAbstractClass() 
+        public void MethodInvokingFromAbstractClass()
         {
             AbstractClass.DoStatic(); // Yes, possible
         }
 
         // 15. Is it true that Interface can only contain method declarations?
 
-        // 16. Is it possible to specify access modifiers inside of an interface?
 
         // 18. Is it possible to define two methods with the same name and arguments, but with a different return types? - NO
         //public int MyMethod(int arg) 
@@ -73,13 +72,13 @@ namespace KnowledgeModel.Lang
         // 20. What does protected internal access modifier mean?
 
         // 21. Your class Shape has one constructor with parameters.Can you create an instances of this class by calling new Shape()? - NO
-        public void CreateInstanceWithEmptyConstructor() 
+        public void CreateInstanceWithEmptyConstructor()
         {
             //Shape shape = new Shape();        No method that corresponds ...
         }
 
         // 22. Is it possible to override a method which is declared without a virtual keyword? - NO (but hiding with new is possible, but not advised)
-        public void MethodNotVirtual() 
+        public void MethodNotVirtual()
         {
             Shape s1 = new Shape(1);
             int i = s1.ShapeMethod();
@@ -95,9 +94,9 @@ namespace KnowledgeModel.Lang
         // 23. What is the difference between new and override keywords in method declaration?
 
         // 24. Is it possible to explicitly call a class’ static constructor?
-        public void CallStaticConstructor() 
+        public void CallStaticConstructor()
         {
-            
+
         }
 
         // 25. How can you override a static constructor?
@@ -120,7 +119,7 @@ namespace KnowledgeModel.Lang
         // 31. What is the difference between events and multicast delegates?
 
         // 32. Is there any difference between Action and Function?
-        public void ActionVsFunction() 
+        public void ActionVsFunction()
         {
             Action<int> action = x => { Console.WriteLine(x); }; // action -> no return 
             Func<int, double> func = x => { return 1 / x; }; // returns value of last type
@@ -173,7 +172,7 @@ namespace KnowledgeModel.Lang
 
     public interface ITwo
     {
-        void MethodTwo();
+        internal void MethodTwo();
         void Method();
     }
 
@@ -189,23 +188,33 @@ namespace KnowledgeModel.Lang
             throw new NotImplementedException();
         }
 
-        public void MethodTwo()
+        internal void MethodTwo()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITwo.Method()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITwo.MethodTwo()
         {
             throw new NotImplementedException();
         }
     }
 
-    public abstract class AbstractClass 
+    public abstract class AbstractClass
     {
         abstract public void DoSomething();
 
-        static public void DoStatic() 
+        static public void DoStatic()
         {
             Console.WriteLine("Static method in the abstract class");
         }
     }
 
-    public class Shape 
+    public class Shape
     {
         private int x;
 
@@ -214,7 +223,7 @@ namespace KnowledgeModel.Lang
             this.x = x;
         }
 
-        public int ShapeMethod() 
+        public int ShapeMethod()
         {
             return x;
         }
@@ -226,13 +235,13 @@ namespace KnowledgeModel.Lang
         {
         }
 
-        public new int ShapeMethod() 
+        public new int ShapeMethod()
         {
             return 0;
         }
     }
 
-    public class ClassWithStatic 
+    public class ClassWithStatic
     {
         public static int X { get; set; }
 
@@ -241,5 +250,14 @@ namespace KnowledgeModel.Lang
             X = 1;
             Console.WriteLine("Static called");
         }
+    }
+
+    // 16. Is it possible to specify access modifiers inside of an interface?
+    public interface ITestInterface 
+    {
+        void PublicMethod();
+        public void NewPublicMethod();
+        internal void IntMethod();
+        //private void PrivMethod(); No
     }
 }
