@@ -70,6 +70,7 @@ namespace KnowledgeModel.Lang
         // 19. What is the difference between method overriding and overloading?
 
         // 20. What does protected internal access modifier mean?
+        // A protected internal member is accessible from the current assembly OR(!) from types that are derived from the containing class.
 
         // 21. Your class Shape has one constructor with parameters.Can you create an instances of this class by calling new Shape()? - NO
         public void CreateInstanceWithEmptyConstructor()
