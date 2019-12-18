@@ -14,7 +14,7 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
             var service = new AmcQuestions();
-            service.MethodNotVirtual();
+            service.IntParseDiff();
             //Console.WriteLine(CalcService.Factorial(20));
         }
     }

@@ -26,6 +26,20 @@ namespace KnowledgeModel.Lang
         // 9. How method arguments are passed in C#? Can this behavior be changed?
 
         // 10. What is the difference between Int.Parse and Int.TryParse?
+        public void IntParseDiff() 
+        {
+            string s1 = "incorrect";
+            string s2 = "1";
+            int i1;
+            int i2;
+            int i3;
+            int i4;
+            //i1 = int.Parse(s1, System.Globalization.NumberStyles.Integer); -> exception thrown
+            i2 = int.Parse(s2, System.Globalization.NumberStyles.Integer);
+            bool b1 = int.TryParse(s1, out i3);
+            bool b2 = int.TryParse(s2, out i4);
+            Console.WriteLine("{0}, {1}", b1, b2);
+        }
 
         // 11. What are the implicit and explicit type conversions?
 
