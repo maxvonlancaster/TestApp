@@ -34,14 +34,25 @@ namespace KnowledgeModel.Lang
         // 13. Why isn't it possible to create an instance of an abstract class?
 
         // 14. Is it possible to invoke a method from an abstract class?
+        public void MethodInvokingFromAbstractClass() 
+        {
+            AbstractClass.DoStatic(); // Yes, possible
+        }
 
         // 15. Is it true that Interface can only contain method declarations?
 
         // 16. Is it possible to specify access modifiers inside of an interface?
 
-        // 17. Can you inherit from two interfaces with the same method name in both of them?
+        // 18. Is it possible to define two methods with the same name and arguments, but with a different return types? - NO
+        //public int MyMethod(int arg) 
+        //{
+        //    return 0;
+        //}
 
-        // 18. Is it possible to define two methods with the same name and arguments, but with a different return types?
+        //public double MyMethod(int arg) 
+        //{
+        //    return 0.0;
+        //}
 
         // 19. What is the difference between method overriding and overloading?
 
@@ -57,7 +68,12 @@ namespace KnowledgeModel.Lang
 
         // 25. How can you override a static constructor?
 
-        // 26. Can you use this keyword inside of a static method?
+        // 26. Can you use this keyword inside of a static method? - NO
+        public static int StaticMethod()
+        {
+            //this.
+            return 0;
+        }
 
         // 27. What is the difference between using a static class and a Singleton pattern?
 
@@ -136,6 +152,16 @@ namespace KnowledgeModel.Lang
         public void MethodTwo()
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public abstract class AbstractClass 
+    {
+        abstract public void DoSomething();
+
+        static public void DoStatic() 
+        {
+            Console.WriteLine("Static method in the abstract class");
         }
     }
 }
