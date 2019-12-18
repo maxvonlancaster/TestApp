@@ -47,7 +47,7 @@ namespace Forum.BLL.Services.Implementations
         public async Task<SubForum> Get(int id)
         {
             return await _context.SubForums.FirstOrDefaultAsync(s => s.SubForumId == id);
-        }
+        } 
 
         public async Task Update(SubForum entity)
         {
