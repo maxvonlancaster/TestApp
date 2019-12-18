@@ -58,7 +58,11 @@ namespace KnowledgeModel.Lang
 
         // 20. What does protected internal access modifier mean?
 
-        // 21. Your class Shape has one constructor with parameters.Can you create an instances of this class by calling new Shape()?
+        // 21. Your class Shape has one constructor with parameters.Can you create an instances of this class by calling new Shape()? - NO
+        public void CreateInstanceWithEmptyConstructor() 
+        {
+            //Shape shape = new Shape();        No method that corresponds ...
+        }
 
         // 22. Is it possible to override a method which is declared without a virtual keyword?
 
@@ -162,6 +166,16 @@ namespace KnowledgeModel.Lang
         static public void DoStatic() 
         {
             Console.WriteLine("Static method in the abstract class");
+        }
+    }
+
+    public class Shape 
+    {
+        private int x;
+
+        public Shape(int x)
+        {
+            this.x = x;
         }
     }
 }
