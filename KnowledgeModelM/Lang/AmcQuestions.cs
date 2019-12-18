@@ -81,6 +81,10 @@ namespace KnowledgeModel.Lang
         // 23. What is the difference between new and override keywords in method declaration?
 
         // 24. Is it possible to explicitly call a class’ static constructor?
+        public void CallStaticConstructor() 
+        {
+            
+        }
 
         // 25. How can you override a static constructor?
 
@@ -102,6 +106,12 @@ namespace KnowledgeModel.Lang
         // 31. What is the difference between events and multicast delegates?
 
         // 32. Is there any difference between Action and Function?
+        public void ActionVsFunction() 
+        {
+            Action<int> action = x => { Console.WriteLine(x); }; // action -> no return 
+            Func<int, double> func = x => { return 1 / x; }; // returns value of last type
+            // Predicate == Func<T, bool>
+        }
 
         // 33. What are lambda expressions? What are they used for?
 
@@ -205,6 +215,17 @@ namespace KnowledgeModel.Lang
         public new int ShapeMethod() 
         {
             return 0;
+        }
+    }
+
+    public class ClassWithStatic 
+    {
+        public static int X { get; set; }
+
+        static ClassWithStatic()
+        {
+            X = 1;
+            Console.WriteLine("Static called");
         }
     }
 }
