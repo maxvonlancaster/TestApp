@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,44 @@ namespace KnowledgeModel.Lang
 {
     public class AmcQuestions
     {
+        // 1. What is the difference between value and reference types? Is it true that the value type is always stored in a stack?
+
+        // 2. What is the output for this block of code?
+        struct Num
+        {
+            public int i;
+        }
+
+        public void Main()
+        {
+            Num x = new Num();
+            x.i = 10;
+            Update(x);
+            Console.Write(x.i);
+        }
+
+        static void Update(Num y)
+        {
+            y.i = 20;
+        }
+
+        // 3. What is the difference between classes and structures? Is it possible to inherit from structure? In what cases it's better to use structures?
+        //struct NumNew : Num 
+        //{}
+
+
+        // 4. What is the purpose of namespaces? Is it good practice to keep your application in a single namespace?
+
+        // 5. Is the following code correct? - NO
+        struct NumT
+        {
+            public const double x = 1.0;
+            public NumT(double start)
+            {
+                //x = start;
+            }
+        }
+
         // 7. What will be the output for this block of code?
         public void CodeExample()
         {
@@ -39,6 +78,7 @@ namespace KnowledgeModel.Lang
             bool b1 = int.TryParse(s1, out i3);
             bool b2 = int.TryParse(s2, out i4);
             Console.WriteLine("{0}, {1}", b1, b2);
+            Console.WriteLine("{0}, {1}", i3, i4);
         }
 
         // 11. What are the implicit and explicit type conversions?
@@ -54,7 +94,7 @@ namespace KnowledgeModel.Lang
         }
 
         // 15. Is it true that Interface can only contain method declarations?
-
+        // properties, events, indexers
 
         // 18. Is it possible to define two methods with the same name and arguments, but with a different return types? - NO
         //public int MyMethod(int arg) 
@@ -156,12 +196,22 @@ namespace KnowledgeModel.Lang
         // 40. What constrains can be applied to generics?
 
         // 41. Can Garbage Collection be forced manually?
+        public void GCCall()
+        {
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
+        }
 
         // 42. What are the generations of.NET Garbage Collector?
 
         // 43. With the IDisposable interface, what logic is usually placed inside of the Dispose method?
 
         // 44. Can you extend the core.NET framework class with your own method?
+        public void ExtensionOfFrameworkClass()
+        {
+            ArrayList ls = new ArrayList() { "a", "bs", "qwqertty" };
+            ls.PrintSomeStuff(1); // yes
+        }
     }
 
     // 17. Can you inherit from two interfaces with the same method name in both of them?
@@ -254,11 +304,20 @@ namespace KnowledgeModel.Lang
     }
 
     // 16. Is it possible to specify access modifiers inside of an interface?
-    public interface ITestInterface 
+    public interface ITestInterface
     {
         void PublicMethod();
         public void NewPublicMethod();
         internal void IntMethod();
         //private void PrivMethod(); No
+    }
+
+    public static class SomeExtensions
+    {
+        public static void PrintSomeStuff(this ArrayList l, int i)
+        {
+            Console.WriteLine(l);
+            Console.WriteLine(i);
+        }
     }
 }
