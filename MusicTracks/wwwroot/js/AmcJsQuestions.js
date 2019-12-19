@@ -12,6 +12,7 @@
     // Name the built -in and native types.Describe wrappers / boxing.
     // Name the data types that can and cannot contain values / types of objects.Name the ways to detect them.
     // What is the practical use of the Symbol data type ?
+    //********************************************************************************************************************************
 
 
 
@@ -21,6 +22,7 @@
     // Specify loops, conditions, and the execution context.
     // Describe the error handling process in JavaScript.
     // How / when to use the Use strict directive ? How does it affect the JavaScript execution ?
+    //********************************************************************************************************************************
 
 
 
@@ -31,6 +33,7 @@
     // Scope chain, lexical environment, and variable name resolution.
     // What is closure ?
     // Describe the Memory Lifecycle in the context of the closure.
+    //********************************************************************************************************************************
 
 
 
@@ -40,6 +43,7 @@
     // What does this keyword refer to in JavaScript ?
     // Provide a description of the partial application of functions vs.currying.
     // Describe the practice of the borrowing method.
+    //********************************************************************************************************************************
 
 
 
@@ -56,11 +60,13 @@
     // What does favor object composition over class inheritance mean ?
     // Compare the imperative programming and declarative programming.
     // Describe SOLID and JavaScript.Provide an example of dependency injection and inversion of control in JavaScript.Are they related ?
+    //********************************************************************************************************************************
 
 
 
     // What are two - way data binding and one - way data flow ? How do they differ ?
     // What are the pros and cons of monolithic and microservice architectures ?
+    //********************************************************************************************************************************
 
 
 
@@ -76,6 +82,7 @@
     // Provide yield - delegation examples and generators concurrency.
     // Describe Web Workers, Shared Workers.
     // Describe the micro and macro tasks in the context of the event loop ?
+    //********************************************************************************************************************************
 
 
 
@@ -83,6 +90,7 @@
     // Describe how the reduce method works.What is the difference between slice and splice ?
     // Describe Map, Set, WeakMap, and WeakSet.
     // What traditional data structures do you know ? How do they correspond with data structures available in JavaScript ?
+    //********************************************************************************************************************************
 
 
 
@@ -94,10 +102,13 @@
     // How to utilize multiple cores in a single NodeJS application ?
     // Explain the difference between programming in JS for NodeJS and browsers.
     // Suggest an application structure / architecture for NodeJS based REST API server.
+    //********************************************************************************************************************************
 
 
 
     // Name the most common test types and explain the difference between them.
     // Describe TDD / BDD.
     // What are the best practices of code testing in JavaScript ?
+    //********************************************************************************************************************************
+
 }

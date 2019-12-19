@@ -156,6 +156,8 @@ namespace KnowledgeModel.Lang
         // 29. How can you create delegates in C#?
 
         // 30. Are delegates of a value or a reference type?
+        // Delegates are ref. type -> One reason is clearly visible in the .NET Framework today. In the original design, there were two kinds of delegates: normal delegates and "multicast" delegates, 
+        // which could have more than one target in their invocation list. The MulticastDelegate class inherits from Delegate. Since you can't inherit from a value type, Delegate had to be a reference type.
 
         // 31. What is the difference between events and multicast delegates?
 
@@ -320,4 +322,6 @@ namespace KnowledgeModel.Lang
             Console.WriteLine(i);
         }
     }
+
+    
 }

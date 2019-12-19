@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mathematics.Calculation;
+using System;
 
 namespace Mathematics
 {
@@ -6,7 +7,9 @@ namespace Mathematics
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var service = new MatrixCalc();
+            service.MatrixRangChecker();
+            Console.WriteLine("This is math playground!");
         }
     }
 }

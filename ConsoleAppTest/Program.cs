@@ -13,8 +13,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new AmcQuestions();
-            service.Main();
+            var service = new Playground();
+            service.TestInterviewMethod();
             //Console.WriteLine(CalcService.Factorial(20));
         }
     }
