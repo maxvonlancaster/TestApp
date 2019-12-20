@@ -28,12 +28,17 @@ namespace KnowledgeModel.Lang
             y.i = 20;
         }
 
+
         // 3. What is the difference between classes and structures? Is it possible to inherit from structure? In what cases it's better to use structures?
         //struct NumNew : Num 
         //{}
 
 
         // 4. What is the purpose of namespaces? Is it good practice to keep your application in a single namespace?
+        // They're used especially to provide the C# compiler a context for all the named information in your program, such as variable names. 
+        // Without namespaces, for example, you wouldn't be able to make a class named Console, as .NET already uses one in its System namespace
+        // Namespaces are used to organize code into logical groups and to prevent name collisions that can occur especially when your code base includes multiple libraries.
+
 
         // 5. Is the following code correct? - NO
         struct NumT
@@ -172,6 +177,16 @@ namespace KnowledgeModel.Lang
         // 33. What are lambda expressions? What are they used for?
 
         // 34. Is it possible to access variables from the outside of a lambda expression?
+        // The result variable should definitely be accessible from outside the scope of the lambda. That's a core feature of lambdas (or anonymous delegates for that matter, 
+        // lambdas are just syntactic sugar for anonymous delegates), called a "lexical closure".
+        public void AccessVariableOfLambda() 
+        {
+            string res = null;
+            Action<int> act = i => { res = i.ToString(); };
+            act(10);
+            Console.WriteLine(res); // prints out 10
+        }
+
 
         // 35. What is LINQ used for?
 
