@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Forum.BLL.Services.Interfaces
 {
     public interface ICategoryService
     {
-        void Add(Category entity);
-        void Delete(int id);
-        List<Category> Get();
-        Category Get(int id);
-        void Update(Category entity);
+        Task Add(Category entity);
+        Task Delete(int id);
+        Task<List<Category>> Get();
+        Task<Category> Get(int id);
+        Task Update(Category entity);
     }
 }

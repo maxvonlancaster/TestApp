@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Forum.BLL.Services.Interfaces
 {
     public interface IPostService
     {
-        void Add(Post entity);
-        void Delete(int id);
-        List<Post> Get();
-        Post Get(int id);
-        void Update(Post entity);
+        Task Add(Post entity);
+        Task Delete(int id);
+        Task<List<Post>> Get();
+        Task<Post> Get(int id);
+        Task Update(Post entity);
     }
 }

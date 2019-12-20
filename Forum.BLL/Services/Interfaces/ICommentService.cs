@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Forum.BLL.Services.Interfaces
 {
     public interface ICommentService
     {
-        void Add(Comment entity);
-        void Delete(int id);
-        List<Comment> Get();
-        Comment Get(int id);
-        void Update(Comment entity);
+        Task Add(Comment entity);
+        Task Delete(int id);
+        Task<List<Comment>> Get();
+        Task<Comment> Get(int id);
+        Task Update(Comment entity);
     }
 }

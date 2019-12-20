@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Forum.BLL.Services.Interfaces
 {
     public interface IUserService
     {
-        void Add(User entity);
-        void Delete(string id);
-        List<User> Get();
-        User Get(string id);
-        void Update(User entity);
+        Task Add(User entity);
+        Task Delete(string id);
+        Task<List<User>> Get();
+        Task<User> Get(string id);
+        Task Update(User entity);
     }
 }

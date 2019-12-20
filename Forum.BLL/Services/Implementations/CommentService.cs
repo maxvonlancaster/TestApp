@@ -4,6 +4,7 @@ using Forum.DAL.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Forum.BLL.Services.Implementations
 {
@@ -16,27 +17,27 @@ namespace Forum.BLL.Services.Implementations
             _context = context;
         }
 
-        public void Add(Comment entity)
+        public Task Add(Comment entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Comment> Get()
+        public Task<List<Comment>> Get()
         {
             throw new NotImplementedException();
         }
 
-        public Comment Get(int id)
+        public Task<Comment> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Comment entity)
+        public Task Update(Comment entity)
         {
             throw new NotImplementedException();
         }
