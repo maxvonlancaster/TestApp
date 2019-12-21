@@ -12,6 +12,7 @@ namespace Forum.BLL.Services.Interfaces
         Task Delete(int id);
         Task<List<Post>> Get();
         Task<Post> Get(int id);
+        bool PostExists(int id);
         Task Update(Post entity);
     }
 }

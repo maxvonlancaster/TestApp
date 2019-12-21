@@ -7,18 +7,41 @@ namespace Mathematics.Calculation
 {
     public class MatrixCalc
     {
-        public void MatrixRangChecker()
+        public void MatrixReader()
         {
-            int rang = 0;
             string json;
             using (StreamReader r = new StreamReader("../../../models.json"))
             {
                 json = r.ReadToEnd();
             }
-            double[,] matrix = (double[,])Newtonsoft.Json.JsonConvert.DeserializeObject<double[,]>(json);
+            double[,] matrix = Newtonsoft.Json.JsonConvert.DeserializeObject<double[,]>(json);
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
             Console.WriteLine(DeterminantN(matrix, rows)); // TODO: rang checking logic
+            Console.WriteLine(MatrixRangChecker(matrix));
+        }
+
+        public int MatrixRangChecker(double[,] m) 
+        {
+            int rang = 0;
+            foreach (var elem in m) 
+            {
+                if (elem != 0) 
+                {
+                    rang = 1;
+                    break;
+                }
+            }
+
+            int n = 2;
+            int rows = m.GetLength(0);
+            int cols = m.GetLength(1);
+            while (n <= Math.Max(rows, cols)) 
+            {
+                int[] rowInd = new int[n];
+                int[] colInd = new int[n];
+            }
+            return rang;
         }
 
         public double DeterminantTwo(double[,] m) 
@@ -44,6 +67,7 @@ namespace Mathematics.Calculation
             }
         }
 
+        // Gets T-slice of matrix 
         public double[,] GetSlice(double[,] m, int row) 
         {
             int dim = m.GetLength(0) - 1;
@@ -62,6 +86,7 @@ namespace Mathematics.Calculation
             return res;
         }
 
+        // Gets slice with indexes from int[,] -> m*2 array, returns matrix m*m
         public double[,] GetMatrixSlice(double[,] m, int[,] indexes) 
         {
             int dim = indexes.GetLength(1);

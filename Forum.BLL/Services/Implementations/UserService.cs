@@ -1,8 +1,10 @@
 ﻿using Forum.BLL.Services.Interfaces;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,29 +19,45 @@ namespace Forum.BLL.Services.Implementations
             _context = context;
         }
 
-        public Task Add(User entity)
+        public async Task Add(User entity)
         {
-            throw new NotImplementedException();
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(string id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Not found");
+            }
         }
 
-        public Task<List<User>> Get()
+        public async Task<List<User>> Get()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<User> Get(string id)
+        public async Task<User> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public Task Update(User entity)
+        public async Task Update(User entity)
         {
-            throw new NotImplementedException();
+            _context.Users.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public bool UserExists(int id) 
+        {
+            return _context.Users.Any(u => u.Id == id);
         }
     }
 }

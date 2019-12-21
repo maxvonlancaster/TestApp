@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Forum.BLL.Services.Interfaces;
 
 namespace Forum.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly ForumsDbContext _context;
+        private readonly ICategoryService _categoryService;
 
-        public CategoriesController(ForumsDbContext context)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync());
+            return View(await _categoryService.Get());
         }
 
         // GET: Categories/Details/5
@@ -33,8 +34,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _categoryService.Get((int)id);
             if (category == null)
             {
                 return NotFound();
@@ -58,8 +58,7 @@ namespace Forum.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
+                await _categoryService.Add(category);
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -73,7 +72,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _categoryService.Get((int)id);
             if (category == null)
             {
                 return NotFound();
@@ -97,12 +96,11 @@ namespace Forum.Controllers
             {
                 try
                 {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
+                    await _categoryService.Update(category);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryId))
+                    if (!_categoryService.CategoryExists(category.CategoryId))
                     {
                         return NotFound();
                     }
@@ -124,8 +122,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            var category = await _categoryService.Get((int)id);
             if (category == null)
             {
                 return NotFound();
@@ -139,15 +136,8 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            await _categoryService.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CategoryExists(int id)
-        {
-            return _context.Categories.Any(e => e.CategoryId == id);
         }
     }
 }

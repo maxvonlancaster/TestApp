@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Forum.BLL.Services.Interfaces;
 
 namespace Forum.Controllers
 {
     public class CommentsController : Controller
     {
-        private readonly ForumsDbContext _context;
+        private readonly ICommentService _commentService;
 
-        public CommentsController(ForumsDbContext context)
+        public CommentsController(ICommentService commentService)
         {
-            _context = context;
+            _commentService = commentService;
         }
 
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Comments.ToListAsync());
+            return View(await _commentService.Get());
         }
 
         // GET: Comments/Details/5
@@ -33,8 +34,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.CommentId == id);
+            var comment = await _commentService.Get((int)id);
             if (comment == null)
             {
                 return NotFound();
@@ -58,8 +58,7 @@ namespace Forum.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comment);
-                await _context.SaveChangesAsync();
+                await _commentService.Add(comment);
                 return RedirectToAction(nameof(Index));
             }
             return View(comment);
@@ -73,7 +72,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments.FindAsync(id);
+            var comment = await _commentService.Get((int)id);
             if (comment == null)
             {
                 return NotFound();
@@ -97,12 +96,11 @@ namespace Forum.Controllers
             {
                 try
                 {
-                    _context.Update(comment);
-                    await _context.SaveChangesAsync();
+                    await _commentService.Update(comment);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CommentExists(comment.CommentId))
+                    if (!_commentService.CommentExists(comment.CommentId))
                     {
                         return NotFound();
                     }
@@ -124,8 +122,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.CommentId == id);
+            var comment = await _commentService.Get((int)id);
             if (comment == null)
             {
                 return NotFound();
@@ -139,15 +136,8 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comment = await _context.Comments.FindAsync(id);
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+            await _commentService.Delete((int)id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CommentExists(int id)
-        {
-            return _context.Comments.Any(e => e.CommentId == id);
         }
     }
 }

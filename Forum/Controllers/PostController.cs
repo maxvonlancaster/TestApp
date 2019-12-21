@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Forum.BLL.Services.Interfaces;
 
 namespace Forum.Controllers
 {
     public class PostController : Controller
     {
-        private readonly ForumsDbContext _context;
+        private readonly IPostService _postService;
 
-        public PostController(ForumsDbContext context)
+        public PostController(IPostService postService)
         {
-            _context = context;
+            _postService = postService;
         }
 
         // GET: Post
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Posts.ToListAsync());
+            return View(await _postService.Get());
         }
 
         // GET: Post/Details/5
@@ -33,8 +34,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts
-                .FirstOrDefaultAsync(m => m.PostId == id);
+            var post = await _postService.Get((int)id);
             if (post == null)
             {
                 return NotFound();
@@ -58,8 +58,7 @@ namespace Forum.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(post);
-                await _context.SaveChangesAsync();
+                await _postService.Add(post);
                 return RedirectToAction(nameof(Index));
             }
             return View(post);
@@ -73,7 +72,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _postService.Get((int)id);
             if (post == null)
             {
                 return NotFound();
@@ -97,12 +96,11 @@ namespace Forum.Controllers
             {
                 try
                 {
-                    _context.Update(post);
-                    await _context.SaveChangesAsync();
+                    await _postService.Update(post);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PostExists(post.PostId))
+                    if (!_postService.PostExists(post.PostId))
                     {
                         return NotFound();
                     }
@@ -124,8 +122,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts
-                .FirstOrDefaultAsync(m => m.PostId == id);
+            var post = await _postService.Get((int)id);
             if (post == null)
             {
                 return NotFound();
@@ -139,15 +136,8 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var post = await _context.Posts.FindAsync(id);
-            _context.Posts.Remove(post);
-            await _context.SaveChangesAsync();
+            await _postService.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool PostExists(int id)
-        {
-            return _context.Posts.Any(e => e.PostId == id);
         }
     }
 }

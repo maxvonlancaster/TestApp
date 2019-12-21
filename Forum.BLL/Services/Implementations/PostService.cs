@@ -1,8 +1,10 @@
 ﻿using Forum.BLL.Services.Interfaces;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,29 +19,45 @@ namespace Forum.BLL.Services.Implementations
             _context = context;
         }
 
-        public Task Add(Post entity)
+        public async Task Add(Post entity)
         {
-            throw new NotImplementedException();
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var post = await _context.Posts.FindAsync(id);
+            if (post != null)
+            {
+                _context.Posts.Remove(post);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Not found");
+            }
         }
 
-        public Task<List<Post>> Get()
+        public async Task<List<Post>> Get()
         {
-            throw new NotImplementedException();
+            return await _context.Posts.ToListAsync();
         }
 
-        public Task<Post> Get(int id)
+        public async Task<Post> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Posts.FirstOrDefaultAsync(p => p.PostId == id);
         }
 
-        public Task Update(Post entity)
+        public async Task Update(Post entity)
         {
-            throw new NotImplementedException();
+            _context.Posts.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public bool PostExists(int id) 
+        {
+            return _context.Posts.Any(p => p.PostId == id);
         }
     }
 }

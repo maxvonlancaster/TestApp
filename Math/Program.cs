@@ -8,7 +8,7 @@ namespace Mathematics
         static void Main(string[] args)
         {
             var service = new MatrixCalc();
-            service.MatrixRangChecker();
+            service.MatrixReader();
             Console.WriteLine("This is math playground!");
         }
     }

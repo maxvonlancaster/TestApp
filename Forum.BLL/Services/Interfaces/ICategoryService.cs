@@ -9,6 +9,7 @@ namespace Forum.BLL.Services.Interfaces
     public interface ICategoryService
     {
         Task Add(Category entity);
+        bool CategoryExists(int id);
         Task Delete(int id);
         Task<List<Category>> Get();
         Task<Category> Get(int id);

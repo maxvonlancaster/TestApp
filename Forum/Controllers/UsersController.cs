@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Forum.BLL.Services.Interfaces;
 
 namespace Forum.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly ForumsDbContext _context;
+        private readonly IUserService _userService;
 
-        public UsersController(ForumsDbContext context)
+        public UsersController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _userService.Get());
         }
 
         // GET: Users/Details/5
@@ -33,8 +34,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _userService.Get((int)id);
             if (user == null)
             {
                 return NotFound();
@@ -58,8 +58,7 @@ namespace Forum.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                await _userService.Add(user);
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -73,7 +72,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
+            var user = await _userService.Get((int)id);
             if (user == null)
             {
                 return NotFound();
@@ -97,12 +96,11 @@ namespace Forum.Controllers
             {
                 try
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    await _userService.Update(user);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!_userService.UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +122,7 @@ namespace Forum.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _userService.Get((int)id);
             if (user == null)
             {
                 return NotFound();
@@ -139,15 +136,8 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            await _userService.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
         }
     }
 }

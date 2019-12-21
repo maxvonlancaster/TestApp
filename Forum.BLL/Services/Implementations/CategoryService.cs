@@ -1,8 +1,10 @@
 ﻿using Forum.BLL.Services.Interfaces;
 using Forum.DAL.Entities;
 using Forum.DAL.Implementations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,29 +19,45 @@ namespace Forum.BLL.Services.Implementations
             _context = context;
         }
 
-        public Task Add(Category entity)
+        public async Task Add(Category entity)
         {
-            throw new NotImplementedException();
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var category = await _context.Categories.FindAsync(id);
+            if (category != null)
+            {
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Not found");
+            }
         }
 
-        public Task<List<Category>> Get()
+        public async Task<List<Category>> Get()
         {
-            throw new NotImplementedException();
+            return await _context.Categories.ToListAsync();
         }
 
-        public Task<Category> Get(int id)
+        public async Task<Category> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
         }
 
-        public Task Update(Category entity)
+        public async Task Update(Category entity)
         {
-            throw new NotImplementedException();
+            _context.Categories.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public bool CategoryExists(int id)
+        {
+            return _context.Categories.Any(c => c.CategoryId == id);
         }
     }
 }

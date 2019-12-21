@@ -9,6 +9,7 @@ namespace Forum.BLL.Services.Interfaces
     public interface ICommentService
     {
         Task Add(Comment entity);
+        bool CommentExists(int id);
         Task Delete(int id);
         Task<List<Comment>> Get();
         Task<Comment> Get(int id);
