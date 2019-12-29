@@ -159,6 +159,28 @@ namespace KnowledgeModel.Lang
         // 28. What does immutable mean? Can you provide examples?
 
         // 29. How can you create delegates in C#?
+        // A delegate is a reference type variable that holds the reference to a method. The reference can be changed at runtime.
+        // Delegates are especially used for implementing events and the call-back methods. All delegates are implicitly derived from the System.Delegate class.
+        delegate int NumberCalc(int n);
+        public int Add(int p) 
+        {
+            return p + 1;
+        }
+        public int Mult(int p) 
+        {
+            return p * 2;
+        }
+        public void DelegateUsage() 
+        {
+            NumberCalc nc1 = new NumberCalc(Add);
+            NumberCalc nc2 = new NumberCalc(Mult);
+
+            int i = nc1(10);
+            int j = nc2(2);
+            Console.WriteLine("{0}, {1}", i, j);
+        }
+
+
 
         // 30. Are delegates of a value or a reference type?
         // Delegates are ref. type -> One reason is clearly visible in the .NET Framework today. In the original design, there were two kinds of delegates: normal delegates and "multicast" delegates, 
