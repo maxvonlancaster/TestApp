@@ -19,6 +19,8 @@ namespace KnowledgeModel.Concurrency
         //.NET are Task and Task<TResult>.Older asynchronous APIs use callbacks or events instead of futures.Asynchronous programming
         // is centered around the idea of an asynchronous operation: some operation that is started that will complete some time later.W
 
+
+
         // 1.2 Introduction to Asynchronous Programming 
         public async Task DoSomethingAsync()
         {
@@ -42,10 +44,26 @@ namespace KnowledgeModel.Concurrency
 
         }
 
+        // To awaoid freezing of app (when using DoSomethingNewAsync().Result) -> ConfigureAwait -> 
+        // The following code will start on the calling thread, and after it is paused by an await, it will resume on a thread-pool thread:
         public async Task DoSomethingNewAsync()
         {
+            int val = 13;
 
+            // asynchronously wait 1 sec
+            await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+
+            val *= 2;
+
+            // asynchronously wait 1 sec
+            await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+            // good practice to always call ConfigureAwait in your core “library” methods, and only resume the context when you need it—in 
+            // your outer “user interface” methods.
+
+            Trace.WriteLine(val);
         }
+
+
 
         // 1.6 Introduction to Multithreaded Programming 
 
