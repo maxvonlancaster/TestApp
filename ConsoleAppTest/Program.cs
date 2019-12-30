@@ -13,8 +13,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new AmcQuestions();
-            service.AccessVariableOfLambda();
+            var service = new TestService();
+            service.TestMethod();
             //Console.WriteLine(CalcService.Factorial(20));
         }
     }

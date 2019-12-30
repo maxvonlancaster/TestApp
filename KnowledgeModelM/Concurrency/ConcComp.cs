@@ -66,6 +66,19 @@ namespace KnowledgeModel.Concurrency
 
 
         // 1.6 Introduction to Multithreaded Programming 
+        // A thread is an independent executor.Each process has multiple threads in it, and each of those threads can be doing different things 
+        // simultaneously.Each thread has its own independent stack but shares the same memory with all the other threads in a process.
+        // In some applications, there is one thread that is special.User interface applications have a single UI thread; Console applications have a single main thread.
+
+        // Every .NET application has a thread pool. The thread pool maintains a number of worker threads that are waiting to execute whatever work 
+        // you have for them to do. The thread pool is responsible for determining how many threads are in the thread pool at any time.
+
+        // There is almost no need to ever create a new thread yourself.The only time you should
+        // ever create a Thread instance is if you need an STA thread for COM interop.
+
+
+
+
 
         // 1.7 Introduction to Concurrent Applications 
 
