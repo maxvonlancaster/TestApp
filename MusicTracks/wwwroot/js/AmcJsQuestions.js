@@ -1,11 +1,60 @@
 ﻿export default class AmcQuestions {
     // Name all data types in JavaScript.
-    DataTypes()
-    {
+    DataTypes() {
+        // The number type represents both integer and floating point numbers.
+        let n = 12;
+        n = 12.34;
+        console.log(1 / 0) // infinity -> also a number
+        let a = 'a';
+        console.log(a / 2); // not a number -> NaN
 
+        // A BigInt is created by appending n to the end of an integer literal:
+        let m = 10932857493752843756243876134758623198065987256876n;
+
+        // strings:
+        let s = 's';
+        s = "s";
+        s = `s`;
+
+        // booleans:
+        let b = 1 > 4;
+
+        // In JavaScript, null is not a “reference to a non-existing object” or a “null pointer” like in some other languages.
+        let n = null;
+
+        // The meaning of undefined is “value is not assigned”.
+        let x;
+        console.log(x);
+
+        // Objects and Symbols
+
+        // The typeof operator returns the type of the argument. 
+        console.log(typeof undefined); // "undefined"
+        console.log(typeof 0); // "number"
+        console.log(typeof 10n); // "bigint"
+        console.log(typeof true); // "boolean"
+        console.log(typeof "foo"); // "string"
+        console.log(typeof Symbol("id")); // "symbol"
+        console.log(typeof Math); // "object"  (1)
+        console.log(typeof null); // "object"  (2)
+        console.log(typeof alert); // "function"  (3)
     }
 
     // Compare the reference types and primitive types.
+    //A variable can hold one of two value types: primitive values or reference values.
+    //  Primitive values are data that are stored on the stack.
+    //  Primitive value is stored directly in the location that the variable accesses.
+    //  Reference values are objects that are stored in the heap.
+    //  Reference value stored in the variable location is a pointer to a location in memory where the object is stored.
+    //  Primitive types include Undefined, Null, Boolean, Number, or String.
+    //The Basics:
+    //Objects are aggregations of properties.A property can reference an object or a primitive.Primitives are values, they have no properties.
+    //Updated:
+    //JavaScript has 6 primitive data types: String, Number, Boolean, Null, Undefined, Symbol(new in ES6).With the exception of null and undefined,
+    //all primitives values have object equivalents which wrap around the primitive values, e.g.a String object wraps around a string primitive.
+    //All primitives are immutable.
+
+
     // Describe the ways of checking data types.What are the possible difficulties of determining the data type ?
     // Describe the difference between Abstract Equality Comparison and Strict Equality Comparison.
     // Describe the process of the type coercion and rules of comparing the same and different data types.
@@ -72,9 +121,9 @@
 
     // What are the ways to handle the async code ?
     AsyncCode()
-    {
+{
 
-    }
+}
 
     // What is a callback hell, and how can you avoid it ?
     // Describe how async / await works.
