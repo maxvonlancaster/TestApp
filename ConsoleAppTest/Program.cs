@@ -6,6 +6,8 @@ using ConsoleAppTest.DataAccess;
 using ConsoleAppTest.Services;
 using ConsoleAppTest.Patterns;
 using KnowledgeModel.Lang;
+using System.Threading.Tasks;
+using KnowledgeModel.Concurrency;
 
 namespace ConsoleAppTest
 {
@@ -15,7 +17,14 @@ namespace ConsoleAppTest
         {
             var service = new TestService();
             service.TestMethod();
+            AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
+        }
+
+        static async Task AsyncMethods() 
+        {
+            var service = new AsyncBasics();
+            await service.WaitingAny();
         }
     }
 }
