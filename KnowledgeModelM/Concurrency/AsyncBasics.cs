@@ -150,7 +150,22 @@ namespace KnowledgeModel.Concurrency
 
 
         // Handling Exceptions from async Task Methods(chapter 2.8)
-
+        // Fortunately, handling exceptions from async Task methods is straightforward.
+        static async Task ThrowExceptionAsync()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            throw new InvalidOperationException("Test");
+        }
+        static async Task TestAsync()
+        {
+            try
+            {
+                await ThrowExceptionAsync();
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        }
 
 
 
