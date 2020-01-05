@@ -170,6 +170,7 @@ namespace KnowledgeModel.Concurrency
 
 
         // Handling Exceptions from async Void Methods(chapter 2.9)
-
+        // You have an async void method and need to handle exceptions propagated out of that method.
+        // There is no good solution. If at all possible, change the method to return Task instead of void.
     }
 }
