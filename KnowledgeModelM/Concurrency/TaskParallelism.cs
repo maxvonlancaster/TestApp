@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,32 @@ namespace KnowledgeModel.Concurrency
 
 
         // Parallel LINQ
+        // AsParallel() -> redistribute query to datasource. Datasource is divided into parts that are executed separately.
+        public void ParallelLINQ()
+        {
+            int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, };
+            var factorials = from n in numbers.AsParallel()
+                             select Factorial(n);
+            foreach (var n in factorials)
+                Console.WriteLine(n);
+            Console.ReadLine();
+            var factorialsNew = numbers.AsParallel().Select(x => Factorial(x));
 
+            // ForAll() -> prints out in the same thread as executed
+            (from n in numbers.AsParallel()
+             where n > 0
+             select Factorial(n))
+            .ForAll(Console.WriteLine);
+
+            // AsOrdered() -> order in the same oerder as arguments are given:
+            var factorialsOrdered = from n in numbers.AsParallel().AsOrdered()
+                             where n > 0
+                             select Factorial(n);
+            // AsUnordered() -> when ordering no longer needed:
+            var query = from n in factorialsOrdered.AsUnordered()
+                        where n > 100
+                        select n;
+        }
 
 
         // Exception-Handling Tasks
@@ -33,7 +59,7 @@ namespace KnowledgeModel.Concurrency
 
 
         // Working with AggregateException
-        public void WorkWithAggregateException() 
+        public void WorkWithAggregateException()
         {
             var t = Task.Run(() => { throw new Exception("This exception is expected!"); });
             try
@@ -51,6 +77,18 @@ namespace KnowledgeModel.Concurrency
                     return ex is Exception;
                 });
             }
+        }
+
+        static int Factorial(int x)
+        {
+            int result = 1;
+
+            for (int i = 1; i <= x; i++)
+            {
+                result *= i;
+            }
+            Console.WriteLine($"Factorial of {x} is equal to {result}");
+            return result;
         }
 
 
