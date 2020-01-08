@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KnowledgeModel.Concurrency
@@ -55,7 +56,53 @@ namespace KnowledgeModel.Concurrency
 
 
         // Canceling Tasks
+        // The System.Threading.Tasks.Task and System.Threading.Tasks.Task<TResult> classes support cancellation through the use of cancellation tokens in the .NET Framework. 
+        // In the Task classes, cancellation involves cooperation between the user delegate, which represents a cancelable operation and the code that requested the cancellation. 
+        // A successful cancellation involves the requesting code calling the CancellationTokenSource.
+        // Cancel method, and the user delegate terminating the operation in a timely manner. You can terminate the operation by using one of these options:
+        // By simply returning from the delegate. In many scenarios this is sufficient; however, a task instance that is canceled in this way transitions to the 
+        // TaskStatus.RanToCompletion state, not to the TaskStatus.Canceled state.
+        // By throwing a OperationCanceledException and passing it the token on which cancellation was requested.The preferred way to do this is to use the ThrowIfCancellationRequested method.
+        // A task that is canceled in this way transitions to the Canceled state, which the calling code can use to verify that the task responded to its cancellation request.
+        public async Task CancellTasks() 
+        {
+            var tokenSource = new CancellationTokenSource();
+            CancellationToken token = tokenSource.Token;
 
+            var task = Task.Run(() =>
+            {
+                // Were we already canceled?
+                token.ThrowIfCancellationRequested();
+
+                bool moreToDo = true;
+                while (moreToDo)
+                {
+                    // Poll on this property if you have to do
+                    // other cleanup before throwing.
+                    if (token.IsCancellationRequested)
+                    {
+                        // Clean up here, then...
+                        token.ThrowIfCancellationRequested();
+                    }
+
+                }
+            }, tokenSource.Token); // Pass same token to Task.Run.
+
+            tokenSource.Cancel();
+            // Just continue on this thread, or await with try-catch:
+            try
+            {
+                await task;
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine($"{nameof(OperationCanceledException)} thrown with message: {e.Message}");
+            }
+            finally
+            {
+                tokenSource.Dispose();
+            }
+        }
 
 
         // Working with AggregateException
