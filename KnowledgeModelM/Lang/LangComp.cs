@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Text;
 
@@ -70,7 +71,13 @@ namespace KnowledgeModel.Lang
 
         public void GcTriggers()
         {
+            // Garbage collection occurs when one of the following conditions is true:
 
+            // The system has low physical memory.
+            // The memory that is used by allocated objects on the managed heap surpasses an acceptable threshold. This threshold is continuously adjusted as the process runs.
+            // The GC.Collect method is called.In almost all cases, you do not have to call this method, because the garbage collector runs continuously. 
+            // (This method is primarily used for unique situations and testing.)
+            GC.Collect();
         }
 
         public void LargeObjects()
@@ -86,8 +93,38 @@ namespace KnowledgeModel.Lang
         // .Net diagnostics
         public void CodeContracts()
         {
-
+            // Code Contracts – новинка, появившаяся с выходом четвертой версии .NET. Это библиотека, реализующая идею программирования по контракту. Несколько упрощая можно сказать, 
+            // что её суть заключается в установке условий, которые должны соблюдать параметры методов и свойства объекта.
+            // Code contracts are always defined at the starting of the method using a Contract class. 
+            var p1 = GetCustomerPassword("cust");
+            var p2 = GetCustomerPassword(null);
+            var a = Division(6, 2);
+            var b = Division(7, 17);
         }
+
+        private string GetCustomerPassword(string customerId) 
+        {
+            Contract.Requires(!string.IsNullOrEmpty(customerId), "Customer ID cannot be Null");
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(customerId), "Exception!!");
+            Contract.Ensures(Contract.Result<string>() != null);
+            string pass = "qwerty";
+            if (customerId != null)
+            {
+                return pass;
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
+        private int Division(int i, int j) 
+        {
+            Contract.Requires(i > j, "i should be greater than j");
+            return i / j;
+        }
+
+
 
         public void EventTracingForWindows()
         {

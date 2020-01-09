@@ -15,8 +15,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new TestService();
-            service.TestMethod();
+            var service = new LangComp();
+            service.CodeContracts();
             AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }
