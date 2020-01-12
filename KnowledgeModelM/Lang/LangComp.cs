@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Text;
@@ -162,6 +164,34 @@ namespace KnowledgeModel.Lang
 
         public void EventLogging()
         {
+            // EventLog -> Provides interaction with Windows event logs.
+
+            // Create the source, if it does not already exist.
+            if (!EventLog.SourceExists("MySource"))
+            {
+                //An event log source should not be created and immediately used.
+                //There is a latency time to enable the source, it should be created
+                //prior to executing the application that uses the source.
+                //Execute this sample a second time to use the new source.
+                EventLog.CreateEventSource("MySource", "MyNewLog");
+                Console.WriteLine("CreatedEventSource");
+                Console.WriteLine("Exiting, execute the application a second time to use the source.");
+                // The source is created.  Exit the application to allow it to be registered.
+                return;
+            }
+
+            // Create an EventLog instance and assign its source.
+            EventLog myLog = new EventLog();
+            myLog.Source = "MySource";
+
+            // Write an informational entry to the event log.    
+            myLog.WriteEntry("Writing to event log.");
+
+
+            // EventLog lets you access or customize Windows event logs, which record information about important software or hardware events. 
+            // Using EventLog, you can read from existing logs, write entries to logs, create or delete event sources, delete logs, 
+            // and respond to log entries. You can also create new logs when creating an event source.
+
 
         }
 
@@ -171,9 +201,34 @@ namespace KnowledgeModel.Lang
         }
         // ^
 
+
+        // NLOG
         public void ImplementLogging()
         {
+            var config = new NLog.Config.LoggingConfiguration();
 
+            // Targets where to log to: File and Console
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = "file.txt" };
+            var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
+
+            // Rules for mapping loggers to targets            
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
+            config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
+
+            // Apply config           
+            NLog.LogManager.Configuration = config;
+
+            NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
+            try
+            {
+                Logger.Info("Hello world");
+                System.Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Goodbye cruel world");
+            }
         }
 
         public void ExceptionHandlingGuidelines()
