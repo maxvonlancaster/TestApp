@@ -113,7 +113,29 @@ namespace KnowledgeModel.Lang
 
         public void LargeObjects()
         {
+            // In .NET 1.1 and 2.0 if an object is >= 85,000 bytes it’s considered a large object. This number was determined by performance tuning. When an object 
+            // allocation request comes in, if it’s >= 85,000 bytes, we will allocate it on the large object heap. 
 
+            // From the generation point of view, large objects belong to generation 2 because they are collected only when we do a generation 2 collection.
+            // When a generation gets collected, all its younger generation(s) also get collected.So for example, when a generation 1 GC happens, both generation 1 and 0 get collected.And when a generation 2 
+            // GC happens, the whole heap gets collected.For this reason a generation 2 GC is also called a full GC.
+
+
+            // A garbage collection doesn't just get rid of unreferenced objects, it also compacts the heap. That's a very important optimization. It doesn't just make memory usage more efficient 
+            // (no unused holes), it makes the CPU cache much more efficient. The cache is a really big deal on modern processors, they are an easy order of magnitude faster than the memory bus.
+            // Compacting is done simply by copying bytes.That however takes time. The larger the object, the more likely that the cost of copying it outweighs the possible CPU cache usage improvements.
+            // So they ran a bunch of benchmarks to determine the break-even point.And arrived at 85,000 bytes as the cutoff point where copying no longer improves perf. With a special exception for arrays 
+            // of double, they are considered 'large' when the array has more than 1000 elements.That's another optimization for 32-bit code, the large object heap allocator has the special 
+            // property that it allocates memory at addresses that are aligned to 8, unlike the regular generational allocator that only allocates aligned to 4. That alignment is a big deal for double, 
+            // reading or writing a mis-aligned double is very expensive. Oddly the sparse Microsoft info never mention arrays of long, not sure what's up with that.
+            // Fwiw, there's lots of programmer angst about the large object heap not getting compacted. This invariably gets triggered when they write programs that 
+            // consume more than half of the entire available address space. Followed by using a tool like a memory profiler to find out why the program bombed even 
+            // though there was still lots of unused virtual memory available. Such a tool shows the holes in the LOH, unused chunks of memory where previously a large 
+            // object lived but got garbage collected. Such is the inevitable price of the LOH, the hole can only be re-used by an allocation for an object that's equal 
+            // or smaller in size.The real problem is assuming that a program should be allowed to consume all virtual memory at any time.
+            // A problem that otherwise disappears completely by just running the code on a 64-bit operating system.A 64-bit process has 8 terabytes of virtual memory address space available, 
+            // 3 orders of magnitude more than a 32-bit process.You just can't run out of holes.
+            // Long story short, the LOH makes code run more efficient.At the cost of using available virtual memory address space less efficient.
         }
 
         public void MonitoringAppMemoryUsage()
