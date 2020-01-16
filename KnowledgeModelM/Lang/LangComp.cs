@@ -86,9 +86,9 @@ namespace KnowledgeModel.Lang
         }
 
         [Author("Batman", version = 1.5)]
-        public static void CustomMethod() 
+        public static void CustomMethod()
         {
-        
+
         }
 
 
@@ -155,7 +155,7 @@ namespace KnowledgeModel.Lang
             var b = Division(7, 17);
         }
 
-        private string GetCustomerPassword(string customerId) 
+        private string GetCustomerPassword(string customerId)
         {
             Contract.Requires(!string.IsNullOrEmpty(customerId), "Customer ID cannot be Null");
             Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(customerId), "Exception!!");
@@ -165,13 +165,13 @@ namespace KnowledgeModel.Lang
             {
                 return pass;
             }
-            else 
+            else
             {
                 return null;
             }
         }
 
-        private int Division(int i, int j) 
+        private int Division(int i, int j)
         {
             Contract.Requires(i > j, "i should be greater than j");
             return i / j;
@@ -261,6 +261,19 @@ namespace KnowledgeModel.Lang
             // don't catch that exception. Enable methods further up the call stack to recover if possible.
             // Clean up resources allocated with either using statements, or finally blocks.Prefer using statements to automatically clean up resources when 
             // exceptions are thrown. Use finally blocks to clean up resources that don't implement IDisposable. Code in a finally clause is almost always executed even when exceptions are thrown.
+
+
+            // When you create user-defined exceptions, ensure that the metadata for the exceptions is available to code that is executing remotely.
+            // For example, on .NET implementations that support App Domains, exceptions may occur across App domains.Suppose App Domain A creates App 
+            // Domain B, which executes code that throws an exception. For App Domain A to properly catch and handle the exception, it must be able 
+            // to find the assembly that contains the exception thrown by App Domain B. If App Domain B throws an exception that is contained in an 
+            // assembly under its application base, but not under App Domain A's application base, App Domain A will not be able to find the exception, 
+            // and the common language runtime will throw a FileNotFoundException exception. To avoid this situation, you can deploy the assembly that
+            // contains the exception information in two ways:
+            // Put the assembly into a common application base shared by both app domains.
+            // - or -
+            // If the domains do not share a common application base, sign the assembly that contains the exception information with a strong name and 
+            // deploy the assembly into the global assembly cache.
         }
 
         // Span<T>
