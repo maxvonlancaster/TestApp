@@ -274,6 +274,11 @@ namespace KnowledgeModel.Lang
             // - or -
             // If the domains do not share a common application base, sign the assembly that contains the exception information with a strong name and 
             // deploy the assembly into the global assembly cache.
+
+            // Include a localized string message in every exception
+            // The error message that the user sees is derived from the Exception.Message property of the exception that was thrown, and not from the 
+            // name of the exception class. Typically, you assign a value to the Exception.Message property by passing the message string to the message argument of an Exception constructor.
+            // For localized applications, you should provide a localized message string for every exception that your application can throw. You use resource files to provide localized error messages.
         }
 
         // Span<T>
