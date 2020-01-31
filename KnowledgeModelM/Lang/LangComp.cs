@@ -1,4 +1,7 @@
-﻿using NLog;
+﻿using Microsoft.Diagnostics.Tracing.Parsers;
+using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
+using Microsoft.Diagnostics.Tracing.Session;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -181,7 +184,52 @@ namespace KnowledgeModel.Lang
 
         public void EventTracingForWindows()
         {
+            // Event Tracing for Windows (ETW) provides a mechanism to trace and log events that are raised 
+            // by user-mode applications and kernel-mode drivers. ETW is implemented in the Windows operating system and provides developers a fast, reliable, and versatile set of event tracing features.
 
+            // Event Tracing for Windows (ETW) provides application programmers the ability to start and stop event tracing sessions, instrument an application to provide trace events, 
+            // and consume trace events. Trace events contain an event header and provider-defined data that describes the current state of an application or operation. You can use 
+            // the events to debug an application and perform capacity and performance analysis.
+            if (!(TraceEventSession.IsElevated() ?? false))
+            {
+                Console.WriteLine("Please run me as admin");
+            }
+            else
+            {
+                // Initialize the ETW session 
+                using (var kernelSession = new TraceEventSession(KernelTraceEventParser.KernelSessionName))
+                {
+                    // Instal the control C handler. It is ok if dispose is called more than once.
+                    Console.CancelKeyPress += delegate (object sender, ConsoleCancelEventArgs e) { kernelSession.Dispose(); };
+
+                    // subscribe to specific kernel events
+                    kernelSession.EnableKernelProvider(
+                        KernelTraceEventParser.Keywords.ImageLoad |
+                        KernelTraceEventParser.Keywords.Process
+                        );
+
+                    // setup function handlers for specific types of events 
+                    kernelSession.Source.Kernel.ImageLoad += DllLoaded;
+                    kernelSession.Source.Kernel.ProcessStart += ProcessStarted;
+                    kernelSession.Source.Kernel.ProcessStop += ProcessStopped;
+
+                    // setup processing events
+                    kernelSession.Source.Process();
+                }
+            }
+        }
+
+        private void ProcessStopped(ProcessTraceData obj)
+        {
+        }
+
+        private void ProcessStarted(ProcessTraceData obj)
+        {
+        }
+
+        private void DllLoaded(ImageLoadTraceData obj)
+        {
+            Console.WriteLine("Dll loaded: {0}, by process: {1} with pid: {2}", obj.FileName, obj.ProcessName, obj.ProcessID);
         }
 
         public void EventLogging()
