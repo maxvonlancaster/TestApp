@@ -90,7 +90,11 @@ namespace KnowledgeModel.Concurrency
 
 
         // 5. Synchronization Context
-
+        // Provides the basic functionality for propagating a synchronization context in various synchronization models.
+        // The purpose of the synchronization model implemented by this class is to allow the internal asynchronous/synchronous 
+        // operations of the common language runtime to behave properly with different synchronization models. This model also simplifies 
+        // some of the requirements that managed applications have had to follow in order to work correctly under different synchronization 
+        // environments. Providers of synchronization models can extend this class and provide their own implementations for these methods.
 
 
     }
