@@ -95,7 +95,15 @@ namespace KnowledgeModel.Concurrency
         // operations of the common language runtime to behave properly with different synchronization models. This model also simplifies 
         // some of the requirements that managed applications have had to follow in order to work correctly under different synchronization 
         // environments. Providers of synchronization models can extend this class and provide their own implementations for these methods.
-
+        public void UsingSynchronisationContext() 
+        {
+            var context = SynchronizationContext.Current;
+            Thread t1 = new Thread(PrintStuffLocked);
+            Thread t2 = new Thread(PrintStuffLocked);
+            t1.Start();
+            t2.Start();
+            context = SynchronizationContext.Current;
+        }
 
     }
 }
