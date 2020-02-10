@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Forum.DAL.Implementations;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -112,9 +113,13 @@ namespace KnowledgeModel.DbAccess
 
 
         // Disconnected entities
+        public void DisconnectedEntities() 
+        {
+            using (var context = new ForumsDbContext(new Microsoft.EntityFrameworkCore.DbContextOptions<ForumsDbContext>()))
+            {
 
-
-
+            }
+        }
 
     }
 }
