@@ -38,6 +38,7 @@ namespace KnowledgeModel.DbAccess
 
 
         // Handle and diagnose database connection exceptions
+        // SqlException
 
 
         // Manage exceptions when selecting, modifying data
