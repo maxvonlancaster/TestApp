@@ -8,6 +8,7 @@ using ConsoleAppTest.Patterns;
 using KnowledgeModel.Lang;
 using System.Threading.Tasks;
 using KnowledgeModel.Concurrency;
+using KnowledgeModel.DbAccess;
 
 namespace ConsoleAppTest
 {
@@ -15,8 +16,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new LangComp();
-            service.EventTracingForWindows();
+            var service = new DbAccessQ();
+            service.GetStuff();
             //AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }
