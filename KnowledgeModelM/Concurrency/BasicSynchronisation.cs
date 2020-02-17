@@ -14,7 +14,7 @@ namespace KnowledgeModel.Concurrency
         // Threads share resources and executes asynchronously. Accessing shared resources (data) is critical task that sometimes 
         // may halt the system. We deal with it by making threads synchronized.
         // It is mainly used in case of transactions like deposit, withdraw etc.
-        public void PrintStuff() 
+        public void PrintStuff()
         {
             for (int i = 1; i <= 10; i++)
             {
@@ -24,7 +24,7 @@ namespace KnowledgeModel.Concurrency
         }
 
         // No synchronisation:
-        public void NoSynch() 
+        public void NoSynch()
         {
             Thread t1 = new Thread(PrintStuff);
             Thread t2 = new Thread(PrintStuff);
@@ -39,7 +39,8 @@ namespace KnowledgeModel.Concurrency
 
         public void PrintStuffLocked()
         {
-            lock (Obj) {
+            lock (Obj)
+            {
                 for (int i = 1; i <= 10; i++)
                 {
                     Thread.Sleep(100);
@@ -48,7 +49,7 @@ namespace KnowledgeModel.Concurrency
             }
         }
 
-        public void LockUsage() 
+        public void LockUsage()
         {
             Thread t1 = new Thread(PrintStuffLocked);
             Thread t2 = new Thread(PrintStuffLocked);
@@ -79,7 +80,7 @@ namespace KnowledgeModel.Concurrency
         // Reset() - Resets the state of the event to non-signaled to block the threads.
         private EventWaitHandle _waitHandle = new AutoResetEvent(false);
 
-        public void SignalingWithEvent() 
+        public void SignalingWithEvent()
         {
             Thread t1 = new Thread(PrintStuffLocked);
             Thread t2 = new Thread(PrintStuffLocked);
@@ -95,15 +96,24 @@ namespace KnowledgeModel.Concurrency
         // operations of the common language runtime to behave properly with different synchronization models. This model also simplifies 
         // some of the requirements that managed applications have had to follow in order to work correctly under different synchronization 
         // environments. Providers of synchronization models can extend this class and provide their own implementations for these methods.
-        public void UsingSynchronisationContext() 
+        public void UsingSynchronisationContext()
         {
             var context = SynchronizationContext.Current;
-            Thread t1 = new Thread(PrintStuffLocked);
-            Thread t2 = new Thread(PrintStuffLocked);
+            Thread t1 = new Thread(PrintStuffSynchronized);
+            Thread t2 = new Thread(PrintStuffSynchronized);
             t1.Start();
             t2.Start();
             context = SynchronizationContext.Current;
         }
 
+
+        public void PrintStuffSynchronized()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                Thread.Sleep(100);
+                Console.WriteLine(i);
+            }
+        }
     }
 }
