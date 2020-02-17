@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace KnowledgeModel.Concurrency
 {
@@ -96,7 +98,7 @@ namespace KnowledgeModel.Concurrency
         // operations of the common language runtime to behave properly with different synchronization models. This model also simplifies 
         // some of the requirements that managed applications have had to follow in order to work correctly under different synchronization 
         // environments. Providers of synchronization models can extend this class and provide their own implementations for these methods.
-        public void UsingSynchronisationContext()
+        public async Task UsingSynchronisationContext()
         {
             var context = SynchronizationContext.Current;
             Thread t1 = new Thread(PrintStuffSynchronized);
@@ -104,6 +106,30 @@ namespace KnowledgeModel.Concurrency
             t1.Start();
             t2.Start();
             context = SynchronizationContext.Current;
+
+
+            // 
+            var task = SomeTask();
+            SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+            var currentContext = SynchronizationContext.Current;
+
+            await task.ContinueWith(t =>
+            {
+                var errors = t.Exception as AggregateException;
+
+                if (errors == null)
+                {
+                    Console.WriteLine(t.Result);
+                }
+
+                else
+                {
+                    Exception actualException = errors.InnerExceptions.First();
+                    Console.WriteLine(actualException.Message);
+                }
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+
+            var i = await task;
         }
 
 
@@ -114,6 +140,14 @@ namespace KnowledgeModel.Concurrency
                 Thread.Sleep(100);
                 Console.WriteLine(i);
             }
+        }
+
+        public Task<int> SomeTask() 
+        {
+            Thread.Sleep(1000);
+            Func<int> f = () => { return 1; };
+            Task<int> task = new Task<int>(f);
+            return task;
         }
     }
 }

@@ -16,16 +16,16 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new DbAccessQ();
-            service.GetStuff();
-            //AsyncMethods().Wait();
+            //var service = new BasicSynchronisation();
+            //service.UsingSynchronisationContext();
+            AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }
 
         static async Task AsyncMethods() 
         {
-            var service = new AsyncBasics();
-            await service.WaitingAny();
+            var service = new BasicSynchronisation();
+            await service.UsingSynchronisationContext();
         }
     }
 }
