@@ -1,35 +1,122 @@
 ﻿1. Software development process
+	In software engineering, a software development process is the process of dividing software development work into distinct phases to improve design, product management, 
+	and project management. It is also known as a software development life cycle (SDLC). The methodology may include the pre-definition of specific deliverables and 
+	artifacts that are created and completed by a project team to develop or maintain an application.
+	Most modern development processes can be vaguely described as agile. Other methodologies include waterfall, prototyping, iterative and incremental development, 
+	spiral development, rapid application development, and extreme programming.
 
 
 2. Basics of SDLC models:
 
+2.1. Waterfall Concept
+	The waterfall model is a breakdown of project activities into linear sequential phases, where each phase depends on the deliverables of the previous one and corresponds to 
+	a specialisation of tasks. The approach is typical for certain areas of engineering design. In software development, it tends to be among the less iterative and flexible 
+	approaches, as progress flows in largely one direction ("downwards" like a waterfall) through the phases of conception, initiation, analysis, design, construction, testing, 
+	deployment and maintenance.
+	The waterfall development model originated in the manufacturing and construction industries; where the highly structured physical environments meant that design changes 
+	became prohibitively expensive much sooner in the development process. When first adopted for software development, there were no recognised alternatives for knowledge-
+	based creative work.
+	Phases: Requirements -> Design -> Implementation -> Verification -> Maintanence;
+	Clients may not know exactly what their requirements are before they see working software and so change their requirements, leading to redesign, redevelopment, and retesting, 
+	and increased costs. Designers may not be aware of future difficulties when designing a new software product or feature. In response to the perceived problems with the pure 
+	waterfall model, modified waterfall models were introduced
 
-3. Waterfall Concept
-
-
-4. Agile software development concept
-
-
-5. Scrum
-
-
-6. Roles and responsibilities
-
-
-7. Artifacts (Scrum board, Cards, Epics, Stories, Tasks, Backlogs, Sprint, Increment, etc.)
-
-
-8. Estimation (Story Points, Velocity, Sprint Burndown Chart, Feature Burnup Chart)
-
-
-9. Ceremonies (Release planning, Sprint planning, Daily Scrum, Sprint demo, Sprint retrospective)
-
-
-10. Kanban
+2.2. Agile software development concept
+	Agile software development comprises various approaches to software development under which requirements and solutions evolve through the collaborative effort of self-organizing 
+	and cross-functional teams and their customer(s)/end user(s). It advocates adaptive planning, evolutionary development, early delivery, and continual improvement, and it encourages 
+	rapid and flexible response to change.
+	The term agile was popularized, in this context, by the Manifesto for Agile Software Development. The values and principles espoused in this manifesto were derived from and underpin 
+	a broad range of software development frameworks, including Scrum and Kanban.
+	One of the differences between agile software development methods and waterfall is the approach to quality and testing. In the waterfall model, there is always a separate testing 
+	phase after a build phase; however, in agile software development testing is completed in the same iteration as programming.
 
 
-11. Scrum vs Kanban: applicability
+3. Scrum
+	Scrum is an agile process framework for managing complex knowledge work, with an initial emphasis on software development, although it has been used in other fields and is slowly 
+	starting to be explored for other complex work, research and advanced technologies.[1] It is designed for teams of ten or fewer members, who break their work into goals that can be 
+	completed within timeboxed iterations, called sprints, no longer than one month and most commonly two weeks, then track progress and re-plan in 15-minute time-boxed daily meetings, 
+	called daily scrums.
+	
+3.1. Roles and responsibilities
+	The three scrum roles are as follows.
+	Product Owner: The person with the product vision
+	Scrum Master: The scrum expert who helps the team build the product according to the scrum framework
+	Development Team: The team members who execute the work
 
+3.2. Artifacts (Scrum board, Cards, Epics, Stories, Tasks, Backlogs, Sprint, Increment, etc.)
+	Scrum Artifacts provide key information that the Scrum Team and the stakeholders need to be aware of for understanding the product under development, the activities being planned, 
+	and the activities done in the project. Scrum artifacts are what the team works on, and no one can make them work on anything else.
+	Scrum board: 
+	Cards: 
+	Epics: a big chunk of work that has one common objective. It could be a feature, customer request or business requirement.
+	Stories: 
+	Tasks: 
+	Backlogs: a ranked list of items that represent customer- or stakeholder-driven changes to the product
+	Sprint: A sprint (also known as iteration or timebox) is the basic unit of development in Scrum. The sprint is a timeboxed effort; that is, the length is agreed and fixed in advance for 
+	each sprint and is normally between one week and one month, with two weeks being the most common
+	Increment: the sum of total of items completed during the sprint and the new functionality they provide.
 
-12. Scrumban
+3.3. Estimation (Story Points, Velocity, Sprint Burndown Chart, Feature Burnup Chart)
+	Story Points: The product backlog contains the product owner's assessment of business value and the development team's assessment of development effort, which are often, but not always, 
+	stated in story points using the rounded Fibonacci scale. Story points define the effort in a time-box, so they do not change with time.
+	Velocity: The total effort a team is capable of in a sprint. The number is derived by evaluating the work (typically in user story points) completed in the last sprint. The collection of 
+	historical velocity data is a guideline for assisting the team in understanding how much work they can likely achieve in a future sprint.
+	Sprint Burndown Chart: a publicly displayed chart showing remaining work in the sprint backlog.[49] Updated every day, it gives a simple view of the sprint progress. It also provides quick 
+	visualizations for reference. The horizontal axis of the sprint burndown chart shows the days in a sprint, while the vertical axis shows the amount of work remaining each day. During sprint 
+	planning, the ideal burndown chart is plotted. Then, during the sprint, each member picks up tasks from the sprint backlog and works on them. At the end of the day, they update the remaining 
+	hours for tasks to be completed. In such a way, the actual burndown chart is updated day by day.
+	Feature Burnup Chart: 
 
+3.4. Ceremonies (Release planning, Sprint planning, Daily Scrum, Sprint demo, Sprint retrospective)
+	Release planning: 
+	Sprint planning: marks the beginning of the sprint, The Scrum team decides what items from the product backlog to pull into the current sprint backlog. The development team forms a plan 
+	for delivering the selected backlog items.
+	Daily Scrum: occurs on every day of the sprint when there isn’t another ceremony. It’s timeboxed at 15 minutes, during which the team comes up with a plan for the next 24 hours.
+	Sprint demo: At the end of the sprint, the Scrum team holds sprint review. The entire team attends, as well as any stakeholders invited by the product owner.
+	Sprint retrospective: After sprint review, but before the next sprint, the team holds the final scrum ceremony: the sprint retrospective, also known as the agile retrospective. Just as 
+	the sprint review offers a moment for the team to inspect and adapt the product it’s making, the sprint retrospective is a space for the team to reflect on its process.
+
+4. Kanban
+	Kanban (Japanese 看板, signboard or billboard) is a lean method to manage and improve work across human systems. This approach aims to manage work by balancing demands with available 
+	capacity, and by improving the handling of system-level bottlenecks.
+	Work items are visualized to give participants a view of progress and process, from start to finish—usually via a Kanban board. Work is pulled as capacity permits, rather than work 
+	being pushed into the process when requested.
+	In knowledge work and in software development, the aim is to provide a visual process management system which aids decision-making about what, when, and how much to produce. The 
+	underlying Kanban method originated in lean manufacturing.
+	Kanban boards, designed for the context in which they are used, vary considerably and may show work item types ("features" and "user stories" here), columns delineating workflow activities, 
+	explicit policies, and swimlanes (rows crossing several columns, used for grouping user stories by feature here). The aim is to make the general workflow and the progress of individual items 
+	clear to participants and stakeholders.
+	The two primary practices of Kanban are: Visualize your work and Limit work in progress(WIP).
+	Kanban manages workflow directly on the Kanban board. The WIP limits for development steps provide development teams immediate feedback on common workflow issues.
+
+5. Scrum vs Kanban: applicability
+	Team Roles: S - A Scrum Master, Product Owner and Team Members; K - No set roles are defined. Roles are not required to be cross functional.
+	Work Boards: S - Columns are labeled to reflect periods in the work flow from beginning through the team’s definition of done; K - Columns are likewise labeled to show work flow states, 
+	but also publish the max number of stories allowed in column at once.
+	Scheduling/ Cadence: S - Scrum processes place heavy emphasis on schedule with a prioritized list of story points. This iterative process enables accurate estimations of work flow and 
+	effective management of multiple projects; K - There are no required time boxes or iterations. While the Kanban method is iterative in nature, the continual improvement is expected to 
+	occur in an evolutionary fashion as work is continually completed.
+
+6. Scrumban
+	Scrumban is an Agile development methodology that is a hybrid of Scrum and Kanban.
+	Scrumban emerged to meet the needs of teams wanting minimize the batching of work and adopt a pull-based system. A hybrid of Scrum and Kanban gives teams the flexibility to adapt and change 
+	to stakeholder and production needs, without feeling overburdened by their project methodology. Scrumban provides the structure of Scrum with the flexibility and visualization of Kanban, 
+	making it a highly versatile approach to workflow management.
+	It can also be used as a stepping stone for teams looking to transition from Scrum to Kanban. For many software development teams, an immediate shift to Kanban would be too drastic. Scrumban 
+	offers teams a healthy, familiar way of learning how to practice continuous improvement in Kanban without abandoning the familiar structure of Scrum.
+	Scrumban combines the structure of Scrum with the flow-based methods of Kanban. Here are the elements of Scrum that are incorporated into the Scrumban method:
+	Iteration planning at regular intervals, synchronized with reviews and retrospectives
+	Decide how much work they can pull into the sprint based on the complexity of the work and the length of the sprint
+	Prioritization on demand -- provides team with the best thing to work on next -- no more or less
+	Assure necessary level of analysis before starting development (Definition of Ready)
+	Use “ready” queue (between Backlog and Doing) to organize
+	Kanban adds process improvement, visualization, and more value metrics to the Scrumban method. These are the elements of Kanban that are used by Scrumban teams:
+	Pull system and continuous workflow: Pull items into Doing as the team has capacity
+	WIP limits: Explicit limits on how many items are in progress at any time
+	Individual roles not clearly specified
+	Short lead times -- emphasize just-in-time analysis and planning (rather than batch-processing for iteration planning estimations)
+	Use process buffers and flow diagrams to expose process weaknesses and identify opportunities for improvement
+	Focus more on cycle time than burndown (if cycle time is predictable, burndown is predictable)
+	Use policies to make process step transitions clearer
+	Scrumban is a great solution for teams who need the structure of Scrum with the flexibility of a flow-based method, or for teams who are looking to transition from Scrum to Kanban. Many teams use 
+	Scrumban as a transition point between a less mature and more mature Agile practice.

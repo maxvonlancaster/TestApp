@@ -1,1 +1,35 @@
-﻿
+﻿1. Scope Concept
+	
+
+2. Estimates, Targets, and Commitments 
+	
+
+3. Overestimate vs Underestimate 
+	
+
+4. Decomposition and Recomposition 
+	
+
+5. Analogy-based estimations 
+	
+
+6. Estimating in Agile
+	
+6.1. Estimating Size with Story Points
+	
+
+6.2. Velocity (simple explanation)
+	
+
+6.3. Planning Poker, When to PLay
+	
+
+6.4. When to re-estimate and Relative Size
+	
+
+6.5. Story Points vs. Ideal Days
+	
+
+6.6. Cross-Functional team
+	
+
