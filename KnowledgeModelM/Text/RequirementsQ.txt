@@ -6,13 +6,22 @@
 	to an explicit, highly objective/clear (and often quantitative) requirement (or sometimes, set of requirements) to be satisfied by a material, design, product, or service.
 
 2. Levels of Requirements: Business, User, and Functional requirements 
-	
+	Business level: defines the business problems or opportunities about the product. Business requirements define why the software product is being developed. They are the objectives of the 
+	customer requesting the development of the software.
+	User level: defines functionality of the software product from the user’s perspective. They define what the software has to do in order for the users to accomplish their objectives.
+	Functional level: define the software functionality must be built into the product to enable users to accomplish their tasks. This includes the entire external, database, functional/non-
+	functional requirements.
 
 3. Most common requirements risks 
-	
+	Lack of involvement of the technical department; Scope creep; Poor impact analysis;
+	Requirements risks are occurrences or conditions that can affect the successful development of an end product if not properly managed. As part of elicitation efforts, BAs typically identify 
+	risks by asking “What-if” questions. When elicitation efforts focus on identifying exceptions and failure points, it’s a form of risk management. The idea is to find potential solutions to 
+	these questions and include them as part of requirements to reduce the probability of missing out on critical requirements.
 
 4. Characteristics of Excellent Requirements 
-	
+	Good requirements should have the following characteristics:
+	Unambiguous; Testable (verifiable); Clear (concise, terse, simple, precise); Correct; Understandable; Feasible (realistic, possible); Independent; Atomic; Necessary; Implementation-free (abstract)
+	Besides these criteria for individual requirements, three criteria apply to the set of requirements. The set should be Consistent; Nonredundant; Complete
 
 5. Benefits from a High-Quality Requirements Process 
 	

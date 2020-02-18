@@ -16,13 +16,25 @@
 6. Estimating in Agile
 	
 6.1. Estimating Size with Story Points
-	
+	Many agile teams, have transitioned to story points. Story points rate the relative effort of work in a Fibonacci-like format: 0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100. It may 
+	sound counter-intuitive, but that abstraction is actually helpful because it pushes the team to make tougher decisions around the difficulty of work. Here are few reasons to 
+	use story points:
+	Dates don’t account for the non-project related work that inevitably creeps into our days: emails, meetings, and interviews that a team member may be involved in.
+	Dates have an emotional attachment to them. Relative estimation removes the emotional attachment.
+	Each team will estimate work on a slightly different scale, which means their velocity (measured in points) will naturally be different. This, in turn, makes it impossible to 
+	play politics using velocity as a weapon.
+	Once you agree on the relative effort of each story point value, you can assign points quickly without much debate. 
+	Story points reward team members for solving problems based on difficulty, not time spent. This keeps team members focused on shipping value, not spending time. 
 
 6.2. Velocity (simple explanation)
-	
+	The total effort a team is capable of in a sprint. The number is derived by evaluating the work (typically in user story points) completed in the last sprint. The collection of 
+	historical velocity data is a guideline for assisting the team in understanding how much work they can likely achieve in a future sprint.
 
 6.3. Planning Poker, When to PLay
-	
+	Planning poker, also called Scrum poker, is a consensus-based, gamified technique for estimating, mostly used to estimate effort or relative size of development goals in software 
+	development. In planning poker, members of the group make estimates by playing numbered cards face-down to the table, instead of speaking them aloud. The cards are revealed, and 
+	the estimates are then discussed. By hiding the figures in this way, the group can avoid the cognitive bias of anchoring, where the first number spoken aloud sets a precedent for 
+	subsequent estimates.
 
 6.4. When to re-estimate and Relative Size
 	
