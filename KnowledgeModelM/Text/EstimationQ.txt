@@ -1,17 +1,41 @@
 ﻿1. Scope Concept
-	
+	Scope refers to the combined objectives and requirements needed to complete a project. The term is often used in project management. Properly defining the scope of a project 
+	allows managers to estimate costs and the time required to finish the project. That's what makes scope management such an important part of business—it saves both time and 
+	money. There are generally two different types of scope in project management. These are project and product scope.
 
 2. Estimates, Targets, and Commitments 
-	
+	An estimate is a rough measure of how long it will take to complete a task in the future. When you give estimates, you are predicting the future. You don’t know what kind of 
+	obstacles you will run into. There may be unexpected delays. Or things may take less time than expected. You never know. Because estimates are highly speculative, they are 
+	prone to a lot of variance. “We can deliver that feature after three weeks of work,” is an estimate. You’re well aware that it may actually take two weeks or four.
+	A target is a goal. “We should have that finished by the end of the month,” is a target. It may not take the whole month, and in fact you may working on several other 
+	things in the month. But your goal is to have it done by then. It might not happen, though.
+	A commitment is more of a promise. “We will have that released by the end of the month.” Now you are committed. If it turns out it will take longer, you’ll need to cut 
+	back on other tasks, work overtime, or do other things. A failure to deliver on time shows you can’t meet your commitments.
 
 3. Overestimate vs Underestimate 
-	
+	Managers and other project stakeholders sometimes fear that, if a project is overestimated, Parkinson’s Law  will kick in – the idea that work will expand to fill available time.
+	Another concern is Goldratt’s “Student Syndrome”. If developers are given too much time, they’ll procrastinate until late in the project, at which point they’ll rush to complete 
+	their work, and they probably won’t finish the project on time. A related motivation for underestimation is the desire to instill a sense of urgency in the development team.
+	Low estimates undermine effective planning by feeding bad assumptions into plans for specific activities. They can cause planning errors in the team size, such as planning to 
+	use a team that’s smaller than it should be. Statistically reduced chance of on-time completion Developers typically estimate 20% to 30% lower than their actual effort. 
+	Destructive late-project dynamics make the project worse than nominal. 
+	Don’t intentionally underestimate. The penalty for underestimation is more severe than the penalty for overestimation. Address concerns about overestimation through planning 
+	and control, not by biasing your estimates.
 
 4. Decomposition and Recomposition 
-	
+	Decomposition is the practice of separating an estimate into multiple pieces, estimating each piece individually, and then recombining the individual estimates into an aggregate 
+	estimate. This estimation approach is also known as "bottom up," "micro estimation," "module build up," "by engineering procedure," and by many other names (Tockey 2005).
+	Decomposition is a cornerstone estimation practice—as long as you watch out for a few pitfalls. This chapter discusses the basic practice in more detail and explains how to 
+	avoid such pitfalls.
 
 5. Analogy-based estimations 
-	
+	Analogy Based Software Estimation is based on the principle that actual values achieved within the organization in an earlier and similar project are better indicators and predict 
+	the future project performance much better than an estimate developed afresh from scratch. It also facilitates bringing the organizational experience to bear on the new projects. 
+	1)  The organization ought to have executed a number of projects 2)  The organization should be keeping meticulous records of past projects 3)  The organization must be conducting 
+	project post mortem for every project and causes for variances must be identified using meticulous methods and the actual values validated depending on the causes. Care must be taken 
+	to prevent erroneous data to influence future projects. 4)  The organization should have a well organized and maintained Knowledge Repository from which it is feasible to locate 
+	similar past projects and extract the validated project data 5)  The estimators should be trained in drawing analogies accurately and in accessing the Knowledge Repository and 
+	extracting validated data and extrapolate the same for the current project
 
 6. Estimating in Agile
 	
@@ -37,11 +61,31 @@
 	subsequent estimates.
 
 6.4. When to re-estimate and Relative Size
-	
+	Here are our guidelines on when you should resize:
+	If you split a story into smaller stories, you need to resize each of these smaller stories you split the original story into. Also remember that the new stories don’t need to add 
+	up to the original story size. Once we break things down we generally get a much better idea of the size, since we are better at sizing smaller things than large things. It’s very 
+	common for the total size to get bigger when we break things down.
+	If the team made an assumption when sizing and that assumption has now been shown to be incorrect. For example you assumed the same functionality is available on all platforms, and 
+	after research that turns out not to be the case.
+	If your understanding about the requirements have changed, you should resize it. Often we find that teams didn’t ask enough questions in grooming initially and thought they understood 
+	what was expected, but later they realised they misunderstood something. Even if the requirement hasn’t changed, the team’s understanding of the requirement may have changed.
 
 6.5. Story Points vs. Ideal Days
-	
+	Ideal days: the number of days of effort that it would take the team to get a story done if the team worked with no interruptions. Story Points are for sizing, not for time estimation. 
+	This allows teams to: 1) Quickly size features and create a release plan without getting bogged down in implementation details. Team members are often very reluctant to provide time 
+	estimates unless they have all of the details about a feature. Being agile means that it is okay not to have all of the details up front. Developers typically are more comfortable 
+	saying that Feature B is twice as big as Feature A knowing that they won’t be held to a specific time estimate.
+	2) Use Story Points in conjunction with the team’s velocity to make delivery date projections that are not as prone to decay as those using story-level time estimates. Relative sizings 
+	based on Story Points are usually fairly stable; estimates based on time can change dramatically as a project unfolds. In conjunction with Story Points, velocity is a reflection the team’s 
+	productivity and expertise. This is much easier and more flexible than trying to bake size, effort, productivity, and expertise into one ideal days number for each story.
+	3) Create sizings that include all of the effort to get a story to ‘done’. Story Points include development hours, user interaction design, QA testing, etc.
+	4) Prevent stakeholders from using Ideal Days estimates to calculate unrealistic delivery dates which are then mandated to the team. It is not their call how many hours per day the team 
+	spends actually working on user stories. They do not have a sense of how the mix of skills on the team or other factors will impact productivity. It is up to the team to determine how much 
+	time it can spend working on stories, and how much time it needs for grooming the backlog, doing production support, etc.
 
 6.6. Cross-Functional team
-	
+	Cross functional teams are groups consisting of people from different functional areas of the company - for example, marketing, product, sales, and customer success. These can be working groups, 
+	where each member belongs to their functional team as well as the cross functional team, or they can be the primary structure of your organization. Cross functional teams are growing in popularity 
+	because of an increased demand from customers to provide consistently personalized, high-touch customer experience. Some of the benefits of cross functional teams include improved coordination 
+	across functional areas, increased innovation in product and process, and reduced cycle times for key customer touchpoints.
 
