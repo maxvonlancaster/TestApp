@@ -1,7 +1,11 @@
 ﻿1. Scope Concept
 	Scope refers to the combined objectives and requirements needed to complete a project. The term is often used in project management. Properly defining the scope of a project 
 	allows managers to estimate costs and the time required to finish the project. That's what makes scope management such an important part of business—it saves both time and 
-	money. There are generally two different types of scope in project management. These are project and product scope.
+	money. There are generally two different types of scope in project management. These are project and product scope. Uncontrollable changes that extend deadlines are known 
+	as scope creep. Extended deadlines may change the original requirements of the project's scope. As the project progresses, small changes to the original plan occur, expanding 
+	the scope from the initial limits regarding budget and time. Small changes can lead to additional changes, resulting in a cascading effect of further considerations and 
+	requirements. Effective project management considers the possibility of scope creep and incorporates strategies to mitigate it. Understanding the vision or primary objective, 
+	proper initial planning, as well as devising and adopting approaches to avoid scope creep from the outset are ways to prevent scope creep.
 
 2. Estimates, Targets, and Commitments 
 	An estimate is a rough measure of how long it will take to complete a task in the future. When you give estimates, you are predicting the future. You don’t know what kind of 
