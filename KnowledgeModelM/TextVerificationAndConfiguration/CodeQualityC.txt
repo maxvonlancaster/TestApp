@@ -1,0 +1,41 @@
+﻿1. SDO Best Practices Catalog - Coding Standards
+	
+
+2. SDO Best Practices Catalog - Automatic Code Inspection
+	
+
+3. SDO Best Practices Catalog - Code Review Process
+	
+
+4. Automated coding standards enforcement (StyleCop, Resharper)
+	
+
+5. Code Reviews and Toolset
+	
+
+6. Use Work Items (TODO, BUG etc.)
+	
+
+7. Preemptive Error Detection
+	
+
+8. Desirable characteristics of a design (minimal complexity, ease of maintenance, minimal connectedness etc)
+	
+
+9. Creating high quality classes
+	
+
+10. Creating high quality methods
+	
+
+11. Guidelines for initializing variables
+	
+
+12. Exceptions and error handling techniques
+	
+
+13. Best practices of working with data types
+	
+
+14. Code commenting practices
+	
