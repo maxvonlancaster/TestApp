@@ -10,7 +10,17 @@
 	perform work, report on and change their state, and "communicate" with other objects in the system. 
 
 2. Encapsulation
-	
+	Bundling of data with the methods that operate on that data, or the restricting of direct access to some of an object's components. 
+	Encapsulation is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct 
+	access to them. Publicly accessible methods are generally provided in the class (so-called "getters" and "setters") to access the values, 
+	and other client classes call these methods to retrieve and modify the values within the object.
+	A language mechanism for restricting direct access to some of the object's components.
+	Encapsulation is implemented by using access specifiers. An access specifier defines the scope and visibility of a class member. C# 
+	supports the following access specifiers − Public Private Protected Internal Protected internal
+	Abstraction and encapsulation are related features in object oriented programming. Abstraction allows making relevant information visible 
+	and encapsulation enables a programmer to implement the desired level of abstraction.
+	Encapsulation can be achieved by: Declaring all the variables in the class as private and using C# Properties in the class to set and get 
+	the values of variables.
 
 3. Inheritance vs. Aggregation
 	
