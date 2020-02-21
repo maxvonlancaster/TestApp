@@ -61,13 +61,93 @@ namespace ConsoleAppTest.Patterns
         /// <summary>
         /// BEHAVIORAL
         /// </summary>
+        public void ChainOfResponsibilityClient() 
+        {
+            
+        }
 
+        public void CommandClient() 
+        {
+        
+        }
 
+        public void IteratorClient() 
+        {
+        
+        }
+
+        public void MediatorClient() 
+        {
+        
+        }
+
+        public void MementoClient()
+        {
+
+        }
+
+        public void ObserverClient()
+        {
+
+        }
+
+        public void StateClient()
+        {
+
+        }
+
+        public void StrategyClient()
+        {
+
+        }
+
+        public void TemplateMethodClient()
+        {
+
+        }
+
+        public void VisitorClient()
+        {
+
+        }
 
         /// <summary>
         /// STRUCTURAL
         /// </summary>
-        
+        public void AdapterClient()
+        {
+
+        }
+
+        public void BridgeClient()
+        {
+
+        }
+
+        public void CompositeClient()
+        {
+
+        }
+
+        public void DecoratorClient()
+        {
+
+        }
+
+        public void FacadeClient()
+        {
+
+        }
+
+        public void FlyweightClient()
+        {
+
+        }
+
+        public void ProxyClient()
+        {
+
+        }
 
     }
 }
