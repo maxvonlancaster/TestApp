@@ -17,7 +17,10 @@ namespace ConsoleAppTest.Services
             var переменная = "Cyrillic variable";
             Console.WriteLine(переменная);
 
-            for (var i = 0; i < 10; i++) { }
+            for (var i = 0; i < 10; i++) 
+            {
+                var inScope = "var";
+            }
 
             // deadlock
             Thread thread1 = new Thread(Task1);
