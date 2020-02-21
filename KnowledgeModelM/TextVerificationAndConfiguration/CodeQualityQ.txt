@@ -1,2 +1,3 @@
 ﻿1. MSDN: Guidelines for Names
 	
+	
