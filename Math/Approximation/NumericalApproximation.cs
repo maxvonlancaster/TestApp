@@ -15,5 +15,15 @@ namespace Mathematics.Approximation
                 Console.WriteLine("Step: {0}, value: {1}", i, a);
             }
         }
+
+        public void BabylonianApproximation(double number) 
+        {
+            double a = 1.0;
+            for (int i = 2; i < 40; i++)
+            {
+                a = 0.5 * (a + number / a);
+                Console.WriteLine("Step: {0}, value: {1}", i, a);
+            }
+        }
     }
 }

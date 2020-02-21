@@ -10,6 +10,7 @@ namespace Mathematics
         {
             var service = new NumericalApproximation();
             service.BabylonianApproximation();
+            service.BabylonianApproximation(100);
             Console.WriteLine("This is math playground!");
         }
     }
