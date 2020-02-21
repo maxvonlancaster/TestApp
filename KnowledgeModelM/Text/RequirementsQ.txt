@@ -24,8 +24,29 @@
 	Besides these criteria for individual requirements, three criteria apply to the set of requirements. The set should be Consistent; Nonredundant; Complete
 
 5. Benefits from a High-Quality Requirements Process 
+	The return on investment for good requirements gathering is virtually always higher than the cost.  In almost all cases if you spend the time develop the requirements you can develop a far superior 
+	product with much less hassle and frustration.  At the same time not doing the right amount of requirements gathering can create a chaotic environment in which stakeholders are upset with the managers, 
+	managers are upset with the developers, developers are upset with managers and in the end what really suffers is the product.  Some of the benefits from good requirements gathering can be:
+	Fewer defects in the delivered product
+	Less development rework
+	Faster delivery of the finished product
+	Less unused features
+	Lower cost of development
+	Less miss-communicated requirements
+	Reduced project chaos
+	Higher levels of satisfaction from stakeholders
+	Higher levels of satisfaction from developers
+	Higher levels of satisfaction from consumers and users
+	Products that work well and have a useful feature set
 	
 
 6. Root Causes of Project Success and Failure
+	Here are just some of the most common causes of project failure:
+	Poorly defined project scope; Inadequate risk management; Failure to identify key assumptions; Project managers who lack experience and training; No use of formal methods and strategies; Lack of effective 
+	communication at all levels; Key staff leaving the project and/or company; Poor management of expectations; Ineffective leadership; Lack of detailed documentation; Failure to track requirements; 
+	Failure to track progress; Lack of detail in the project plans; Inaccurate time and effort estimates; Cultural differences in global projects;
+	The top 5 factors found in successful projects are: 1.   User Involvement 2.   Executive Management Support 3.   Clear Statement of Requirements 4.   Proper Planning 5.   Realistic Expectations
+	The top 5 indicators found in “Challenged” projects are: 1.   Lack of User Input 2.   Incomplete Requirements & Specifications 3.   Changing Requirements & Specifications 4.   Lack of Executive Support 5.   Technical
+	Incompetence
 	
 
