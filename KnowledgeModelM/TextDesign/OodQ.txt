@@ -26,7 +26,21 @@
 	
 
 4. Modularity
-	
+	Broadly speaking, modularity is the degree to which a system's components may be separated and recombined, often with the benefit of flexibility 
+	and variety in use. The concept of modularity is used primarily to reduce complexity by breaking a system into varying degrees of interdependence 
+	and independence across and "hide the complexity of each part behind an abstraction and interface." However, the concept of modularity can be 
+	extended to multiple disciplines, each with their own nuances.  logical partitioning of the "software design" that allows complex software to 
+	be manageable for the purpose of implementation and maintenance. The logic of partitioning may be based on related functions, implementation 
+	considerations, data links, or other criteria.
+	Modularity refers to the concept of making multiple modules first and then linking and combining them to form a complete system. Modularity 
+	enables re-usability and minimizes duplication. In addition to re-usability, modularity also makes it easier to fix problems as bugs can be 
+	traced to specific system modules, thus limiting the scope of detailed error searching. Modular programming is an extensively used concept 
+	based on modularity. Modularity is also a feature of object oriented programming.
+	Allows multiple implementations: The client can select an appropriate implementation module without modification of its code.
+	Ensures that required functions are effectively provided
+	Allows several developers to work on different modules concurrently
+	Allows to test modules independently
+	Large projects become easier to monitor and to control
 
 5. Polymorphism
 	Provision of a single interface to entities of different types or the use of a single symbol to represent multiple different types. 
