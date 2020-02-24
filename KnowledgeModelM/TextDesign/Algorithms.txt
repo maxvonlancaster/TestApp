@@ -6,6 +6,23 @@
 	
 
 2. Array sorting methods(bubble sort, quick sort, merge sort)
+	Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
+	Worst and Average Case Time Complexity: O(n*n). Worst case occurs when array is reverse sorted. Best Case Time Complexity: O(n). Best case 
+	occurs when array is already sorted.  
+	Quicksort (sometimes called partition-exchange sort) is an efficient sorting algorithm. Quicksort is a divide-and-conquer algorithm. It works 
+	by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than 
+	or greater than the pivot. The sub-arrays are then sorted recursively. This can be done in-place, requiring small additional amounts of memory 
+	to perform the sorting. Mathematical analysis of quicksort shows that, on average, the algorithm takes O(n log n) comparisons to sort n items. 
+	In the worst case, it makes O(n^2) comparisons, though this behavior is rare. The steps for in-place Quicksort are: 1) Pick an element, called 
+	a pivot, from the array. 2) Partitioning: reorder the array so that all elements with values less than the pivot come before the pivot, while 
+	all elements with values greater than the pivot come after it (equal values can go either way). After this partitioning, the pivot is in its 
+	final position. This is called the partition operation. 3) Recursively apply the above steps to the sub-array of elements with smaller values 
+	and separately to the sub-array of elements with greater values.
+	In computer science, merge sort (also commonly spelled mergesort) is an efficient, general-purpose, comparison-based sorting algorithm. Most 
+	implementations produce a stable sort, which means that the order of equal elements is the same in the input and output. Merge sort is a divide 
+	and conquer algorithm that was invented by John von Neumann in 1945. Conceptually, a merge sort works as follows: 1) Divide the unsorted list 
+	into n sublists, each containing one element (a list of one element is considered sorted). 2) Repeatedly merge sublists to produce new sorted 
+	sublists until there is only one sublist remaining. This will be the sorted list.
 	
 
 3. Tree structure(construction, traversal)
