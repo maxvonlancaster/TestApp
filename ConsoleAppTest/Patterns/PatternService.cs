@@ -115,6 +115,9 @@ namespace ConsoleAppTest.Patterns
         /// <summary>
         /// STRUCTURAL
         /// </summary>
+        
+        // Provides means to allow two incompatible interfaces to communicate with each other through the use of an adapter object that inherits 
+        // the incompatible object and implements the target interface.
         public void AdapterClient()
         {
 
