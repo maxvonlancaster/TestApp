@@ -1,11 +1,21 @@
 ﻿1. Algorithms complexity (understanding, big O notation, complexity of common algorithms)
+	In computer science, the time complexity is the computational complexity that describes the amount of time it takes to run an algorithm. 
+	Time complexity is commonly estimated by counting the number of elementary operations performed by the algorithm, supposing that each elementary 
+	operation takes a fixed amount of time to perform. Thus, the amount of time taken and the number of elementary operations performed by the 
+	algorithm are taken to differ by at most a constant factor.
+	
 
 2. Array sorting methods(bubble sort, quick sort, merge sort)
+	
 
 3. Tree structure(construction, traversal)
+	
 
 4. Binary search algorithm
+	
 
 5. Hash table(creating, collisions)
+	
 
 6. Stack, queue, linked list(construction, understanding, usage)
+	
