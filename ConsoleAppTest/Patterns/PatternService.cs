@@ -81,6 +81,7 @@ namespace ConsoleAppTest.Patterns
         
         }
 
+        // Provide means to keep track of the state of the object. 
         public void MementoClient()
         {
 
