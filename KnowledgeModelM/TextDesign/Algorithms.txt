@@ -45,7 +45,37 @@
 
 
 5. Hash table(creating, collisions)
-	
+	In computing, a hash table (hash map) is a data structure that implements an associative array abstract data type, a structure that can map keys 
+	to values. A hash table uses a hash function to compute an index, also called a hash code, into an array of buckets or slots, from which the 
+	desired value can be found. Ideally, the hash function will assign each key to a unique bucket, but most hash table designs employ an imperfect 
+	hash function, which might cause hash collisions where the hash function generates the same index for more than one key. Such collisions are 
+	always accommodated in some way. In a well-dimensioned hash table, the average cost (number of instructions) for each lookup is independent of 
+	the number of elements stored in the table. Many hash table designs also allow arbitrary insertions and deletions of key-value pairs, at 
+	(amortized) constant average cost per operation. In many situations, hash tables turn out to be on average more efficient than search trees 
+	or any other table lookup structure. For this reason, they are widely used in many kinds of computer software, particularly for associative 
+	arrays, database indexing, caches, and sets.
 
 6. Stack, queue, linked list(construction, understanding, usage)
-	
+	STACK is an abstract data type that serves as a collection of elements, with two principal operations: 1) push, which 
+	adds an element to the collection, and 2) pop, which removes the most recently added element that was not yet removed. The order in which 
+	elements come off a stack gives rise to its alternative name, LIFO (last in, first out). Additionally, a peek operation may give access to 
+	the top without modifying the stack.
+	QUEUE - a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence 
+	and removal from the other end of the sequence. By convention, the end of the sequence at which elements are added is called the back, tail, 
+	or rear of the queue and the end at which elements are removed is called the head or front of the queue, analogously to the words used when 
+	people line up to wait for goods or services. The operation of adding an element to the rear of the queue is known as enqueue, and the operation 
+	of removing an element from the front is known as dequeue. Other operations may also be allowed, often including a peek or front operation that 
+	returns the value of the next element to be dequeued without dequeuing it. The operations of a queue make it a first-in-first-out (FIFO) data 
+	structure. In a FIFO data structure, the first element added to the queue will be the first one to be removed. This is equivalent to the 
+	requirement that once a new element is added, all elements that were added before have to be removed before the new element can be removed. 
+	A queue is an example of a linear data structure, or more abstractly a sequential collection. Queues are common in computer programs, where 
+	they are implemented as data structures coupled with access routines, as an abstract data structure or in object-oriented languages as classes. 
+	Common implementations are circular buffers and linked lists. Queues provide services in computer science, transport, and operations research 
+	where various entities such as data, objects, persons, or events are stored and held to be processed later. In these contexts, the queue 
+	performs the function of a buffer. Another usage of queues is in the implementation of breadth-first search.
+	LINKED LIST is a linear collection of data elements, whose order is not given by their physical placement in memory. Instead, each element 
+	points to the next. It is a data structure consisting of a collection of nodes which together represent a sequence. In its most basic form, 
+	each node contains: data, and a reference (in other words, a link) to the next node in the sequence. This structure allows for efficient 
+	insertion or removal of elements from any position in the sequence during iteration. More complex variants add additional links, allowing 
+	more efficient insertion or removal of nodes at arbitrary positions. A drawback of linked lists is that access time is linear (and difficult 
+	to pipeline). Faster access, such as random access, is not feasible. Arrays have better cache locality compared to linked lists.
