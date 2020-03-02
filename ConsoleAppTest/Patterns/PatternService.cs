@@ -19,6 +19,7 @@ namespace ConsoleAppTest.Patterns
             var instance = SingletonClass.getInstance();
             var instanceNew = SingletonClass.getInstance();
             Console.WriteLine("{0}; {1}", instance.GetHashCode(), instanceNew.GetHashCode());
+            //SingletonClass singletonClass = new SingletonClass(); --> inaccessible
         }
 
         // Builder -> separate constructor of a complex object from its representation
