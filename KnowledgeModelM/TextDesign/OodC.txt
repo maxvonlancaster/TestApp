@@ -104,12 +104,34 @@ Observer Pattern
 	for subject events and other support mechanism from the kernel (Linux epoll, ...)
 
 Strategy Pattern
-	
+	A behavioral software design pattern that enables selecting an algorithm at runtime. Instead of implementing a single algorithm directly, code 
+	receives run-time instructions as to which in a family of algorithms to use.
+	Strategy lets the algorithm vary independently from clients that use it. Strategy is one of the patterns included in the influential book Design 
+	Patterns by Gamma et al.[3] that popularized the concept of using design patterns to describe how to design flexible and reusable object-
+	oriented software. Deferring the decision about which algorithm to use until runtime allows the calling code to be more flexible and reusable.
+	For instance, a class that performs validation on incoming data may use the strategy pattern to select a validation algorithm depending on 
+	the type of data, the source of the data, user choice, or other discriminating factors. These factors are not known until run-time and may 
+	require radically different validation to be performed. The validation algorithms (strategies), encapsulated separately from the validating 
+	object, may be used by other validating objects in different areas of the system (or even different systems) without code duplication.
+	Typically the strategy pattern stores a reference to some code in a data structure and retrieves it. This can be achieved by mechanisms such 
+	as the native function pointer, the first-class function, classes or class instances in object-oriented programming languages, or accessing 
+	the language implementation's internal storage of code via reflection.
 
 High-level understanding is required:
 
 The Builder Pattern
-	
+	A design pattern designed to provide a flexible solution to various object creation problems in object-oriented programming. The intent of 
+	the Builder design pattern is to separate the construction of a complex object from its representation.
+	The Builder design pattern solves problems like:
+	How can a class (the same construction process) create different representations of a complex object?
+	How can a class that includes creating a complex object be simplified?
+	Creating and assembling the parts of a complex object directly within a class is inflexible. It commits the class to creating a particular 
+	representation of the complex object and makes it impossible to change the representation later independently from (without having to change) 
+	the class.
+	The Builder design pattern describes how to solve such problems:
+	Encapsulate creating and assembling the parts of a complex object in a separate Builder object.
+	A class delegates object creation to a Builder object instead of creating the objects directly.
+	A class (the same construction process) can delegate to different Builder objects to create different representations of a complex object.
 
 The Prototype Pattern
 	
