@@ -76,10 +76,32 @@ Proxy Pattern
 	interface. Clients can't tell whether they work with a subject or its proxy.
 
 The Command Pattern
-	
+	A behavioral design pattern in which an object is used to encapsulate all information needed to perform an action or trigger an event at a later 
+	time. This information includes the method name, the object that owns the method and values for the method parameters.
+	Four terms always associated with the command pattern are command, receiver, invoker and client. A command object knows about receiver and 
+	invokes a method of the receiver. Values for parameters of the receiver method are stored in the command. The receiver object to execute 
+	these methods is also stored in the command object by aggregation. The receiver then does the work when the execute() method in command 
+	is called. An invoker object knows how to execute a command, and optionally does bookkeeping about the command execution. The invoker does 
+	not know anything about a concrete command, it knows only about the command interface. Invoker object(s), command objects and receiver objects 
+	are held by a client object, the client decides which receiver objects it assigns to the command objects, and which commands it assigns to the 
+	invoker. The client decides which commands to execute at which points. To execute a command, it passes the command object to the invoker object.
+	Using command objects makes it easier to construct general components that need to delegate, sequence or execute method calls at a time of 
+	their choosing without the need to know the class of the method or the method parameters. Using an invoker object allows bookkeeping about 
+	command executions to be conveniently performed, as well as implementing different modes for commands, which are managed by the invoker object, 
+	without the need for the client to be aware of the existence of bookkeeping or modes.
+	The central ideas of this design pattern closely mirror the semantics of first-class functions and higher-order functions in functional 
+	programming languages. Specifically, the invoker object is a higher-order function of which the command object is a first-class argument.
 
 Observer Pattern
-	
+	A software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them 
+	automatically of any state changes, usually by calling one of their methods. It is mainly used to implement distributed event handling 
+	systems, in "event driven" software. In those systems, the subject is usually called a "stream of events" or "stream source of events", 
+	while the observers are called "sink of events". The stream nomenclature simulates or adapts to a physical setup where the observers are 
+	physically separated and have no control over the emitted events of the subject/stream-source. This pattern then perfectly suits any process 
+	where data arrives through I/O, that is, where data is not available to the CPU at startup, but can arrive "randomly" (HTTP requests, GPIO 
+	data, user input from keyboard/mouse/..., distributed databases and blockchains, ...). Most modern languages have built-in "event" constructs 
+	which implement the observer pattern components. While not mandatory most 'observers' implementations will use background threads listening 
+	for subject events and other support mechanism from the kernel (Linux epoll, ...)
 
 Strategy Pattern
 	
