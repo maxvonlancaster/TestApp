@@ -134,13 +134,35 @@ The Builder Pattern
 	A class (the same construction process) can delegate to different Builder objects to create different representations of a complex object.
 
 The Prototype Pattern
-	
+	A creational design pattern in software development. It is used when the type of objects to create is determined by a prototypical instance, 
+	which is cloned to produce new objects. This pattern is used to:
+	avoid subclasses of an object creator in the client application, like the factory method pattern does.
+	avoid the inherent cost of creating a new object in the standard way (e.g., using the 'new' keyword) when it is prohibitively expensive 
+	for a given application.
+	To implement the pattern, declare an abstract base class that specifies a pure virtual clone() method. Any class that needs a "polymorphic 
+	constructor" capability derives itself from the abstract base class, and implements the clone() operation.
+	The client, instead of writing code that invokes the "new" operator on a hard-coded class name, calls the clone() method on the prototype, 
+	calls a factory method with a parameter designating the particular concrete derived class desired, or invokes the clone() method through 
+	some mechanism provided by another design pattern.
+	The mitotic division of a cell — resulting in two identical cells — is an example of a prototype that plays an active role in copying itself 
+	and thus, demonstrates the Prototype pattern. When a cell splits, two cells of identical genotype result. In other words, the cell clones 
+	itself.
 
 Bridge Pattern
-	
+	A design pattern used in software engineering that is meant to "decouple an abstraction from its implementation so that the two can vary 
+	independently", introduced by the Gang of Four. The bridge uses encapsulation, aggregation, and can use inheritance to separate responsibilities 
+	into different classes.
+	When a class varies often, the features of object-oriented programming become very useful because changes to a program's code can be made 
+	easily with minimal prior knowledge about the program. The bridge pattern is useful when both the class and what it does vary often. The 
+	class itself can be thought of as the abstraction and what the class can do as the implementation. The bridge pattern can also be thought 
+	of as two layers of abstraction.
 
 Decorator Design Pattern
-	
+	A design pattern that allows behavior to be added to an individual object, dynamically, without affecting the behavior of other objects from 
+	the same class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to 
+	be divided between classes with unique areas of concern. The decorator pattern is structurally nearly identical to the chain of responsibility 
+	pattern, the difference being that in a chain of responsibility, exactly one of the classes handles the request, while for the decorator, all 
+	classes handle the request.
 
 Flyweight
 	Is a software design pattern. A flyweight is an object that minimizes memory usage by sharing as much data as possible with other similar 
@@ -174,7 +196,9 @@ Chain of Responsibility
 	chain until a receiver handles the request. The sender of a request is no longer coupled to a particular receiver.
 
 Interpreter Pattern
-	
+	A design pattern that specifies how to evaluate sentences in a language. The basic idea is to have a class for each symbol (terminal or 
+	nonterminal) in a specialized computer language. The syntax tree of a sentence in the language is an instance of the composite pattern and 
+	is used to evaluate (interpret) the sentence for a client.
 
 Iterator Pattern
 	
@@ -223,13 +247,13 @@ Unit of Work
 	harder to optimize certain operations which are performed against the data source.
 
 Rules Pattern
-
+	
 
 Specification Pattern
-
+	
 
 Event Aggregator
-
+	
 
 Lazy Load Pattern
 
