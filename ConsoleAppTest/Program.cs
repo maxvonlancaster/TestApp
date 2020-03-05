@@ -16,9 +16,9 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            //var service = new BasicSynchronisation();
-            //service.UsingSynchronisationContext();
-            AsyncMethods().Wait();
+            var service = new LangComp();
+            service.ImplementLogging();
+            //AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }
 
