@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MLPlayground.Services;
+using System;
 
 namespace MLPlayground
 {
@@ -7,6 +8,8 @@ namespace MLPlayground
         static void Main(string[] args)
         {
             Console.WriteLine("This is a ML playground!");
+            var service = new TestService();
+            service.GetTrainAndTestData();
         }
     }
 }
