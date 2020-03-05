@@ -240,7 +240,16 @@ Memento
 	when initialized with the seed state)
 
 State Pattern
-	
+	A behavioral software design pattern that allows an object to alter its behavior when its internal state changes. This pattern is close to the 
+	concept of finite-state machines. The state pattern can be interpreted as a strategy pattern, which is able to switch a strategy through 
+	invocations of methods defined in the pattern's interface.
+	The state pattern is used in computer programming to encapsulate varying behavior for the same object, based on its internal state. This can 
+	be a cleaner way for an object to change its behavior at runtime without resorting to conditional statements and thus improve maintainability.
+	Define separate (state) objects that encapsulate state-specific behavior for each state. That is, define an interface (state) for performing 
+	state-specific behavior, and define classes that implement the interface for each state.
+	A class delegates state-specific behavior to its current state object instead of implementing state-specific behavior directly.
+	This makes a class independent of how state-specific behavior is implemented. New states can be added by defining new state classes. A class 
+	can change its behavior at run-time by changing its current state object.
 
 Template Method
 	
