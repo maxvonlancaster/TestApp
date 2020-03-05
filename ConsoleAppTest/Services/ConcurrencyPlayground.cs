@@ -38,6 +38,7 @@ namespace ConsoleAppTest.Services
 
         }
 
+
         // TPL
 
         public void UsingTask() 
@@ -64,6 +65,7 @@ namespace ConsoleAppTest.Services
         {
 
         }
+
 
         // Async
 
@@ -97,6 +99,7 @@ namespace ConsoleAppTest.Services
 
         }
 
+
         // pLinq
 
         public void UsingAsParallel()
@@ -110,6 +113,19 @@ namespace ConsoleAppTest.Services
         }
 
         public void PlinqCancellation()
+        {
+
+        }
+
+
+        // Additional Methods
+
+        private void DummyMethodOne() 
+        {
+        
+        }
+
+        private void DummyMethodTwo()
         {
 
         }
