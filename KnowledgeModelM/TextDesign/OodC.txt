@@ -311,87 +311,87 @@ Event Aggregator
 	
 
 Lazy Load Pattern
-
+	
 
 Model View Presenter (MVP) Pattern
-
+	
 
 Model View ViewModel (MVVM) Pattern
-
+	
 
 Null Object Pattern
-
+	
 
 Software Architecture Patterns (structure, pros & cons): 
 
 Layered architecture
-
+	
 
 Event-driven architecture
-
+	
 
 Microkernel architecture
-
+	
 
 Microservices architecture
-
+	
 
 Inversion of Control Containers and the Dependency Injection pattern
-
+	
 
 Domain-Driven Design patterns:
 
 Why Should You Care About Domain-Driven Design?
-
+	
 
 Benefits of DDD
-
+	
 
 Drawbacks of DDD
-
+	
 
 A Mind Map of DDD's Working Parts
-
+	
 
 
 Sub-domain
-
+	
 
 Bounded Context
-
+	
 
 Difference Between Sub-domain and Bounded Context
-
+	
 
 Understanding Context Maps
-
+	
 
 The Ubiquitous Language of a Bounded Context
-
+	
 
 
 
 Anemic and Rich Models
-
+	
 
 Entities in DDD and in Our Bounded Context
-
+	
 
 Value Objects
-
+	
 
 Domain Services
-
+	
 
 Aggregates and Aggregate Roots
-
+	
 
 Repositories
-
+	
 
 Domain Events
-
+	
 
 Anti-patterns
-
+	
 
