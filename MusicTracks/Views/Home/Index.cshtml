@@ -2,93 +2,125 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="page">
-    <div class="row">
-        <h1>Title</h1>
+    <div class="page">
+        <div class="row">
+            <h1>Title</h1>
 
-        <h4>Headings -> titles displayed on the page, 6 levels - h1,h1,...,h6 -> the higher the level, the less prominent the heading</h4>
+            <h4>Headings -> titles displayed on the page, 6 levels - h1,h1,...,h6 -> the higher the level, the less prominent the heading</h4>
 
-        <p>p element makes all text inside it a distinct paragraph.</p>
+            <p>p element makes all text inside it a distinct paragraph.</p>
 
-        <ul>
-            <li>Wrapping inside "ul" tag tells browser that whatever is inside should be rendered as an unordered list</li>
-            <li>To denote particular element, wrap them in "li" tags</li>
-            <li>Strict rule -> "ul" element shoul only contain "li" elements</li>
-        </ul>
+            <ul>
+                <li>Wrapping inside "ul" tag tells browser that whatever is inside should be rendered as an unordered list</li>
+                <li>To denote particular element, wrap them in "li" tags</li>
+                <li>Strict rule -> "ul" element shoul only contain "li" elements</li>
+            </ul>
 
-        <ol>
-            <li>"ol" tag for ordered list</li>
-            <li>Each element is also "li", but numbers increment on their own</li>
-        </ol>
+            <ol>
+                <li>"ol" tag for ordered list</li>
+                <li>Each element is also "li", but numbers increment on their own</li>
+            </ol>
 
-        <p>Above -> block eleemnts, below -> inline elements</p>
-        <p><em>Here is</em> italic inline element</p>
-        <p><strong>Here is</strong> inline tag for bold text</p>
-        <p><em><strong>Italic and bold!!</strong></em></p>
-        @*<p><em>Check the order of tags</p></em>*@
+            <p>Above -> block eleemnts, below -> inline elements</p>
+            <p><em>Here is</em> italic inline element</p>
+            <p><strong>Here is</strong> inline tag for bold text</p>
+            <p><em><strong>Italic and bold!!</strong></em></p>
+            @*<p><em>Check the order of tags</p></em>*@
 
-        <p>Here is the <br />line break, using "br" tag, that is emty(self-closing)</p>
-        <p>Here is the horisontal rule, that represents a thematic break (also empty):</p>
-        <hr />
+            <p>Here is the <br />line break, using "br" tag, that is emty(self-closing)</p>
+            <p>Here is the horisontal rule, that represents a thematic break (also empty):</p>
+            <hr />
 
-        <p>Ypu can also use empty tags <br>without slash</p>
-        <hr>
+            <p>Ypu can also use empty tags <br>without slash</p>
+            <hr>
 
-        <a href='google.com'>Another page</a>
+            <a href='google.com'>Another page</a>
 
-        <h1>Css Selectors</h1>
+            <h1>Css Selectors</h1>
 
-        <p class="synopsis">
-            CSS selectors let you <em>select</em> individual HTML elements in an HTML
-            document. This is <strong>super</strong> useful.
-        </p>
+            <p class="synopsis">
+                CSS selectors let you <em>select</em> individual HTML elements in an HTML
+                document. This is <strong>super</strong> useful.
+            </p>
 
-        <p>
-            Classes are ridiculously important, since they allow you to select
-            arbitrary boxes in your web pages.
-        </p>
+            <p>
+                Classes are ridiculously important, since they allow you to select
+                arbitrary boxes in your web pages.
+            </p>
 
-        <div class="button"><a href='google.com'>Button One</a></div>
-        <div class="button">
-            <a href='google.com'>Button Two</a> @*Reusing class styles*@
+            <div class="button"><a href='google.com'>Button One</a></div>
+            <div class="button">
+                <a href='google.com'>Button Two</a> @*Reusing class styles*@
+            </div>
+            <div class="call-to button">
+                <a href='google.com'>Button Three</a> @*Modifying class styles -> multipple classes*@
+            </div>
+            @*ORDER IN STYLESHEET MATTERS -> when two confluicting styles, last one applies. Order in html does not matter *@
+
+            <p id="button-3">Last of type p</p>
+
         </div>
-        <div class="call-to button">
-            <a href='google.com'>Button Three</a> @*Modifying class styles -> multipple classes*@
-        </div>
-        @*ORDER IN STYLESHEET MATTERS -> when two confluicting styles, last one applies. Order in html does not matter *@
 
-        <p id="button-3">Last of type p</p>
+        <div class="row">
+            <h1 id="h1">Box model</h1>
+
+            <p id="p1">
+                Paragraphs are blocks, too. <em id="e1">However</em>, &lt;em&gt; and &lt;strong&gt;
+                elements are not. They are <strong id="s1">inline</strong> elements.
+            </p>
+
+            <p id="p2">
+                Block elements define the flow of the HTML document, while inline elements
+                do not.
+            </p>
+
+            <p id="p3">
+                Paragraphs are blocks, too. <em id="e2">However</em>, &lt;em&gt; and &lt;strong&gt;
+                elements are not. They are <strong id="s2">inline</strong> elements.
+            </p>
+
+            <p id="p4">Padding</p>
+
+            <p id="p5">Padding Another</p>
+
+            <p id="p6">Border</p>
+
+            <p id="p7">Border Another</p>
+
+            <p id="p8"></p>
+
+        </div>
+
+
+
+        <h4>
+            HTML: Standards and Browser compatibility
+        </h4>
+        <div></div>
+
+        <h4>
+            HTML: Page Layouts with divs
+        </h4>
+        <div></div>
+
+        <h4>
+            HTML: Frames
+        </h4>
+        <div></div>
+
+        <h4>
+            CSS: Elements positioning and layering
+        </h4>
+        <div></div>
+
+        <h4>
+            CSS: Tables properties
+        </h4>
+        <div></div>
+
+        <h4>
+            CSS: Flexbox
+        </h4>
+        <div></div>
 
     </div>
-
-    <div class="row">
-        <h1 id="h1">Box model</h1>
-
-        <p id="p1">
-            Paragraphs are blocks, too. <em id="e1">However</em>, &lt;em&gt; and &lt;strong&gt;
-            elements are not. They are <strong id="s1">inline</strong> elements.
-        </p>
-
-        <p id="p2">
-            Block elements define the flow of the HTML document, while inline elements
-            do not.
-        </p>
-
-        <p id="p3">
-            Paragraphs are blocks, too. <em id="e2">However</em>, &lt;em&gt; and &lt;strong&gt;
-            elements are not. They are <strong id="s2">inline</strong> elements.
-        </p>
-
-        <p id="p4">Padding</p>
-
-        <p id="p5">Padding Another</p>
-
-        <p id="p6">Border</p>
-
-        <p id="p7">Border Another</p>
-
-        <p id="p8"></p>
-
-    </div>
-
-</div>
