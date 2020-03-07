@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace ConsoleAppTest.Services
 {
@@ -10,17 +11,62 @@ namespace ConsoleAppTest.Services
 
         public void ClassThread()
         {
+            // Поток предствляет некоторую часть кода программы. При выполнении программы каждому потоку выделяется определенный квант времени. 
+            // И при помощи многопоточности мы можем выделить в приложении несколько потоков, которые будут выполнять различные задачи 
+            // одновременно.
+            // Main functionality in System.Threading, there class Thread -> separate thread
+
+            Thread t = Thread.CurrentThread; // Get current Thread
+
+            Console.WriteLine($"Имя потока: {t.Name}");
+            Console.WriteLine($"Запущен ли поток: {t.IsAlive}");
+            Console.WriteLine($"Приоритет потока: {t.Priority}"); // Lowest, BelowNormal, Normal(default), AboveNormal, Highest
+            Console.WriteLine($"Статус потока: {t.ThreadState}"); // 
+            Console.WriteLine($"Домен приложения: {Thread.GetDomain().FriendlyName}"); // получаем домен приложения
 
         }
 
         public void ThreadCreation()
         {
+            // Используя класс Thread, мы можем выделить в приложении несколько потоков, которые будут выполняться одновременно.
 
+            // Во - первых, для запуска нового потока нам надо определить задачу в приложении, которую будет выполнять данный поток. 
+            // Для этого мы можем добавить новый метод, производящий какие-либо действия.
+
+            // Для создания нового потока используется делегат ThreadStart, который получает в качестве параметра метод
+
+            // И чтобы запустить поток, вызывается метод Start.
+            Thread t = new Thread(new ThreadStart(DummyMethodOne));
+            t.Start();
+
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("First thread: {0}", i);
+                Thread.Sleep(300);
+            }
+
+            // You can also use Thread myThread = new Thread(Count); ThreadStart delegate is created implicitly anyway
         }
 
         public void ThreadsWithParams()
         {
+            // ParameterizedThreadStart -> передать какие-нибудь параметры в поток
+            int number = 4;
+            Thread t = new Thread(new ParameterizedThreadStart(DummyMethodTwo));
+            // ParameterizedThreadStart мы сталкиваемся с ограничением: мы можем запускать во втором потоке только такой метод, который в 
+            // качестве единственного параметра принимает объект типа object. Поэтому в данном случае нам надо дополнительно привести 
+            // переданное значение к типу int, чтобы его использовать в вычислениях.
+            t.Start(number);
 
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("First thread: {0}", i);
+                Thread.Sleep(300);
+            }
+
+            // Но что делать, если нам надо передать не один, а несколько параметров различного типа? В этом случае на помощь приходит 
+            // классовый подход (Сначала определяем специальный класс Counter, объект которого будет передаваться во второй поток, а в 
+            // методе Main передаем его во второй поток.)
         }
 
         public void ThreadSynchronization()
@@ -122,12 +168,21 @@ namespace ConsoleAppTest.Services
 
         private void DummyMethodOne() 
         {
-        
+            for (int i = 0; i < 10; i++) 
+            {
+                Console.WriteLine("Second thread: {0}", i);
+                Thread.Sleep(400);
+            }
         }
 
-        private void DummyMethodTwo()
+        private void DummyMethodTwo(object x)
         {
-
+            int j = (int)x;
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("Second thread: {0}, paramether: {1}", i, j);
+                Thread.Sleep(400);
+            }
         }
     }
 }

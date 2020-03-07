@@ -16,8 +16,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new LangComp();
-            service.ImplementLogging();
+            var service = new ConcurrencyPlayground();
+            service.ThreadCreation();
             //AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }
