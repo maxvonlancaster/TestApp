@@ -69,7 +69,7 @@ namespace ConsoleAppTest.Services
             // методе Main передаем его во второй поток.)
         }
 
-        
+
         static object locker = new object();
         static int x = 0;
 
@@ -82,7 +82,8 @@ namespace ConsoleAppTest.Services
             // каким-нибудь потоком. Для этого используется ключевое слово lock. Оператор lock определяет блок кода, внутри которого весь код 
             // блокируется и становится недоступным для других потоков до завершения работы текущего потока.
 
-            Action actionWithLocker = () => {
+            Action actionWithLocker = () =>
+            {
                 lock (locker)
                 {
                     for (x = 1; x < 10; x++)
@@ -93,7 +94,7 @@ namespace ConsoleAppTest.Services
                 }
             };
 
-            for (int i = 0; i < 5; i++) 
+            for (int i = 0; i < 5; i++)
             {
                 Thread t = new Thread(new ThreadStart(actionWithLocker));
                 t.Name = "Thread " + i.ToString();
@@ -109,7 +110,8 @@ namespace ConsoleAppTest.Services
             // Метод Monitor.Enter принимает два параметра - объект блокировки и значение типа bool, которое указывает на результат блокировки 
             // (если он равен true, то блокировка успешно выполнена).
 
-            Action actionWithMonitor = () => {
+            Action actionWithMonitor = () =>
+            {
                 bool acquiredLock = false;
 
                 try
@@ -121,7 +123,7 @@ namespace ConsoleAppTest.Services
                         Thread.Sleep(100);
                     }
                 }
-                finally 
+                finally
                 {
                     if (acquiredLock)
                         Monitor.Exit(locker);
@@ -137,17 +139,41 @@ namespace ConsoleAppTest.Services
             }
         }
 
+
+        AutoResetEvent autoReset = new AutoResetEvent(true);
+
         public void ClassAutoResetEvent()
         {
+            // Класс AutoResetEvent также служит целям синхронизации потоков. Этот класс является оберткой над объектом ОС Windows "событие" 
+            // и позволяет переключить данный объект-событие из сигнального в несигнальное состояние
 
+            Action actionWithARE = () =>
+            {
+
+                autoReset.WaitOne();
+                for (x = 1; x < 10; x++)
+                {
+                    Console.WriteLine("{0}: {1}", Thread.CurrentThread.Name, x);
+                    Thread.Sleep(100);
+                }
+                autoReset.Set();
+            };
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                Thread t = new Thread(new ThreadStart(actionWithARE));
+                t.Name = "Thread " + i.ToString();
+                t.Start();
+            }
         }
 
 
         // TPL
 
-        public void UsingTask() 
+        public void UsingTask()
         {
-        
+
         }
 
         public void WorkingWithTask()
@@ -224,9 +250,9 @@ namespace ConsoleAppTest.Services
 
         // Additional Methods
 
-        private void DummyMethodOne() 
+        private void DummyMethodOne()
         {
-            for (int i = 0; i < 10; i++) 
+            for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine("Second thread: {0}", i);
                 Thread.Sleep(400);
