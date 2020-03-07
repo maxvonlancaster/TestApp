@@ -4,7 +4,41 @@ using System.Text;
 
 namespace ConsoleAppTest.Services
 {
-    class DelegatesPlayground
+    public class DelegatesPlayground
     {
+        public void Delegates() 
+        {
+        
+        }
+
+        public void DelegateUsage() 
+        {
+        
+        }
+
+        public void AnonymuousMethods() 
+        {
+        
+        }
+
+        public void Lambdas()
+        { 
+        
+        }
+
+        public void Events() 
+        { 
+        
+        }
+
+        public void Covarianity() 
+        {
+        
+        }
+
+        public void ActionFuncPred() 
+        { 
+        
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
             var service = new ConcurrencyPlayground();
-            service.ThreadCreation();
+            service.ThreadSynchronization();
             //AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }

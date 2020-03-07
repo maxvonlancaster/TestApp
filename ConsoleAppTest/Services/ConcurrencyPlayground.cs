@@ -69,9 +69,36 @@ namespace ConsoleAppTest.Services
             // методе Main передаем его во второй поток.)
         }
 
+        
+        static object locker = new object();
+        static int x = 0;
+
         public void ThreadSynchronization()
         {
+            // Нередко в потоках используются некоторые разделяемые ресурсы, общие для всей программы. Это могут быть общие переменные, файлы, 
+            // другие ресурсы. (here it is x variable)
 
+            // Решение проблемы состоит в том, чтобы синхронизировать потоки и ограничить доступ к разделяемым ресурсам на время их использования 
+            // каким-нибудь потоком. Для этого используется ключевое слово lock. Оператор lock определяет блок кода, внутри которого весь код 
+            // блокируется и становится недоступным для других потоков до завершения работы текущего потока.
+
+            Action actionWithLocker = () => {
+                lock (locker)
+                {
+                    for (x = 1; x < 10; x++)
+                    {
+                        Console.WriteLine("{0}: {1}", Thread.CurrentThread.Name, x);
+                        Thread.Sleep(100);
+                    }
+                }
+            };
+
+            for (int i = 0; i < 5; i++) 
+            {
+                Thread t = new Thread(new ThreadStart(actionWithLocker));
+                t.Name = "Thread " + i.ToString();
+                t.Start();
+            }
         }
 
         public void Monitors()
