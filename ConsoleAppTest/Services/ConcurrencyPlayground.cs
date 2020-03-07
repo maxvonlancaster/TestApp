@@ -103,7 +103,38 @@ namespace ConsoleAppTest.Services
 
         public void Monitors()
         {
+            // Наряду с оператором lock для синхронизации потоков мы можем использовать мониторы, представленные классом System.Threading.Monitor. 
+            // Фактически конструкция оператора lock из прошлой темы инкапсулирует в себе синтаксис использования мониторов.
 
+            // Метод Monitor.Enter принимает два параметра - объект блокировки и значение типа bool, которое указывает на результат блокировки 
+            // (если он равен true, то блокировка успешно выполнена).
+
+            Action actionWithMonitor = () => {
+                bool acquiredLock = false;
+
+                try
+                {
+                    Monitor.Enter(locker, ref acquiredLock);
+                    for (x = 1; x < 10; x++)
+                    {
+                        Console.WriteLine("{0}: {1}", Thread.CurrentThread.Name, x);
+                        Thread.Sleep(100);
+                    }
+                }
+                finally 
+                {
+                    if (acquiredLock)
+                        Monitor.Exit(locker);
+                }
+            };
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                Thread t = new Thread(new ThreadStart(actionWithMonitor));
+                t.Name = "Thread " + i.ToString();
+                t.Start();
+            }
         }
 
         public void ClassAutoResetEvent()
