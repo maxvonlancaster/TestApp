@@ -315,10 +315,15 @@ Specification Pattern
 	repository.
 
 Event Aggregator
-	
+	The Event Aggregator pattern tries overcome the limitation of traditional event handling approach by providing a central place to publish and 
+	subscribe for events which is nothing but an Event Aggregator. The Event Aggregator takes care for registering, unregistering and invoking of 
+	events loosely coupling Publishers and Subscribers. All Publishers and Subscribers of event will know only about the Event Aggregator. 
 
 Lazy Load Pattern
-	
+	Software design pattern where the initialization of an object occurs only when it is actually needed and not before to preserve simplicity of 
+	usage and improve performance.
+	Essential when the cost of object creation is very high and the use of the object is very rare. So this is the scenario where it’s worth 
+	implementing lazy loading.The fundamental idea of lazy loading is to load object/data when needed.
 
 Model View Presenter (MVP) Pattern
 	

@@ -168,6 +168,9 @@ namespace ConsoleAppTest.Services
             }
         }
 
+        // Thread is a lower-level concept: if you're directly starting a thread, you know it will be a separate thread, rather than executing on 
+        // the thread pool etc.
+        // Task is more than just an abstraction of "where to run some code" though - it's really just "the promise of a result in the future". 
 
         // TPL
 
