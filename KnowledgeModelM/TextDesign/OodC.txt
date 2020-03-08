@@ -326,7 +326,10 @@ Lazy Load Pattern
 	implementing lazy loading.The fundamental idea of lazy loading is to load object/data when needed.
 
 Model View Presenter (MVP) Pattern
-	
+	Is a derivation of the model–view–controller (MVC) architectural pattern, and is used mostly for building user interfaces.
+	In MVP, the presenter assumes the functionality of the "middle-man". In MVP, all presentation logic is pushed to the presenter.
+	The presenter acts upon the model and the view. It retrieves data from repositories (the model), and formats it for display in the view.
+
 
 Model View ViewModel (MVVM) Pattern
 	
@@ -405,5 +408,49 @@ Domain Events
 	
 
 Anti-patterns
-	
+	Common response to a recurring problem that is usually ineffective and risks being highly counterproductive.
+	Cart before the horse: Focusing too many resources on a stage of a project out of its sequence
+	Death march: A project whose staff, while expecting it to fail, are compelled to continue, often with much overwork, by management which is in 
+	denial
+	Overengineering: Spending resources making a project more robust and complex than is needed
+	Scope creep: Uncontrolled changes or continuous growth in a project's scope, or adding new features to the project after the original requirements 
+	have been drafted and accepted
+	Analysis paralysis: A project stalled in the analysis phase, unable to achieve support for any of the potential plans of approach
+	Copy and paste programming: Copying (and modifying) existing code rather than creating generic solutions
+	Micromanagement: Ineffectiveness from excessive observation, supervision, or other hands-on involvement from management
+	Cash cow: A profitable legacy product that often leads to complacency about new products
+	Design by committee: The result of having many contributors to a design, but no unifying vision
+	Bystander apathy: The phenomenon in which people are less likely to or do not offer help to a person in need when others are present
+	Seagull management: Management in which managers only interact with employees when a problem arises, when they "fly in, make a lot of noise, 
+	dump on everyone, do not solve the problem, then fly out"
+	Peter principle: Continually promoting otherwise well-performing employees up to their level of incompetence, where they remain indefinitely
+	Vendor lock-in: Making a system excessively dependent on an externally supplied component
+	Spaghetti code: Programs whose structure is barely comprehensible, especially because of misuse of code structures
+	Accidental complexity: Programming tasks which could be eliminated with better tools (as opposed to essential complexity inherent in the problem 
+	being solved)
+	Action at a distance: Unexpected interaction between widely separated parts of a system
+	Boat anchor: Retaining a part of a system that no longer has any use
+	Busy waiting: Consuming CPU while waiting for something to happen, usually by repeated checking instead of messaging
+	Caching failure: Forgetting to clear a cache that holds a negative result (error) after the error condition has been corrected
+	Cargo cult programming: Using patterns and methods without understanding why
+	Coding by exception: Adding new code to handle each special case as it is recognized
+	Design pattern: The use of patterns has itself been called an anti-pattern, a sign that a system is not employing enough abstraction
+	Error hiding: Catching an error message before it can be shown to the user and either showing nothing or showing a meaningless message. This 
+	anti-pattern is also named Diaper Pattern. Also can refer to erasing the Stack trace during exception handling, which can hamper debugging.
+	Hard code: Embedding assumptions about the environment of a system in its implementation
+	Lasagna code: Programs whose structure consists of too many layers of inheritance
+	Lava flow: Retaining undesirable (redundant or low-quality) code because removing it is too expensive or has unpredictable consequences
+	Loop-switch sequence: Encoding a set of sequential steps using a switch within a loop statement
+	Magic numbers: Including unexplained numbers in algorithms
+	Magic strings: Implementing presumably unlikely input scenarios, such as comparisons with very specific strings, to mask functionality.
+	Repeating yourself: Writing code which contains repetitive patterns and substrings over again; avoid with once and only once (abstraction 
+	principle)
+	Shooting the messenger: Throwing exceptions from the scope of a plugin or subscriber in response to legitimate input, especially when this 
+	causes the outer scope to fail.
+	Shotgun surgery: Developer adds features to an application codebase which span a multiplicity of implementors or implementations in a single 
+	change
+	Soft code: Storing business logic in configuration files rather than source code
+	Reinventing the square wheel: 
+	Silver bullet: Assuming that a favorite technical solution can solve a larger process or problem
+	Tester Driven Development: Software projects in which new requirements are specified in bug reports
 
