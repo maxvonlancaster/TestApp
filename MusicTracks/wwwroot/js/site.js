@@ -2,7 +2,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-import Fundamentals from './JsFundamentalsQ.js';
+import Fundamentals from './JsFundamentalsC.js';
 const Fund = new Fundamentals();
 
-Fund.FunctionsContextScopes();
+Fund.Es6();
