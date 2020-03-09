@@ -329,10 +329,19 @@ Model View Presenter (MVP) Pattern
 	Is a derivation of the model–view–controller (MVC) architectural pattern, and is used mostly for building user interfaces.
 	In MVP, the presenter assumes the functionality of the "middle-man". In MVP, all presentation logic is pushed to the presenter.
 	The presenter acts upon the model and the view. It retrieves data from repositories (the model), and formats it for display in the view.
-
+	The .NET environment supports the MVP pattern much like any other development environment. The same model and presenter class can be used 
+	to support multiple interfaces, such as an ASP.NET Web application, a Windows Forms application, or a Silverlight application. The presenter 
+	gets and sets information from/to the view through an interface that can be accessed by the interface (view) component.
 
 Model View ViewModel (MVVM) Pattern
-	
+	MVVM facilitates a separation of development of the graphical user interface – be it via a markup language or GUI code – from development of the
+	business logic or back-end logic (the data model). The view model of MVVM is a value converter, meaning the view model is responsible for 
+	exposing (converting) the data objects from the model in such a way that objects are easily managed and presented. In this respect, the view 
+	model is more model than view, and handles most if not all of the view's display logic. The view model may implement a mediator pattern, 
+	organizing access to the back-end logic around the set of use cases supported by the view.
+	The view model is an abstraction of the view exposing public properties and commands. Instead of the controller of the MVC pattern, or the 
+	presenter of the MVP pattern, MVVM has a binder, which automates communication between the view and its bound properties in the view model. 
+	The view model has been described as a state of the data in the model
 
 Null Object Pattern
 	A null object is an object with no referenced value or with defined neutral ("null") behavior. The null object design pattern describes the 
