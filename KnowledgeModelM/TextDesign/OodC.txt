@@ -335,7 +335,11 @@ Model View ViewModel (MVVM) Pattern
 	
 
 Null Object Pattern
-	
+	A null object is an object with no referenced value or with defined neutral ("null") behavior. The null object design pattern describes the 
+	uses of such objects and their behavior (or lack thereof).
+	Instead of using a null reference to convey absence of an object (for instance, a non-existent customer), one uses an object which implements 
+	the expected interface, but whose method body is empty. The advantage of this approach over a working default implementation is that a null 
+	object is very predictable and has no side effects: it does nothing.
 
 Software Architecture Patterns (structure, pros & cons): 
 
