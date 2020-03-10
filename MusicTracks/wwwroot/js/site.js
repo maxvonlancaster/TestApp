@@ -5,4 +5,4 @@
 import Fundamentals from './JsFundamentalsC.js';
 const Fund = new Fundamentals();
 
-Fund.Es6();
+Fund.Promise();

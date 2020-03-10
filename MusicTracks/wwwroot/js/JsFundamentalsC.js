@@ -193,6 +193,32 @@
         // pending: initial state, neither fulfilled nor rejected.
         // fulfilled: meaning that the operation completed successfully.
         // rejected: meaning that the operation failed.
+
+        let promise = new Promise(function (resolve, reject) {
+            // this is function-executor -> contains code, that will give the result some time;
+            // resolve and reject -> callbacks
+            // resolve(value) -> if succesfull with value
+            // reject(error) -> when error happened
+
+            // properties of promise: state(pending, fulfilled, rejected) and result(undefined, value, error);
+            setTimeout(() => resolve("Done!"), 1000);
+        });
+
+
+        // consumers of the promise can be registered with the methods .then, .catch and .finally.
+        promise.then(
+            result => alert(result), // two argmets functions that will work if promise is succesfully complited and failed
+            error => alert(error) // will not work
+        );
+
+        // cath will consume only error of the promise:
+        let promiseTwo = new Promise(function (resolve, reject) {
+            setTimeout(() => reject("Error!"), 1000);
+        });
+
+        promiseTwo.catch(alert);
+
+        // consumer .finally(f) similar with .then(f, f) : f will work in any case.
     }
 
 }
