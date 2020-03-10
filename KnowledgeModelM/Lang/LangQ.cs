@@ -43,7 +43,14 @@ namespace KnowledgeModel.Lang
 
         public void ValueAndReferenceTypes()
         {
+            // The following data types are all of value type: bool,byte,char,decimal,double,enum,float,int,long,sbyte,short,struct,uint,ulong,ushort;
+            // A data type is a value type if it holds a data value within its own memory space. It means variables of these data types directly 
+            // contain their values.
 
+            // The following data types are of reference type: String, All arrays(even if their elements are value types),Class,Delegates;
+            // Unlike value types, a reference type doesn't store its value directly. Instead, it stores the address where the value is being 
+            // stored. In other words, a reference type contains a pointer to another memory location that holds the data.
+            // Reference types have null value by default, when they are not initialized.
         }
 
         // Properties and automatic properties
@@ -55,6 +62,10 @@ namespace KnowledgeModel.Lang
 
         public void StructuredExceptionHandling()
         {
+            // C# exceptions are represented by classes. The exception classes in C# are mainly directly or indirectly derived from the 
+            // System.Exception class. Some of the exception classes derived from the System.Exception class are the System.ApplicationException 
+            // and System.SystemException classes.
+
 
         }
 
@@ -300,7 +311,8 @@ namespace KnowledgeModel.Lang
 
         public void BuildingComparableTypes()
         {
-            
+            // IComparable: Defines a generalized type-specific comparison method that a value type or class implements to order or sort its 
+            // instances.
         }
 
         public void NullableTypes()
@@ -321,9 +333,31 @@ namespace KnowledgeModel.Lang
             int i = ni2 ?? 10;
         }
 
+
+        delegate void Message();  // declare delegate
+        delegate int Operation(int x, int y);
         public void DelegatesEventsLambdas()
         {
+            // Делегаты представляют такие объекты, которые указывают на методы. То есть делегаты - это указатели на методы и с помощью делегатов 
+            // мы можем вызвать данные методы.
 
+            Message mes;// create variable of the delegate
+            if (DateTime.Now.Hour < 12)
+            {
+                mes = GoodMorning; // assign adress of that method to a variable;
+            }
+            else 
+            {
+                mes = GoodEvening;
+            };
+            mes(); // call the delegate
+
+
+
+            // Лямбда-выражения представляют упрощенную запись анонимных методов. Лямбда-выражения позволяют создать емкие лаконичные методы, 
+            // которые могут возвращать некоторое значение и которые можно передать в качестве параметров в другие методы.
+            Operation operation = (x, y) => x + y;
+            Console.WriteLine(operation(10, 20));
         }
 
         public void IndexersAndOperatorOverloading()
@@ -583,6 +617,15 @@ namespace KnowledgeModel.Lang
         static void PointsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private static void GoodMorning()
+        {
+            Console.WriteLine("Good Morning");
+        }
+        private static void GoodEvening()
+        {
+            Console.WriteLine("Good Evening");
         }
     }
 
