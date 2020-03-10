@@ -66,6 +66,33 @@
         // Operators used in arithmetic expressions, comparison, logical expression, assignements and more
         // unary, binary, ternary operators
 
+        // The conditional operator is the only JavaScript operator that takes three operands. The operator can have one of two values based on a 
+        // condition.The syntax is: condition ? val1 : val2
+        let i = 0;
+        let value = (i > 0) ? "more than 0" : "0";
+        alert(value);
+
+        // The typeof operator returns a string indicating the type of the unevaluated operand. operand is the string, variable, keyword, or object 
+        // for which the type is to be returned.The parentheses are optional.
+        alert(typeof value);
+
+        // The comma operator (,) simply evaluates both of its operands and returns the value of the last operand. This operator is primarily used 
+        // inside a for loop, to allow multiple variables to be updated each time through the loop.
+        for (var i = 0, j = 9; i <= j; i++ , j--) {
+            alert("i="+i+"; j="+j);
+        }
+
+        // The void operator specifies an expression to be evaluated without returning a value.
+
+        // The instanceof operator returns true if the specified object is of the specified object type.
+        var theDay = new Date(1995, 12, 17);
+        alert(theDay instanceof Date);
+
+        // The in operator returns true if the specified property is in the specified object. objectName instanceof objectType
+
+        // The delete operator deletes an object, an object's property, or an element at a specified index
+        delete value; // If the delete operator succeeds, it sets the property or element to undefined. The delete operator returns true if the 
+        //operation is possible; it returns false if the operation is not possible.
     }
 
     ControlAndLoopConstructions()
