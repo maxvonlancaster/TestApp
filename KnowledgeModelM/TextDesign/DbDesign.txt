@@ -1,0 +1,20 @@
+﻿Relational terminology: Entities
+	
+
+Relational terminology: Attributes
+	
+
+Relational terminology: Records (Tuples)
+	
+
+Relationships (One-to-One, One-to-Many)
+	
+
+Understanding ER notation
+	
+
+Understanding normalization concept
+	
+
+Data Integrity
+	

@@ -8,7 +8,14 @@ Combining the results of multiple queries (union, except, intersect, minus, subq
 	
 
 Sessions, transactions, locks
+	A SQL session is an occurrence of a user interacting with a relational database through the use of SQL commands. When a user initially 
+	connects to the database, a session is established.
 	
+	A transaction is a unit of work that is performed against a database. Transactions are units or sequences of work accomplished in a logical 
+	order, whether in a manual fashion by a user or automatically by some sort of a database program.
+	
+	Locking is essential to successful SQL Server transactions processing and it is designed to allow SQL Server to work seamlessly in a multi-
+	user environment. Locking is the way that SQL Server manages transaction concurrency. 
 
 Isolation levels understanding
 	
