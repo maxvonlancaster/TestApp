@@ -1,8 +1,44 @@
 ﻿Tables, relationships, keys, constraints understanding
-	
+	A table is a collection of related data held in a table format within a database. It consists of columns, and rows.
+	Relation, is a set of tuples (d1, d2, ..., dn), where each element dj is a member of Dj, a data domain.
+	A DBMS key is an attribute or set of an attribute which helps you to identify a row(tuple) in a relation(table). They allow you to find the 
+	relation between two tables. Keys help you uniquely identify a row in a table by a combination of one or more columns in that table.
+	Super Key a group of single or multiple keys which identifies rows in a table. A Super key may have additional attributes that are not needed 
+	for unique identification.
+	Primary Key a column or group of columns in a table that uniquely identify every row in that table. The Primary Key can't be a duplicate meaning 
+	the same value can't appear more than once in the table. A table cannot have more than one primary key. Primary key field cannot be null; 
+	value in a primary key column can never be modified or updated if any foreign key refers to that primary key; two rows can't have the same 
+	primary key value. 
+	Candidate Key 
+	Alternate Key a column or group of columns in a table that uniquely identify every row in that table. A table can have multiple choices for a 
+	primary key but only one can be set as the primary key. All the keys which are not primary key are called an Alternate Key.
+	Foreign Key 
+	Compound Key 
+	Composite Key 
+	Surrogate Key 
+	SQL constraints are used to specify rules for data in a table.
+	CREATE TABLE table_name (
+		column1 datatype constraint,
+		column2 datatype constraint,
+		....
+	);
+	NOT NULL - Ensures that a column cannot have a NULL value
+	UNIQUE - Ensures that all values in a column are different
+	PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+	FOREIGN KEY - Uniquely identifies a row/record in another table
+	CHECK - Ensures that all values in a column satisfies a specific condition // CHECK (Age>=18)
+	DEFAULT - Sets a default value for a column when no value is specified // DEFAULT "Jon doe"
+	INDEX - Used to create and retrieve data from the database very quickly // 
 
 DDL, DML, DCL understanding
-	
+	DDL: A data definition or data description language (DDL) is a syntax similar to a computer programming language for defining data structures, 
+	especially database schemas. DDL statements create and modify database objects such as tables, indexes, and users. Common DDL statements are 
+	CREATE, ALTER, and DROP.
+	DML: A data manipulation language (DML) is a computer programming language used for adding (inserting), deleting, and modifying (updating) data 
+	in a database. A DML is often a sublanguage of a broader database language such as SQL, with the DML comprising some of the operators in the 
+	language. Read-only selecting of data is sometimes distinguished as being part of a separate data query language (DQL), but it is closely 
+	related and sometimes also considered a component of a DML; some operators may perform both selecting (reading) and writing.
+	DCL: 
 
 SQL data types 
 	
