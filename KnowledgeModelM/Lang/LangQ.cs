@@ -366,6 +366,9 @@ namespace KnowledgeModel.Lang
 
         delegate void Message();  // declare delegate
         delegate int Operation(int x, int y);
+
+        delegate void AccountHandler(string message);
+        event AccountHandler Notify;
         public void DelegatesEventsLambdas()
         {
             // Делегаты представляют такие объекты, которые указывают на методы. То есть делегаты - это указатели на методы и с помощью делегатов 
@@ -387,12 +390,17 @@ namespace KnowledgeModel.Lang
             // События сигнализируют системе о том, что произошло определенное действие. И если нам надо отследить эти действия, то как раз мы 
             // можем применять события.
             // События объявляются в классе с помощью ключевого слова event, после которого указывается тип делегата, который представляет событие:
-
+            Notify += DisplayMessage;   // Добавляем обработчик для события Notify
 
             // Лямбда-выражения представляют упрощенную запись анонимных методов. Лямбда-выражения позволяют создать емкие лаконичные методы, 
             // которые могут возвращать некоторое значение и которые можно передать в качестве параметров в другие методы.
             Operation operation = (x, y) => x + y;
             Console.WriteLine(operation(10, 20));
+        }
+
+        private void DisplayMessage(string message)
+        {
+            Console.WriteLine(message);
         }
 
         public void IndexersAndOperatorOverloading()
