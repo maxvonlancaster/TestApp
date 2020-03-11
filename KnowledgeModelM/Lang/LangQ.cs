@@ -313,6 +313,35 @@ namespace KnowledgeModel.Lang
         {
             // IComparable: Defines a generalized type-specific comparison method that a value type or class implements to order or sort its 
             // instances.
+
+            // Если требуется отсортировать коллекцию, состоящую из объектов определяемого пользователем класса, при условии, что они не сохраняются 
+            // в коллекции класса SortedList, где элементы располагаются в отсортированном порядке, то в такой коллекции должен быть известен способ 
+            // сортировки содержащихся в ней объектов. С этой целью можно, в частности, реализовать интерфейс IComparable для объектов сохраняемого 
+            // типа. Интерфейс IComparable доступен в двух формах: обобщенной и необобщенной. Несмотря на сходство применения обеих форм данного 
+            // интерфейса, между ними имеются некоторые, хотя и небольшие, отличия.
+
+            // Для сортировки объектов по нарастающей конкретная реализация данного метода должна возвращать нулевое значение, если значения 
+            // сравниваемых объектов равны; положительное — если значение вызывающего объекта больше, чем у объекта другого other; и отрицательное 
+            // — если значение вызывающего объекта меньше, чем у другого объекта other. А для сортировки по убывающей можно обратить результат 
+            // сравнения объектов.
+
+            List<PointComparable> list = new List<PointComparable>()
+            {
+                new PointComparable(1, 2),
+                new PointComparable(4, 4),
+                new PointComparable(1, 5),
+                new PointComparable(5, 9),
+                new PointComparable(-20, 0),
+                new PointComparable(9, -2),
+                new PointComparable(1, 2),
+                new PointComparable(356, 90),
+                new PointComparable(2, 0)
+            };
+            list.Sort(); // 
+            foreach(var p in list) 
+            {
+                Console.WriteLine("X={0}, Y={1}", p.X, p.Y);
+            }
         }
 
         public void NullableTypes()
@@ -809,6 +838,34 @@ namespace KnowledgeModel.Lang
         public static implicit operator PointSpace(int i)
         {
             return new PointSpace() { X = i, Y = i, Z = i };
+        }
+    }
+
+    public class PointComparable : IComparable<PointComparable>
+    {
+        public PointComparable(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public int CompareTo(PointComparable other)
+        {
+            if (X > other.X)
+            {
+                return 1;
+            }
+            else if (X < other.X)
+            {
+                return -1;
+            }
+            else 
+            {
+                return 0;
+            }
         }
     }
 }

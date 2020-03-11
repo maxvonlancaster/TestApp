@@ -1,0 +1,70 @@
+﻿Information security concepts:
+
+CIA Triad
+
+
+
+Authentication/Authorization concepts
+
+
+
+
+Access Control Lists (ACLs)
+
+
+
+Access Control Models
+
+Mandatory Access Control (MAC)
+
+
+
+Discretionary Access Control (DAC)
+
+
+
+Role-Based Access Control (RBAC)
+
+
+
+
+.NET Cryptography Model. Choosing an Algorithm (for encryption, integrity, signature, random number generation)
+
+
+
+ASP.NET Identity
+
+
+
+OWASP Top 10
+
+
+
+Top 10 2017
+
+
+
+Changes since 2013
+
+
+
+Cross-Site Request Forgery (XSRF)
+
+
+
+Protecting against cross-site scripting attacks (XSS)
+
+
+
+Protecting against buffer overrun attacks
+
+
+
+Protecting against SQL-injection attacks
+
+
+
+CSRF/XSRF protection
+
+
+
