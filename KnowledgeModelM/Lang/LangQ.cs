@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using static System.Console;
@@ -98,7 +99,7 @@ namespace KnowledgeModel.Lang
             Console.WriteLine("# of items: {0}", points.Count);
             foreach (Point p in points)
                 Console.WriteLine(p);
-            points.Insert(2, new Point { X=2, Y=2}); // insert at speciefied index
+            points.Insert(2, new Point { X = 2, Y = 2 }); // insert at speciefied index
             Console.WriteLine("# of items: {0}", points.Count);
             Point[] pointsArray = points.ToArray();
             foreach (Point p in pointsArray)
@@ -145,7 +146,7 @@ namespace KnowledgeModel.Lang
                 new Point{ X = -10, Y = 1},
                 new Point{ X = 1, Y = 1}
             };
-            pointsSorted.Add(new Point { X = 0, Y = 9});
+            pointsSorted.Add(new Point { X = 0, Y = 9 });
             foreach (Point p in pointsSorted)
             {
                 Console.WriteLine(p.X);
@@ -338,7 +339,7 @@ namespace KnowledgeModel.Lang
                 new PointComparable(2, 0)
             };
             list.Sort(); // 
-            foreach(var p in list) 
+            foreach (var p in list)
             {
                 Console.WriteLine("X={0}, Y={1}", p.X, p.Y);
             }
@@ -375,12 +376,17 @@ namespace KnowledgeModel.Lang
             {
                 mes = GoodMorning; // assign adress of that method to a variable;
             }
-            else 
+            else
             {
                 mes = GoodEvening;
             };
             mes(); // call the delegate
 
+
+
+            // События сигнализируют системе о том, что произошло определенное действие. И если нам надо отследить эти действия, то как раз мы 
+            // можем применять события.
+            // События объявляются в классе с помощью ключевого слова event, после которого указывается тип делегата, который представляет событие:
 
 
             // Лямбда-выражения представляют упрощенную запись анонимных методов. Лямбда-выражения позволяют создать емкие лаконичные методы, 
@@ -432,7 +438,7 @@ namespace KnowledgeModel.Lang
             var itemPurchase = new
             {
                 TimeBought = DateTime.Now,
-                Item = new { Color = "Red", Speed = 50},
+                Item = new { Color = "Red", Speed = 50 },
                 Price = 34.00
             };
         }
@@ -475,7 +481,31 @@ namespace KnowledgeModel.Lang
         // Strings and StringBuilder. String concatenation practices. String Interpolation
         public void StringsAndStringBuilder()
         {
+            // stringBuilder - Represents a mutable string of characters. This class cannot be inherited. System.Text
+            // 
+            StringBuilder sb = new StringBuilder("string");
+            sb.Append(new char[] { 'D', 'E', 'F' });
+            sb.AppendFormat("GHI{0}{1}", 'J', 'k');
+            Console.WriteLine("{0} chars: {1}", sb.Length, sb.ToString());
+            sb.Insert(0, "A"); // inserts at the beggining
+            sb.Replace("k", "K"); // replaces all
+            Console.WriteLine(sb.ToString());
 
+
+
+            // The $ special character identifies a string literal as an interpolated string. An interpolated string is a string literal that might 
+            // contain interpolation expressions. When an interpolated string is resolved to a result string, items with interpolation expressions 
+            // are replaced by the string representations of the expression results. This feature is available starting with C# 6.
+            // String interpolation provides a more readable and convenient syntax to create formatted strings than a string composite formatting 
+            // feature.
+
+            int i = 1;
+            string name = "Namen";
+            int age = 30;
+
+            Console.WriteLine($"i={i}, Name={name}, {age} year{(age == 1 ? "" : "s")} old");
+            // To include a brace, "{" or "}", in the text produced by an interpolated string, use two braces, "{{" or "}}".
+            // Possible to use conditional operator in an interpolation expression
         }
 
 
@@ -484,7 +514,9 @@ namespace KnowledgeModel.Lang
         public void Serialization()
         {
             //Configuring Objects for Serialization
-
+            // Serialization is a process of storing the object instance to a disk file. Serialization stores state of the object i.e. member 
+            // variable values to disk. Deserialization is reverse of serialization i.e. it's a process of reading objects from a file where 
+            // they have been stored. In this code sample we will see how to serialize and deserialize objects using C#.
 
 
             //Choosing a Serialization Formatter(binary, soap, xml, etc)
@@ -499,19 +531,72 @@ namespace KnowledgeModel.Lang
         public void SystemIONameSpace()
         {
             //Abstract Stream Class
-
+            // Provides a generic view of a sequence of bytes. This is an abstract class.
+            // Stream is the abstract base class of all streams. A stream is an abstraction of a sequence of bytes, such as a file, an input/output 
+            // device, an inter-process communication pipe, or a TCP/IP socket. The Stream class and its derived classes provide a generic view of 
+            // these different types of input and output, and isolate the programmer from the specific details of the operating system and the 
+            // underlying devices.
 
 
             //StreamWriters and StreamReaders
+            // StremWriter -> Implements a TextWriter for writing characters to a stream in a particular encoding.
+            // Get the directories currently on the C drive.
+            DirectoryInfo[] cDirs = new DirectoryInfo(@"c:\").GetDirectories();
+            using (StreamWriter sw = new StreamWriter("dummy.txt"))
+            {
+                foreach (DirectoryInfo directory in cDirs)
+                {
+                    sw.WriteLine(directory.Name);
+                }
+                sw.Close();
+            }
+            string line = "";
 
+            // StremWriter -> Implements a TextReader that reads characters from a byte stream in a particular encoding.
+            // Read and show each line from the file.
+            using (StreamReader sr = new StreamReader("dummy.txt"))
+            {
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+            // 
 
 
             //StringWriters and StringReaders
+            // StringWriter -> Implements a TextWriter for writing information to a string. The information is stored in an underlying StringBuilder.
+            string textReaderText = "TextReader is the abstract base " +
+            "class of StreamReader and StringReader, which read " +
+            "characters from streams and strings, respectively.\n\n" +
 
+            "Create an instance of TextReader to open a text file " +
+            "for reading a specified range of characters, or to " +
+            "create a reader based on an existing stream.\n\n" +
+
+            "You can also use an instance of TextReader to read " +
+            "text from a custom backing store using the same " +
+            "APIs you would use for a string or a stream.\n\n";
+            StringReader stringReader = new StringReader(textReaderText);
+            string aLine;
+            while (true) 
+            {
+                aLine = stringReader.ReadLine();
+                if (aLine != null)
+                {
+                    Console.WriteLine("New Line: " + aLine);
+                }
+                else 
+                {
+                    break;
+                }
+            }
+            // StringReader -> 
 
 
             //Watching Files Programmatically
-
+            // 
+            // 
         }
 
         public void LinqToObjects()
@@ -519,7 +604,7 @@ namespace KnowledgeModel.Lang
             // linq -> strongly typed query language, embedded directly into the grammar of c# itself.
 
             // LINQ Queries to Primitive Arrays and Collections
-            string[] stringArray = { "ab", "cd", "eq", "ce"};
+            string[] stringArray = { "ab", "cd", "eq", "ce" };
             // when have array -> common to extract a subset of items based on a given requirement
             IEnumerable<string> subset = from s in stringArray
                                          where s.Contains("c")
@@ -568,6 +653,22 @@ namespace KnowledgeModel.Lang
                           select p;
 
             //LINQ Query Operators
+            // A set of extension methods forming a query pattern is known as LINQ Standard Query Operators. As building blocks of LINQ query 
+            // expressions, these operators offer a range of query capabilities like filtering, sorting, projection, aggregation, etc.
+            // Filtering: where (filter based on predicate function), OfType()
+            // Join: Join (join … in … on … equals …), GroupJoin (join ... in … on … equals … into …)
+            // Projection: 
+            // Sorting: 
+            // Grouping: 
+            // Conversions: 
+            // Concatenation: 
+            // Aggregation: 
+            // Quantifiers: 
+            // Partition: 
+            // Generation: 
+            // Set: 
+            // Equality: 
+            // Element: 
 
 
 
@@ -672,7 +773,7 @@ namespace KnowledgeModel.Lang
 
         public static bool operator <(Point p1, Point p2)
         {
-            return (p1.X < p2.X) && (p1.Y < p2.Y); 
+            return (p1.X < p2.X) && (p1.Y < p2.Y);
         }
 
         public static bool operator >(Point p1, Point p2)
@@ -683,7 +784,7 @@ namespace KnowledgeModel.Lang
         // 3d point can be explicitly converted to 2d point 
         public static explicit operator Point(PointSpace p)
         {
-            return new Point() { X = p.X, Y = p.Y}; // Z is lost
+            return new Point() { X = p.X, Y = p.Y }; // Z is lost
         }
     }
 
@@ -862,7 +963,7 @@ namespace KnowledgeModel.Lang
             {
                 return -1;
             }
-            else 
+            else
             {
                 return 0;
             }
