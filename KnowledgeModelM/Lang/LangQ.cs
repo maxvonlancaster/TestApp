@@ -599,7 +599,17 @@ namespace KnowledgeModel.Lang
                     break;
                 }
             }
-            // StringReader -> 
+            // StringReader -> Implements a TextReader that reads from a string.
+            StringBuilder stringToRead = new StringBuilder();
+            stringToRead.AppendLine("Characters in 1st line to read");
+            stringToRead.AppendLine("and 2nd line");
+            stringToRead.AppendLine("and the end");
+
+            using (StringReader reader = new StringReader(stringToRead.ToString()))
+            {
+                string readText = reader.ReadToEnd();
+                Console.WriteLine(readText);
+            }
 
 
             //Watching Files Programmatically
