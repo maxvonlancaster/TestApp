@@ -10,19 +10,62 @@ Combining the results of multiple queries (union, except, intersect, minus, subq
 Sessions, transactions, locks
 	A SQL session is an occurrence of a user interacting with a relational database through the use of SQL commands. When a user initially 
 	connects to the database, a session is established.
+	A session may be invoked by either direct connection to the database or through a front-end application. In both cases, sessions are 
+	normally established by a user at a terminal or workstation that communicates through a network with the computer that hosts the database.
+	When a user connects to a database, the SQL session is initialized. The CONNECT command is used to establish a database connection. With 
+	the CONNECT command, you can either invoke a connection or change connections to the database. For example, if you are connected as USER1, 
+	you can use the CONNECT command to connect to the database as USER2. When this happens, the SQL session for USER1 is implicitly disconnected.
+	CONNECT user@database
+	DISCONNECT
+	sys.dm_exec_sessions -> Returns one row per authenticated session on SQL Server. sys.dm_exec_sessions is a server-scope view that shows 
+	information about all active user connections and internal tasks. This information includes client version, client program name, client 
+	login time, login user, current session setting, and more.
 	
 	A transaction is a unit of work that is performed against a database. Transactions are units or sequences of work accomplished in a logical 
 	order, whether in a manual fashion by a user or automatically by some sort of a database program.
+	A transaction is the propagation of one or more changes to the database. For example, if you are creating a record or updating a record or 
+	deleting a record from the table, then you are performing a transaction on that table. It is important to control these transactions to ensure 
+	the data integrity and to handle database errors.
+	ACID (Atomicity, Consistency, Isolation, Durability)
+	COMMIT − to save the changes.
+	ROLLBACK − to roll back the changes.
+	SAVEPOINT − creates points within the groups of transactions in which to ROLLBACK.
+	SET TRANSACTION − Places a name on a transaction.
 	
 	Locking is essential to successful SQL Server transactions processing and it is designed to allow SQL Server to work seamlessly in a multi-
 	user environment. Locking is the way that SQL Server manages transaction concurrency. 
+	Lock is defined as a mechanism to ensure data integrity, consistency while allowing concurrent access to data. It is used to implement 
+	concurrency control when multiple users access Database to manipulate its data at the same time.
+	
 
 Isolation levels understanding
+	Controls the locking and row versioning behavior of Transact-SQL statements issued by a connection to SQL Server.
+	Transaction Isolation Levels: READ UNCOMMITTED (Specifies that statements can read rows that have been modified by other transactions but not 
+	yet committed.); READ COMMITTED (Default, Specifies that statements cannot read data that has been modified but not committed by other 
+	transactions.); REPEATABLE READ; SERIALIZABLE; SNAPSHOT(Specifies that data read by any statement in a transaction will be the transactionally 
+	consistent version of the data that existed at the start of the transaction.).
+	SET TRANSACTION ISOLATION LEVEL ... .
 	
-
+	
 Implementing stored procedures, user-defined functions, triggers
-	
+	Procedures and triggers store procedural SQL statements in a database for use by all applications. They can include control statements that 
+	allow repetition (LOOP statement) and conditional execution (IF statement and CASE statement) of SQL statements. Batches are sets of SQL 
+	statements submitted to the database server as a group. Many features available in procedures and triggers, such as control statements, are 
+	also available in batches.
+	Procedures are invoked with a CALL statement, and use parameters to accept values and return values to the calling environment. SELECT 
+	statements can also operate on procedure result sets by including the procedure name in the FROM clause.
+	Procedures can return result sets to the caller, call other procedures, or fire triggers. For example, a user-defined function is a type of 
+	stored procedure that returns a single value to the calling environment. User-defined functions do not modify parameters passed to them, but 
+	rather, they broaden the scope of functions available to queries and other SQL statements.
+	Triggers are associated with specific database tables. They fire automatically whenever someone inserts, updates or deletes rows of the 
+	associated table. Triggers can call procedures and fire other triggers, but they have no parameters and cannot be invoked by a CALL 
+	statement.
 
 Cursors
 	A database cursor is an object that enables traversal over the rows of a result set. It allows you to process individual row returned by a query.
+	To use cursors in SQL procedures, you need to do the following:
+	Declare a cursor that defines a result set.
+	Open the cursor to establish the result set.
+	Fetch the data into local variables as needed from the cursor, one row at a time.
+	Close the cursor when done.
 	
