@@ -1,8 +1,24 @@
 ﻿Creating, modifying, removing database objects
-	
+	The first pair are CREATE TABLE and DROP TABLE. While they are written as two words, they are actually single commands. The first one creates a 
+	new table; its arguments are the names and types of the table’s columns. 
+	Once tables have been created, we can add, change, and remove records using our other set of commands, INSERT, UPDATE, and DELETE.
+	TRUNCATE TABLE statement is a Data Definition Language (DDL) operation that marks the extents of a table for deallocation (empty for reuse). 
+	The result of this operation quickly removes all data from a table, typically bypassing a number of integrity enforcing mechanisms.
 
 Aggregations (ORDER BY, GROUP BY, HAVING, SUM, COUNT, AVG, etc)
-	
+	ORDER BY clause specifies that a SQL SELECT statement returns a result set with the rows being sorted by the values of one or more columns. 
+	The sort criteria do not have to be included in the result set. The sort criteria can be expressions, including column names, user-defined 
+	functions, arithmetic operations, or CASE expressions. The expressions are evaluated and the results are used for the sorting, i.e., the values 
+	stored in the column or the results of the function call.
+	GROUP BY 
+	HAVING HAVING clause specifies that an SQL SELECT statement should only return rows where aggregate values meet the specified conditions. It 
+	was added to the SQL language because the WHERE keyword could not be used with aggregate functions.
+	SUM function returns the total sum of a numeric column.
+	COUNT function returns the number of rows that matches a specified criteria.
+	AVG function returns the average value of a numeric column.
+	SELECT AVG(column_name) -- COUNT(column_name) / SUM(column_name)
+	FROM table_name
+	WHERE condition;
 
 Combining the results of multiple queries (union, except, intersect, minus, subqueries)
 	

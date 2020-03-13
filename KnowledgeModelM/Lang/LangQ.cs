@@ -691,7 +691,9 @@ namespace KnowledgeModel.Lang
 
 
             //Internal Representation of LINQ Query
-
+            // Expression trees. These are representations of code as data. For instance, an expression tree could represent the notion of "take 
+            // a string parameter, call the Length property on it, and return the result". The fact that these exist as data rather than as compiled 
+            // code means that LINQ providers such as LINQ to SQL can analyze them and convert them into SQL.
 
 
             //Building Query Using Lambda Expressions
