@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ConsoleAppTest.Services
 {
@@ -171,12 +172,59 @@ namespace ConsoleAppTest.Services
         // Thread is a lower-level concept: if you're directly starting a thread, you know it will be a separate thread, rather than executing on 
         // the thread pool etc.
         // Task is more than just an abstraction of "where to run some code" though - it's really just "the promise of a result in the future". 
+        // ThreadPool is a wrapper around a pool of threads maintained by the CLR. ThreadPool gives you no control at all; you can submit work 
+        // to execute at some point, and you can control the size of the pool, but you can't set anything else. You can't even tell when the 
+        // pool will start running the work you submit to it.
+
+        // В эпоху многоядерных машин, которые позволяют параллельно выполнять сразу несколько процессов, стандартных средств работы с потоками в 
+        // .NET уже оказалось недостаточно. Поэтому во фреймворк .NET была добавлена библиотека параллельных задач TPL (Task Parallel Library), 
+        // основной функционал которой располагается в пространстве имен System.Threading.Tasks. Данная библиотека позволяет распараллелить задачи и 
+        // выполнять их сразу на нескольких процессорах, если на целевом компьютере имеется несколько ядер. Кроме того, упрощается сама работа по 
+        // созданию новых потоков. Поэтому начиная с .NET 4.0. рекомендуется использовать именно TPL и ее классы для создания многопоточных 
+        // приложений, хотя стандартные средства и класс Thread по-прежнему находят широкое применение.
 
         // TPL
 
         public void UsingTask()
         {
+            // В основе библиотеки TPL лежит концепция задач, каждая из которых описывает отдельную продолжительную операцию. В библиотеке классов 
+            // .NET задача представлена специальным классом - классом Task, который находится в пространстве имен System.Threading.Tasks. Данный 
+            // класс описывает отдельную задачу, которая запускается асинхронно в одном из потоков из пула потоков. Хотя ее также можно запускать 
+            // синхронно в текущем потоке.
 
+            Task task = new Task(() => Console.WriteLine("Hello")); // В качестве параметра объект Task принимает делегат Action, то есть мы можем 
+            // передать любое действие, которое соответствует данному делегату, например, лямбда-выражение, как в данном случае, или ссылку на 
+            // какой-либо метод
+            task.Start(); // 
+
+            // Второй способ заключается в использовании статического метода Task.Factory.StartNew(). Этот метод также в качестве параметра 
+            // принимает делегат Action, который указывает, какое действие будет выполняться. При этом этот метод сразу же запускает задачу
+            Task task1 = Task.Factory.StartNew(() => Console.WriteLine("Hello1"));
+            // В качестве результата метод возвращает запущенную задачу.
+
+            // Третий способ определения и запуска задач представляет использование статического метода Task.Run():
+            Task task2 = Task.Run(() => Console.WriteLine("Hello2"));
+
+            // Важно понимать, что задачи не выполняются последовательно. Первая запущенная задача может завершить свое выполнение после последней 
+            // задачи.
+            Task task3 = new Task(DummyMethodOne);
+            task3.Start();
+            Console.WriteLine("End of main thread");
+            // End of main thread may be before DummyMethodOne 
+
+            // Чтобы указать, что тред Main должен подождать до конца выполнения задачи, нам надо использовать метод Wait:
+            Task task4 = new Task(DummyMethodOne);
+            task4.Start();
+            task4.Wait();
+            Console.WriteLine("End of main thread");
+
+            // Класс Task имеет ряд свойств, с помощью которых мы можем получить информацию об объекте.Некоторые из них:
+            // AsyncState: возвращает объект состояния задачи
+            // CurrentId: возвращает идентификатор текущей задачи
+            // Exception: возвращает объект исключения, возникшего при выполнении задачи
+            // Status: возвращает статус задачи
+            Console.WriteLine(task4.AsyncState);
+            Console.WriteLine(task4.Status);
         }
 
         public void WorkingWithTask()
