@@ -229,7 +229,66 @@ namespace ConsoleAppTest.Services
 
         public void WorkingWithTask()
         {
+            // Одна задача может запускать другую - вложенную задачу. При этом эти задачи выполняются независимо друг от друга.
+            var taskOuter = Task.Factory.StartNew(() =>
+                {
+                    Console.WriteLine("Outer task started ");
+                    var taskInner = Task.Factory.StartNew(() =>
+                    {
+                        Console.WriteLine("Inner task started ");
+                        Thread.Sleep(1000);
+                        Console.WriteLine("Inner task ended ");
+                    });
+                    Console.WriteLine("Outer task ended ");
+                }
 
+                // Несмотря на то, что здесь мы ожидаем выполнения внешней задачи, но вложенная задача может завершить выполнение даже после 
+                // завершения метода Main
+            );
+            taskOuter.Wait();
+            Console.WriteLine("Main ended");
+
+
+            // Если необходимо, чтобы вложенная задача выполнялась вместе с внешней, необходимо использовать значение 
+            // TaskCreationOptions.AttachedToParent
+            var taskOuterNew = Task.Factory.StartNew(() =>
+            {
+                Console.WriteLine("Outer task started ");
+                var taskInnerNew = Task.Factory.StartNew(() =>
+                {
+                    Console.WriteLine("Inner task started ");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("Inner task ended ");
+                }, TaskCreationOptions.AttachedToParent); // HERE
+                Console.WriteLine("Outer task ended ");
+            });
+            taskOuterNew.Wait();
+            Console.WriteLine("Main ended");
+
+
+            // Если необходимо выполнять некоторый код лишь после того, как все задачи из массива завершатся, то применяется метод Task.WaitAll(tasks)
+            // Также мы можем применять метод Task.WaitAny(tasks). Он ждет, пока завершится хотя бы одна из массива задач.
+            Task[] tasks1 = new Task[3]
+            {
+                new Task(() => Console.WriteLine("First Task")),
+                new Task(() => Console.WriteLine("Second Task")),
+                new Task(() => Console.WriteLine("Third Task"))
+            };
+            foreach (var t in tasks1)
+                t.Start();
+            Task.WaitAll(tasks1); // ожидаем завершения задач 
+            Console.WriteLine("Завершение метода Main");
+
+            // Задачи могут не только выполняться как процедуры, но и возвращать определенные результаты
+            // Во-первых, чтобы задать возвращаемый из задачи тип объекта, мы должны типизировать Task. Например, Task<int> - в данном случае 
+            // задача будет возвращать объект int.
+            // И, во - вторых, в качестве задачи должен выполняться метод, возвращающий данный тип объекта.Например, в первом случае у нас в 
+            // качестве задачи выполняется функция Factorial, которая принимает числовой параметр и также на выходе возвращает число.
+            // Возвращаемое число будет храниться в свойстве Result: task1.Result.Нам не надо его приводить к типу int, оно уже само по себе 
+            // будет представлять число.
+            Task<int> taskInt = Task.Factory.StartNew(() => ThirdDegree(5));
+            int res = taskInt.Result; // ожидаем получение результата
+            Console.WriteLine(res);
         }
 
         public void TaskContinuation()
@@ -318,6 +377,11 @@ namespace ConsoleAppTest.Services
                 Console.WriteLine("Second thread: {0}, paramether: {1}", i, j);
                 Thread.Sleep(400);
             }
+        }
+
+        private int ThirdDegree(int i)
+        {
+            return i * i * i;
         }
     }
 }
