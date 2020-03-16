@@ -77,9 +77,25 @@ namespace MusicTracks.KM
 
         // ASP.NETCore MVC
         // MVC basics (Model, View, Controller, DI)
+        // MVC (Model-View-Controller) is a pattern for building web applications that's used in almost every web framework (Ruby on Rails and 
+        // Express are popular examples), plus frontend JavaScript frameworks like Angular. Mobile apps on iOS and Android use a variation of 
+        // MVC as well.
+        // As the name suggests, MVC has three components: models, views, and controllers.Controllers handle incoming requests from a client 
+        // or web browser and make decisions about what code to run.Views are templates (usually HTML plus a templating language like Handlebars, 
+        // Pug, or Razor) that get data added to them and then are displayed to the user.Models hold the data that is added to views, or data 
+        // that is entered by the user.
+        // There are two separate model classes that need to be created: a model that represents a item stored in the database (sometimes 
+        // called an entity), and the model that will be combined with a view (the MV in MVC) and sent back to the user's browser.
 
 
         // Model Binding
+        // Controllers and Razor pages work with data that comes from HTTP requests. For example, route data may provide a record key, and posted 
+        // form fields may provide values for the properties of the model. Writing code to retrieve each of these values and convert them from 
+        // strings to .NET types would be tedious and error-prone. Model binding automates this process. The model binding system:
+        // Retrieves data from various sources such as route data, form fields, and query strings.
+        // Provides the data to controllers and Razor pages in method parameters and public properties.
+        // Converts string data to.NET types.
+        // Updates properties of complex types.
 
 
         // Security and Identity (concepts understanding)

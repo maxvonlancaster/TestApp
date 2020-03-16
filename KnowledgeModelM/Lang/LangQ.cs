@@ -742,7 +742,14 @@ namespace KnowledgeModel.Lang
 
 
             //Building Query Using Lambda Expressions
-
+            // You do not use lambda expressions directly in query syntax, but you do use them in method calls, and query expressions can contain 
+            // method calls. In fact, some query operations can only be expressed in method syntax.
+            int[] scores = { 90, 71, 82, 93, 75, 82 };
+            int highScoreCount = scores.Where(n => n > 10).Count();
+            // Note that the Where method in this example has an input parameter of the delegate type Func<T,TResult> and that delegate takes an 
+            // integer as input and returns a Boolean. The lambda expression can be converted to that delegate. If this were a LINQ to SQL query 
+            // that used the Queryable.Where method, the parameter type would be an Expression<Func<int,bool>> but the lambda expression would look 
+            // exactly the same
         }
 
         public void GeneralCodingConventions()
