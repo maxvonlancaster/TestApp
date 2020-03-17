@@ -33,7 +33,16 @@ Understanding ER notation
 	
 
 Understanding normalization concept
-	
+	Database normalization is the process of structuring a relational database in accordance with a series of so-called normal forms in order to 
+	reduce data redundancy and improve data integrity.
+	To satisfy 1NF, the values in each column of a table must be atomic.
+	2NF -> does not have any non-prime attribute that is functionally dependent on any proper subset of any candidate key of the relation. A non-
+	prime attribute of a relation is an attribute that is not a part of any candidate key of the relation.
+	A table in third normal form (3NF) is a table in 2NF that has no transitive dependencies.
+	A relational schema R is considered to be in Boyce–Codd normal form (BCNF) if, for every one of its dependencies X → Y, one of the following 
+	conditions hold true: 1) X → Y is a trivial functional dependency (i.e., Y is a subset of X); 2) X is a superkey for schema R
+	4NF -> concerned with a more general type of dependency known as a multivalued dependency. A table is in 4NF if and only if, for every one of 
+	its non-trivial multivalued dependencies X ->  Y, X is a superkey—that is, X is either a candidate key or a superset thereof
 
 Data Integrity
 	Data integrity is the maintenance of, and the assurance of the accuracy and consistency of data over its entire life-cycle, and is a critical 
