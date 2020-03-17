@@ -1,11 +1,30 @@
 ﻿Relational terminology: Entities
-	
+	An entity may be defined as a thing capable of an independent existence that can be uniquely identified. An entity is an abstraction from 
+	the complexities of a domain. When we speak of an entity, we normally speak of some aspect of the real world that can be distinguished from 
+	other aspects of the real world.
+	Entities can be thought of as nouns.
+	An entity is a thing that exists either physically or logically. An entity may be a physical object such as a house or a car (they exist 
+	physically), an event such as a house sale or a car service, or a concept such as a customer transaction or order (they exist logically—as 
+	a concept). Although the term entity is the one most commonly used, following Chen we should really distinguish between an entity and an 
+	entity-type. An entity-type is a category. An entity, strictly speaking, is an instance of a given entity-type. There are usually many 
+	instances of an entity-type. Because the term entity-type is somewhat cumbersome, most people tend to use the term entity as a synonym 
+	for this term
 
 Relational terminology: Attributes
-	
+	Entities may be characterized not only by relationships, but also by additional properties (attributes), which include identifiers called 
+	"primary keys". Diagrams created to represent attributes as well as entities and relationships may be called entity-attribute-relationship 
+	diagrams, rather than entity–relationship models.
+	This model organizes data into one or more tables (or "relations") of columns and rows, with a unique key identifying each row. Rows are 
+	also called records or tuples. Columns are also called attributes. Generally, each table/relation represents one "entity type" (such as 
+	customer or product). The rows represent instances of that type of entity (such as "Lee" or "chair") and the columns representing values 
+	attributed to that instance (such as address or price).
 
 Relational terminology: Records (Tuples)
-	
+	Record (also called a structure, struct, or compound data) is a basic data structure. Records in a database or spreadsheet are usually called 
+	"rows". 
+	A record is a collection of fields, possibly of different data types, typically in fixed number and sequence. The fields of a record may also 
+	be called members, particularly in object-oriented programming; fields may also be called elements, though these risk confusion with the 
+	elements of a collection.
 
 Relationships (One-to-One, One-to-Many)
 	
@@ -17,4 +36,11 @@ Understanding normalization concept
 	
 
 Data Integrity
-	
+	Data integrity is the maintenance of, and the assurance of the accuracy and consistency of data over its entire life-cycle, and is a critical 
+	aspect to the design, implementation and usage of any system which stores, processes, or retrieves data. The term is broad in scope and may have 
+	widely different meanings depending on the specific context – even under the same general umbrella of computing. It is at times used as a proxy 
+	term for data quality, while data validation is a pre-requisite for data integrity. Data integrity is the opposite of data corruption. 
+	The overall intent of any data integrity technique is the same: ensure data is recorded exactly as intended (such as a database correctly 
+	rejecting mutually exclusive possibilities,) and upon later retrieval, ensure the data is the same as it was when it was originally recorded. 
+	In short, data integrity aims to prevent unintentional changes to information. Data integrity is not to be confused with data security, the 
+	discipline of protecting data from unauthorized parties.

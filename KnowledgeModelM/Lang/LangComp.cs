@@ -267,6 +267,10 @@ namespace KnowledgeModel.Lang
 
         public void PerformanceMonitoring()
         {
+            // PerformanceCounter Class -> Represents a Windows NT performance counter component.
+            // 
+            // 
+
 
         }
         // ^
