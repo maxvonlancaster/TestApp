@@ -1,1 +1,35 @@
-﻿
+﻿Microservices architecture
+	
+
+
+Dockerize a .NET Core application
+
+Dockerfile for an ASP.NET Core application
+	
+
+
+Build and run the Docker image
+	
+
+
+Development workflow for Docker apps
+
+Dockerfile
+	
+
+
+Multi-stage builds in Dockerfile
+	
+
+
+Create your custom Docker images and embed your application or service in them
+	
+
+
+Define your services in docker-compose.yml(multi-container Docker application)
+	
+
+
+Build and run your Docker application
+	
+
