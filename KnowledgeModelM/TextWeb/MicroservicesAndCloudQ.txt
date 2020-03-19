@@ -1,15 +1,32 @@
 ﻿Microservices architecture
+	Microservices are a software development technique —a variant of the service-oriented architecture (SOA) structural style— that arranges an 
+	application as a collection of loosely coupled services. In a microservices architecture, services are fine-grained and the protocols are 
+	lightweight.
+	Services in a microservice architecture (MSA) are often processes that communicate over a network to fulfil a goal using technology-agnostic 
+	protocols such as HTTP.
+	Services in a microservice architecture are independently deployable
+	Services are organized around business capabilities.
+	Services can be implemented using different programming languages, databases, hardware and software environment, depending on what fits best.
+	Services are small in size, messaging-enabled, bounded by contexts, autonomously developed, independently deployable, decentralized and built 
+	and released with automated processes.
 	
 
 
 Dockerize a .NET Core application
 
 Dockerfile for an ASP.NET Core application
-	
+	A Dockerfile is a file that defines a set of instructions that creates an image. Each instruction in the Dockerfile creates a layer in the 
+	image. For the most part, when you rebuild the image, only the layers that have changed are rebuilt. The Dockerfile can be distributed to 
+	others and allows them to recreate a new image in the same manner you created it. While this allows you to distribute the instructions on 
+	how to create the image, the main way to distribute your image is to publish it to a registry.
 
 
 Build and run the Docker image
-	
+	An image is an ordered collection of filesystem changes that form the basis of a container. The image doesn't have a state and is read-only. 
+	Much the time an image is based on another image, but with some customization. For example, when you create an new image for your application, 
+	you would base it on an existing image that already contains the .NET Core runtime.
+	A container is a runnable instance of an image. As you build your image, you deploy your application and dependencies. Then, multiple containers 
+	can be instantiated, each isolated from one another. Each container instance has its own filesystem, memory, and network interface.
 
 
 Development workflow for Docker apps
@@ -32,4 +49,5 @@ Define your services in docker-compose.yml(multi-container Docker application)
 
 Build and run your Docker application
 	
+
 
