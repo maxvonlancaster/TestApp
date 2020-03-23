@@ -1,7 +1,12 @@
 ﻿Information security concepts:
 
 CIA Triad
-
+	CIA - Confidentiality, Integrity and Availability.
+	Confidentiality -> It's crucial in today's world for people to protect their sensitive, private information from unauthorized access.
+	Integrity -> designed to protect data from deletion or modification from any unauthorized party, and it ensures that when an authorized person 
+	makes a change that should not have been made the damage can be reversed
+	Availability -> Authentication mechanisms, access channels and systems all have to work properly for the information they protect and ensure 
+	it's available when it is needed.
 
 
 Authentication/Authorization concepts
