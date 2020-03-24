@@ -10,12 +10,23 @@ CIA Triad
 
 
 Authentication/Authorization concepts
-
+	Authentication is about validating your credentials such as Username/User ID and password to verify your identity. The system then checks 
+	whether you are what you say you are using your credentials. Whether in public or private networks, the system authenticates the user identity 
+	through login passwords. Usually authentication is done by a username and password, although there are other various ways to be authenticated.
+	methods: Login form; Http; X.509 certification; custom
+	Authorization occurs after your identity is successfully authenticated by the system, which therefore gives you full access to resources such 
+	as information, files, databases, funds, etc. However authorization verifies your rights to grant you access to resources only after determining 
+	your ability to access the system and up to what extent. In other words, authorization is the process to determine whether the authenticated 
+	user has access to the particular resources. A good example of this is, once verifying and confirming employee ID and passwords through 
+	authentication, the next step would be determining which employee has access to which floor and that is done through authorization.
+	methods: access controls for URLs, secure methods and objects, Access control lists (ACLs)
 
 
 
 Access Control Lists (ACLs)
-
+	An access-control list (ACL), with respect to a computer file system, is a list of permissions attached to an object. An ACL specifies which 
+	users or system processes are granted access to objects, as well as what operations are allowed on given objects. Each entry in a typical 
+	ACL specifies a subject and an operation. For instance, if a file object has an ACL that contains (Alice: read,write; Bob: read),
 
 
 Access Control Models
