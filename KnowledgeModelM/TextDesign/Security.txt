@@ -32,7 +32,13 @@ Access Control Lists (ACLs)
 Access Control Models
 
 Mandatory Access Control (MAC)
-
+	MAC refers to a type of access control by which the operating system constrains the ability of a subject or initiator to access or generally 
+	perform some sort of operation on an object or target. In practice, a subject is usually a process or thread; objects are constructs such as 
+	files, directories, TCP/UDP ports, shared memory segments, IO devices, etc. Subjects and objects each have a set of security attributes. 
+	Whenever a subject attempts to access an object, an authorization rule enforced by the operating system kernel examines these security 
+	attributes and decides whether the access can take place. Any operation by any subject on any object is tested against the set of authorization 
+	rules (aka policy) to determine if the operation is allowed. A database management system, in its access control mechanism, can also apply 
+	mandatory access control; in this case, the objects are tables, views, procedures, etc.
 
 
 Discretionary Access Control (DAC)
@@ -53,7 +59,37 @@ ASP.NET Identity
 
 
 OWASP Top 10
-
+	Injection. Injection flaws, such as SQL, NoSQL, OS, and LDAP injection, occur when untrusted data is sent to an interpreter as part of a 
+	command or query. The attacker’s hostile data can trick the interpreter into executing unintended commands or accessing data without proper 
+	authorization.
+	Broken Authentication. Application functions related to authentication and session management are often implemented incorrectly, allowing 
+	attackers to compromise passwords, keys, or session tokens, or to exploit other implementation flaws to assume other users’ identities 
+	temporarily or permanently.
+	Sensitive Data Exposure. Many web applications and APIs do not properly protect sensitive data, such as financial, healthcare, and PII. 
+	Attackers may steal or modify such weakly protected data to conduct credit card fraud, identity theft, or other crimes. Sensitive data 
+	may be compromised without extra protection, such as encryption at rest or in transit, and requires special precautions when exchanged 
+	with the browser.
+	XML External Entities (XXE). Many older or poorly configured XML processors evaluate external entity references within XML documents. External 
+	entities can be used to disclose internal files using the file URI handler, internal file shares, internal port scanning, remote code execution, 
+	and denial of service attacks.
+	Broken Access Control. Restrictions on what authenticated users are allowed to do are often not properly enforced. Attackers can exploit these 
+	flaws to access unauthorized functionality and/or data, such as access other users’ accounts, view sensitive files, modify other users’ data, 
+	change access rights, etc.
+	Security Misconfiguration. Security misconfiguration is the most commonly seen issue. This is commonly a result of insecure default configurations, 
+	incomplete or ad hoc configurations, open cloud storage, misconfigured HTTP headers, and verbose error messages containing sensitive information. 
+	Not only must all operating systems, frameworks, libraries, and applications be securely configured, but they must be patched/upgraded in a 
+	timely fashion.
+	Cross-Site Scripting XSS. XSS flaws occur whenever an application includes untrusted data in a new web page without proper validation or escaping, 
+	or updates an existing web page with user-supplied data using a browser API that can create HTML or JavaScript. XSS allows attackers to execute 
+	scripts in the victim’s browser which can hijack user sessions, deface web sites, or redirect the user to malicious sites.
+	Insecure Deserialization. Insecure deserialization often leads to remote code execution. Even if deserialization flaws do not result in remote 
+	code execution, they can be used to perform attacks, including replay attacks, injection attacks, and privilege escalation attacks.
+	Using Components with Known Vulnerabilities. Components, such as libraries, frameworks, and other software modules, run with the same privileges 
+	as the application. If a vulnerable component is exploited, such an attack can facilitate serious data loss or server takeover. Applications and 
+	APIs using components with known vulnerabilities may undermine application defenses and enable various attacks and impacts.
+	Insufficient Logging & Monitoring. Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, 
+	allows attackers to further attack systems, maintain persistence, pivot to more systems, and tamper, extract, or destroy data. Most breach 
+	studies show time to detect a breach is over 200 days, typically detected by external parties rather than internal processes or monitoring.
 
 
 Top 10 2017
@@ -65,7 +101,14 @@ Changes since 2013
 
 
 Cross-Site Request Forgery (XSRF)
-
+	Cross-site request forgery, also known as one-click attack or session riding and abbreviated as CSRF (sometimes pronounced sea-surf) or XSRF, 
+	is a type of malicious exploit of a website where unauthorized commands are transmitted from a user that the web application trusts. There 
+	are many ways in which a malicious website can transmit such commands; specially-crafted image tags, hidden forms, and JavaScript XMLHttpRequests
+	, for example, can all work without the user's interaction or even knowledge. Unlike cross-site scripting (XSS), which exploits the trust a user 
+	has for a particular site, CSRF exploits the trust that a site has in a user's browser.
+	In a CSRF attack, the attacker's goal is to cause an innocent victim to unknowingly submit a maliciously crafted web request to a website that 
+	the victim has privileged access to. This web request can be crafted to include URL parameters, cookies and other data that appear normal to 
+	the web server processing the request.
 
 
 Protecting against cross-site scripting attacks (XSS)
@@ -77,14 +120,16 @@ Protecting against buffer overrun attacks
 
 
 Protecting against SQL-injection attacks
-
+	SQL injection is a type of injection attack. Injection attacks occur when maliciously crafted inputs are submitted by an attacker, causing an 
+	application to perform an unintended action. Because of the ubiquity of SQL databases, SQL injection is one of the most common types of attack 
+	on the internet.
+	Sanitizing inputs is a good practice for all applications.
 
 
 CSRF/XSRF protection
-	Cross-site request forgery, also known as one-click attack or session riding and abbreviated as CSRF (sometimes pronounced sea-surf) or XSRF, 
-	is a type of malicious exploit of a website where unauthorized commands are transmitted from a user that the web application trusts. There 
-	are many ways in which a malicious website can transmit such commands; specially-crafted image tags, hidden forms, and JavaScript XMLHttpRequests
-	, for example, can all work without the user's interaction or even knowledge. Unlike cross-site scripting (XSS), which exploits the trust a user 
-	has for a particular site, CSRF exploits the trust that a site has in a user's browser.
+	Synchronizer token pattern (STP) is a technique where a token, secret and unique value for each request, is embedded by the web application in 
+	all HTML forms and verified on the server side.
+	Web applications that use JavaScript for the majority of their operations may use an anti-CSRF technique that relies on same-origin policy.
+	
 
 
