@@ -1,0 +1,162 @@
+﻿Test Pyramid concept
+	Bottom to top: Unit Tests; Service Tests; User Interface Tests
+
+Testing Pyramid, Agile Testing Pyramid, Diamond
+
+
+Breaking the dependency, Interaction testing
+
+
+Strategies for isolating the database in tests
+
+
+Test smells and how to avoid
+Conditional test logic
+
+
+Hard-to-test code
+
+
+Test code duplication
+	Duplicated code is a smell in unit test code just as much as in other code. If you have duplicated code in tests, it makes it harder to 
+	refactor the implementation code because you have a disproportionate number of tests to update. Tests should help you refactor with confidence, 
+	rather than be a large burden that impedes your work on the code being tested.
+
+Test logic in production
+
+
+Obscure tests
+	It is difficult to understand the test at a glance. We are having trouble understanding what behavior a test is verifying
+	The first issue with an Obscure Test is that it makes the test harder to understand and therefore maintain.
+
+Erratic tests
+	One or more tests are behaving erratically; sometimes they pass and sometimes they fail.
+
+Slow Tests
+
+
+Assertion Roulette
+	It is hard to tell which of several assertions within the same test method caused a test failure.
+	Solution: For unit tests, we break up the test into a suite of Single Condition Tests
+
+Frequent Debugging
+	Manual debugging is required to determine the cause of most test failures.
+	Solution: We can ask ourselves what kind of automated test would have prevented the manual debugging session. 
+
+Fragile Tests
+
+
+Test Organization patterns
+
+
+Named Test suite
+
+
+Test Case structure
+
+
+Testcase class per Class
+
+
+Testcase class per Fixture
+
+
+Testcase class per Feature
+
+
+Test Code Reuse
+
+
+Test Utility method
+
+
+Creation Method
+
+
+Custom assertion
+
+
+Parameterized Test
+
+
+Location
+
+
+Testcase superclass
+
+
+Test Helper
+
+
+Fixture setup patterns
+
+
+Fresh Fixture
+
+
+Inline setup
+
+
+Delegated setup
+
+
+Implicit setup
+
+
+Shared Fixture
+
+
+Prebuilt fixture
+
+
+Lazy setup
+
+
+SuiteFixture setup
+
+
+Setup Decorator
+
+
+Chained tests
+
+
+Test double patterns
+
+
+Test Stub
+
+
+Test Spy
+
+
+Mock Object
+
+
+Fake Object
+
+
+Configurable Test Double
+
+
+Hard-coded Test Double
+
+
+
+Feature-driven development (FDD)
+
+
+Behavior-driven development (BDD)
+
+
+Test-driven development (TDD), 
+
+
+Outside-In Test-Driven Development (Outside-In TDD)
+
+
+Acceptance testing, Acceptance Test Driven Development (ATDD)
+
+
+Continuous testing
+

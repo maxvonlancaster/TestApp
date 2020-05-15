@@ -1,0 +1,14 @@
+﻿Create, configure, and publish a web package (.NET Web Profile)
+	Configure solution build profiles
+	Configure transformation of web.config file
+	Configure publishing profiles
+	Create a web deployment package with MSBuild script
+	Run deployment from command line
+
+Publishing Web Services
+	
+
+Manage packages by using NuGet, NPM and Bower
+	Bower can manage components that contain HTML, CSS, JavaScript, fonts or even image files. Bower doesn’t concatenate or minify code or do 
+	anything else - it just installs the right versions of the packages you need and their dependencies.
+	bower install <package>

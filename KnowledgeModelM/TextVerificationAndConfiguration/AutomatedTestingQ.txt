@@ -1,0 +1,123 @@
+﻿Software testing basic concepts
+(white/black-box, types, )
+	Black box: Мы не знаем, как устроена тестируемая система.
+	тест-дизайн, основанный на технике черного ящика – процедура написания или выбора тест-кейсов на основе анализа функциональной или нефункциональной 
+	спецификации компонента или системы  без знания ее внутреннего устройства.
+	– неправильно реализованные или недостающие функции;
+	– ошибки интерфейса;
+	– ошибки в структурах данных или организации доступа к внешним базам данных;
+	– ошибки поведения или недостаточная производительности системы;
+	White box: Нам известны все детали реализации тестируемой программы
+	тестирование, основанное на анализе внутренней структуры компонента или системы.
+	тестирование может производиться на ранних этапах: нет необходимости ждать создания пользовательского интерфейса;
+	можно провести более тщательное тестирование, с покрытием большого количества путей выполнения программы;
+	для выполнения тестирования белого ящика необходимо большое количество специальных знаний
+	Types: 
+	Functional Testing types include: 
+	Unit Testing (Testing of an individual software component or module; by programer)
+	Integration Testing ()
+	System Testing ()
+	Sanity Testing ()
+	Smoke Testing ()
+	Interface Testing ()
+	Regression Testing ()
+	Beta/Acceptance Testing (carried out by the customer; in the Real Environment before releasing the product)
+	Non-functional Testing types include:
+	Performance Testing ()
+	Load Testing ()
+	Stress Testing ()
+	Volume Testing ()
+	Security Testing ()
+	Compatibility Testing ()
+	Install Testing ()
+	Recovery Testing ()
+	Reliability Testing ()
+	Usability Testing ()
+	Compliance Testing ()
+	Localization Testing ()
+
+Software testability (how to improve it?)
+	Software testability is the degree to which a software artifact (i.e. a software system, software module, requirements- or design document) 
+	supports testing in a given test context. If the testability of the software artifact is high, then finding faults in the system (if it has 
+	any) by means of testing is easier.
+	The testability of software components (modules, classes) is determined by factors such as:
+	Controllability: The degree to which it is possible to control the state of the component under test (CUT) as required for testing.
+	Observability: The degree to which it is possible to observe (intermediate and final) test results.
+	Isolateability: The degree to which the component under test (CUT) can be tested in isolation.
+	Separation of concerns: The degree to which the component under test has a single, well defined responsibility.
+	Understandability: The degree to which the component under test is documented or self-explaining.
+	Automatability: The degree to which it is possible to automate testing of the component under test.
+	Heterogeneity: The degree to which the use of diverse technologies requires to use diverse test methods and tools in parallel.
+	The testability of software components can be improved by: Test-driven development; Design for testability 
+
+Software testing concept
+
+Test case
+	Это артефакт, описывающий совокупность шагов, конкретных условий и параметров, необходимых для проверки реализации тестируемой функции или её 
+	части. Под тест кейсом понимается структура вида: Action > Expected Result > Test Result
+
+Test Suite
+	Тест Сьют это набор тест кейсов, которые объединены тем что относятся к одному тестируемому модулю, функциональности, приоритету или одному типу 
+	тестирования. Каждый тест сьют состоит из более чем одного тест кейса и зачастую выполняется всей «пачкой» в процессе тестирования.
+
+Test Plan
+
+Testing Levels:
+Unit
+	Testing of an individual software component or module is termed as Unit Testing. It is typically done by the programmer and not by testers, as 
+	it requires detailed knowledge of the internal program design and code. It may also require developing test driver modules or test harnesses.
+
+Integration
+	Testing of all integrated modules to verify the combined functionality after integration is termed as Integration Testing.
+	Modules are typically code modules, individual applications, client and server applications on a network, etc. This type of testing is especially 
+	relevant to client/server and distributed systems.
+
+End-to-end
+	Similar to system testing, End-to-End Testing involves testing of a complete application environment in a situation that mimics real-world use, 
+	such as interacting with a database, using network communications, or interacting with other hardware, applications, or systems if appropriate.
+
+Manual
+	is a type of Software Testing where Testers manually execute test cases without using any automation tools. Manual Testing is the most primitive 
+	of all testing types and helps find bugs in the software system.
+
+White/black-box testing
+	
+Naming standards for unit tests
+	The basic naming of a test comprises of three main parts: [UnitOfWork_StateUnderTest_ExpectedBehavior]
+	Public void Sum_NegativeNumberAs1stParam_ExceptionThrown()
+
+
+Types of test doubles (Stub, Mock, Spy, Fake, Dummy)
+	Use doubles to stand in for collaborating components in your tests:
+	Use a dummy to ensure a collaborator is never used in a certain scenario.
+	Use stubs to double read only collaborators.
+	Use spies to double write only collaborators.
+	Refactor a spy into a mock to dry up duplicate spy verification between tests.
+	Use fakes to double read/write collaborators, and write contract tests to verify their behavior.
+	Join these doubles together into new combinations when appropriate, but carefully weigh the tradeoffs when doing so
+
+Schools of thought on Test Doubles: Classical, and Mockist
+	
+
+Basic coverage criteria
+	
+
+Testing concepts (Unit vs Functional vs Integration)
+	
+
+Goals of Unit Testing, What Makes a Test Valuable?
+	
+
+Styles of Unit Testing (Output / State / Collaboration)
+	
+
+Good unit test properties
+	
+
+F.I.R.S.T Principles of unit testing
+	FAST(developer should not hesitate to run the tests as they are slow), 
+	ISOLATED/INDEPENDENT, 
+	REPEATABLE(A test method should NOT depend on any data in the environment/instance in which it is running), 
+	SELF-VALIDATING(No manual inspection required to check whether the test has passed or failed) and 
+	THOROUGH/TIMELY(Should cover every use case scenario and NOT just aim for 100% coverage)
+

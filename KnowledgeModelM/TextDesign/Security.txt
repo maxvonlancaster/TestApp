@@ -76,6 +76,8 @@ ASP.NET Identity
 
 
 OWASP Top 10
+
+Top 10 2017
 	Injection. Injection flaws, such as SQL, NoSQL, OS, and LDAP injection, occur when untrusted data is sent to an interpreter as part of a 
 	command or query. The attacker’s hostile data can trick the interpreter into executing unintended commands or accessing data without proper 
 	authorization.
@@ -107,11 +109,6 @@ OWASP Top 10
 	Insufficient Logging & Monitoring. Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, 
 	allows attackers to further attack systems, maintain persistence, pivot to more systems, and tamper, extract, or destroy data. Most breach 
 	studies show time to detect a breach is over 200 days, typically detected by external parties rather than internal processes or monitoring.
-
-
-Top 10 2017
-
-
 
 Changes since 2013
 

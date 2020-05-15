@@ -7,11 +7,34 @@
 
 
 2. Basic understanding of TCP/IP model and protocols
-	
+	The application layer is the scope within which applications, or processes, create user data and communicate this data to other applications 
+	on another or the same host. The applications make use of the services provided by the underlying lower layers, especially the transport layer 
+	which provides reliable or unreliable pipes to other processes. The communications partners are characterized by the application architecture, 
+	such as the client-server model and peer-to-peer networking. This is the layer in which all application protocols, such as SMTP, FTP, SSH, 
+	HTTP, operate. Processes are addressed via ports which essentially represent services.
+	The transport layer performs host-to-host communications on either the local network or remote networks separated by routers. It provides a 
+	channel for the communication needs of applications. UDP is the basic transport layer protocol, providing an unreliable connectionless datagram 
+	service. The Transmission Control Protocol provides flow-control, connection establishment, and reliable transmission of data.
+	The internet layer exchanges datagrams across network boundaries. It provides a uniform networking interface that hides the actual topology 
+	(layout) of the underlying network connections. It is therefore also the layer that establishes internetworking. Indeed, it defines and 
+	establishes the Internet. This layer defines the addressing and routing structures used for the TCP/IP protocol suite. The primary protocol 
+	in this scope is the Internet Protocol, which defines IP addresses. Its function in routing is to transport datagrams to the next host, functioning 
+	as an IP router, that has the connectivity to a network closer to the final data destination.
+	The link layer defines the networking methods within the scope of the local network link on which hosts communicate without intervening routers. This 
+	layer includes the protocols used to describe the local network topology and the interfaces needed to affect the transmission of Internet layer 
+	datagrams to next-neighbor hosts.
 
 
 3. Defining internet, intranet and VPN
-
+	Internet - the global system of interconnected computer networks that uses the Internet protocol suite (TCP/IP) to link devices worldwide. It is a 
+	network of networks that consists of private, public, academic, business, and government networks of local to global scope, linked by a broad array
+	of electronic, wireless, and optical networking technologies. The Internet carries a vast range of information resources and services, such as the 
+	inter-linked hypertext documents and applications of the World Wide Web (WWW), electronic mail, telephony, and file sharing.
+	Intranet - a computer network for sharing information, collaboration tools, operational systems, and other computing services only within an 
+	organization, and to the exclusion of access by outsiders to the organization. The term is used in contrast to public networks, such as the 
+	Internet, but uses most of the same technology based on the Internet Protocol Suite.
+	VPN - extends a private network across a public network, and enables users to send and receive data across shared or public networks as if their computing 
+	devices were directly connected to the private network (virtual private network)
 
 4. Basics of Firewalls and DMZ
 
@@ -41,6 +64,10 @@
 
 
 13. Remote access services: Telnet, SSH, rdesktop, VNC
+	Telnet - 
+	SSH - 
+	Rdesktop - 
+	VNC - 
 
 
 14. The basic difference between HTTP and HTTPS protocols
