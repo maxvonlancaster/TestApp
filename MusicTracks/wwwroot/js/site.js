@@ -2,7 +2,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-import Fundamentals from './JsFundamentalsC.js';
-const Fund = new Fundamentals();
+import Monads from './Monads.js';
+const Monad = new Monads();
 
-Fund.Promise();
+Monad.monadUsage();
