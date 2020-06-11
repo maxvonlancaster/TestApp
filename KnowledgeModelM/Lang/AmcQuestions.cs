@@ -66,6 +66,11 @@ namespace KnowledgeModel.Lang
         }
 
         // 8. Can you describe why the lock() statement is designed to only accept reference type parameters?
+        // if the compiler let you lock on a value type, you would end up locking nothing at all... because each time you passed the value 
+        // type to the lock, you would be passing a boxed copy of it; a different boxed copy. So the locks would be as if they were entirely different objects. 
+        // You cannot lock a value type because it doesn't have a sync root record.
+        // Locking is performed by CLR and OS internals mechanisms that rely upon an object having a record that can only be accessed by 
+        // a single thread at a time - sync block root.
 
         // 9. How method arguments are passed in C#? Can this behavior be changed?
 
