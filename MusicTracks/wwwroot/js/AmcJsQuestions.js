@@ -121,11 +121,16 @@
 
     // What are the ways to handle the async code ?
     AsyncCode()
-{
+    {
 
-}
+    }
 
     // What is a callback hell, and how can you avoid it ?
+    CallbackHell()
+    {
+
+    }
+
     // Describe how async / await works.
     // Describe the generators and iterators and their possible usage in async JavaScript.
     // Provide yield - delegation examples and generators concurrency.
@@ -136,6 +141,39 @@
 
 
     // Name the most commonly used Array methods.
+    ArrayMethods()
+    {
+        let fruits = ["Orange", "Apple", "Banana", "Mango"]
+        console.log(fruits.toString()); // converts an array to a string of (comma separated) array values
+
+        console.log(fruits.join(" * ")); // method also joins all array elements into a string, but in addition you can specify the separator
+
+        // removes the last element from an array, returns the value that was "popped out"
+        console.log(fruits.pop());
+
+        // adds a new element to an array (at the end), returns new array length
+        console.log(fruits.push("Kiwi"));
+
+        // Shifting is equivalent to popping, working on the first element instead of the last.
+        console.log(fruits.shift());
+
+        // unshift() method adds a new element to an array (at the beginning), returns new array length:
+        console.log(fruits.unshift("Peach"));
+
+        // Since JavaScript arrays are objects, elements can be deleted by using the JavaScript operator delete
+        delete fruits[0];
+
+        // splice() method can be used to add new items to an array
+        fruits.splice(2, 0, "Lemon", "Apricot"); // where to add, how many el-s to remove; can be used to remove el-s
+
+        // The concat() method creates a new array by merging (concatenating) existing arrays:
+
+        fruits.sort();        // First sort the elements of fruits
+        fruits.reverse();     // Then reverse the order of the elements
+        // can be provided with compare function
+
+    }
+
     // Describe how the reduce method works.What is the difference between slice and splice ?
     // Describe Map, Set, WeakMap, and WeakSet.
     // What traditional data structures do you know ? How do they correspond with data structures available in JavaScript ?
