@@ -56,6 +56,15 @@
 
 
     // Describe the ways of checking data types.What are the possible difficulties of determining the data type ?
+    CheckingDataTypes()
+    {
+        // USE TYPEOF TO CHECK THE TYPE OF A VARIABLE AT RUNTIME
+        let b = true;
+        console.log(typeof b);
+
+        console.log(typeof foo);
+    }
+
     // Describe the difference between Abstract Equality Comparison and Strict Equality Comparison.
     // Describe the process of the type coercion and rules of comparing the same and different data types.
     // Name the built -in and native types.Describe wrappers / boxing.
