@@ -66,10 +66,20 @@
     }
 
     // Describe the difference between Abstract Equality Comparison and Strict Equality Comparison.
+
+
     // Describe the process of the type coercion and rules of comparing the same and different data types.
+
+
     // Name the built -in and native types.Describe wrappers / boxing.
+
+
     // Name the data types that can and cannot contain values / types of objects.Name the ways to detect them.
+
+
     // What is the practical use of the Symbol data type ?
+
+
     //********************************************************************************************************************************
 
 

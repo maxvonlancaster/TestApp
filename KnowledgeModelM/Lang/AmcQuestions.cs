@@ -96,6 +96,8 @@ namespace KnowledgeModel.Lang
         // 12. How do you cast from one reference type to another without risking to throw an exception?
 
         // 13. Why isn't it possible to create an instance of an abstract class?
+        // Because it's abstract and an object is concrete. An abstract class is sort of like a template, 
+        // or an empty/partially empty structure, you have to extend it and build on it before you can use it.
 
         // 14. Is it possible to invoke a method from an abstract class?
         public void MethodInvokingFromAbstractClass()
