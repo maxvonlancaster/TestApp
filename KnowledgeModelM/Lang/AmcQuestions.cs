@@ -145,6 +145,15 @@ namespace KnowledgeModel.Lang
         }
 
         // 23. What is the difference between new and override keywords in method declaration?
+        // Override: When a method of a base class is overridden in a derived class, the version in the derived class is used, even if the 
+        // calling code didn't "know" that the object was an instance of the derived class.
+        // New: If you use the new keyword instead of override, the method in the derived class doesn't override the method in the base class, it merely hides it.
+        // If you don't specify either new or overrides, the resulting output is the same as if you specified new, but you'll also get a compiler warning 
+        // (as you may not be aware that you're hiding a method in the base class method, or indeed you may have wanted to override it, and merely forgot 
+        // to include the keyword).
+        // Override: used with virtual/abstract/override type of method in base class
+        // New : when base class has not declared method as virtual/abstract/override
+
 
         // 24. Is it possible to explicitly call a class’ static constructor?
         public void CallStaticConstructor()
