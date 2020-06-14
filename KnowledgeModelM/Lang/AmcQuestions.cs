@@ -162,6 +162,53 @@ namespace KnowledgeModel.Lang
         }
 
         // 25. How can you override a static constructor?
+        // A static constructor is used to initialize any static data, or to perform a particular action that needs to be performed once only. It is 
+        // called automatically before the first instance is created or any static members are referenced.
+        class SimpleClass
+        {
+            // Static variable that must be initialized at run time.
+            public static readonly long baseline;
+
+            // Static constructor is called at most one time, before any
+            // instance constructor is invoked or member is accessed.
+            static SimpleClass()
+            {
+                baseline = DateTime.Now.Ticks;
+            }
+        }
+        // A static constructor does not take access modifiers or have parameters.
+        // A class or struct can only have one static constructor.
+        // Static constructors cannot be inherited or overloaded.
+        // A static constructor cannot be called directly and is only meant to be called by the common language runtime(CLR). It is invoked 
+        // automatically.
+        // The user has no control on when the static constructor is executed in the program.
+        // A static constructor is called automatically to initialize the class before the first instance is created or any static members 
+        // are referenced.A static constructor will run before an instance constructor.A type's static constructor is called when a static 
+        // method assigned to an event or a delegate is invoked and not when it is assigned. If static field variable initializers are 
+        // present in the class of the static constructor, they will be executed in the textual order in which they appear in the class 
+        // declaration immediately prior to the execution of the static constructor.
+        // If you don't provide a static constructor to initialize static fields, all static fields are initialized to their default value 
+        // as listed in Default values of C# types.
+        // If a static constructor throws an exception, the runtime will not invoke it a second time, and the type will remain uninitialized 
+        // for the lifetime of the application domain in which your program is running.Most commonly, a TypeInitializationException exception 
+        // is thrown when a static constructor is unable to instantiate a type or for an unhandled exception occurring within a static 
+        // constructor.For implicit static constructors that are not explicitly defined in source code, troubleshooting may require inspection 
+        // of the intermediate language(IL) code.
+        // The presence of a static constructor prevents the addition of the BeforeFieldInit type attribute.This limits runtime optimization.
+        // A field declared as static readonly may only be assigned as part of its declaration or in a static constructor.When an explicit static 
+        // constructor is not required, initialize static fields at declaration, rather than through a static constructor for better runtime optimization.
+
+        public void SimpleClassUsage() 
+        {
+            Console.WriteLine(SimpleClass.baseline);
+        }
+
+        class NewSimpleClass : SimpleClass
+        {
+            public NewSimpleClass() : base()
+            { }
+        }
+
 
         // 26. Can you use this keyword inside of a static method? - NO
         public static int StaticMethod()
