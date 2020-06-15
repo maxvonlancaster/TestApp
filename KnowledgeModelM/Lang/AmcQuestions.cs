@@ -197,7 +197,6 @@ namespace KnowledgeModel.Lang
         // The presence of a static constructor prevents the addition of the BeforeFieldInit type attribute.This limits runtime optimization.
         // A field declared as static readonly may only be assigned as part of its declaration or in a static constructor.When an explicit static 
         // constructor is not required, initialize static fields at declaration, rather than through a static constructor for better runtime optimization.
-
         public void SimpleClassUsage() 
         {
             Console.WriteLine(SimpleClass.baseline);
@@ -208,6 +207,8 @@ namespace KnowledgeModel.Lang
             public NewSimpleClass() : base()
             { }
         }
+        // you can't override constructors. The concept makes no sense in C#, because constructors simply aren't invoked polymorphically. You 
+        // always state which class you're trying to construct, and the arguments to the constructor.
 
 
         // 26. Can you use this keyword inside of a static method? - NO

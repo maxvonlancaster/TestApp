@@ -26,8 +26,30 @@ namespace ConsoleAppTest.Services
         // protected internal - The type or member can be accessed by any code in the same assembly, or by any derived class in another assembly.
         protected internal int f;
 
+        public void Main()
+        {
+            Generic<int> generic = new Generic<int>();
 
+            
+        }
 
+    }
 
+    // Generics:
+    public class Generic<T> 
+    {
+        // Default value of generic:
+        public T val = default(T);
+
+        // Destructors in C# are methods inside the class used to destroy instances of that class when they are no longer needed. The Destructor 
+        // is called implicitly by the .NET Framework’s Garbage collector and therefore programmer has no control as when to invoke the destructor. 
+        // An instance variable or an object is eligible for destruction when it is no longer reachable.
+        // only used with classes
+        // cannot be overloaded or inherited
+        // 
+        ~Generic() 
+        {
+            Console.WriteLine("DESTRUCTOR called {0}", val);
+        }
     }
 }

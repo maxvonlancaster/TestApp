@@ -16,8 +16,8 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new AmcQuestions();
-            service.SimpleClassUsage();
+            var service = new Language();
+            service.Main();
             //AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }
