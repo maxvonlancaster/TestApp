@@ -28,7 +28,7 @@ namespace ConsoleAppTest.Services
 
         public void Main()
         {
-            Generic<int> generic = new Generic<int>();
+            Generic<int> generic = new Generic<int>(1);
 
             
         }
