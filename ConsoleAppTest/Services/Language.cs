@@ -41,6 +41,11 @@ namespace ConsoleAppTest.Services
         // Default value of generic:
         public T val = default(T);
 
+        public Generic(T val)
+        {
+            this.val = val;
+        }
+
         // Destructors in C# are methods inside the class used to destroy instances of that class when they are no longer needed. The Destructor 
         // is called implicitly by the .NET Framework’s Garbage collector and therefore programmer has no control as when to invoke the destructor. 
         // An instance variable or an object is eligible for destruction when it is no longer reachable.
@@ -50,6 +55,28 @@ namespace ConsoleAppTest.Services
         ~Generic() 
         {
             Console.WriteLine("DESTRUCTOR called {0}", val);
+        }
+    }
+
+    // inheritance of generics - three types:
+    public class GenericInhOne<T> : Generic<T>
+    {
+        public GenericInhOne(T val) : base(val)
+        {
+        }
+    }
+
+    public class GenericInhTwo : Generic<int>
+    {
+        public GenericInhTwo(int val) : base(val)
+        {
+        }
+    }
+
+    public class GenericInhThree<T> : Generic<int>
+    {
+        public GenericInhThree(int val) : base(val)
+        {
         }
     }
 }
