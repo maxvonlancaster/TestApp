@@ -30,7 +30,21 @@ namespace ConsoleAppTest.Services
         {
             Generic<int> generic = new Generic<int>(1);
 
-            
+            Addition(1,2,3,4,5);
+            Addition();
+            int[] ints = new int[] {1,2,3 };
+            Addition(ints);
+        }
+
+        // params - pass any numer of parameters:
+        public void Addition(params int[] integers) // One dimentional!
+        {
+            int res = 0;
+            foreach (int i in integers) 
+            {
+                res += i;
+            }
+            Console.WriteLine(res);
         }
 
     }
