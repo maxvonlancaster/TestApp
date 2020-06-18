@@ -47,6 +47,26 @@ namespace ConsoleAppTest.Services
             Console.WriteLine(res);
         }
 
+
+        // Variables context:
+        // Class context, method context, block of code context;
+        static int x = 1; // class level variable
+        // 
+        public void VariableContext() 
+        {
+            int y = 2; // method level variable
+
+            {
+                int z = 3; // block of code level variable
+            }
+
+            //Console.WriteLine(z); - z does not exist in current context;
+
+            // when working with variables it is important to remember that local variables can cover variable of the higher level:
+            int x = 10;
+            Console.WriteLine(x);
+        }
+
     }
 
     // Generics:
