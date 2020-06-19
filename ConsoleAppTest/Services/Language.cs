@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Diagnostics.Tracing.Parsers.JSDumpHeap;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 
 namespace ConsoleAppTest.Services
 {
@@ -66,6 +68,30 @@ namespace ConsoleAppTest.Services
             // when working with variables it is important to remember that local variables can cover variable of the higher level:
             int x = 10;
             Console.WriteLine(x);
+        }
+
+        // Tuples - from c# 7
+        public void TupleUsage() 
+        {
+            var tuple = (1, 10);
+            Console.WriteLine(tuple.Item1);
+            Console.WriteLine(tuple.Item2);
+
+            // we can explicitly give type of the tuple:
+            (int, string, byte) t = (2, "n", 0);
+
+            // we can give names to tuple fields:
+            var t2 = (sum: 10, count: 2);
+            Console.WriteLine(t2.sum);
+            Console.WriteLine(t2.count);
+
+            // tuples can be used in methods:
+            var res = GetTuple((1,2,3), "text");
+        }
+
+        public (int, int) GetTuple((int, int, int) tuple, string text) 
+        {
+            return (tuple.Item1 + tuple.Item2 + tuple.Item3, 3);
         }
 
     }
