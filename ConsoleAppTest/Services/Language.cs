@@ -34,6 +34,7 @@ namespace ConsoleAppTest.Services
             Addition();
             int[] ints = new int[] {1,2,3 };
             Addition(ints);
+
         }
 
         // params - pass any numer of parameters:
@@ -111,6 +112,24 @@ namespace ConsoleAppTest.Services
     {
         public GenericInhThree(int val) : base(val)
         {
+        }
+    }
+
+
+    // Enum type - data type; byte int long short (int by default)
+    // by default first elem is 0, you can specify another
+    enum Days : short 
+    {
+        Monday = 1,
+        Tuesday,
+        Wednesday
+    }
+
+    public static class EnumDaysUsage 
+    {
+        public static void Main() 
+        {
+            Console.WriteLine(Days.Wednesday);
         }
     }
 }
