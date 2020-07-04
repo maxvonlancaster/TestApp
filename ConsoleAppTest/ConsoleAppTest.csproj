@@ -51,7 +51,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KnowledgeModelM\KnowledgeModel.csproj" />
-    <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

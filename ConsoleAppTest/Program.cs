@@ -16,16 +16,16 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            var service = new Language();
-            service.Main();
+            var service = new Playground();
+            service.CheckIfEvent();
             //AsyncMethods().Wait();
             //Console.WriteLine(CalcService.Factorial(20));
         }
 
-        static async Task AsyncMethods() 
-        {
-            var service = new BasicSynchronisation();
-            await service.UsingSynchronisationContext();
-        }
+        //static async Task AsyncMethods() 
+        //{
+        //    var service = new BasicSynchronisation();
+        //    await service.UsingSynchronisationContext();
+        //}
     }
 }

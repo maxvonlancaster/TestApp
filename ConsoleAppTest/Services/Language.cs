@@ -28,7 +28,7 @@ namespace ConsoleAppTest.Services
         // protected internal - The type or member can be accessed by any code in the same assembly, or by any derived class in another assembly.
         protected internal int f;
 
-        public void Main()
+        public void Params()
         {
             Generic<int> generic = new Generic<int>(1);
 
@@ -151,11 +151,11 @@ namespace ConsoleAppTest.Services
         Wednesday
     }
 
-    public static class EnumDaysUsage 
-    {
-        public static void Main() 
-        {
-            Console.WriteLine(Days.Wednesday);
-        }
-    }
+    //public static class EnumDaysUsage 
+    //{
+    //    public static void Usage() 
+    //    {
+    //        Console.WriteLine(Days.Wednesday);
+    //    }
+    //}
 }

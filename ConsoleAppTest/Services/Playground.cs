@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ConsoleAppTest.Services
@@ -50,7 +52,60 @@ namespace ConsoleAppTest.Services
             n.x = 20;
         }
 
-        //public class NClass { }
+
+        public delegate void MyDelegate(int i);
+
+        public void TestDelegate()
+        {
+            var del = new MyDelegate(Method);
+            bool isDelegate = typeof(Delegate).IsAssignableFrom(del.GetType());
+            Console.WriteLine(isDelegate);
+            Console.WriteLine();
+
+        }
+
+        private void Method(int j)
+        {
+
+        }
+
+        public void ReflectIsMethodExtension() 
+        {
+            var extensionClass = typeof(Extensions);
+            var extensionMethod = extensionClass.GetMethods().FirstOrDefault(m => m.Name == "WordCount");
+            var isExtension = extensionMethod.IsDefined(typeof(ExtensionAttribute), true);
+            var parameter = extensionMethod.GetParameters().FirstOrDefault();
+            //var modifier = parameter.GetRequiredCustomModifiers().FirstOrDefault().Name;
+
+            //bool isExtension = extensionClass.IsAbstract && extensionClass.IsSealed && extensionMethod.IsStatic ;
+        }
+
+
+        public void CheckIfMethodIsAnonymous() 
+        {
+        
+        }
+
+        public void MethodWithAnon() 
+        {
+            
+        }
+
+        public static event EventHandler Show;
+
+        public void CheckIfEvent() 
+        {
+            var type = typeof(Playground);
+
+        }
+    }
+
+    public static class Extensions
+    {
+        public static int WordCount(this string word) 
+        {
+            return word.Length;
+        }
     }
 
     public struct NStruct
